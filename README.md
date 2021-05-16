@@ -1,5 +1,5 @@
 # Welcome to ERNIE_Plus
-ERNIE_Plus is a re-incarnation of ERNIE. I forked the ERNIE repo on May 16, 2020 and created a new ERNIE_Plus folder that will serve as root level directory for code develope after this day. More information on ERNIE can be found at https://netesolutions.github.io/ernie_homepage/
+ERNIE_Plus is a re-incarnation of ERNIE. I forked the ERNIE repo on May 16, 2020 and created a new ERNIE_Plus folder that will serve as root level directory for code developed after this day. More information on ERNIE can be found at https://netesolutions.github.io/ernie_homepage/. All new code is stored within the ernie_plus folder in this repo
 
 
 <img align="left" src="ERNIE.png" width="250" height="200" border="120">
