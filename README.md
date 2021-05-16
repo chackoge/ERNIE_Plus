@@ -1,7 +1,9 @@
-# Welcome to ERNIE
-<img align="left" src="ERNIE.png" width="250" height="200" border="120">
+# Welcome to ERNIE_Plus
+ERNIE_Plus is a re-incarnation of ERNIE if you will. I forked the ERNIE repo on May 16, 2020 and created a new ERNIE_PLus folder that will serve as root level directory for code develope after this day. 
 
-Cite us:
+
+<img align="left" src="ERNIE.png" width="250" height="200" border="120">
+Cite ERNIE:
 ```
 @article{keserci_ernie:_2018,
 	title = {{ERNIE}: {A} {Data} {Platform} for {Research} {Assessment}},
