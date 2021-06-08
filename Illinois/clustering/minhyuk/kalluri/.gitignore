@@ -1,0 +1,14 @@
+*.tsv
+*.tab
+
+*.mat
+*.clusters
+
+*.map
+
+*.out
+*.err
+*.png
+
+modsoft/modsoft/_modsoft.cpp
+modsoft/modsoft/_modsoft.cpython-38-x86_64-linux-gnu.so
