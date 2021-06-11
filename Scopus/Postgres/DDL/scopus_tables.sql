@@ -670,7 +670,7 @@ CREATE TABLE IF NOT EXISTS scopus_publication_identifiers (
   document_id TEXT NOT NULL,
   document_id_type TEXT NOT NULL,
   last_updated_time TIMESTAMP DEFAULT now(),
-  CONSTRAINT scopus_publiaction_identifiers_pk
+  CONSTRAINT scopus_publication_identifiers_pk
     PRIMARY KEY (scp, document_id_type, document_id) --
       USING INDEX TABLESPACE index_tbs
 )
