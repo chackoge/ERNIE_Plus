@@ -60,7 +60,7 @@ COMMENT ON COLUMN open_citations.time_span IS --
 of the cited entity.';
 
 CREATE OR REPLACE VIEW stg_open_citations AS
-SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journal_sc, 'qux' author_sc
+SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journal_sc, 'qux' AS author_sc
   FROM open_citations;
 
 \include_relative trg_transform_and_load_open_citation.sql

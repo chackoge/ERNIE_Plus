@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-for file in *.csv; do
+set -e
+set -o pipefail
+
+load_csv() {
+  set -e
+  set -o pipefail
+  local file=$1
   echo "Processing ${file} ..."
 
   if [[ "${file}" != */* ]]; then
@@ -15,11 +21,25 @@ for file in *.csv; do
   absolute_file_dir=$(cd "${dir}" && pwd)
   absolute_file_path="${absolute_file_dir}/${name_with_ext}"
 
-  # Stripping extra columns `journal_sc,author_sc` from `oci,citing,cited,creation,timespan,journal_sc,author_sc`
-  # could be done via `COPY ... FROM PROGRAM 'cut -d "," -f 1-5 ':'file'''`, but it is probably not worth it.
+  # Ignoring extra columns `journal_sc, author_sc` from `oci, citing, cited, creation, timespan, journal_sc, author_sc`
+  # could be done via e.g., `COPY ... FROM PROGRAM 'cut -d "," -f 1-5 ':'file'''`, but it is probably not worth it
+  # performance-wise.
+
   # language=PostgresPLSQL
-  psql -v ON_ERROR_STOP=on --echo-all -v "file=${absolute_file_path}" << 'HEREDOC'
+  psql -v ON_ERROR_STOP=on -v "file=${absolute_file_path}" << 'HEREDOC'
     COPY stg_open_citations(oci, citing, cited, creation, timespan, journal_sc, author_sc)
     FROM :'file' (FORMAT CSV, HEADER ON);
 HEREDOC
-done
+
+  echo "Loaded ${file}"
+}
+export -f load_csv
+
+echo "Appending all records to the existing Open Citations data"
+
+# Piping `ls` to `parallel` is done by design here: handling potentially a large number of files
+# shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
+find . -maxdepth 1 -type f -name '*.csv' -print0 \
+  | parallel -0 --halt soon,fail=1 --line-buffer --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
+
+
