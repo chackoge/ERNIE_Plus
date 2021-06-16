@@ -58,3 +58,16 @@ and missing days are defaulted to 15.';
 COMMENT ON COLUMN open_citations.time_span IS --
   'The time span of a citation, i.e. the interval between the publication of the citing entity and the publication
 of the cited entity.';
+
+CREATE OR REPLACE VIEW stg_open_citations AS
+SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journal_sc, 'qux' author_sc
+  FROM open_citations;
+
+\include_relative trg_transform_and_load_open_citation.sql
+
+DROP TRIGGER IF EXISTS stg_open_citations_trg ON stg_open_citations;
+CREATE TRIGGER stg_open_citations_trg
+  INSTEAD OF INSERT
+  ON stg_open_citations
+  FOR EACH ROW
+EXECUTE FUNCTION trg_transform_and_load_open_citation();
