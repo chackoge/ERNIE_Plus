@@ -23,11 +23,22 @@ CREATE INDEX IF NOT EXISTS cp_published_year_i ON cr_publications(published_year
 
 CREATE INDEX IF NOT EXISTS cp_issn_i ON cr_publications(issn) /*TABLESPACE index_tbs*/;
 
+CREATE TABLE cr_pub_authors (
+  doi VARCHAR(400),
+  given_name VARCHAR(200),
+  family_name VARCHAR(400),
+  CONSTRAINT cr_pub_authors_pk
+    PRIMARY KEY (doi, family_name, given_name) --USING INDEX TABLESPACE index_tbs
+);
+
+CREATE INDEX IF NOT EXISTS cpa_family_name_given_name_i ON cr_pub_authors(family_name, given_name)
+/*TABLESPACE index_tbs*/;
+
 CREATE TABLE open_citations (
   oci VARCHAR(400)
     CONSTRAINT open_citations_pk
       PRIMARY KEY /*USING INDEX TABLESPACE index_tbs*/,
-    citing VARCHAR (400),
+  citing VARCHAR(400),
   cited VARCHAR(400),
   creation_date DATE,
   time_span INTERVAL,
@@ -47,14 +58,3 @@ and missing days are defaulted to 15.';
 COMMENT ON COLUMN open_citations.time_span IS --
   'The time span of a citation, i.e. the interval between the publication of the citing entity and the publication
 of the cited entity.';
-
-CREATE TABLE cr_pub_authors (
-  doi VARCHAR(400),
-  given_name VARCHAR(200),
-  family_name VARCHAR(400),
-  CONSTRAINT cr_pub_authors_pk
-    PRIMARY KEY (doi, family_name, given_name) --USING INDEX TABLESPACE index_tbs
-);
-
-CREATE INDEX IF NOT EXISTS cpa_family_name_given_name_i ON cr_pub_authors(family_name, given_name)
-/*TABLESPACE index_tbs*/;

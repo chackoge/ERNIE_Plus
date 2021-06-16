@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2084afeb-3b7b-44c0-af54-3116bd784965" name="Valhalla" url="http://valhalla.cs.illinois.edu">
+        <fileTransfer host="valhalla.cs.illinois.edu" port="22" rootFolder="/home/dmitriy" accessType="SFTP" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
