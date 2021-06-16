@@ -12,7 +12,7 @@ for file in *.csv; do
   # Remove longest */ prefix
   name_with_ext=${file##*/}
 
-  absolute_file_dir="$(cd ${dir} && pwd)"
+  absolute_file_dir=$(cd "${dir}" && pwd)
   absolute_file_path="${absolute_file_dir}/${name_with_ext}"
 
   #FIXME Strip extra columns via `pcregrep` piping to the stdin
