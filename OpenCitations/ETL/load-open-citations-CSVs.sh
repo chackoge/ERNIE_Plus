@@ -2,6 +2,11 @@
 set -e
 set -o pipefail
 
+# When the # of jobs >= 74 Postgres 12 gets oveloaded and crashes with the `DETAIL:  The postmaster has commanded this
+# server process to roll back the current transaction and exit, because another server process exited abnormally and
+# possibly corrupted shared memory.` error. The limit should be in the [4..74) range with Postgres tuned as it is now.
+readonly MAX_PARALLEL_JOBS=64
+
 load_csv() {
   set -e
   set -o pipefail
@@ -39,7 +44,7 @@ echo "Starting data load: appending all records to existing Open Citations data.
 
 # Piping `ls` to `parallel` is done by design here: handling potentially a large number of files
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
-find . -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j 4 --halt soon,fail=1 --line-buffer \
+find . -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j $MAX_PARALLEL_JOBS --halt soon,fail=1 --line-buffer \
     --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
 
 
