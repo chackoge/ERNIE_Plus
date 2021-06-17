@@ -44,7 +44,7 @@ CREATE TABLE open_citations (
   time_span INTERVAL,
   citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
   cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
-);
+) TABLESPACE open_citations_tbs;
 
 CREATE INDEX IF NOT EXISTS oc_citing_i ON open_citations(citing) /*TABLESPACE index_tbs*/;
 

@@ -35,11 +35,11 @@ HEREDOC
 }
 export -f load_csv
 
-echo "Appending all records to the existing Open Citations data"
+echo "Starting data load: appending all records to existing Open Citations data."
 
 # Piping `ls` to `parallel` is done by design here: handling potentially a large number of files
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
-find . -maxdepth 1 -type f -name '*.csv' -print0 \
-  | parallel -0 --halt soon,fail=1 --line-buffer --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
+find . -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j 4 --halt soon,fail=1 --line-buffer \
+    --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
 
 
