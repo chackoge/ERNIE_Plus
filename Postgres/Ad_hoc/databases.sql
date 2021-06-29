@@ -1,11 +1,13 @@
 -- Databases and their owners
 SELECT
   pd.datname AS db,
-  pa.rolname AS db_owner
-FROM pg_authid AS pa
-JOIN pg_database AS pd
-  ON (pd.datdba = pa.oid)
---WHERE pd.datname = current_database()
+  pa.rolname AS db_owner,
+  pt.spcname AS default_tablespace
+FROM pg_database AS pd
+JOIN pg_authid AS pa
+  ON (pa.oid = pd.datdba)
+JOIN pg_tablespace pt
+  ON (pt.oid = pd.dattablespace)
 ORDER BY db
 ;
 
