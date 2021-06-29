@@ -4,9 +4,9 @@ project more maintainable.
 """
 
 import pandas as pd
-import log_util
+# from . import log_util
 
-logger = log_util.get_logger(__name__)
+# logger = log_util.get_logger(__name__)
 
 
 def recast_df(df):
@@ -38,7 +38,7 @@ def recast_df(df):
     # Recast fields that contain datetime from strings to a datetime type
     for date_field in date_resp_fields:
         if date_field in df.columns:
-            logger.info("Converting {}".format(date_field))
+            # logger.info("Converting {}".format(date_field))
             df[date_field] = df[date_field].apply(
                     pd.Timestamp)
     return df

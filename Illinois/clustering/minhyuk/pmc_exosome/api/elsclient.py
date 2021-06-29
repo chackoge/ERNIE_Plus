@@ -28,7 +28,7 @@ class ElsClient:
     __ts_last_req = time.time()                 ## Tracker for throttling
  
     # constructors
-    def __init__(self, api_key, inst_token=None, num_res=25, output_dir = None, log_dir=None):
+    def __init__(self, api_key, inst_token=None, num_res=500, output_dir = None, log_dir=None):
         # TODO: make num_res configurable for searches and documents/authors view
         #   - see https://github.com/ElsevierDev/elsapy/issues/32
         """Initializes a client with a given API Key and, optionally, institutional

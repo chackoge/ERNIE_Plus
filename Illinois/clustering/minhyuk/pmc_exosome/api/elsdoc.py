@@ -157,8 +157,17 @@ class ExtendedAbsDoc(elsentity.ElsEntity):
 
     def get_bibliography(self):
         bibliography = []
-        raw_list = self.data["item"]["bibrecord"]["tail"]["bibliography"]["reference"]
-        for reference in raw_list:
-            current_item = reference["ref-info"]["refd-itemidlist"]["itemid"]
-            bibliography.append((current_item["@idtype"], current_item["$"]))
+        tail_list = self.data["item"]["bibrecord"]["tail"]
+        if(tail_list is not None):
+            raw_list = tail_list["bibliography"]["reference"]
+            for reference in raw_list:
+                current_item_list = reference["ref-info"]["refd-itemidlist"]["itemid"]
+                current_item = None
+                if isinstance(current_item_list, list):
+                    for item in current_item_list:
+                        if(item["@idtype"] == "SGR"):
+                            current_item = item
+                else:
+                    current_item = current_item_list
+                bibliography.append((current_item["@idtype"], current_item["$"]))
         return bibliography

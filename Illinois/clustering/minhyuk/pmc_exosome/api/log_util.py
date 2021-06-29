@@ -18,23 +18,24 @@ def get_logger(log_dir):
     #   https://github.com/ElsevierDev/elsapy/issues/26
     # create logger with module name
     logger = logging.getLogger("default-logger")
-    logger.setLevel(logging.DEBUG)
-    # create log path, if not already there
-    logPath = Path(log_dir)
-    if not logPath.exists():
-        logPath.mkdir()
-    # create file handler which logs even debug messages
-    fh = logging.FileHandler(f"{log_dir}/api-{str(time.strftime('%m%d%Y'))}.log")
-    fh.setLevel(logging.DEBUG)
-    # create console handler with a higher log level
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.ERROR)
-    # create formatter and add it to the handlers
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-    fh.setFormatter(formatter)
-    ch.setFormatter(formatter)
-    # add the handlers to the logger
-    logger.addHandler(fh)
-    logger.addHandler(ch)
-    logger.info("Module loaded.")
+    if(not logger.handlers):
+        logger.setLevel(logging.DEBUG)
+        # create log path, if not already there
+        logPath = Path(log_dir)
+        if not logPath.exists():
+            logPath.mkdir()
+        # create file handler which logs even debug messages
+        fh = logging.FileHandler(f"{log_dir}/api-{str(time.strftime('%m%d%Y'))}.log")
+        fh.setLevel(logging.DEBUG)
+        # create console handler with a higher log level
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.ERROR)
+        # create formatter and add it to the handlers
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        fh.setFormatter(formatter)
+        ch.setFormatter(formatter)
+        # add the handlers to the logger
+        logger.addHandler(fh)
+        logger.addHandler(ch)
+        logger.info("Module loaded.")
     return logger

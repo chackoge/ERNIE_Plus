@@ -109,7 +109,8 @@ class ElsEntity(metaclass=ABCMeta):
             return False
 
     def get_datapath(self):
-        return self.client.output_dir / (urllib.parse.quote_plus(self.uri)+'.json')
+        return self.client.output_dir / str("elsentity-" + self.id +'.json')
+        # return self.client.output_dir / (urllib.parse.quote_plus(self.uri)+'.json')
 
     def write(self):
         """If data exists for the entity, writes it to disk as a .JSON file with

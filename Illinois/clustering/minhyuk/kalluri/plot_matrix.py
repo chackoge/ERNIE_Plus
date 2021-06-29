@@ -91,12 +91,12 @@ def plot_communities(graph, suffix, map_file, pos, membership, figure_name, figs
 suffix = "100"
 
 leiden_membership_matrix = load_leiden_membership_matrix(suffix)
-louvain_membership_matrix = load_louvain_membership_matrix(suffix)
-modsoft_membership_matrix = load_modsoft_membership_matrix(suffix)
+# louvain_membership_matrix = load_louvain_membership_matrix(suffix)
+# modsoft_membership_matrix = load_modsoft_membership_matrix(suffix)
 
 graph = nx.read_edgelist(f"./{suffix}/kalluri_sample_network.integer_label.{suffix}.tsv")
 coordinates = nx.fruchterman_reingold_layout(graph, center=[0.5, 0.5], scale=0.5)
 
 plot_communities(graph, suffix, f"./{suffix}/nodelabel_to_doi_{suffix}.map", coordinates, leiden_membership_matrix, f"{suffix}/leiden_{suffix}")
-plot_communities(graph, suffix, f"./{suffix}/nodelabel_to_doi_{suffix}.map", coordinates, modsoft_membership_matrix, f"{suffix}/modsoft_{suffix}")
-plot_communities(graph, suffix, f"./{suffix}/nodelabel_to_doi_{suffix}.map", coordinates, louvain_membership_matrix, f"{suffix}/louvain_{suffix}")
+# plot_communities(graph, suffix, f"./{suffix}/nodelabel_to_doi_{suffix}.map", coordinates, modsoft_membership_matrix, f"{suffix}/modsoft_{suffix}")
+# plot_communities(graph, suffix, f"./{suffix}/nodelabel_to_doi_{suffix}.map", coordinates, louvain_membership_matrix, f"{suffix}/louvain_{suffix}")
