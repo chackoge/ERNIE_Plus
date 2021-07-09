@@ -12,6 +12,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import psycopg2
 
+SMALL_SIZE = 12
+MEDIUM_SIZE = 18
+BIGGER_SIZE = 24
+
+plt.rc("font", size=SMALL_SIZE)          # controls default text sizes
+plt.rc("axes", titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc("axes", labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc("xtick", labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc("ytick", labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc("legend", fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc("figure", titlesize=BIGGER_SIZE)
+
 
 def file_to_dict(clustering):
     cluster_to_doi_dict = {}
@@ -150,34 +162,41 @@ def save_histogram(x_min, x_max, bin_size, data, y_label, x_label, title, output
     plt.xlabel(x_label);
     plt.title(title);
     plt.savefig(output_prefix + ".png", bbox_inches="tight")
+    plt.close()
 
 
-def save_scatter(x_data, y_data, x_label, y_label, title, output_prefix, y_min=0):
-    plt.clf()
+def save_scatter(x_data, y_data, x_label, y_label, title, output_prefix, y_min=0, add_x_y_line=False, log_log=False):
     # plt.locator_params(nbins=10)
+    plt.clf()
     plt.figure(figsize=(20, 17))
     plt.xticks(np.linspace(0, max(x_data), 25, dtype=int))
     plt.scatter(x_data, y_data)
+    if(add_x_y_line):
+        print("adding y=x")
+        plt.plot(x_data, x_data, color="red", label="y=x")
     plt.ylim(ymin=y_min)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.title(title)
     plt.savefig(output_prefix + ".png", bbox_inches="tight")
+    plt.close()
 
 @click.command()
 @click.option("--clustering", required=True, type=click.Path(exists=True), help="Clustering output from another method")
 @click.option("--config-file", required=True, type=click.Path(exists=True), help="The config file containing the backbonedb and processeddb")
 @click.option("--output-prefix", required=True, type=click.Path(), help="Output file prefix")
-@click.option("--method", required=True, type=click.Choice(["increment_type_1+plot", "scatter_plot_indegrees"]))
-def type_post_processing(clustering, config_file, output_prefix, method):
+@click.option("--figure-prefix", required=True, type=click.Path(), help="Output file prefix")
+@click.option("--method", required=True, type=click.Choice(["increment_type_1", "increment_type_1+plot", "scatter_plot_indegrees"]))
+def type_post_processing(clustering, config_file, output_prefix, figure_prefix, method):
     if(method == "increment_type_1"):
-        increment_type_one(clustering, config_file, output_prefix, False)
+        increment_type_one(clustering, config_file, output_prefix, figure_prefix, False)
     elif(method == "increment_type_1+plot"):
-        increment_type_one(clustering, config_file, output_prefix, True)
+        increment_type_one(clustering, config_file, output_prefix, figure_prefix, True)
     elif(method == "scatter_plot_indegrees"):
-        scatter_plot_indegrees(clustering, config_file, output_prefix)
+        scatter_plot_indegrees(clustering, config_file, output_prefix, figure_prefix)
 
-def scatter_plot_indegrees(clustering, config_file, output_prefix):
+
+def scatter_plot_indegrees(clustering, config_file, output_prefix, figure_prefix):
     cluster_dicts = file_to_dict(clustering)
     cluster_to_doi_dict = cluster_dicts["cluster_to_doi_dict"]
     doi_to_cluster_dict = cluster_dicts["doi_to_cluster_dict"]
@@ -190,23 +209,26 @@ def scatter_plot_indegrees(clustering, config_file, output_prefix):
     print(f"num_clusters: {len(cluster_to_doi_dict)}")
     indegree_dict = {}
     indegree_from_own_cluster_dict = {}
-    for doi,cited_by_count in get_all_doi_and_indegree(cursor):
+    for doi,cited_by_count in get_all_doi_and_indegree(cursor)[:10000]:
         indegree_dict[doi] = cited_by_count
-        print(f"{doi} belongs to {doi_to_cluster_dict[doi]}")
         indegree_from_own_cluster_dict[doi] = 0
         for current_cluster_number in doi_to_cluster_dict[doi]:
-            cluster_member_arr = cluster_to_doi_dict[current_clutser_number]
+            if(len(doi_to_cluster_dict[doi]) > 1):
+                print(f"Overlapping clustering detected")
+            cluster_member_arr = cluster_to_doi_dict[current_cluster_number]
             indegree_from_own_cluster_dict[doi] += get_intracluster_query_doi_indegree(cursor, doi, cluster_member_arr)
-
+    print(f"computed indegrees")
     outdegree_dict = {}
-    outdegree_from_own_cluster_dict = {}
-    for doi,citing_count in get_all_doi_and_indegree(cursor):
+    outdegree_to_own_cluster_dict = {}
+    for doi,citing_count in get_all_doi_and_outdegree(cursor)[:10000]:
         outdegree_dict[doi] = citing_count
-        print(f"{doi} belongs to {doi_to_cluster_dict[doi]}")
-        outdegree_from_own_cluster_dict[doi] = 0
+        outdegree_to_own_cluster_dict[doi] = 0
         for current_cluster_number in doi_to_cluster_dict[doi]:
-        cluster_member_arr = cluster_to_doi_dict[doi]
-        outdegree_to_own_cluster_dict[doi] += get_intracluster_query_doi_outdegree(cursor, doi, cluster_member_arr)
+            if(len(doi_to_cluster_dict[doi]) > 1):
+                print(f"Overlapping clustering detected")
+            cluster_member_arr = cluster_to_doi_dict[current_cluster_number]
+            outdegree_to_own_cluster_dict[doi] += get_intracluster_query_doi_outdegree(cursor, doi, cluster_member_arr)
+    print(f"computed outdegrees")
 
     indegree_scatter_x_data = []
     indegree_scatter_y_data = []
@@ -220,11 +242,11 @@ def scatter_plot_indegrees(clustering, config_file, output_prefix):
         outdegree_scatter_x_data.append(outdegree_to_own_cluster_dict[doi])
         outdegree_scatter_y_data.append(outdegree_dict[doi])
 
-    save_scatter(indegree_scatter_x_data, indegree_scatter_y_data, "indegree from the cluster the publication belongs to", "indegree from the entire network", f"{output_prefix}/total_membership_indegree")
-    save_scatter(outdegree_scatter_x_data, outdegree_scatter_y_data, "outdegree from the cluster the publication belongs to", "outdegree from the entire network", f"{output_prefix}/total_membership_outdegree")
+    save_scatter(indegree_scatter_x_data, indegree_scatter_y_data, "indegree from the cluster the publication belongs to", "indegree from the entire network", "total to cluster indegrees", f"{figure_prefix}/total_membership_indegree", add_x_y_line=True)
+    save_scatter(outdegree_scatter_x_data, outdegree_scatter_y_data, "outdegree to the cluster the publication belongs to", "outdegree to the entire network", "total to cluster outdegrees", f"{figure_prefix}/total_membership_outdegree", add_x_y_line=True)
 
 
-def increment_type_one(clustering, config_file, output_prefix, generate_histogram):
+def increment_type_one(clustering, config_file, output_prefix, figure_prefix, generate_histogram):
     cluster_dicts = file_to_dict(clustering)
     cluster_to_doi_dict = cluster_dicts["cluster_to_doi_dict"]
     doi_to_cluster_dict = cluster_dicts["doi_to_cluster_dict"]
@@ -234,7 +256,8 @@ def increment_type_one(clustering, config_file, output_prefix, generate_histogra
     highly_cited_doi_arr = []
     num_dois = len(get_all_dois(cursor))
 
-    highly_cited_threshold = 0.00001
+    # highly_cited_threshold = 0.00001 # gets about 4 publications?
+    highly_cited_threshold = 0.0001
     type_1_threshold = 0.1
 
     print(f"num_dois: {num_dois}")
@@ -252,9 +275,9 @@ def increment_type_one(clustering, config_file, output_prefix, generate_histogra
     histogram_data_cluster_outdegrees = {}
     histogram_data_highly_cited_doi_in_out_degrees = {}
 
-    for highly_cited_doi in highly_cited_doi_arr[:1]: # DEBUG: cropping at :1 to make it faster and not look through all the highly cited nodes
+    for highly_cited_doi in highly_cited_doi_arr: # DEBUG: cropping at :1 to make it faster and not look through all the highly cited nodes
         current_incoming_dois = get_all_incoming_dois(cursor, highly_cited_doi)
-        print(f"{highly_cited_)} incoming dois")
+        print(f"{len(current_incoming_dois)} incoming dois")
         print(f"belongs to {doi_to_cluster_dict[highly_cited_doi]}")
         current_incoming_clusters_arr = list(reduce(lambda x,y: x.union(set(doi_to_cluster_dict[y])), current_incoming_dois, set()))
         current_incoming_clusters_arr.sort()
@@ -282,7 +305,7 @@ def increment_type_one(clustering, config_file, output_prefix, generate_histogra
 
                 if(generate_histogram):
                     histogram_data_cluster_indegrees[highly_cited_doi][current_incoming_cluster_number] = [int(tup[1]) for tup in current_intracluster_doi_and_indegree_arr]
-                    histogram_data_cluster_outdegrees[highly_cited_doi][current_incoming_cluster_number] = [int(tup[1]) for tup in current_intracluster_outdegree_arr]
+                    histogram_data_cluster_outdegrees[highly_cited_doi][current_incoming_cluster_number] = [int(tup[1]) for tup in current_intracluster_doi_and_outdegree_arr]
 
                 if(len(current_intracluster_doi_and_indegree_arr) == 0):
                     cluster_type_1_threshold_dict[current_incoming_cluster_number] = 0
@@ -302,13 +325,23 @@ def increment_type_one(clustering, config_file, output_prefix, generate_histogra
                 histogram_data_highly_cited_doi_in_out_degrees[highly_cited_doi]["sumdegree"]["x"].append(current_incoming_cluster_number)
                 histogram_data_highly_cited_doi_in_out_degrees[highly_cited_doi]["sumdegree"]["y"].append(current_highly_cited_doi_indegree + current_highly_cited_doi_outdegree)
 
-            if(current_highly_cited_doi_indegree > cluster_type_1_threshold_dict[current_incoming_cluster_number]):
+            if(current_highly_cited_doi_indegree > cluster_type_1_threshold_dict[current_incoming_cluster_number] and
+                current_incoming_cluster_number not in doi_to_cluster_dict[highly_cited_doi]):
                 print(f"UPDATE: {highly_cited_doi} has indegree {current_highly_cited_doi_indegree} and outdegree {current_highly_cited_doi_outdegree}({current_highly_cited_doi_outgoing_dois}) in cluster {current_incoming_cluster_number} where the top {type_1_threshold}th indegree is {cluster_type_1_threshold_dict[current_incoming_cluster_number]}")
                 if(highly_cited_doi not in type_1_to_be_updated):
                     type_1_to_be_updated[highly_cited_doi] = []
                 type_1_to_be_updated[highly_cited_doi].append(current_incoming_cluster_number)
     print(cluster_type_1_threshold_dict)
     print(type_1_to_be_updated)
+
+    for highly_cited_doi in type_1_to_be_updated:
+        for cluster_number in type_1_to_be_updated[highly_cited_doi]:
+            cluster_to_doi_dict[cluster_number].append(highly_cited_doi)
+    with open(f"{output_prefix}/incremented.clustering", "w") as f:
+        for cluster_number in range(max(cluster_to_doi_dict.keys())):
+            if(cluster_number in cluster_to_doi_dict):
+                for cluster_member_doi in cluster_to_doi_dict[cluster_number]:
+                    f.write(f"{cluster_number} {cluster_member_doi}\n")
 
     if(generate_histogram):
         for highly_cited_doi in highly_cited_doi_arr[:1]:
@@ -318,18 +351,18 @@ def increment_type_one(clustering, config_file, output_prefix, generate_histogra
             y_outdegree_data = histogram_data_highly_cited_doi_in_out_degrees[highly_cited_doi]["outdegree"]["y"]
             x_sumdegree_data = histogram_data_highly_cited_doi_in_out_degrees[highly_cited_doi]["sumdegree"]["x"]
             y_sumdegree_data = histogram_data_highly_cited_doi_in_out_degrees[highly_cited_doi]["sumdegree"]["y"]
-            save_scatter(x_indegree_data, y_indegree_data, "cluster number", "indegree from the cluster", f"node: {highly_cited_doi}", f"{output_prefix}/{highly_cited_doi[0].replace('/','SLASH')}_indegree", y_min=1)
-            save_scatter(x_outdegree_data, y_outdegree_data, "cluster number", "outdegree from the cluster", f"node: {highly_cited_doi}", f"{output_prefix}/{highly_cited_doi[0].replace('/','SLASH')}_outdegree", y_min=1)
-            save_scatter(x_sumdegree_data, y_sumdegree_data, "cluster number", "sumdegree from the cluster", f"node: {highly_cited_doi}", f"{output_prefix}/{highly_cited_doi[0].replace('/','SLASH')}_sumdegree", y_min=1)
+            save_scatter(x_indegree_data, y_indegree_data, "cluster number", "indegree from the cluster", f"node: {highly_cited_doi}", f"{figure_prefix}/{highly_cited_doi.replace('/','SLASH')}_indegree", y_min=1)
+            save_scatter(x_outdegree_data, y_outdegree_data, "cluster number", "outdegree from the cluster", f"node: {highly_cited_doi}", f"{figure_prefix}/{highly_cited_doi.replace('/','SLASH')}_outdegree", y_min=1)
+            save_scatter(x_sumdegree_data, y_sumdegree_data, "cluster number", "sumdegree from the cluster", f"node: {highly_cited_doi}", f"{figure_prefix}/{highly_cited_doi.replace('/','SLASH')}_sumdegree", y_min=1)
 
         print(f"saved degree scatter plots")
         for highly_cited_doi in highly_cited_doi_arr[:1]:
             for cluster_number in histogram_data_cluster_indegrees[highly_cited_doi]:
                 if(len(histogram_data_cluster_indegrees[highly_cited_doi][cluster_number]) > 0):
-                    save_histogram(0, max(histogram_data_cluster_indegrees[highly_cited_doi][cluster_number]) + 1, 1, histogram_data_cluster_indegrees[highly_cited_doi][cluster_number], "count", "intracluster indegrees", f"cluster number: {cluster_number}", f"{output_prefix}/{highly_cited_doi[0].replace('/', 'SLASH')}_{cluster_number}_intracluster_indegrees")
+                    save_histogram(0, max(histogram_data_cluster_indegrees[highly_cited_doi][cluster_number]) + 1, 1, histogram_data_cluster_indegrees[highly_cited_doi][cluster_number], "count", "intracluster indegrees", f"cluster number: {cluster_number}", f"{figure_prefix}/{highly_cited_doi.replace('/', 'SLASH')}_{cluster_number}_intracluster_indegrees")
             for cluster_number in histogram_data_cluster_outdegrees[highly_cited_doi]:
                 if(len(histogram_data_cluster_outdegrees[highly_cited_doi][cluster_number]) > 0):
-                    save_histogram(0, max(histogram_data_cluster_outdegrees[highly_cited_doi][cluster_number]) + 1, 1, histogram_data_cluster_outdegrees[highly_cited_doi][cluster_number], "count", "intracluster outdegrees", f"cluster number: {cluster_number}", f"{output_prefix}/{highly_cited_doi[0].replace('/', 'SLASH')}_{cluster_number}_intracluster_outdegrees")
+                    save_histogram(0, max(histogram_data_cluster_outdegrees[highly_cited_doi][cluster_number]) + 1, 1, histogram_data_cluster_outdegrees[highly_cited_doi][cluster_number], "count", "intracluster outdegrees", f"cluster number: {cluster_number}", f"{figure_prefix}/{highly_cited_doi.replace('/', 'SLASH')}_{cluster_number}_intracluster_outdegrees")
         print(f"saved cluster histograms")
 
 if __name__ == "__main__":
