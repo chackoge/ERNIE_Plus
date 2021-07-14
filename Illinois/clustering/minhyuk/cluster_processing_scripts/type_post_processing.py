@@ -142,7 +142,7 @@ def increment_type_one(clustering, config_file, output_prefix, figure_prefix, hi
                 histogram_data_highly_cited_doi_in_out_degrees[highly_cited_doi]["sumdegree"]["y"].append(current_highly_cited_doi_indegree + current_highly_cited_doi_outdegree)
 
     # this is one of the relevant sections for the note portion in the pseudocode
-    write_new_clustering_file(type_1_to_be_update, cluster_to_doi_dict, output_prefix)
+    write_new_clustering_file(type_1_to_be_updated, cluster_to_doi_dict, output_prefix)
 
     if(generate_histogram):
         for highly_cited_doi in highly_cited_doi_arr[:1]:
