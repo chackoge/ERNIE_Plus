@@ -3,8 +3,10 @@ import json
 import click
 
 
-
 def parse_mcl(clustering_output, output_prefix):
+    ''' This function takes in the mcl output cluster format
+    and writes a cluster format where each line is "<cluster number>SPACE<node id>"
+    '''
     with open(output_prefix, "w") as fw:
         with open(clustering_output, "r") as f:
             for line_number,current_line in enumerate(f):
@@ -14,6 +16,9 @@ def parse_mcl(clustering_output, output_prefix):
                 fw.write(current_cluster_number + " " + current_doi + "\n")
 
 def parse_leiden(clustering_output, leiden_mapping, output_prefix):
+    ''' This function takes in the leiden cluster format and leiden integer mapping
+    and writes a cluster format where each line is "<cluster number>SPACE<node id>"
+    '''
     integer_to_doi_mapping = {}
     with open(leiden_mapping, "r") as f:
         for current_line in f:
@@ -32,6 +37,9 @@ def parse_leiden(clustering_output, leiden_mapping, output_prefix):
 @click.option("--cluster-method", required=True, type=click.Choice(["mcl", "leiden"]), help="Clustering method used")
 @click.option("--output-prefix", required=True, type=click.Path(), help="Output file prefix")
 def convert_to_doi_cluster_format(clustering_output, leiden_mapping, cluster_method, output_prefix):
+    '''This is the main function that takes in either mcl or leiden formatted clustering output
+    and writes a cluster format where each line is "<cluster number>SPACE<node id>"
+    '''
     if(cluster_method == "mcl"):
         parse_mcl(clustering_output, output_prefix)
     if(cluster_method == "leiden"):

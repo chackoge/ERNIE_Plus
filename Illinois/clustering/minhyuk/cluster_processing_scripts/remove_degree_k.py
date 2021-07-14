@@ -5,6 +5,10 @@ import psycopg2
 
 
 def file_to_dict(clustering):
+    '''This function takes in an input clustering of format "<cluster number>SPACE<node id>"
+    and returns two python dictionaries that map from cluster number to a list of node ids and
+    from a node id to list of cluster numbers.
+    '''
     cluster_to_doi_dict = {}
     doi_to_cluster_dict = {}
 
@@ -26,6 +30,10 @@ def file_to_dict(clustering):
 
 
 def get_cursor_client_dict(config_file):
+    '''This function parses a JSON formatted config file
+    that contains the dbname, username, and table name to return a
+    psycopg2 connection and cursor.
+    '''
     config = None
     with open(config_file, "r") as config_f:
         config = json.load(config_f)
@@ -39,10 +47,14 @@ def get_cursor_client_dict(config_file):
     return {
         "connection": psql_connection,
         "cursor": cursor,
+        "table_name": config["tablename"],
     }
 
 
 def get_sum_degrees(cursor, k, table_name):
+    '''This is a SQL wrapper that takes in a node degree and returns
+    all nodes with degree k.
+    '''
     cursor.execute(f"""with outdegree_table as (
     select citing as node, count(distinct cited) as degree from {table_name} group by citing order by count(distinct cited) desc
     ), indegree_table as (
@@ -60,6 +72,9 @@ def get_sum_degrees(cursor, k, table_name):
 
 
 def delete_doi_array(connection, cursor, doi_arr, table_name):
+    '''This is a SQL wrapper that takes in a list of dois and drops rows that
+    include the doi.
+    '''
     doi_arr_string_representation = "("
     doi_arr_string_representation += ("'" + doi_arr[0] + "'")
     for doi in doi_arr[1:]:
@@ -71,13 +86,17 @@ def delete_doi_array(connection, cursor, doi_arr, table_name):
 
 @click.command()
 @click.option("--config-file", required=True, type=click.Path(exists=True), help="The config file containing the backbonedb and processeddb")
-def remove_degree_k(config_file):
+@click.option("--k", required=True, type=int, help="Nodes with degree k will be removed")
+def remove_degree_k(config_file, k):
+    '''This is the main function that takes in a config file containing database information
+    and removes every node with degree k
+    '''
     cursor_client_dict = get_cursor_client_dict(config_file)
     cursor = cursor_client_dict.pop("cursor", None)
     connection = cursor_client_dict.pop("connection", None)
-    dois_to_delete = [tup[0] for tup in get_sum_degrees(cursor, 3, "TABLENAME")]
-    print(dois_to_delete)
-    delete_doi_array(connection, cursor, dois_to_delete, "TABLENAME")
+    table_name = cursor_client_dict.pop("table_name", None)
+    dois_to_delete = [tup[0] for tup in get_sum_degrees(cursor, 3, table_name)]
+    delete_doi_array(connection, cursor, dois_to_delete, table_name)
 
 
 if __name__ == "__main__":
