@@ -69,7 +69,6 @@ def modsoft_write_membership_matrix(modsoft_membership, suffix):
     return modsoft_membership_matrix
 
 
-
 def write_integer_map_and_graph(graph, suffix):
     graph_labels = {}
     for current_node in graph.nodes():
@@ -80,14 +79,13 @@ def write_integer_map_and_graph(graph, suffix):
     nx.write_edgelist(graph, f"/home/minhyuk2/git_repos/ERNIE_Plus/Illinois/clustering/minhyuk/kalluri/{suffix}/kalluri_sample_network.integer_label.{suffix}.tsv")
 
 
-
 suffix = "full"
 original_graph = nx.read_edgelist(f"/home/minhyuk2/git_repos/ERNIE_Plus/Illinois/clustering/minhyuk/kalluri/{suffix}/kalluri_sample_network.{suffix}.tsv")
 graph = nx.convert_node_labels_to_integers(original_graph, label_attribute="doi")
 write_integer_map_and_graph(graph, suffix)
 
-louvain_part  = run_louvain(graph)
+# louvain_part  = run_louvain(graph)
 modsoft_membersihp = run_modsoft(graph)
 
-louvain_write_membership_matrix(louvain_part, suffix)
+# louvain_write_membership_matrix(louvain_part, suffix)
 modsoft_write_membership_matrix(modsoft_membership, suffix)

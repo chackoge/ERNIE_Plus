@@ -186,7 +186,7 @@ def save_scatter(x_data, y_data, x_label, y_label, title, output_prefix, y_min=0
 @click.option("--config-file", required=True, type=click.Path(exists=True), help="The config file containing the backbonedb and processeddb")
 @click.option("--output-prefix", required=True, type=click.Path(), help="Output file prefix")
 @click.option("--figure-prefix", required=True, type=click.Path(), help="Output file prefix")
-@click.option("--method", required=True, type=click.Choice(["increment_type_1", "increment_type_1+plot", "scatter_plot_indegrees"]))
+@click.option("--method", required=True, type=click.Choice(["increment_type_1", "increment_type_1+plot", "scatter_plot_indegrees", "cluster_analysis"]))
 def type_post_processing(clustering, config_file, output_prefix, figure_prefix, method):
     if(method == "increment_type_1"):
         increment_type_one(clustering, config_file, output_prefix, figure_prefix, False)
@@ -194,6 +194,36 @@ def type_post_processing(clustering, config_file, output_prefix, figure_prefix, 
         increment_type_one(clustering, config_file, output_prefix, figure_prefix, True)
     elif(method == "scatter_plot_indegrees"):
         scatter_plot_indegrees(clustering, config_file, output_prefix, figure_prefix)
+    elif(method == "cluster_analysis"):
+        cluster_analysis(clustering, config_file, output_prefix, figure_prefix)
+
+
+def cluster_analysis(clustering, config_file, output_prefix, figure_prefix):
+    cluster_dicts = file_to_dict(clustering)
+    cluster_to_doi_dict = cluster_dicts["cluster_to_doi_dict"]
+    doi_to_cluster_dict = cluster_dicts["doi_to_cluster_dict"]
+    cursor_client_dict = get_cursor_client_dict(config_file)
+    cursor = cursor_client_dict.pop("cursor", None)
+    connection = cursor_client_dict.pop("connection", None)
+    largest_cluster_number = list(cluster_to_doi_dict.keys())[0]
+    for cluster_number in cluster_to_doi_dict:
+        if(len(cluster_to_doi_dict[cluster_number]) > len(cluster_to_doi_dict[largest_cluster_number])):
+            largest_cluster_number = cluster_number
+
+    print(f"the largest cluster number is {largest_cluster_number} with size {len(cluster_to_doi_dict[largest_cluster_number])}")
+    current_intracluster_doi_and_indegree_arr = get_intracluster_doi_and_indegree(cursor, cluster_to_doi_dict[largest_cluster_number])
+    current_intracluster_doi_and_outdegree_arr = get_intracluster_doi_and_outdegree(cursor, cluster_to_doi_dict[largest_cluster_number])
+    histogram_indegree_data = [int(tup[1]) for tup in current_intracluster_doi_and_indegree_arr]
+    histogram_outdegree_data = [int(tup[1]) for tup in current_intracluster_doi_and_outdegree_arr]
+    print(f"number of nodes in indegree data: {len(histogram_indegree_data)}")
+    print(f"number of nodes in outdegree data: {len(histogram_outdegree_data)}")
+    maximum_indegree_index = np.argmax(histogram_indegree_data)
+    maximum_outdegree_index = np.argmax(histogram_outdegree_data)
+    print(f"node with the highest indegree is {current_intracluster_doi_and_indegree_arr[maximum_indegree_index]}")
+    print(f"node with the highest outdegree is {current_intracluster_doi_and_outdegree_arr[maximum_outdegree_index]}")
+    return
+    save_histogram(0, max(histogram_indegree_data) + 1, 1, histogram_indegree_data, "count", "intracluster indegrees", f"cluster number: {largest_cluster_number}", f"{figure_prefix}/{largest_cluster_number}_intracluster_indegrees")
+    save_histogram(0, max(histogram_outdegree_data) + 1, 1, histogram_outdegree_data, "count", "intracluster outdegrees", f"cluster number: {largest_cluster_number}", f"{figure_prefix}/{largest_cluster_number}_intracluster_outdegrees")
 
 
 def scatter_plot_indegrees(clustering, config_file, output_prefix, figure_prefix):
