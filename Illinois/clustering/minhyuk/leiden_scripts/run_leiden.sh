@@ -1,4 +1,5 @@
 #!/bin/bash
+# this script is a wrapper around leiden that is instaleld on valhalla
 SIZE="full"
 
 OUTPUT_PREFIX="./${SIZE}/"
