@@ -1,3 +1,5 @@
+import json
+
 import click
 import matplotlib.pyplot as plt
 import numpy as np
@@ -17,6 +19,10 @@ plt.rc("figure", titlesize=BIGGER_SIZE)
 
 
 def file_to_dict(clustering):
+    '''This function takes in an input clustering of format "<cluster number>SPACE<node id>"
+    and returns two python dictionaries that map from cluster number to a list of node ids and
+    from a node id to list of cluster numbers.
+    '''
     cluster_to_doi_dict = {}
     doi_to_cluster_dict = {}
 
