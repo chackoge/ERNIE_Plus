@@ -118,3 +118,15 @@ def get_all_doi_and_outdegree(cursor, table_name):
     cursor.execute(f"""SELECT citing,COUNT(DISTINCT cited) FROM {table_name} GROUP BY citing ORDER BY COUNT(DISTINCT cited) DESC""")
     rows = cursor.fetchall()
     return [tup for tup in rows]
+
+
+def get_all_id_and_indegree(cursor, table_name):
+    cursor.execute(f"""SELECT cited_id,COUNT(DISTINCT citing_id) FROM {table_name} GROUP BY cited_id ORDER BY COUNT(DISTINCT citing_id) DESC""")
+    rows = cursor.fetchall()
+    return [tup for tup in rows]
+
+
+def get_all_id_and_outdegree(cursor, table_name):
+    cursor.execute(f"""SELECT citing_id,COUNT(DISTINCT cited_id) FROM {table_name} GROUP BY citing_id ORDER BY COUNT(DISTINCT cited_id) DESC""")
+    rows = cursor.fetchall()
+    return [tup for tup in rows]
