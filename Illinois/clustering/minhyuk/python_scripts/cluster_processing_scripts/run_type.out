@@ -1,0 +1,1589 @@
+num_dois: 305399
+num_clusters: 17254
+top 0.0001 nodes by indegree: ['10.1038/ncb1596', '10.1080/20013078.2018.1535750', '10.1083/jcb.201211138', '10.1038/nm.3394', '10.1002/0471143030.cb0322s30', '10.3402/jev.v4.27066', '10.1038/nature15756', '10.1146/annurev-pathol-121808-102144', '10.1038/ncb1800', '10.1146/annurev-cellbio-101512-122326', '10.1073/pnas.1521230113', '10.1038/nri855', '10.1073/pnas.1019055108', '10.1038/nm.2753', '10.1038/nbt.1807', '10.1128/jvi.73.8.6235-6244.1999', '10.1126/science.1153124', '10.1038/nrm.2017.125', '10.1146/annurev-immunol-032713-120231', '10.1182/blood.v94.11.3791', '10.1038/nature12787', '10.1038/onc.2016.304', '10.1084/jem.183.3.1161', '10.1038/cr.2015.82', '10.3402/jev.v3.26913', '10.1007/s00018-017-2595-9', '10.3389/fendo.2018.00402', '10.1101/gad.1800909', '10.1016/s0022-2836(03)00865-9', '10.1038/s41586-018-0392-8', '10.1038/nature22341']
+974 incoming dois
+belongs to [366]
+10.1038/ncb1596 is cited by dois from 889 clusters ([9, 34, 63, 70, 90, 126, 164, 229, 233, 234, 235, 254, 262, 267, 297, 319, 334, 365, 366, 370, 374, 375, 385, 397, 400, 401, 407, 431, 448, 509, 510, 525, 540, 547, 549, 556, 577, 579, 609, 635, 683, 709, 710, 711, 712, 725, 731, 746, 748, 763, 784, 832, 845, 849, 859, 884, 914, 921, 929, 942, 947, 958, 971, 973, 976, 983, 1001, 1014, 1015, 1017, 1038, 1044, 1047, 1064, 1065, 1068, 1075, 1084, 1086, 1094, 1122, 1138, 1163, 1179, 1189, 1192, 1193, 1221, 1229, 1240, 1246, 1264, 1265, 1276, 1289, 1293, 1302, 1304, 1322, 1334, 1343, 1356, 1359, 1362, 1387, 1394, 1429, 1432, 1436, 1447, 1491, 1502, 1517, 1538, 1541, 1544, 1557, 1566, 1589, 1609, 1642, 1655, 1666, 1676, 1679, 1705, 1708, 1711, 1713, 1715, 1734, 1755, 1778, 1780, 1785, 1824, 1845, 1847, 1848, 1901, 1902, 1907, 1909, 1912, 1915, 1924, 1926, 1964, 1968, 1969, 1970, 1975, 1980, 1987, 1992, 2007, 2032, 2044, 2053, 2063, 2070, 2074, 2117, 2121, 2128, 2135, 2138, 2142, 2147, 2161, 2169, 2170, 2177, 2178, 2184, 2199, 2206, 2207, 2221, 2230, 2250, 2259, 2263, 2280, 2282, 2310, 2320, 2331, 2333, 2337, 2345, 2358, 2376, 2397, 2401, 2404, 2405, 2412, 2437, 2440, 2442, 2444, 2447, 2463, 2483, 2487, 2496, 2516, 2534, 2536, 2553, 2559, 2564, 2582, 2590, 2594, 2610, 2653, 2689, 2692, 2693, 2706, 2712, 2726, 2732, 2744, 2745, 2790, 2797, 2802, 2807, 2823, 2828, 2844, 2852, 2859, 2898, 2906, 2915, 2929, 2936, 2944, 2948, 2952, 2958, 2962, 2964, 2969, 3001, 3012, 3025, 3038, 3050, 3051, 3059, 3078, 3088, 3103, 3131, 3134, 3143, 3144, 3175, 3176, 3181, 3187, 3221, 3225, 3235, 3242, 3251, 3252, 3255, 3257, 3276, 3286, 3287, 3306, 3308, 3325, 3327, 3352, 3362, 3363, 3377, 3393, 3394, 3395, 3407, 3408, 3411, 3414, 3419, 3434, 3450, 3454, 3458, 3462, 3479, 3481, 3486, 3488, 3523, 3537, 3544, 3554, 3562, 3565, 3575, 3585, 3594, 3598, 3605, 3606, 3607, 3609, 3611, 3622, 3632, 3639, 3644, 3645, 3649, 3674, 3681, 3689, 3691, 3694, 3695, 3696, 3702, 3703, 3705, 3714, 3720, 3724, 3738, 3739, 3749, 3762, 3780, 3786, 3794, 3796, 3814, 3821, 3834, 3835, 3840, 3842, 3857, 3858, 3865, 3869, 3872, 3892, 3912, 3916, 3926, 3932, 3948, 3956, 3957, 3965, 3973, 3977, 3984, 3985, 3986, 3990, 3996, 3997, 4001, 4005, 4012, 4014, 4021, 4025, 4059, 4065, 4080, 4081, 4083, 4088, 4105, 4115, 4129, 4133, 4142, 4149, 4156, 4160, 4167, 4176, 4187, 4206, 4214, 4216, 4218, 4224, 4233, 4235, 4245, 4255, 4262, 4271, 4282, 4300, 4304, 4312, 4316, 4337, 4338, 4347, 4357, 4358, 4365, 4369, 4372, 4381, 4397, 4400, 4409, 4410, 4429, 4434, 4435, 4445, 4448, 4451, 4454, 4457, 4461, 4473, 4475, 4480, 4501, 4504, 4513, 4532, 4533, 4539, 4545, 4551, 4596, 4602, 4612, 4617, 4627, 4632, 4633, 4638, 4639, 4643, 4644, 4654, 4656, 4670, 4680, 4682, 4705, 4706, 4716, 4717, 4719, 4721, 4722, 4727, 4737, 4738, 4757, 4775, 4778, 4785, 4790, 4792, 4797, 4807, 4833, 4845, 4848, 4870, 4879, 4884, 4891, 4896, 4910, 4911, 4924, 4931, 4947, 4950, 4984, 5014, 5023, 5045, 5046, 5049, 5056, 5072, 5074, 5081, 5086, 5090, 5105, 5118, 5123, 5133, 5172, 5173, 5178, 5189, 5190, 5194, 5203, 5212, 5239, 5240, 5247, 5267, 5394, 5398, 5405, 5409, 5412, 5415, 5424, 5436, 5438, 5439, 5477, 5486, 5498, 5501, 5511, 5513, 5531, 5547, 5578, 5587, 5613, 5614, 5623, 5626, 5630, 5649, 5651, 5663, 5668, 5692, 5702, 5728, 5731, 5756, 5893, 5895, 5901, 5913, 5920, 5964, 6066, 6080, 6094, 6188, 6224, 6227, 6246, 6248, 6274, 6287, 6294, 6299, 6313, 6315, 6345, 6367, 6376, 6389, 6419, 6475, 6603, 6609, 6613, 6618, 6620, 6630, 6637, 6678, 6738, 6767, 6777, 6788, 6798, 6801, 6824, 6826, 6839, 6870, 6879, 6914, 6950, 7008, 7033, 7105, 7183, 7193, 7213, 7216, 7266, 7278, 7282, 7343, 7353, 7358, 7368, 7372, 7427, 7457, 7471, 7559, 7580, 7651, 7818, 7847, 7857, 7872, 7874, 7896, 7924, 7938, 7988, 7996, 8002, 8004, 8015, 8024, 8051, 8057, 8059, 8068, 8102, 8151, 8161, 8180, 8196, 8205, 8211, 8213, 8251, 8337, 8358, 8395, 8427, 8475, 8612, 8614, 8631, 8632, 8638, 8660, 8669, 8678, 8692, 8712, 8733, 8740, 8744, 8769, 8775, 8800, 8825, 8851, 8856, 8867, 8871, 8907, 8911, 8963, 8985, 8995, 9034, 9053, 9094, 9131, 9163, 9220, 9260, 9345, 9465, 9600, 9723, 9728, 9739, 9762, 9800, 9802, 9810, 9824, 9845, 9855, 9871, 9937, 9985, 10020, 10036, 10095, 10118, 10135, 10180, 10239, 10246, 10282, 10347, 10412, 10429, 10440, 10512, 10596, 10601, 10665, 10729, 10732, 10766, 10833, 10836, 11241, 11289, 11292, 11302, 11321, 11327, 11335, 11358, 11409, 11434, 11493, 11508, 11559, 11595, 11625, 11635, 11645, 11671, 11728, 11758, 11782, 11818, 11916, 11925, 12024, 12092, 12188, 12192, 12208, 12221, 12288, 12303, 12356, 12373, 12792, 13309, 13345, 13354, 13389, 13419, 13480, 13600, 13665, 13701, 13831, 13906, 13909, 14015, 14040, 14108, 14343, 14364, 14425, 14515, 14548, 14630, 15069, 15968, 15980, 15989, 15996, 16027, 16032, 16036, 16040, 16043, 16051, 16056, 16060, 16062, 16066, 16067, 16082, 16097, 16098, 16117, 16119, 16135, 16141, 16146, 16150, 16157, 16163, 16169, 16187, 16197, 16198, 16215, 16219, 16238, 16252, 16255, 16260, 16264, 16296, 16314, 16315, 16319, 16338, 16347, 16354, 16355, 16358, 16365, 16368, 16374, 16385, 16395, 16402, 16417, 16435, 16441, 16453, 16458, 16470, 16480, 16503, 16516, 16524, 16548, 16549, 16555, 16559, 16566, 16574, 16582, 16604, 16605, 16613, 16622, 16630, 16636, 16649, 16657, 16665, 16709, 16712, 16714, 16717, 16724, 16733, 16774, 16778, 16794, 16800, 16823, 16838, 16878, 16905, 16913, 16942, 16968, 16992, 16993, 17010, 17023, 17027, 17071, 17072, 17081, 17088, 17093, 17132, 17248])
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 365 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 3 in cluster 884 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 983 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 4 in cluster 1065 where the top 0.01th indegree is 2
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 1970 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 3 in cluster 2117 where the top 0.01th indegree is 2
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 3523 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 3681 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 3965 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 4214 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 4445 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 4454 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 5189 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 5415 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 6248 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 7857 where the top 0.01th indegree is 1
+cluster 11292 has 3 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 3 in cluster 11292 where the top 0.01th indegree is 0
+cluster 11327 has 3 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 3 in cluster 11327 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 11625 where the top 0.01th indegree is 1
+cluster 13345 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 13345 where the top 0.01th indegree is 0
+cluster 13354 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 2 in cluster 13354 where the top 0.01th indegree is 0
+cluster 13419 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 13419 where the top 0.01th indegree is 0
+cluster 13600 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 13600 where the top 0.01th indegree is 0
+cluster 15968 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 15968 where the top 0.01th indegree is 0
+cluster 15980 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 15980 where the top 0.01th indegree is 0
+cluster 15989 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 15989 where the top 0.01th indegree is 0
+cluster 15996 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 15996 where the top 0.01th indegree is 0
+cluster 16027 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16027 where the top 0.01th indegree is 0
+cluster 16032 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16032 where the top 0.01th indegree is 0
+cluster 16036 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16036 where the top 0.01th indegree is 0
+cluster 16040 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+cluster 16043 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16043 where the top 0.01th indegree is 0
+cluster 16051 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16051 where the top 0.01th indegree is 0
+cluster 16056 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16056 where the top 0.01th indegree is 0
+cluster 16060 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16060 where the top 0.01th indegree is 0
+cluster 16062 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16062 where the top 0.01th indegree is 0
+cluster 16066 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16066 where the top 0.01th indegree is 0
+cluster 16067 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16067 where the top 0.01th indegree is 0
+cluster 16082 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16082 where the top 0.01th indegree is 0
+cluster 16097 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16097 where the top 0.01th indegree is 0
+cluster 16098 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16098 where the top 0.01th indegree is 0
+cluster 16117 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16117 where the top 0.01th indegree is 0
+cluster 16119 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16119 where the top 0.01th indegree is 0
+cluster 16135 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16135 where the top 0.01th indegree is 0
+cluster 16141 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16141 where the top 0.01th indegree is 0
+cluster 16146 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16146 where the top 0.01th indegree is 0
+cluster 16150 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16150 where the top 0.01th indegree is 0
+cluster 16157 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16157 where the top 0.01th indegree is 0
+cluster 16163 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16163 where the top 0.01th indegree is 0
+cluster 16169 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16169 where the top 0.01th indegree is 0
+cluster 16187 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16187 where the top 0.01th indegree is 0
+cluster 16197 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16197 where the top 0.01th indegree is 0
+cluster 16198 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16198 where the top 0.01th indegree is 0
+cluster 16215 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16215 where the top 0.01th indegree is 0
+cluster 16219 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16219 where the top 0.01th indegree is 0
+cluster 16238 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16238 where the top 0.01th indegree is 0
+cluster 16252 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16252 where the top 0.01th indegree is 0
+cluster 16255 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16255 where the top 0.01th indegree is 0
+cluster 16260 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16260 where the top 0.01th indegree is 0
+cluster 16264 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16264 where the top 0.01th indegree is 0
+cluster 16296 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16296 where the top 0.01th indegree is 0
+cluster 16314 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+cluster 16315 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16315 where the top 0.01th indegree is 0
+cluster 16319 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16319 where the top 0.01th indegree is 0
+cluster 16338 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16338 where the top 0.01th indegree is 0
+cluster 16347 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16347 where the top 0.01th indegree is 0
+cluster 16354 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+cluster 16355 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16355 where the top 0.01th indegree is 0
+cluster 16358 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16358 where the top 0.01th indegree is 0
+cluster 16365 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16365 where the top 0.01th indegree is 0
+cluster 16368 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16368 where the top 0.01th indegree is 0
+cluster 16374 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16374 where the top 0.01th indegree is 0
+cluster 16385 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16385 where the top 0.01th indegree is 0
+cluster 16395 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16395 where the top 0.01th indegree is 0
+cluster 16402 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16402 where the top 0.01th indegree is 0
+cluster 16417 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16417 where the top 0.01th indegree is 0
+cluster 16435 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16435 where the top 0.01th indegree is 0
+cluster 16441 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16441 where the top 0.01th indegree is 0
+cluster 16453 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16453 where the top 0.01th indegree is 0
+cluster 16458 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16458 where the top 0.01th indegree is 0
+cluster 16470 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16470 where the top 0.01th indegree is 0
+cluster 16480 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16480 where the top 0.01th indegree is 0
+cluster 16503 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16503 where the top 0.01th indegree is 0
+cluster 16516 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16516 where the top 0.01th indegree is 0
+cluster 16524 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16524 where the top 0.01th indegree is 0
+cluster 16548 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16548 where the top 0.01th indegree is 0
+cluster 16549 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16549 where the top 0.01th indegree is 0
+cluster 16555 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16555 where the top 0.01th indegree is 0
+cluster 16559 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16559 where the top 0.01th indegree is 0
+cluster 16566 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16566 where the top 0.01th indegree is 0
+cluster 16574 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16574 where the top 0.01th indegree is 0
+cluster 16582 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16582 where the top 0.01th indegree is 0
+cluster 16604 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16604 where the top 0.01th indegree is 0
+cluster 16605 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16605 where the top 0.01th indegree is 0
+cluster 16613 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16613 where the top 0.01th indegree is 0
+cluster 16622 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16622 where the top 0.01th indegree is 0
+cluster 16630 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16630 where the top 0.01th indegree is 0
+cluster 16636 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16636 where the top 0.01th indegree is 0
+cluster 16649 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16649 where the top 0.01th indegree is 0
+cluster 16657 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16657 where the top 0.01th indegree is 0
+cluster 16665 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16665 where the top 0.01th indegree is 0
+cluster 16709 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16709 where the top 0.01th indegree is 0
+cluster 16712 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16712 where the top 0.01th indegree is 0
+cluster 16714 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16714 where the top 0.01th indegree is 0
+cluster 16717 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16717 where the top 0.01th indegree is 0
+cluster 16724 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16724 where the top 0.01th indegree is 0
+cluster 16733 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16733 where the top 0.01th indegree is 0
+cluster 16774 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16774 where the top 0.01th indegree is 0
+cluster 16778 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16778 where the top 0.01th indegree is 0
+cluster 16794 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16794 where the top 0.01th indegree is 0
+cluster 16800 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16800 where the top 0.01th indegree is 0
+cluster 16823 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16823 where the top 0.01th indegree is 0
+cluster 16838 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16838 where the top 0.01th indegree is 0
+cluster 16878 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16878 where the top 0.01th indegree is 0
+cluster 16905 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16905 where the top 0.01th indegree is 0
+cluster 16913 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16913 where the top 0.01th indegree is 0
+cluster 16942 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16942 where the top 0.01th indegree is 0
+cluster 16968 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16968 where the top 0.01th indegree is 0
+cluster 16992 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16992 where the top 0.01th indegree is 0
+cluster 16993 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 16993 where the top 0.01th indegree is 0
+cluster 17010 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17010 where the top 0.01th indegree is 0
+cluster 17023 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17023 where the top 0.01th indegree is 0
+cluster 17027 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17027 where the top 0.01th indegree is 0
+cluster 17071 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17071 where the top 0.01th indegree is 0
+cluster 17072 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17072 where the top 0.01th indegree is 0
+cluster 17081 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17081 where the top 0.01th indegree is 0
+cluster 17088 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17088 where the top 0.01th indegree is 0
+cluster 17093 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17093 where the top 0.01th indegree is 0
+cluster 17132 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17132 where the top 0.01th indegree is 0
+cluster 17248 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1596 has indegree 1 in cluster 17248 where the top 0.01th indegree is 0
+747 incoming dois
+belongs to [710]
+10.1080/20013078.2018.1535750 is cited by dois from 674 clusters ([1, 70, 73, 166, 198, 229, 234, 236, 241, 327, 337, 345, 374, 397, 442, 501, 568, 651, 682, 710, 731, 776, 784, 789, 806, 813, 875, 879, 884, 899, 921, 942, 952, 955, 958, 959, 978, 982, 987, 1027, 1057, 1060, 1061, 1065, 1091, 1119, 1163, 1179, 1187, 1188, 1191, 1192, 1229, 1237, 1241, 1244, 1265, 1281, 1282, 1353, 1366, 1394, 1437, 1457, 1458, 1468, 1514, 1515, 1519, 1557, 1565, 1642, 1651, 1657, 1675, 1676, 1708, 1711, 1713, 1720, 1752, 1777, 1784, 1798, 1812, 1819, 1907, 1913, 1921, 1924, 1942, 1945, 1947, 1953, 1968, 1994, 2014, 2035, 2053, 2092, 2117, 2123, 2128, 2135, 2138, 2142, 2143, 2146, 2151, 2165, 2177, 2188, 2191, 2215, 2222, 2244, 2255, 2280, 2293, 2331, 2337, 2345, 2355, 2398, 2420, 2429, 2439, 2463, 2467, 2497, 2504, 2531, 2535, 2553, 2568, 2604, 2617, 2624, 2643, 2650, 2672, 2673, 2680, 2693, 2699, 2744, 2765, 2766, 2788, 2793, 2794, 2809, 2814, 2823, 2828, 2842, 2844, 2852, 2865, 2883, 2892, 2895, 2907, 2911, 2925, 2927, 2941, 2959, 2970, 2979, 2991, 2998, 2999, 3004, 3018, 3030, 3053, 3054, 3067, 3078, 3104, 3119, 3121, 3131, 3134, 3156, 3171, 3182, 3186, 3187, 3195, 3196, 3221, 3235, 3236, 3239, 3261, 3268, 3269, 3272, 3276, 3279, 3287, 3303, 3306, 3320, 3330, 3362, 3386, 3391, 3392, 3393, 3410, 3421, 3433, 3435, 3458, 3462, 3477, 3480, 3506, 3529, 3542, 3550, 3573, 3632, 3666, 3681, 3705, 3706, 3707, 3716, 3730, 3784, 3819, 3833, 3838, 3847, 3849, 3859, 3888, 3899, 3906, 3916, 3930, 3931, 3945, 3956, 3957, 3958, 3959, 3960, 3974, 3978, 3979, 3984, 4010, 4037, 4041, 4069, 4078, 4082, 4084, 4096, 4101, 4102, 4103, 4115, 4119, 4133, 4137, 4155, 4166, 4186, 4206, 4218, 4231, 4233, 4241, 4259, 4263, 4268, 4301, 4357, 4364, 4377, 4382, 4409, 4410, 4419, 4429, 4445, 4457, 4458, 4459, 4461, 4464, 4467, 4475, 4496, 4501, 4507, 4512, 4514, 4519, 4521, 4525, 4576, 4589, 4609, 4653, 4660, 4665, 4704, 4705, 4717, 4734, 4773, 4797, 4807, 4848, 4867, 4875, 4891, 4894, 4916, 4946, 5015, 5070, 5090, 5095, 5171, 5183, 5196, 5205, 5212, 5229, 5271, 5279, 5283, 5303, 5321, 5379, 5394, 5409, 5412, 5415, 5420, 5436, 5477, 5485, 5494, 5496, 5498, 5522, 5613, 5614, 5630, 5631, 5639, 5650, 5663, 5685, 5705, 5728, 5731, 5783, 5809, 5834, 5895, 5899, 5901, 5905, 5961, 5964, 5971, 5985, 5992, 6014, 6071, 6185, 6188, 6208, 6218, 6235, 6237, 6258, 6287, 6328, 6355, 6431, 6586, 6620, 6626, 6630, 6654, 6657, 6661, 6663, 6772, 6824, 6890, 7112, 7115, 7146, 7150, 7152, 7216, 7229, 7238, 7256, 7278, 7343, 7417, 7459, 7517, 7543, 7618, 7710, 7792, 7836, 7857, 7866, 7890, 7893, 7903, 7907, 7913, 7933, 7943, 7954, 7964, 7994, 8068, 8079, 8150, 8213, 8265, 8614, 8623, 8632, 8724, 8733, 8775, 8803, 8806, 8835, 8849, 8902, 8907, 8965, 9150, 9161, 9184, 9206, 9304, 9399, 9434, 9497, 9723, 9739, 9802, 9805, 9815, 9840, 9847, 10002, 10020, 10096, 10215, 10239, 10277, 10283, 10448, 10476, 10495, 10605, 10632, 10665, 10715, 10872, 10883, 11240, 11241, 11280, 11289, 11294, 11305, 11321, 11324, 11327, 11335, 11354, 11358, 11381, 11502, 11508, 11511, 11520, 11549, 11559, 11583, 11611, 11625, 11628, 11653, 11663, 11694, 11731, 11760, 11782, 11828, 11855, 11934, 11999, 12049, 12108, 12227, 12254, 12349, 13309, 13345, 13354, 13381, 13397, 13405, 13414, 13432, 13440, 13443, 13479, 13511, 13523, 13537, 13584, 13591, 13607, 13631, 13659, 13727, 13767, 13870, 13980, 14108, 14199, 14302, 14331, 14399, 14411, 14515, 14570, 14680, 14865, 15309, 15973, 15981, 15983, 15992, 15996, 16000, 16001, 16009, 16018, 16021, 16024, 16037, 16040, 16051, 16059, 16060, 16066, 16069, 16082, 16097, 16114, 16129, 16131, 16134, 16136, 16151, 16157, 16163, 16179, 16187, 16191, 16195, 16199, 16207, 16214, 16219, 16223, 16236, 16255, 16260, 16262, 16278, 16287, 16291, 16296, 16299, 16300, 16303, 16305, 16307, 16310, 16314, 16340, 16342, 16347, 16349, 16356, 16365, 16368, 16372, 16403, 16410, 16417, 16420, 16425, 16438, 16440, 16448, 16456, 16470, 16473, 16483, 16490, 16501, 16514, 16518, 16524, 16543, 16559, 16574, 16586, 16604, 16613, 16616, 16661, 16663, 16673, 16689, 16714, 16723, 16725, 16770, 16838, 16847, 16870, 16875, 16893, 16894, 16910, 16912, 16921, 16923, 16927, 16932, 16961, 16967, 16968, 16992, 17039, 17066, 17081, 17098, 17123, 17148, 17155, 17164, 17175, 17179, 17221, 17232])
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 234 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 884 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 3 in cluster 942 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 1091 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 2014 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 3 in cluster 2117 where the top 0.01th indegree is 2
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 2280 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 2293 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 2865 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 2907 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 3529 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 3956 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 3 in cluster 3957 where the top 0.01th indegree is 2
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 4382 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 4445 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 4704 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 4867 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 5412 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 5613 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 5630 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 6586 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 7115 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 7893 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 4 in cluster 9161 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 10239 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 11289 where the top 0.01th indegree is 1
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 11327 where the top 0.01th indegree is 0
+cluster 12108 has 3 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 12108 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 13345 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 13354 where the top 0.01th indegree is 0
+cluster 13397 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 13397 where the top 0.01th indegree is 0
+cluster 13405 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 13405 where the top 0.01th indegree is 0
+cluster 13432 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 2 in cluster 13432 where the top 0.01th indegree is 0
+cluster 13523 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 13523 where the top 0.01th indegree is 0
+cluster 13607 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 13607 where the top 0.01th indegree is 0
+cluster 15973 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 15973 where the top 0.01th indegree is 0
+cluster 15981 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 15981 where the top 0.01th indegree is 0
+cluster 15983 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 15983 where the top 0.01th indegree is 0
+cluster 15992 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 15992 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 15996 where the top 0.01th indegree is 0
+cluster 16000 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+cluster 16001 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16001 where the top 0.01th indegree is 0
+cluster 16009 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16009 where the top 0.01th indegree is 0
+cluster 16018 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16018 where the top 0.01th indegree is 0
+cluster 16021 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16021 where the top 0.01th indegree is 0
+cluster 16024 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16024 where the top 0.01th indegree is 0
+cluster 16037 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16037 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16051 where the top 0.01th indegree is 0
+cluster 16059 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16059 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16060 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16066 where the top 0.01th indegree is 0
+cluster 16069 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16069 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16082 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16097 where the top 0.01th indegree is 0
+cluster 16114 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16114 where the top 0.01th indegree is 0
+cluster 16129 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16129 where the top 0.01th indegree is 0
+cluster 16131 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16131 where the top 0.01th indegree is 0
+cluster 16134 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16134 where the top 0.01th indegree is 0
+cluster 16136 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+cluster 16151 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16151 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16157 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16163 where the top 0.01th indegree is 0
+cluster 16179 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16179 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16187 where the top 0.01th indegree is 0
+cluster 16191 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16191 where the top 0.01th indegree is 0
+cluster 16195 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16195 where the top 0.01th indegree is 0
+cluster 16199 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16199 where the top 0.01th indegree is 0
+cluster 16207 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16207 where the top 0.01th indegree is 0
+cluster 16214 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16214 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16219 where the top 0.01th indegree is 0
+cluster 16223 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16223 where the top 0.01th indegree is 0
+cluster 16236 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16236 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16255 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16260 where the top 0.01th indegree is 0
+cluster 16262 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16262 where the top 0.01th indegree is 0
+cluster 16278 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16278 where the top 0.01th indegree is 0
+cluster 16287 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+cluster 16291 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16291 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16296 where the top 0.01th indegree is 0
+cluster 16299 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16299 where the top 0.01th indegree is 0
+cluster 16300 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16300 where the top 0.01th indegree is 0
+cluster 16303 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16303 where the top 0.01th indegree is 0
+cluster 16305 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16305 where the top 0.01th indegree is 0
+cluster 16307 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16307 where the top 0.01th indegree is 0
+cluster 16310 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16310 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+cluster 16340 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16340 where the top 0.01th indegree is 0
+cluster 16342 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16342 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16347 where the top 0.01th indegree is 0
+cluster 16349 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16349 where the top 0.01th indegree is 0
+cluster 16356 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16356 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16365 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16368 where the top 0.01th indegree is 0
+cluster 16372 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16372 where the top 0.01th indegree is 0
+cluster 16403 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16403 where the top 0.01th indegree is 0
+cluster 16410 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16410 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16417 where the top 0.01th indegree is 0
+cluster 16420 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16420 where the top 0.01th indegree is 0
+cluster 16425 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16425 where the top 0.01th indegree is 0
+cluster 16438 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16438 where the top 0.01th indegree is 0
+cluster 16440 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16440 where the top 0.01th indegree is 0
+cluster 16448 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16448 where the top 0.01th indegree is 0
+cluster 16456 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16456 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16470 where the top 0.01th indegree is 0
+cluster 16473 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16473 where the top 0.01th indegree is 0
+cluster 16483 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16483 where the top 0.01th indegree is 0
+cluster 16490 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16490 where the top 0.01th indegree is 0
+cluster 16501 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16501 where the top 0.01th indegree is 0
+cluster 16514 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16514 where the top 0.01th indegree is 0
+cluster 16518 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16518 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16524 where the top 0.01th indegree is 0
+cluster 16543 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16543 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16559 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16574 where the top 0.01th indegree is 0
+cluster 16586 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16586 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16604 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16613 where the top 0.01th indegree is 0
+cluster 16616 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16616 where the top 0.01th indegree is 0
+cluster 16661 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16661 where the top 0.01th indegree is 0
+cluster 16663 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16663 where the top 0.01th indegree is 0
+cluster 16673 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16673 where the top 0.01th indegree is 0
+cluster 16689 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16689 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16714 where the top 0.01th indegree is 0
+cluster 16723 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16723 where the top 0.01th indegree is 0
+cluster 16725 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16725 where the top 0.01th indegree is 0
+cluster 16770 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16770 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16838 where the top 0.01th indegree is 0
+cluster 16847 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16847 where the top 0.01th indegree is 0
+cluster 16870 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16870 where the top 0.01th indegree is 0
+cluster 16875 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16875 where the top 0.01th indegree is 0
+cluster 16893 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16893 where the top 0.01th indegree is 0
+cluster 16894 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16894 where the top 0.01th indegree is 0
+cluster 16910 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16910 where the top 0.01th indegree is 0
+cluster 16912 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16912 where the top 0.01th indegree is 0
+cluster 16921 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16921 where the top 0.01th indegree is 0
+cluster 16923 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16923 where the top 0.01th indegree is 0
+cluster 16927 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16927 where the top 0.01th indegree is 0
+cluster 16932 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16932 where the top 0.01th indegree is 0
+cluster 16961 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16961 where the top 0.01th indegree is 0
+cluster 16967 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16967 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16968 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 16992 where the top 0.01th indegree is 0
+cluster 17039 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17039 where the top 0.01th indegree is 0
+cluster 17066 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17066 where the top 0.01th indegree is 0
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17081 where the top 0.01th indegree is 0
+cluster 17098 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17098 where the top 0.01th indegree is 0
+cluster 17123 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17123 where the top 0.01th indegree is 0
+cluster 17148 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17148 where the top 0.01th indegree is 0
+cluster 17155 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17155 where the top 0.01th indegree is 0
+cluster 17164 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17164 where the top 0.01th indegree is 0
+cluster 17175 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17175 where the top 0.01th indegree is 0
+cluster 17179 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17179 where the top 0.01th indegree is 0
+cluster 17221 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17221 where the top 0.01th indegree is 0
+cluster 17232 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1080/20013078.2018.1535750 has indegree 1 in cluster 17232 where the top 0.01th indegree is 0
+722 incoming dois
+belongs to [1705]
+10.1083/jcb.201211138 is cited by dois from 656 clusters ([10, 13, 25, 47, 68, 70, 73, 126, 133, 156, 166, 234, 236, 238, 239, 240, 243, 254, 259, 261, 313, 327, 362, 365, 386, 397, 423, 442, 446, 483, 526, 544, 546, 576, 577, 609, 621, 646, 649, 651, 683, 753, 776, 813, 838, 845, 883, 885, 887, 894, 915, 920, 940, 942, 947, 952, 957, 973, 978, 983, 1015, 1040, 1065, 1083, 1101, 1122, 1163, 1179, 1188, 1192, 1196, 1207, 1209, 1229, 1234, 1244, 1245, 1253, 1265, 1271, 1285, 1293, 1322, 1333, 1366, 1382, 1447, 1455, 1468, 1487, 1505, 1530, 1536, 1537, 1557, 1559, 1580, 1581, 1586, 1632, 1642, 1655, 1685, 1705, 1713, 1746, 1778, 1785, 1795, 1798, 1847, 1850, 1872, 1873, 1878, 1879, 1913, 1924, 1926, 1946, 1952, 1968, 1970, 1975, 1980, 1987, 1990, 1994, 2007, 2028, 2029, 2053, 2072, 2073, 2104, 2113, 2117, 2137, 2138, 2170, 2178, 2180, 2191, 2199, 2206, 2221, 2225, 2243, 2249, 2259, 2273, 2280, 2283, 2303, 2310, 2311, 2337, 2340, 2355, 2358, 2404, 2410, 2422, 2437, 2447, 2459, 2493, 2496, 2497, 2505, 2518, 2556, 2559, 2582, 2619, 2623, 2625, 2647, 2699, 2720, 2721, 2725, 2742, 2750, 2755, 2781, 2797, 2816, 2842, 2876, 2883, 2889, 2907, 2936, 2943, 2944, 2947, 2950, 2962, 2981, 2993, 3006, 3021, 3052, 3054, 3078, 3095, 3108, 3109, 3121, 3134, 3139, 3144, 3156, 3181, 3182, 3184, 3190, 3208, 3251, 3252, 3265, 3268, 3276, 3280, 3287, 3324, 3325, 3338, 3347, 3354, 3360, 3370, 3374, 3387, 3400, 3407, 3414, 3419, 3450, 3451, 3497, 3506, 3515, 3542, 3548, 3559, 3567, 3573, 3575, 3605, 3610, 3611, 3645, 3655, 3660, 3691, 3707, 3716, 3720, 3729, 3751, 3762, 3774, 3784, 3789, 3796, 3812, 3816, 3819, 3821, 3833, 3835, 3840, 3844, 3860, 3884, 3895, 3899, 3912, 3916, 3919, 3920, 3932, 3948, 3956, 3957, 3959, 3969, 3970, 3982, 3984, 3990, 3997, 4033, 4042, 4044, 4086, 4088, 4106, 4109, 4112, 4115, 4117, 4134, 4135, 4154, 4170, 4176, 4206, 4215, 4216, 4230, 4244, 4263, 4290, 4300, 4308, 4316, 4317, 4357, 4364, 4369, 4372, 4376, 4391, 4403, 4410, 4445, 4448, 4455, 4473, 4478, 4494, 4495, 4496, 4510, 4513, 4521, 4522, 4559, 4582, 4584, 4589, 4596, 4607, 4617, 4638, 4680, 4705, 4711, 4712, 4721, 4722, 4732, 4737, 4738, 4739, 4745, 4757, 4766, 4769, 4772, 4773, 4775, 4776, 4795, 4827, 4853, 4868, 4870, 4875, 4881, 4891, 4902, 4914, 4919, 4960, 4975, 5010, 5023, 5043, 5046, 5061, 5074, 5081, 5082, 5086, 5204, 5239, 5281, 5287, 5296, 5304, 5385, 5394, 5398, 5405, 5406, 5409, 5415, 5420, 5421, 5438, 5473, 5477, 5485, 5519, 5552, 5572, 5610, 5613, 5648, 5663, 5705, 5767, 5895, 5913, 5920, 5923, 5971, 5982, 5994, 6001, 6026, 6071, 6103, 6188, 6208, 6213, 6227, 6235, 6236, 6244, 6248, 6328, 6345, 6485, 6586, 6592, 6597, 6603, 6605, 6627, 6673, 6694, 6717, 6740, 6754, 6797, 6811, 6870, 6872, 6890, 6915, 7141, 7212, 7213, 7216, 7321, 7352, 7432, 7461, 7468, 7578, 7651, 7787, 7820, 7844, 7895, 7907, 7966, 7989, 8002, 8102, 8213, 8222, 8223, 8268, 8315, 8358, 8632, 8721, 8729, 8770, 8815, 8845, 8879, 8907, 8924, 8963, 9118, 9150, 9188, 9225, 9252, 9262, 9268, 9283, 9465, 9497, 9582, 9754, 9768, 9805, 9824, 9878, 9926, 9974, 10020, 10039, 10062, 10180, 10186, 10215, 10235, 10295, 10511, 10514, 10520, 10605, 11059, 11292, 11299, 11350, 11358, 11396, 11434, 11551, 11552, 11595, 11603, 11625, 11731, 11755, 11758, 11759, 11760, 11843, 11916, 11932, 11934, 12076, 12088, 12101, 12190, 12224, 12235, 12465, 12584, 12611, 12801, 13309, 13328, 13381, 13405, 13440, 13443, 13479, 13480, 13497, 13511, 13523, 13548, 13567, 13584, 13587, 13659, 13713, 13827, 13831, 13916, 14411, 14623, 14900, 15063, 15997, 16000, 16003, 16021, 16051, 16053, 16062, 16117, 16119, 16131, 16134, 16139, 16142, 16152, 16159, 16176, 16179, 16198, 16214, 16238, 16248, 16260, 16264, 16271, 16287, 16291, 16296, 16310, 16314, 16315, 16349, 16365, 16374, 16375, 16384, 16385, 16400, 16402, 16410, 16414, 16441, 16444, 16453, 16489, 16514, 16530, 16543, 16544, 16549, 16555, 16559, 16651, 16662, 16725, 16744, 16755, 16766, 16778, 16849, 16881, 16886, 16893, 16909, 16910, 16966, 16969, 16970, 16993, 16999, 17005, 17027, 17039, 17044, 17066, 17071, 17093, 17103, 17147, 17187, 17222])
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 365 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 4 in cluster 838 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 3 in cluster 1015 where the top 0.01th indegree is 2
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 1163 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 3 in cluster 1179 where the top 0.01th indegree is 2
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 1366 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 2943 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 2950 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 4357 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 6627 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 10020 where the top 0.01th indegree is 1
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 11292 where the top 0.01th indegree is 0
+cluster 13328 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 13328 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 13405 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 13523 where the top 0.01th indegree is 0
+cluster 14623 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 2 in cluster 14623 where the top 0.01th indegree is 0
+cluster 15997 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 15997 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+cluster 16003 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16003 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16021 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16051 where the top 0.01th indegree is 0
+cluster 16053 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16053 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16062 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16117 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16119 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16131 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16134 where the top 0.01th indegree is 0
+cluster 16139 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16139 where the top 0.01th indegree is 0
+cluster 16142 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16142 where the top 0.01th indegree is 0
+cluster 16152 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16152 where the top 0.01th indegree is 0
+cluster 16159 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16159 where the top 0.01th indegree is 0
+cluster 16176 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16176 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16179 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16198 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16214 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16238 where the top 0.01th indegree is 0
+cluster 16248 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16248 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16260 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16264 where the top 0.01th indegree is 0
+cluster 16271 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16271 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16291 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16296 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16310 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16315 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16349 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16365 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16374 where the top 0.01th indegree is 0
+cluster 16375 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16375 where the top 0.01th indegree is 0
+cluster 16384 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16384 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16385 where the top 0.01th indegree is 0
+cluster 16400 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16400 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16402 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16410 where the top 0.01th indegree is 0
+cluster 16414 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16414 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16441 where the top 0.01th indegree is 0
+cluster 16444 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16444 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16453 where the top 0.01th indegree is 0
+cluster 16489 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16489 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16514 where the top 0.01th indegree is 0
+cluster 16530 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16530 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16543 where the top 0.01th indegree is 0
+cluster 16544 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16544 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16549 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16555 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16559 where the top 0.01th indegree is 0
+cluster 16651 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16651 where the top 0.01th indegree is 0
+cluster 16662 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16662 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16725 where the top 0.01th indegree is 0
+cluster 16744 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16744 where the top 0.01th indegree is 0
+cluster 16755 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16755 where the top 0.01th indegree is 0
+cluster 16766 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16766 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16778 where the top 0.01th indegree is 0
+cluster 16849 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16849 where the top 0.01th indegree is 0
+cluster 16881 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16881 where the top 0.01th indegree is 0
+cluster 16886 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16886 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16893 where the top 0.01th indegree is 0
+cluster 16909 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16909 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16910 where the top 0.01th indegree is 0
+cluster 16966 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16966 where the top 0.01th indegree is 0
+cluster 16969 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16969 where the top 0.01th indegree is 0
+cluster 16970 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16970 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16993 where the top 0.01th indegree is 0
+cluster 16999 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 16999 where the top 0.01th indegree is 0
+cluster 17005 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17005 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17027 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17039 where the top 0.01th indegree is 0
+cluster 17044 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17044 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17066 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17071 where the top 0.01th indegree is 0
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17093 where the top 0.01th indegree is 0
+cluster 17103 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17103 where the top 0.01th indegree is 0
+cluster 17147 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17147 where the top 0.01th indegree is 0
+cluster 17187 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17187 where the top 0.01th indegree is 0
+cluster 17222 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1083/jcb.201211138 has indegree 1 in cluster 17222 where the top 0.01th indegree is 0
+585 incoming dois
+belongs to [13]
+10.1038/nm.3394 is cited by dois from 249 clusters ([13, 29, 44, 88, 116, 126, 133, 144, 171, 219, 369, 381, 417, 418, 423, 440, 475, 552, 583, 619, 626, 668, 679, 701, 742, 802, 834, 838, 847, 857, 875, 906, 921, 962, 991, 1019, 1097, 1267, 1278, 1293, 1390, 1428, 1429, 1444, 1447, 1471, 1480, 1516, 1528, 1537, 1581, 1648, 1666, 1806, 1810, 1826, 2094, 2097, 2161, 2165, 2203, 2208, 2253, 2273, 2317, 2325, 2355, 2406, 2407, 2466, 2518, 2549, 2590, 2633, 2640, 2664, 2697, 2743, 2750, 2762, 2858, 2931, 2933, 2968, 3007, 3073, 3253, 3278, 3336, 3459, 3516, 3540, 3544, 3670, 3725, 3798, 3904, 3919, 3926, 3995, 4015, 4025, 4057, 4065, 4068, 4078, 4104, 4115, 4116, 4125, 4142, 4203, 4294, 4298, 4376, 4423, 4461, 4488, 4565, 4681, 4769, 4784, 4793, 4847, 4912, 4934, 4979, 4984, 5014, 5020, 5034, 5035, 5078, 5135, 5172, 5272, 5318, 5337, 5369, 5418, 5445, 5541, 5592, 5594, 5650, 5714, 5748, 5780, 5791, 5904, 6037, 6039, 6111, 6152, 6176, 6210, 6242, 6286, 6302, 6303, 6317, 6358, 6435, 6441, 6470, 6513, 6547, 6554, 6565, 6573, 6584, 6589, 6677, 6797, 6932, 6996, 7030, 7041, 7076, 7079, 7111, 7258, 7283, 7290, 7318, 7407, 7424, 7425, 7477, 7506, 7526, 7660, 7663, 7683, 7826, 7950, 7971, 7999, 8049, 8149, 8208, 8264, 8312, 8368, 8461, 8551, 8598, 8671, 8816, 9030, 9083, 9091, 9346, 9604, 10208, 10309, 10455, 10628, 10793, 10801, 10823, 11276, 11299, 11305, 11434, 11468, 11500, 11835, 11857, 12338, 12343, 12365, 12398, 12565, 12822, 13085, 13244, 14559, 14709, 15003, 16078, 16315, 16320, 16329, 16348, 16548, 16625, 16932, 17198])
+UPDATE: 10.1038/nm.3394 has indegree 2 in cluster 133 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nm.3394 has indegree 2 in cluster 418 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nm.3394 has indegree 2 in cluster 423 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nm.3394 has indegree 2 in cluster 802 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nm.3394 has indegree 2 in cluster 1390 where the top 0.01th indegree is 1
+cluster 16078 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16078 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16315 where the top 0.01th indegree is 0
+cluster 16320 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16320 where the top 0.01th indegree is 0
+cluster 16329 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16329 where the top 0.01th indegree is 0
+cluster 16348 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16348 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16548 where the top 0.01th indegree is 0
+cluster 16625 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16625 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 16932 where the top 0.01th indegree is 0
+cluster 17198 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.3394 has indegree 1 in cluster 17198 where the top 0.01th indegree is 0
+420 incoming dois
+belongs to [3450]
+10.1002/0471143030.cb0322s30 is cited by dois from 388 clusters ([9, 41, 83, 166, 234, 365, 583, 609, 632, 710, 732, 875, 885, 942, 977, 1001, 1065, 1094, 1163, 1184, 1192, 1276, 1285, 1323, 1386, 1432, 1437, 1449, 1459, 1468, 1482, 1536, 1544, 1559, 1584, 1634, 1636, 1638, 1666, 1677, 1708, 1746, 1769, 1833, 1924, 1940, 1980, 2046, 2049, 2053, 2087, 2092, 2103, 2113, 2117, 2137, 2138, 2178, 2184, 2191, 2195, 2216, 2219, 2222, 2275, 2280, 2283, 2320, 2330, 2331, 2337, 2358, 2467, 2469, 2493, 2581, 2596, 2617, 2709, 2759, 2793, 2809, 2830, 2850, 2852, 2855, 2865, 2867, 2892, 2898, 2921, 2925, 2950, 2967, 2982, 2991, 2992, 3004, 3021, 3037, 3053, 3121, 3131, 3144, 3156, 3173, 3181, 3182, 3196, 3200, 3235, 3236, 3239, 3242, 3255, 3262, 3303, 3318, 3334, 3363, 3379, 3393, 3395, 3403, 3411, 3445, 3450, 3451, 3486, 3498, 3515, 3585, 3600, 3618, 3661, 3666, 3674, 3676, 3681, 3694, 3695, 3698, 3706, 3720, 3739, 3765, 3816, 3842, 3843, 3849, 3854, 3994, 3996, 4007, 4025, 4072, 4076, 4084, 4095, 4106, 4158, 4170, 4175, 4215, 4216, 4233, 4235, 4255, 4263, 4273, 4278, 4282, 4290, 4291, 4300, 4344, 4365, 4368, 4380, 4381, 4400, 4429, 4445, 4450, 4472, 4494, 4497, 4507, 4519, 4582, 4596, 4620, 4655, 4680, 4709, 4717, 4725, 4738, 4744, 4748, 4757, 4867, 4868, 4891, 4902, 4906, 4913, 4924, 4945, 4995, 5015, 5037, 5039, 5070, 5105, 5130, 5194, 5212, 5279, 5379, 5412, 5416, 5462, 5477, 5496, 5610, 5635, 5663, 5793, 5915, 5919, 5971, 6188, 6213, 6218, 6235, 6263, 6345, 6355, 6583, 6603, 6643, 6661, 6798, 6809, 6870, 7183, 7213, 7228, 7266, 7352, 7457, 7468, 7794, 7825, 7828, 7857, 7880, 7943, 8029, 8634, 8692, 8729, 8744, 8770, 8907, 9058, 9256, 9342, 9399, 9405, 9434, 9600, 9615, 9752, 9760, 9900, 10039, 10046, 10239, 10277, 10368, 10643, 10702, 10811, 10894, 11034, 11154, 11253, 11299, 11324, 11346, 11352, 11434, 11443, 11444, 11467, 11508, 11511, 11536, 11547, 11559, 11680, 11694, 11771, 11797, 12105, 12108, 12349, 12444, 12474, 13331, 13345, 13354, 13363, 13377, 13480, 13508, 13537, 13584, 13831, 14018, 14083, 14183, 14279, 14409, 14411, 14425, 14475, 14489, 14630, 14660, 15980, 16000, 16001, 16027, 16040, 16049, 16051, 16055, 16062, 16066, 16067, 16117, 16157, 16181, 16185, 16198, 16203, 16238, 16243, 16248, 16277, 16310, 16347, 16367, 16371, 16379, 16411, 16417, 16439, 16440, 16453, 16489, 16501, 16502, 16518, 16544, 16591, 16605, 16627, 16630, 16664, 16691, 16700, 16724, 16803, 16828, 16849, 16852, 16881, 16904, 16947, 16948, 16977, 16992, 17093, 17203])
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 1677 where the top 0.01th indegree is 1
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 1980 where the top 0.01th indegree is 1
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 3 in cluster 2117 where the top 0.01th indegree is 2
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 2950 where the top 0.01th indegree is 1
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 3379 where the top 0.01th indegree is 1
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 4084 where the top 0.01th indegree is 1
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 4867 where the top 0.01th indegree is 1
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 10239 where the top 0.01th indegree is 1
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 2 in cluster 12108 where the top 0.01th indegree is 0
+cluster 13331 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 13331 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 13345 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 13354 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 15980 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16001 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16027 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+cluster 16049 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16049 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16051 where the top 0.01th indegree is 0
+cluster 16055 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16055 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16062 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16066 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16067 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16117 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16157 where the top 0.01th indegree is 0
+cluster 16181 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16181 where the top 0.01th indegree is 0
+cluster 16185 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16185 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16198 where the top 0.01th indegree is 0
+cluster 16203 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16203 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16238 where the top 0.01th indegree is 0
+cluster 16243 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16243 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16248 where the top 0.01th indegree is 0
+cluster 16277 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16277 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16310 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16347 where the top 0.01th indegree is 0
+cluster 16367 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16367 where the top 0.01th indegree is 0
+cluster 16371 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16371 where the top 0.01th indegree is 0
+cluster 16379 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16379 where the top 0.01th indegree is 0
+cluster 16411 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16411 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16417 where the top 0.01th indegree is 0
+cluster 16439 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16439 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16440 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16453 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16489 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16501 where the top 0.01th indegree is 0
+cluster 16502 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16502 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16518 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16544 where the top 0.01th indegree is 0
+cluster 16591 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16591 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16605 where the top 0.01th indegree is 0
+cluster 16627 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16627 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16630 where the top 0.01th indegree is 0
+cluster 16664 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16664 where the top 0.01th indegree is 0
+cluster 16691 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16691 where the top 0.01th indegree is 0
+cluster 16700 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16700 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16724 where the top 0.01th indegree is 0
+cluster 16803 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16803 where the top 0.01th indegree is 0
+cluster 16828 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16828 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16849 where the top 0.01th indegree is 0
+cluster 16852 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16852 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16881 where the top 0.01th indegree is 0
+cluster 16904 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16904 where the top 0.01th indegree is 0
+cluster 16947 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16947 where the top 0.01th indegree is 0
+cluster 16948 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16948 where the top 0.01th indegree is 0
+cluster 16977 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16977 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 16992 where the top 0.01th indegree is 0
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 17093 where the top 0.01th indegree is 0
+cluster 17203 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1002/0471143030.cb0322s30 has indegree 1 in cluster 17203 where the top 0.01th indegree is 0
+408 incoming dois
+belongs to [4728]
+10.3402/jev.v4.27066 is cited by dois from 379 clusters ([17, 25, 73, 133, 195, 202, 212, 234, 370, 397, 398, 535, 544, 577, 583, 614, 632, 639, 649, 682, 710, 719, 722, 731, 735, 746, 748, 753, 813, 832, 875, 883, 902, 942, 977, 983, 1001, 1058, 1065, 1066, 1094, 1127, 1138, 1163, 1171, 1179, 1187, 1192, 1221, 1234, 1244, 1264, 1296, 1343, 1353, 1366, 1382, 1387, 1462, 1487, 1566, 1586, 1629, 1638, 1676, 1679, 1711, 1713, 1742, 1746, 1752, 1769, 1778, 1789, 1798, 1847, 1907, 1924, 1933, 1942, 1968, 1970, 1981, 1999, 2014, 2016, 2055, 2072, 2117, 2138, 2177, 2250, 2260, 2273, 2280, 2337, 2368, 2404, 2409, 2422, 2423, 2429, 2497, 2498, 2507, 2575, 2582, 2594, 2603, 2643, 2721, 2790, 2799, 2800, 2809, 2826, 2859, 2883, 2889, 2898, 2907, 2925, 2944, 2945, 2954, 2993, 2999, 3008, 3015, 3067, 3078, 3095, 3119, 3156, 3173, 3191, 3221, 3257, 3262, 3265, 3276, 3292, 3306, 3339, 3380, 3405, 3413, 3415, 3542, 3618, 3655, 3681, 3698, 3706, 3784, 3788, 3804, 3821, 3837, 3844, 3847, 3868, 3909, 3910, 3934, 3957, 3960, 3974, 3989, 3996, 4010, 4068, 4072, 4104, 4109, 4117, 4169, 4224, 4242, 4263, 4290, 4291, 4379, 4385, 4400, 4403, 4429, 4451, 4465, 4512, 4519, 4533, 4545, 4589, 4620, 4651, 4728, 4738, 4739, 4757, 4786, 4791, 4807, 4824, 4839, 4869, 4891, 4910, 4947, 4972, 5044, 5045, 5046, 5061, 5090, 5117, 5183, 5190, 5222, 5240, 5271, 5406, 5421, 5436, 5454, 5519, 5613, 5621, 5626, 5659, 5692, 5765, 5901, 5912, 5945, 5964, 6014, 6053, 6071, 6088, 6237, 6258, 6277, 6328, 6345, 6382, 6586, 6609, 6613, 6620, 6643, 6717, 6810, 6824, 6871, 7025, 7115, 7127, 7180, 7411, 7602, 7710, 7801, 7861, 7890, 7943, 7960, 8079, 8122, 8199, 8632, 8712, 8729, 8879, 8907, 9053, 9058, 9160, 9162, 9212, 9283, 9294, 9497, 9739, 9759, 9815, 9839, 9999, 10020, 10257, 10270, 10347, 10431, 10476, 10605, 10643, 10702, 10888, 11241, 11280, 11324, 11339, 11403, 11595, 11625, 11663, 11782, 11818, 11843, 11919, 11934, 12044, 12138, 12257, 13354, 13397, 13573, 13584, 13894, 14108, 15968, 15981, 15983, 16000, 16001, 16003, 16009, 16018, 16036, 16053, 16066, 16091, 16135, 16139, 16185, 16198, 16214, 16215, 16296, 16301, 16314, 16315, 16318, 16354, 16371, 16400, 16402, 16403, 16429, 16441, 16453, 16458, 16467, 16478, 16483, 16504, 16518, 16530, 16543, 16559, 16586, 16590, 16596, 16649, 16665, 16689, 16714, 16719, 16744, 16761, 16782, 16865, 16889, 16910, 16921, 16967, 17155, 17221, 17222])
+UPDATE: 10.3402/jev.v4.27066 has indegree 2 in cluster 1138 where the top 0.01th indegree is 1
+UPDATE: 10.3402/jev.v4.27066 has indegree 2 in cluster 1366 where the top 0.01th indegree is 1
+UPDATE: 10.3402/jev.v4.27066 has indegree 2 in cluster 2721 where the top 0.01th indegree is 1
+UPDATE: 10.3402/jev.v4.27066 has indegree 4 in cluster 3078 where the top 0.01th indegree is 3
+UPDATE: 10.3402/jev.v4.27066 has indegree 2 in cluster 3306 where the top 0.01th indegree is 1
+UPDATE: 10.3402/jev.v4.27066 has indegree 2 in cluster 13354 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 2 in cluster 13397 where the top 0.01th indegree is 0
+cluster 13894 has 2 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 13894 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 15968 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 15981 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 15983 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16001 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16003 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16009 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16018 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16036 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16053 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16066 where the top 0.01th indegree is 0
+cluster 16091 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16091 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16135 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16139 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16185 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16198 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16214 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16215 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16296 where the top 0.01th indegree is 0
+cluster 16301 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16301 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16315 where the top 0.01th indegree is 0
+cluster 16318 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16318 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16371 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16400 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16402 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16403 where the top 0.01th indegree is 0
+cluster 16429 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16429 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16441 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16453 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16458 where the top 0.01th indegree is 0
+cluster 16467 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16467 where the top 0.01th indegree is 0
+cluster 16478 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16478 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16483 where the top 0.01th indegree is 0
+cluster 16504 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16504 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16518 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16530 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16543 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16559 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16586 where the top 0.01th indegree is 0
+cluster 16590 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16590 where the top 0.01th indegree is 0
+cluster 16596 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16596 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16649 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16665 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16689 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16714 where the top 0.01th indegree is 0
+cluster 16719 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16719 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16744 where the top 0.01th indegree is 0
+cluster 16761 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16761 where the top 0.01th indegree is 0
+cluster 16782 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16782 where the top 0.01th indegree is 0
+cluster 16865 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16865 where the top 0.01th indegree is 0
+cluster 16889 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16889 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16910 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16921 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 16967 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 17155 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 17221 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v4.27066 has indegree 1 in cluster 17222 where the top 0.01th indegree is 0
+382 incoming dois
+belongs to [3372]
+10.1038/nature15756 is cited by dois from 347 clusters ([9, 62, 70, 80, 101, 126, 133, 193, 243, 275, 301, 313, 397, 398, 400, 401, 410, 412, 440, 501, 548, 549, 552, 619, 650, 692, 701, 770, 875, 885, 898, 911, 947, 959, 983, 1065, 1163, 1229, 1265, 1293, 1302, 1351, 1353, 1406, 1437, 1444, 1505, 1526, 1541, 1557, 1612, 1634, 1657, 1658, 1666, 1705, 1789, 1839, 1869, 1924, 1970, 2010, 2070, 2082, 2117, 2253, 2265, 2269, 2273, 2310, 2337, 2347, 2414, 2423, 2481, 2507, 2518, 2576, 2693, 2697, 2726, 2750, 2799, 2844, 2917, 2936, 2957, 2960, 2991, 2995, 3009, 3064, 3128, 3134, 3149, 3156, 3186, 3190, 3253, 3257, 3265, 3324, 3330, 3363, 3372, 3409, 3459, 3468, 3476, 3488, 3552, 3567, 3582, 3590, 3606, 3609, 3661, 3674, 3723, 3736, 3752, 3792, 3821, 3824, 3834, 3835, 3896, 3919, 3931, 3940, 3959, 3965, 3973, 3986, 3989, 3990, 4031, 4037, 4052, 4081, 4095, 4111, 4115, 4122, 4206, 4216, 4218, 4233, 4235, 4252, 4256, 4259, 4344, 4376, 4377, 4410, 4457, 4460, 4473, 4480, 4486, 4501, 4526, 4545, 4596, 4607, 4609, 4642, 4647, 4680, 4717, 4732, 4737, 4738, 4745, 4748, 4754, 4786, 4792, 4891, 4911, 4924, 4929, 4934, 4946, 4984, 5014, 5063, 5073, 5081, 5183, 5202, 5205, 5229, 5272, 5331, 5379, 5398, 5409, 5417, 5425, 5498, 5531, 5547, 5578, 5610, 5613, 5633, 5686, 5705, 5756, 5781, 5858, 5901, 5915, 5961, 5982, 6120, 6124, 6212, 6234, 6242, 6246, 6263, 6286, 6296, 6299, 6317, 6359, 6363, 6431, 6433, 6482, 6510, 6521, 6601, 6613, 6618, 6626, 6643, 6879, 7146, 7164, 7173, 7256, 7294, 7432, 7468, 7792, 7794, 7825, 7872, 7933, 7990, 8241, 8321, 8431, 8641, 8755, 8884, 8997, 9078, 9259, 9289, 9723, 9728, 9739, 10036, 10085, 10107, 10137, 10291, 10493, 10625, 11289, 11305, 11327, 11332, 11335, 11396, 11434, 11492, 11508, 11559, 11720, 11755, 11760, 11792, 11916, 12049, 12224, 12227, 12254, 12349, 12444, 12684, 13345, 13397, 13432, 13440, 13537, 13567, 13591, 13607, 13665, 13713, 13797, 13855, 13978, 14675, 16018, 16032, 16051, 16087, 16114, 16136, 16187, 16199, 16219, 16262, 16268, 16287, 16288, 16315, 16342, 16348, 16354, 16379, 16420, 16425, 16440, 16448, 16456, 16497, 16522, 16544, 16574, 16584, 16594, 16599, 16719, 16744, 16864, 16932, 16975, 17002, 17013])
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 701 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 1839 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature15756 has indegree 4 in cluster 3265 where the top 0.01th indegree is 3
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 3723 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 6613 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 11327 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 13345 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 13397 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 13432 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 13607 where the top 0.01th indegree is 0
+cluster 13855 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 2 in cluster 13855 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16018 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16032 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16051 where the top 0.01th indegree is 0
+cluster 16087 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16087 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16114 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16187 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16199 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16219 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16262 where the top 0.01th indegree is 0
+cluster 16268 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16268 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+cluster 16288 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16288 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16315 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16342 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16348 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16379 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16420 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16425 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16440 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16448 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16456 where the top 0.01th indegree is 0
+cluster 16497 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16497 where the top 0.01th indegree is 0
+cluster 16522 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16522 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16544 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16574 where the top 0.01th indegree is 0
+cluster 16584 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16584 where the top 0.01th indegree is 0
+cluster 16594 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16594 where the top 0.01th indegree is 0
+cluster 16599 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16599 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16719 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16744 where the top 0.01th indegree is 0
+cluster 16864 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16864 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16932 where the top 0.01th indegree is 0
+cluster 16975 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 16975 where the top 0.01th indegree is 0
+cluster 17002 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 17002 where the top 0.01th indegree is 0
+cluster 17013 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature15756 has indegree 1 in cluster 17013 where the top 0.01th indegree is 0
+356 incoming dois
+belongs to [47]
+10.1146/annurev-pathol-121808-102144 is cited by dois from 118 clusters ([47, 83, 110, 228, 334, 337, 351, 390, 505, 552, 700, 738, 774, 826, 863, 875, 898, 969, 973, 1014, 1112, 1265, 1312, 1665, 1897, 1940, 1968, 2115, 2120, 2137, 2180, 2338, 2517, 2546, 2617, 2785, 2814, 2819, 2861, 2871, 2931, 3174, 3281, 3293, 3333, 3372, 3401, 3417, 3464, 3692, 3877, 3884, 3890, 3991, 4208, 4228, 4250, 4359, 4444, 4529, 4582, 4673, 4855, 4988, 5103, 5340, 5482, 5571, 5644, 5694, 5754, 5850, 5896, 5981, 5989, 6080, 6183, 6216, 6317, 6358, 6379, 6473, 6491, 6932, 6964, 7050, 7166, 7253, 7395, 7442, 7445, 7463, 7974, 8061, 8215, 8247, 8320, 8508, 8598, 8690, 9118, 9490, 9494, 9780, 10343, 10704, 10785, 10888, 11345, 11359, 11669, 12167, 12354, 12806, 13006, 13051, 15308, 16348])
+UPDATE: 10.1146/annurev-pathol-121808-102144 has indegree 3 in cluster 228 where the top 0.01th indegree is 1
+UPDATE: 10.1146/annurev-pathol-121808-102144 has indegree 2 in cluster 700 where the top 0.01th indegree is 1
+UPDATE: 10.1146/annurev-pathol-121808-102144 has indegree 1 in cluster 16348 where the top 0.01th indegree is 0
+349 incoming dois
+belongs to [2902]
+10.1038/ncb1800 is cited by dois from 313 clusters ([34, 126, 164, 183, 197, 229, 239, 347, 365, 366, 375, 397, 398, 498, 535, 540, 546, 583, 609, 620, 651, 664, 717, 763, 885, 893, 921, 942, 987, 1015, 1017, 1050, 1094, 1151, 1229, 1241, 1302, 1311, 1428, 1437, 1516, 1519, 1541, 1555, 1602, 1634, 1666, 1708, 1711, 1742, 1795, 1824, 1839, 1847, 1915, 1924, 1942, 1947, 1968, 1969, 1980, 2046, 2097, 2106, 2117, 2134, 2138, 2146, 2206, 2293, 2310, 2316, 2325, 2332, 2463, 2536, 2691, 2693, 2742, 2744, 2745, 2867, 2889, 2902, 2918, 2933, 2944, 2982, 3004, 3014, 3059, 3070, 3103, 3132, 3137, 3156, 3207, 3225, 3251, 3283, 3287, 3354, 3362, 3384, 3393, 3394, 3407, 3479, 3506, 3520, 3523, 3544, 3575, 3588, 3605, 3649, 3674, 3681, 3694, 3695, 3768, 3786, 3816, 3835, 3858, 3860, 3865, 3871, 3872, 3884, 3892, 3919, 3931, 3970, 3977, 3985, 4014, 4088, 4100, 4115, 4160, 4167, 4214, 4235, 4248, 4259, 4262, 4276, 4352, 4377, 4435, 4445, 4473, 4504, 4512, 4573, 4594, 4607, 4617, 4620, 4632, 4665, 4680, 4711, 4715, 4717, 4757, 4774, 4818, 4839, 4875, 4916, 4924, 4975, 5015, 5056, 5074, 5173, 5178, 5183, 5190, 5194, 5202, 5203, 5237, 5273, 5379, 5407, 5415, 5417, 5486, 5578, 5610, 5618, 5621, 5633, 5635, 5682, 5756, 5893, 5901, 5971, 5983, 6233, 6248, 6258, 6263, 6482, 6618, 6620, 6677, 6701, 6801, 6913, 6914, 7112, 7154, 7189, 7218, 7358, 7414, 7468, 7791, 7911, 7924, 8051, 8211, 8337, 8358, 8631, 8744, 8777, 8924, 9728, 9739, 9802, 9863, 9925, 10036, 10039, 10568, 10596, 10822, 10894, 10974, 11289, 11327, 11335, 11365, 11381, 11384, 11492, 11495, 11520, 11595, 11625, 11671, 12067, 12611, 13414, 13480, 13511, 13591, 13659, 13713, 13872, 14015, 14411, 14515, 15980, 15989, 15996, 16000, 16029, 16031, 16032, 16034, 16051, 16060, 16062, 16066, 16091, 16117, 16119, 16135, 16187, 16195, 16198, 16232, 16243, 16260, 16287, 16325, 16354, 16417, 16435, 16441, 16489, 16516, 16530, 16548, 16549, 16594, 16622, 16656, 16712, 16905, 16913, 16921, 16972, 16992, 17051, 17187])
+UPDATE: 10.1038/ncb1800 has indegree 3 in cluster 398 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 609 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 942 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 1555 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 3 in cluster 2117 where the top 0.01th indegree is 2
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 3523 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 4276 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 5379 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 5621 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 6248 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 9802 where the top 0.01th indegree is 1
+UPDATE: 10.1038/ncb1800 has indegree 2 in cluster 11327 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 15980 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 15989 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 15996 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+cluster 16029 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16029 where the top 0.01th indegree is 0
+cluster 16031 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16031 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16032 where the top 0.01th indegree is 0
+cluster 16034 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16034 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16051 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16060 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16062 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16066 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16091 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16117 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16119 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16135 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16187 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16195 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16198 where the top 0.01th indegree is 0
+cluster 16232 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16232 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16243 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16260 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+cluster 16325 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16325 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16417 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16435 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16441 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16489 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16516 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16530 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16548 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16549 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16594 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16622 where the top 0.01th indegree is 0
+cluster 16656 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16656 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16712 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16905 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16913 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16921 where the top 0.01th indegree is 0
+cluster 16972 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16972 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 16992 where the top 0.01th indegree is 0
+cluster 17051 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 17051 where the top 0.01th indegree is 0
+UPDATE: 10.1038/ncb1800 has indegree 1 in cluster 17187 where the top 0.01th indegree is 0
+340 incoming dois
+belongs to [13327]
+10.1146/annurev-cellbio-101512-122326 is cited by dois from 337 clusters ([9, 25, 67, 126, 133, 238, 241, 262, 321, 327, 342, 359, 397, 442, 467, 510, 544, 577, 583, 694, 736, 784, 804, 852, 885, 902, 927, 940, 957, 959, 977, 1002, 1010, 1057, 1059, 1094, 1122, 1127, 1138, 1193, 1209, 1229, 1241, 1273, 1276, 1285, 1290, 1293, 1311, 1322, 1343, 1394, 1406, 1417, 1436, 1437, 1447, 1505, 1530, 1536, 1551, 1566, 1581, 1586, 1655, 1670, 1679, 1689, 1708, 1711, 1713, 1715, 1736, 1805, 1869, 1878, 1907, 1945, 1970, 1990, 2034, 2053, 2069, 2070, 2072, 2092, 2096, 2103, 2135, 2164, 2177, 2191, 2195, 2205, 2249, 2260, 2280, 2333, 2404, 2443, 2467, 2508, 2518, 2544, 2559, 2588, 2608, 2613, 2639, 2643, 2644, 2691, 2699, 2724, 2727, 2748, 2755, 2794, 2811, 2823, 2828, 2881, 2907, 2943, 2945, 2956, 2982, 2992, 2993, 2998, 3001, 3030, 3033, 3037, 3044, 3054, 3074, 3078, 3119, 3131, 3135, 3139, 3148, 3173, 3193, 3229, 3236, 3244, 3312, 3316, 3318, 3325, 3330, 3350, 3362, 3407, 3411, 3433, 3443, 3459, 3464, 3477, 3488, 3515, 3542, 3550, 3569, 3571, 3573, 3603, 3606, 3609, 3611, 3616, 3643, 3649, 3676, 3681, 3706, 3707, 3714, 3757, 3784, 3820, 3832, 3833, 3835, 3840, 3848, 3854, 3859, 3865, 3887, 3909, 3919, 3973, 3974, 3994, 4000, 4001, 4005, 4010, 4022, 4025, 4068, 4076, 4082, 4083, 4088, 4102, 4104, 4112, 4115, 4149, 4158, 4166, 4181, 4187, 4216, 4224, 4255, 4288, 4291, 4340, 4344, 4364, 4369, 4373, 4374, 4381, 4404, 4429, 4435, 4474, 4475, 4478, 4494, 4495, 4497, 4507, 4596, 4609, 4617, 4618, 4632, 4644, 4652, 4656, 4679, 4680, 4694, 4712, 4717, 4745, 4757, 4766, 4775, 4837, 4868, 4884, 4891, 4913, 4929, 4946, 4975, 5040, 5044, 5048, 5052, 5061, 5070, 5073, 5074, 5117, 5133, 5191, 5194, 5202, 5205, 5222, 5326, 5379, 5398, 5409, 5436, 5496, 5498, 5526, 5613, 5614, 5631, 5663, 5729, 5765, 5793, 5913, 5915, 5920, 5994, 6233, 6258, 6627, 6723, 6767, 6775, 6798, 6883, 6890, 7218, 7256, 7266, 7282, 7517, 7826, 7857, 7890, 7907, 7924, 7932, 7960, 8102, 8162, 8632, 8712, 8721, 8733, 8744, 8773, 9256, 9808, 10039, 10283, 11206, 11782, 11818, 16347, 16354])
+UPDATE: 10.1146/annurev-cellbio-101512-122326 has indegree 2 in cluster 3681 where the top 0.01th indegree is 1
+UPDATE: 10.1146/annurev-cellbio-101512-122326 has indegree 1 in cluster 16347 where the top 0.01th indegree is 0
+UPDATE: 10.1146/annurev-cellbio-101512-122326 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+328 incoming dois
+belongs to [8735]
+10.1073/pnas.1521230113 is cited by dois from 310 clusters ([70, 166, 234, 254, 395, 397, 401, 501, 544, 575, 614, 725, 731, 735, 875, 959, 1065, 1101, 1127, 1163, 1192, 1265, 1316, 1382, 1406, 1417, 1458, 1468, 1487, 1502, 1515, 1629, 1670, 1684, 1742, 1746, 1798, 1913, 1920, 1926, 1933, 1940, 1942, 2069, 2117, 2128, 2138, 2143, 2148, 2188, 2191, 2216, 2249, 2260, 2293, 2303, 2316, 2318, 2337, 2355, 2397, 2404, 2507, 2533, 2568, 2624, 2647, 2680, 2686, 2709, 2788, 2805, 2809, 2819, 2850, 2892, 2907, 2925, 2959, 2991, 2997, 2998, 2999, 3004, 3067, 3078, 3096, 3104, 3144, 3156, 3184, 3187, 3190, 3244, 3262, 3276, 3280, 3306, 3308, 3318, 3330, 3344, 3350, 3362, 3384, 3393, 3395, 3421, 3436, 3529, 3534, 3546, 3562, 3567, 3632, 3647, 3661, 3685, 3691, 3729, 3819, 3832, 3849, 3924, 3959, 3996, 4037, 4070, 4076, 4082, 4103, 4115, 4117, 4122, 4158, 4170, 4187, 4214, 4259, 4274, 4316, 4343, 4363, 4369, 4373, 4377, 4475, 4507, 4514, 4573, 4589, 4607, 4609, 4617, 4636, 4644, 4653, 4656, 4660, 4674, 4679, 4717, 4734, 4774, 4870, 4891, 5018, 5040, 5074, 5183, 5189, 5218, 5240, 5271, 5379, 5394, 5412, 5417, 5420, 5425, 5436, 5498, 5526, 5531, 5613, 5614, 5630, 5631, 5633, 5648, 5895, 5915, 6071, 6185, 6218, 6235, 6237, 6245, 6345, 6586, 6661, 6680, 6686, 6694, 7411, 7484, 7517, 7710, 7792, 7825, 7857, 7890, 7994, 7996, 8162, 8240, 8243, 8614, 8632, 8659, 8712, 8735, 8799, 8835, 8845, 9035, 9053, 9304, 9399, 9847, 10008, 10277, 10283, 10476, 10702, 10715, 10737, 11280, 11289, 11294, 11327, 11339, 11502, 11511, 11611, 11671, 11694, 11713, 11758, 11759, 11818, 12109, 12349, 13354, 13381, 13397, 13432, 13440, 13511, 13548, 13584, 13591, 13758, 14137, 14399, 14718, 15989, 15996, 15997, 16000, 16001, 16018, 16040, 16066, 16069, 16119, 16131, 16136, 16152, 16169, 16203, 16264, 16268, 16287, 16314, 16315, 16342, 16349, 16354, 16412, 16456, 16463, 16467, 16501, 16524, 16552, 16570, 16584, 16691, 16714, 16755, 16847, 16894, 16910, 16921, 16932, 16947, 16969, 16975, 16977])
+UPDATE: 10.1073/pnas.1521230113 has indegree 3 in cluster 2117 where the top 0.01th indegree is 2
+UPDATE: 10.1073/pnas.1521230113 has indegree 2 in cluster 2907 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1521230113 has indegree 2 in cluster 4214 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1521230113 has indegree 2 in cluster 4717 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1521230113 has indegree 2 in cluster 5412 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1521230113 has indegree 2 in cluster 11327 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 13354 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 2 in cluster 13397 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 2 in cluster 13432 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 15989 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 15996 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 15997 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16001 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16018 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16066 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16069 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16119 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16131 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16152 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16169 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16203 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16264 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16268 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16315 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16342 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16349 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+cluster 16412 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16412 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16456 where the top 0.01th indegree is 0
+cluster 16463 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16463 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16467 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16501 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16524 where the top 0.01th indegree is 0
+cluster 16552 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16552 where the top 0.01th indegree is 0
+cluster 16570 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16570 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16584 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16691 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16714 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16755 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16847 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16894 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16910 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16921 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16932 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16947 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16969 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16975 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1521230113 has indegree 1 in cluster 16977 where the top 0.01th indegree is 0
+299 incoming dois
+belongs to [16033]
+10.1038/nri855 is cited by dois from 294 clusters ([2, 9, 126, 161, 229, 385, 400, 498, 510, 515, 545, 554, 603, 649, 651, 680, 686, 688, 712, 732, 736, 745, 748, 763, 784, 789, 824, 839, 884, 885, 887, 921, 927, 942, 967, 1015, 1038, 1061, 1115, 1179, 1240, 1241, 1276, 1288, 1311, 1323, 1392, 1403, 1406, 1416, 1509, 1526, 1555, 1557, 1560, 1566, 1690, 1708, 1711, 1730, 1734, 1776, 1781, 1795, 1824, 1839, 1869, 1926, 1945, 1980, 1994, 2074, 2092, 2116, 2142, 2170, 2206, 2218, 2219, 2243, 2263, 2275, 2308, 2310, 2323, 2325, 2333, 2358, 2366, 2397, 2422, 2444, 2447, 2483, 2529, 2531, 2550, 2559, 2588, 2609, 2613, 2638, 2720, 2726, 2742, 2746, 2792, 2800, 2823, 2859, 2865, 2920, 2929, 2944, 2945, 2948, 2949, 2956, 2980, 2992, 3051, 3095, 3101, 3109, 3115, 3128, 3131, 3139, 3181, 3212, 3225, 3242, 3252, 3262, 3271, 3312, 3329, 3377, 3390, 3451, 3476, 3560, 3562, 3563, 3566, 3580, 3607, 3610, 3611, 3618, 3619, 3645, 3649, 3679, 3681, 3707, 3711, 3714, 3729, 3739, 3774, 3822, 3832, 3835, 3836, 3858, 3873, 3888, 3938, 3945, 3957, 3982, 4022, 4072, 4078, 4083, 4086, 4104, 4112, 4141, 4151, 4158, 4176, 4181, 4215, 4216, 4233, 4235, 4255, 4276, 4300, 4358, 4376, 4378, 4400, 4445, 4457, 4494, 4495, 4504, 4510, 4532, 4533, 4551, 4596, 4607, 4608, 4612, 4617, 4618, 4632, 4638, 4651, 4704, 4732, 4745, 4757, 4797, 4842, 4845, 4848, 4896, 4924, 4975, 4995, 5014, 5030, 5061, 5065, 5070, 5096, 5179, 5207, 5313, 5385, 5394, 5405, 5412, 5438, 5498, 5511, 5519, 5610, 5613, 5622, 5635, 5639, 5651, 5721, 5731, 5739, 5756, 5920, 5961, 5968, 5982, 6248, 6263, 6304, 6528, 6620, 6626, 6694, 6775, 6797, 6824, 6913, 7173, 7417, 7826, 7857, 7861, 8095, 8162, 8721, 8729, 8733, 8744, 8794, 8807, 9058, 10039, 10085, 10137, 10215, 10239, 10940, 11402, 11409, 11434, 11443, 11575, 14138, 16347])
+UPDATE: 10.1038/nri855 has indegree 2 in cluster 3681 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nri855 has indegree 1 in cluster 16347 where the top 0.01th indegree is 0
+293 incoming dois
+belongs to [7132]
+10.1073/pnas.1019055108 is cited by dois from 263 clusters ([246, 267, 365, 366, 370, 437, 452, 470, 500, 540, 545, 553, 578, 595, 609, 644, 747, 752, 770, 823, 845, 883, 911, 957, 961, 1014, 1041, 1065, 1075, 1086, 1115, 1151, 1211, 1221, 1282, 1286, 1289, 1304, 1310, 1399, 1434, 1517, 1544, 1609, 1676, 1708, 1805, 1901, 1969, 2007, 2104, 2115, 2117, 2128, 2214, 2265, 2292, 2327, 2359, 2410, 2508, 2553, 2615, 2653, 2706, 2710, 2744, 2752, 2906, 2952, 2997, 3008, 3038, 3070, 3151, 3186, 3241, 3394, 3486, 3487, 3505, 3523, 3545, 3583, 3687, 3724, 3791, 3796, 3819, 3821, 3822, 3840, 3869, 3872, 3977, 3997, 4012, 4021, 4059, 4070, 4138, 4206, 4208, 4214, 4339, 4347, 4358, 4396, 4404, 4479, 4501, 4504, 4525, 4612, 4656, 4705, 4717, 4792, 4816, 4870, 4910, 4924, 4931, 4971, 5066, 5081, 5086, 5090, 5410, 5477, 5501, 5550, 5564, 5630, 5649, 5702, 5822, 5875, 5922, 6094, 6097, 6188, 6279, 6315, 6367, 6375, 6409, 6413, 6482, 6605, 6629, 6641, 6652, 6678, 6693, 6709, 6738, 6822, 6839, 6914, 6928, 6947, 7019, 7112, 7132, 7240, 7296, 7340, 7352, 7358, 7363, 7427, 7469, 7522, 7597, 7610, 7695, 7699, 7818, 7847, 7895, 7913, 7994, 8205, 8251, 8427, 8611, 8638, 8641, 8660, 8669, 8740, 8806, 8871, 8883, 8995, 9021, 9023, 9193, 9230, 9728, 9903, 9910, 9937, 10059, 10095, 10135, 10180, 10224, 10235, 10596, 10665, 10833, 11252, 11292, 11327, 11493, 11635, 11671, 11774, 11934, 11943, 12003, 12208, 12242, 12321, 12381, 12386, 12546, 13497, 13633, 13957, 14884, 15069, 16043, 16053, 16059, 16070, 16119, 16135, 16152, 16198, 16199, 16205, 16215, 16288, 16319, 16435, 16549, 16582, 16608, 16620, 16622, 16712, 16714, 16838, 16878, 16893, 16905, 16923, 17072, 17131, 17203])
+UPDATE: 10.1073/pnas.1019055108 has indegree 2 in cluster 365 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1019055108 has indegree 3 in cluster 595 where the top 0.01th indegree is 2
+UPDATE: 10.1073/pnas.1019055108 has indegree 3 in cluster 1075 where the top 0.01th indegree is 2
+UPDATE: 10.1073/pnas.1019055108 has indegree 2 in cluster 1969 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1019055108 has indegree 3 in cluster 3008 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1019055108 has indegree 2 in cluster 3523 where the top 0.01th indegree is 1
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 11292 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 2 in cluster 11327 where the top 0.01th indegree is 0
+cluster 13633 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 13633 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16043 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16053 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16059 where the top 0.01th indegree is 0
+cluster 16070 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16070 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16119 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16135 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16152 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16198 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16199 where the top 0.01th indegree is 0
+cluster 16205 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16205 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16215 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16288 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16319 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16435 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16549 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16582 where the top 0.01th indegree is 0
+cluster 16608 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16608 where the top 0.01th indegree is 0
+cluster 16620 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16620 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16622 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16712 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16714 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16838 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16878 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16893 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16905 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 16923 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 17072 where the top 0.01th indegree is 0
+cluster 17131 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 17131 where the top 0.01th indegree is 0
+UPDATE: 10.1073/pnas.1019055108 has indegree 1 in cluster 17203 where the top 0.01th indegree is 0
+289 incoming dois
+belongs to [7168]
+10.1038/nm.2753 is cited by dois from 278 clusters ([52, 62, 80, 97, 126, 239, 243, 275, 313, 345, 397, 444, 450, 467, 554, 617, 660, 710, 838, 893, 921, 959, 1017, 1065, 1229, 1240, 1264, 1302, 1311, 1437, 1444, 1447, 1505, 1526, 1541, 1557, 1634, 1658, 1666, 1839, 1921, 1970, 2117, 2138, 2170, 2219, 2265, 2266, 2273, 2282, 2310, 2340, 2355, 2363, 2368, 2429, 2479, 2518, 2556, 2590, 2691, 2693, 2720, 2726, 2745, 2755, 2823, 2933, 2936, 2960, 3001, 3009, 3093, 3139, 3173, 3190, 3193, 3223, 3244, 3251, 3265, 3267, 3324, 3354, 3434, 3479, 3509, 3550, 3598, 3638, 3649, 3674, 3691, 3719, 3745, 3762, 3789, 3859, 3874, 3919, 3942, 3953, 3959, 3972, 3973, 3982, 3986, 3989, 3990, 3998, 4095, 4115, 4154, 4187, 4206, 4218, 4233, 4247, 4252, 4259, 4284, 4316, 4357, 4374, 4377, 4454, 4455, 4475, 4480, 4539, 4545, 4573, 4596, 4609, 4618, 4680, 4689, 4706, 4715, 4717, 4725, 4732, 4738, 4754, 4796, 4799, 4815, 4818, 4837, 4859, 4864, 4870, 4892, 4896, 4924, 4929, 4952, 4975, 4984, 5014, 5015, 5063, 5074, 5081, 5090, 5172, 5183, 5202, 5240, 5326, 5331, 5379, 5418, 5439, 5526, 5587, 5610, 5613, 5621, 5631, 5633, 5668, 5686, 5901, 5919, 5945, 5982, 6066, 6234, 6246, 6248, 6286, 6296, 6299, 6335, 6613, 6619, 6620, 6644, 6775, 6878, 6879, 7168, 7193, 7387, 7787, 7826, 7924, 8149, 8690, 8712, 8963, 9058, 9245, 9345, 9728, 9739, 9800, 9802, 9808, 9850, 9863, 9925, 10020, 10137, 10294, 10456, 11289, 11299, 11305, 11395, 11418, 11495, 11755, 11998, 12049, 12227, 12349, 12843, 12908, 13309, 13345, 13397, 13432, 13537, 13607, 13797, 14411, 14432, 15980, 16000, 16003, 16016, 16018, 16032, 16034, 16062, 16107, 16129, 16136, 16287, 16307, 16314, 16315, 16348, 16410, 16441, 16448, 16456, 16460, 16543, 16544, 16599, 16627, 16642, 16803, 16849, 16932])
+UPDATE: 10.1038/nm.2753 has indegree 2 in cluster 959 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nm.2753 has indegree 2 in cluster 13345 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 2 in cluster 13397 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 2 in cluster 13432 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 13607 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 15980 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16003 where the top 0.01th indegree is 0
+cluster 16016 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16016 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16018 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16032 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16034 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16062 where the top 0.01th indegree is 0
+cluster 16107 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16107 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16129 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16307 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16315 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16348 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16410 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16441 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16448 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16456 where the top 0.01th indegree is 0
+cluster 16460 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16460 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16543 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16544 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16599 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16627 where the top 0.01th indegree is 0
+cluster 16642 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16642 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16803 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16849 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nm.2753 has indegree 1 in cluster 16932 where the top 0.01th indegree is 0
+287 incoming dois
+belongs to [2246]
+10.1038/nbt.1807 is cited by dois from 259 clusters ([33, 73, 120, 164, 166, 229, 262, 319, 327, 385, 398, 511, 577, 604, 620, 626, 662, 793, 858, 864, 964, 983, 1015, 1068, 1117, 1154, 1229, 1238, 1265, 1293, 1334, 1505, 1555, 1595, 1655, 1757, 1869, 1915, 1924, 1926, 1963, 1970, 1980, 2053, 2100, 2103, 2105, 2117, 2121, 2195, 2206, 2246, 2250, 2337, 2345, 2477, 2483, 2493, 2508, 2590, 2631, 2692, 2699, 2736, 2779, 2787, 2816, 2823, 2907, 2991, 2998, 3014, 3044, 3056, 3144, 3229, 3261, 3265, 3306, 3362, 3367, 3393, 3395, 3411, 3423, 3507, 3674, 3681, 3691, 3697, 3714, 3729, 3816, 3888, 3890, 3906, 3956, 3959, 3997, 4022, 4095, 4124, 4149, 4151, 4152, 4161, 4206, 4214, 4233, 4252, 4280, 4300, 4334, 4337, 4347, 4381, 4410, 4445, 4454, 4457, 4476, 4496, 4522, 4545, 4589, 4662, 4704, 4705, 4714, 4721, 4730, 4737, 4891, 4896, 4908, 5014, 5044, 5061, 5090, 5183, 5240, 5274, 5324, 5385, 5415, 5426, 5534, 5552, 5630, 5634, 5639, 5737, 5901, 5921, 5985, 6064, 6085, 6236, 6263, 6431, 6433, 6630, 6723, 6740, 7142, 7193, 7252, 7266, 7552, 7857, 7999, 8102, 8243, 8272, 8282, 8744, 8769, 9244, 9304, 9728, 9779, 9974, 10118, 10456, 10604, 10766, 10908, 11253, 11259, 11263, 11280, 11289, 11299, 11302, 11321, 11358, 11434, 11508, 11611, 11625, 11694, 11826, 11934, 12101, 12158, 12227, 12229, 12649, 13345, 13354, 13381, 13397, 13419, 13440, 13567, 13591, 13600, 13701, 13827, 15973, 15980, 15996, 16001, 16032, 16036, 16055, 16059, 16073, 16098, 16136, 16185, 16190, 16236, 16264, 16271, 16277, 16287, 16296, 16314, 16354, 16358, 16371, 16385, 16394, 16395, 16414, 16444, 16480, 16508, 16516, 16522, 16540, 16556, 16616, 16649, 16778, 16866, 16878, 16911])
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 983 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 1555 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 3 in cluster 1963 where the top 0.01th indegree is 2
+UPDATE: 10.1038/nbt.1807 has indegree 3 in cluster 2117 where the top 0.01th indegree is 2
+UPDATE: 10.1038/nbt.1807 has indegree 3 in cluster 2337 where the top 0.01th indegree is 2
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 3681 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 4214 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 4454 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 4496 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 4704 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 4730 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 13345 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 13354 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 13397 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 13419 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 2 in cluster 13600 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 15973 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 15980 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 15996 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16001 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16032 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16036 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16055 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16059 where the top 0.01th indegree is 0
+cluster 16073 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16073 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16098 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16185 where the top 0.01th indegree is 0
+cluster 16190 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16190 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16236 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16264 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16271 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16277 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16296 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16358 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16371 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16385 where the top 0.01th indegree is 0
+cluster 16394 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16394 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16395 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16414 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16444 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16480 where the top 0.01th indegree is 0
+cluster 16508 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16508 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16516 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16522 where the top 0.01th indegree is 0
+cluster 16540 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16540 where the top 0.01th indegree is 0
+cluster 16556 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16556 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16616 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16649 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16778 where the top 0.01th indegree is 0
+cluster 16866 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16866 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16878 where the top 0.01th indegree is 0
+cluster 16911 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nbt.1807 has indegree 1 in cluster 16911 where the top 0.01th indegree is 0
+274 incoming dois
+belongs to [21]
+10.1128/jvi.73.8.6235-6244.1999 is cited by dois from 17 clusters ([21, 480, 625, 850, 1114, 1186, 1533, 1742, 1754, 1821, 2444, 3661, 4463, 4962, 7436, 10685, 16064])
+UPDATE: 10.1128/jvi.73.8.6235-6244.1999 has indegree 2 in cluster 625 where the top 0.01th indegree is 1
+UPDATE: 10.1128/jvi.73.8.6235-6244.1999 has indegree 3 in cluster 4962 where the top 0.01th indegree is 1
+cluster 16064 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1128/jvi.73.8.6235-6244.1999 has indegree 1 in cluster 16064 where the top 0.01th indegree is 0
+269 incoming dois
+belongs to [4860]
+10.1126/science.1153124 is cited by dois from 250 clusters ([9, 25, 27, 70, 226, 239, 243, 254, 397, 401, 568, 583, 680, 812, 838, 877, 884, 885, 887, 947, 964, 983, 1015, 1041, 1065, 1138, 1143, 1293, 1334, 1406, 1433, 1437, 1505, 1536, 1538, 1559, 1574, 1581, 1586, 1630, 1642, 1645, 1649, 1713, 1789, 1845, 1847, 1850, 1851, 1876, 1901, 1926, 1940, 1964, 1970, 1975, 1987, 2092, 2103, 2138, 2142, 2170, 2195, 2206, 2259, 2280, 2303, 2327, 2337, 2345, 2355, 2397, 2408, 2411, 2436, 2498, 2518, 2726, 2788, 2793, 2799, 2805, 2809, 2823, 2907, 2959, 2999, 3025, 3054, 3101, 3243, 3325, 3362, 3367, 3369, 3393, 3407, 3411, 3444, 3488, 3500, 3611, 3661, 3694, 3698, 3707, 3722, 3796, 3814, 3821, 3854, 3872, 3885, 3893, 3932, 3956, 3959, 3967, 4010, 4041, 4053, 4082, 4088, 4112, 4149, 4151, 4214, 4259, 4290, 4337, 4343, 4369, 4377, 4380, 4393, 4475, 4486, 4533, 4557, 4596, 4602, 4706, 4717, 4721, 4732, 4742, 4772, 4775, 4860, 4868, 4875, 4891, 4924, 5014, 5037, 5040, 5046, 5055, 5074, 5137, 5190, 5191, 5194, 5202, 5205, 5240, 5281, 5417, 5422, 5438, 5496, 5498, 5501, 5587, 5610, 5614, 5623, 5639, 5651, 5663, 5729, 5740, 5783, 6299, 6586, 6592, 6597, 6603, 7213, 7448, 7468, 7787, 7794, 7890, 7924, 7943, 7991, 8004, 8068, 8240, 8632, 8744, 8769, 8770, 8799, 8851, 9723, 9728, 9847, 10107, 10620, 10660, 11292, 11299, 11327, 11335, 11520, 11603, 13309, 13381, 13573, 13758, 16000, 16021, 16032, 16040, 16051, 16129, 16135, 16187, 16264, 16288, 16314, 16325, 16354, 16365, 16395, 16448, 16467, 16516, 16538, 16598, 16605, 16757, 16849, 16852, 16864, 16865, 17108, 17181])
+UPDATE: 10.1126/science.1153124 has indegree 2 in cluster 254 where the top 0.01th indegree is 1
+UPDATE: 10.1126/science.1153124 has indegree 2 in cluster 1437 where the top 0.01th indegree is 1
+UPDATE: 10.1126/science.1153124 has indegree 2 in cluster 2823 where the top 0.01th indegree is 1
+UPDATE: 10.1126/science.1153124 has indegree 2 in cluster 2907 where the top 0.01th indegree is 1
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 11292 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 11327 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16000 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16021 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16032 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16051 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16129 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16135 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16187 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16264 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16288 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16325 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16365 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16395 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16448 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16467 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16516 where the top 0.01th indegree is 0
+cluster 16538 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16538 where the top 0.01th indegree is 0
+cluster 16598 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16598 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16605 where the top 0.01th indegree is 0
+cluster 16757 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16757 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16849 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16852 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16864 where the top 0.01th indegree is 0
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 16865 where the top 0.01th indegree is 0
+cluster 17108 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 17108 where the top 0.01th indegree is 0
+cluster 17181 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1126/science.1153124 has indegree 1 in cluster 17181 where the top 0.01th indegree is 0
+266 incoming dois
+belongs to [15976]
+10.1038/nrm.2017.125 is cited by dois from 264 clusters ([9, 54, 67, 166, 234, 239, 245, 247, 254, 262, 267, 327, 336, 342, 359, 376, 397, 423, 467, 575, 583, 614, 621, 683, 797, 806, 845, 846, 874, 877, 887, 893, 894, 902, 914, 964, 983, 1002, 1010, 1065, 1163, 1171, 1179, 1207, 1229, 1250, 1366, 1394, 1437, 1515, 1557, 1586, 1612, 1613, 1649, 1666, 1713, 1789, 1812, 1849, 1934, 1940, 1964, 1967, 1975, 1980, 1994, 2051, 2092, 2117, 2128, 2177, 2184, 2188, 2195, 2207, 2265, 2283, 2303, 2308, 2331, 2337, 2404, 2436, 2463, 2467, 2477, 2594, 2603, 2624, 2647, 2673, 2693, 2709, 2725, 2788, 2794, 2799, 2811, 2823, 2827, 2883, 2899, 2946, 2991, 3104, 3109, 3148, 3156, 3186, 3243, 3246, 3265, 3272, 3287, 3330, 3344, 3362, 3384, 3392, 3423, 3439, 3443, 3464, 3465, 3511, 3542, 3563, 3567, 3652, 3676, 3681, 3694, 3705, 3706, 3707, 3716, 3722, 3738, 3746, 3819, 3820, 3821, 3835, 3837, 3840, 3893, 3924, 3938, 3956, 3959, 3967, 3974, 3984, 4010, 4032, 4036, 4041, 4050, 4072, 4076, 4101, 4102, 4112, 4124, 4151, 4166, 4168, 4218, 4233, 4259, 4263, 4270, 4317, 4343, 4368, 4377, 4396, 4435, 4454, 4460, 4472, 4475, 4483, 4501, 4600, 4644, 4704, 4718, 4719, 4721, 4737, 4746, 4775, 4776, 4792, 4837, 4867, 4868, 4894, 4911, 5014, 5037, 5043, 5044, 5046, 5048, 5061, 5074, 5117, 5178, 5183, 5189, 5191, 5228, 5314, 5379, 5394, 5399, 5409, 5426, 5462, 5496, 5526, 5613, 5614, 5630, 5920, 5964, 6014, 6234, 6235, 6237, 6259, 6609, 6630, 6661, 6694, 6740, 6843, 7146, 7152, 7256, 7326, 7517, 7651, 7836, 7872, 7890, 7907, 7964, 8612, 8632, 8692, 8721, 9304, 9847, 10215, 10456, 10835, 10873, 14083, 14108, 16354])
+UPDATE: 10.1038/nrm.2017.125 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+264 incoming dois
+belongs to [121]
+10.1146/annurev-immunol-032713-120231 is cited by dois from 78 clusters ([103, 121, 438, 464, 695, 818, 872, 1214, 1480, 1529, 1567, 1593, 2091, 2149, 2538, 2723, 2771, 2780, 2862, 3276, 3613, 3690, 3709, 3955, 4028, 4266, 4315, 4335, 4482, 4566, 4616, 5003, 5064, 5180, 5246, 5423, 5488, 5503, 5575, 5584, 5597, 5927, 5955, 5962, 5987, 6015, 6352, 6424, 6481, 6560, 6606, 6612, 6830, 6861, 6936, 7228, 7323, 7354, 7397, 7436, 7685, 7751, 7756, 7979, 8380, 8460, 8626, 9306, 9471, 9474, 9484, 9488, 9581, 9898, 10259, 10324, 11925, 12801])
+260 incoming dois
+belongs to [4589]
+10.1182/blood.v94.11.3791 is cited by dois from 242 clusters ([202, 248, 342, 366, 418, 710, 729, 731, 789, 888, 940, 976, 1163, 1322, 1509, 1581, 1666, 1705, 1724, 1746, 1776, 1990, 2206, 2354, 2364, 2444, 2447, 2572, 2744, 2804, 2944, 3039, 3110, 3251, 3339, 3350, 3362, 3376, 3390, 3450, 3559, 3611, 3618, 3640, 3679, 3689, 3719, 3736, 3751, 3762, 3803, 3859, 3886, 3900, 3948, 3959, 3974, 4038, 4047, 4293, 4304, 4337, 4393, 4410, 4445, 4473, 4502, 4589, 4680, 4682, 4728, 4757, 4853, 4913, 4924, 4960, 5045, 5128, 5186, 5190, 5204, 5512, 5623, 5655, 5659, 5740, 5961, 6050, 6103, 6213, 6262, 6284, 6333, 6376, 6692, 7132, 7133, 7137, 7138, 7150, 7229, 7288, 7364, 7390, 7801, 7802, 7857, 7868, 7875, 7926, 7947, 8136, 8140, 8213, 8253, 8268, 8314, 8632, 8659, 8668, 8672, 8690, 8770, 8787, 8833, 8849, 8925, 8956, 8973, 9283, 9318, 9356, 9795, 9807, 9820, 9821, 9873, 9912, 9916, 9995, 10029, 10060, 10087, 10094, 10105, 10148, 10266, 10465, 10553, 10568, 10771, 10778, 10798, 11121, 11325, 11348, 11382, 11441, 11448, 11474, 11478, 11524, 11539, 11585, 11692, 11713, 11843, 11850, 11924, 11942, 11977, 12133, 12134, 12137, 12272, 12290, 12330, 12397, 12477, 12487, 12579, 12722, 12980, 13088, 13162, 13190, 13314, 13352, 13353, 13374, 13382, 13399, 13450, 13499, 13569, 13624, 13645, 13706, 13756, 13920, 13922, 13956, 14008, 14035, 14131, 14266, 14341, 14355, 14675, 14688, 14923, 15023, 15046, 15048, 15974, 15977, 16045, 16057, 16094, 16103, 16170, 16279, 16304, 16313, 16382, 16401, 16415, 16427, 16442, 16452, 16475, 16496, 16640, 16711, 16739, 16767, 16786, 16822, 16845, 16892, 17083, 17174])
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 2 in cluster 2804 where the top 0.01th indegree is 1
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 2 in cluster 4393 where the top 0.01th indegree is 1
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 2 in cluster 10105 where the top 0.01th indegree is 1
+cluster 13399 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 13399 where the top 0.01th indegree is 0
+cluster 13956 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 13956 where the top 0.01th indegree is 0
+cluster 14266 has 2 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 14266 where the top 0.01th indegree is 0
+cluster 15974 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 15974 where the top 0.01th indegree is 0
+cluster 15977 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 15977 where the top 0.01th indegree is 0
+cluster 16045 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16045 where the top 0.01th indegree is 0
+cluster 16057 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16057 where the top 0.01th indegree is 0
+cluster 16094 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16094 where the top 0.01th indegree is 0
+cluster 16103 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16103 where the top 0.01th indegree is 0
+cluster 16170 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16170 where the top 0.01th indegree is 0
+cluster 16279 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16279 where the top 0.01th indegree is 0
+cluster 16304 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16304 where the top 0.01th indegree is 0
+cluster 16313 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16313 where the top 0.01th indegree is 0
+cluster 16382 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16382 where the top 0.01th indegree is 0
+cluster 16401 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16401 where the top 0.01th indegree is 0
+cluster 16415 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16415 where the top 0.01th indegree is 0
+cluster 16427 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16427 where the top 0.01th indegree is 0
+cluster 16442 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16442 where the top 0.01th indegree is 0
+cluster 16452 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16452 where the top 0.01th indegree is 0
+cluster 16475 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16475 where the top 0.01th indegree is 0
+cluster 16496 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16496 where the top 0.01th indegree is 0
+cluster 16640 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16640 where the top 0.01th indegree is 0
+cluster 16711 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16711 where the top 0.01th indegree is 0
+cluster 16739 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16739 where the top 0.01th indegree is 0
+cluster 16767 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16767 where the top 0.01th indegree is 0
+cluster 16786 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16786 where the top 0.01th indegree is 0
+cluster 16822 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16822 where the top 0.01th indegree is 0
+cluster 16845 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16845 where the top 0.01th indegree is 0
+cluster 16892 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 16892 where the top 0.01th indegree is 0
+cluster 17083 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 17083 where the top 0.01th indegree is 0
+cluster 17174 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1182/blood.v94.11.3791 has indegree 1 in cluster 17174 where the top 0.01th indegree is 0
+253 incoming dois
+belongs to [201]
+10.1038/nature12787 is cited by dois from 78 clusters ([78, 88, 201, 405, 455, 476, 613, 889, 898, 1058, 1076, 1274, 1370, 1395, 1419, 1661, 1773, 1794, 1900, 1922, 2109, 2580, 2871, 3125, 3158, 3167, 3485, 3654, 3718, 3810, 3914, 3939, 4027, 4028, 4261, 4269, 4311, 4342, 4449, 4708, 4862, 4953, 5071, 5216, 5288, 5332, 5458, 5495, 5545, 5546, 5711, 5719, 5836, 6009, 6032, 6205, 6252, 6514, 7247, 7254, 7271, 7520, 7669, 7904, 7976, 8549, 8685, 8753, 9215, 9257, 10070, 10101, 10471, 10987, 12129, 12386, 15096, 16175])
+UPDATE: 10.1038/nature12787 has indegree 2 in cluster 405 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature12787 has indegree 2 in cluster 889 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature12787 has indegree 2 in cluster 3125 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature12787 has indegree 2 in cluster 4027 where the top 0.01th indegree is 1
+cluster 16175 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature12787 has indegree 1 in cluster 16175 where the top 0.01th indegree is 0
+236 incoming dois
+belongs to [110]
+10.1038/onc.2016.304 is cited by dois from 68 clusters ([53, 110, 281, 317, 553, 619, 626, 891, 1003, 1013, 1359, 1444, 1602, 1678, 2186, 2580, 2776, 3155, 3349, 3372, 3540, 3651, 3894, 3963, 3995, 4057, 4345, 4523, 4534, 4786, 4918, 5134, 5203, 5336, 5586, 5957, 6100, 6108, 6391, 6515, 6787, 6847, 6875, 7106, 7159, 7174, 7569, 7607, 8080, 8177, 8418, 8697, 8719, 8792, 8904, 9414, 9516, 9650, 10931, 11027, 11862, 12123, 12163, 12186, 13985, 15226, 15527, 17197])
+UPDATE: 10.1038/onc.2016.304 has indegree 2 in cluster 53 where the top 0.01th indegree is 1
+cluster 17197 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/onc.2016.304 has indegree 1 in cluster 17197 where the top 0.01th indegree is 0
+236 incoming dois
+belongs to [5615]
+10.1084/jem.183.3.1161 is cited by dois from 221 clusters ([63, 166, 234, 339, 342, 366, 397, 467, 614, 637, 671, 845, 884, 885, 947, 1065, 1179, 1229, 1234, 1246, 1366, 1394, 1448, 1457, 1537, 1538, 1655, 1708, 1713, 1734, 1822, 1851, 1907, 1926, 1980, 2044, 2053, 2195, 2206, 2310, 2404, 2444, 2497, 2550, 2606, 2609, 2691, 2748, 2797, 2892, 3014, 3139, 3144, 3156, 3190, 3223, 3268, 3276, 3338, 3347, 3393, 3573, 3586, 3605, 3640, 3674, 3679, 3685, 3697, 3714, 3719, 3722, 3748, 3749, 3762, 3803, 3821, 3833, 3840, 3842, 3843, 3909, 3916, 3932, 3956, 3957, 3959, 3967, 3998, 4010, 4072, 4088, 4095, 4132, 4151, 4206, 4265, 4274, 4365, 4369, 4374, 4445, 4454, 4457, 4463, 4501, 4510, 4582, 4589, 4602, 4732, 4737, 4785, 4896, 4906, 4913, 4924, 4946, 5014, 5117, 5183, 5189, 5190, 5204, 5240, 5314, 5400, 5477, 5532, 5615, 5621, 5630, 5631, 5635, 5651, 5655, 5739, 5756, 5915, 6030, 6233, 6242, 6609, 6792, 6801, 7282, 7561, 7857, 7893, 7988, 8395, 8632, 8744, 8770, 8773, 8798, 9256, 9871, 9925, 10283, 11097, 11299, 11339, 11434, 11495, 11595, 11625, 11640, 11694, 11818, 12174, 12372, 13309, 13328, 13381, 13389, 13440, 13443, 13511, 13600, 13701, 13713, 14766, 15996, 16003, 16018, 16031, 16040, 16136, 16142, 16157, 16159, 16200, 16238, 16260, 16263, 16264, 16296, 16314, 16318, 16354, 16371, 16375, 16395, 16417, 16435, 16453, 16467, 16489, 16516, 16522, 16528, 16559, 16666, 16689, 16714, 16849, 16875, 16893, 16975, 16993])
+UPDATE: 10.1084/jem.183.3.1161 has indegree 2 in cluster 4454 where the top 0.01th indegree is 1
+UPDATE: 10.1084/jem.183.3.1161 has indegree 2 in cluster 7893 where the top 0.01th indegree is 1
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 13328 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 13600 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 15996 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16003 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16018 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16031 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16142 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16157 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16159 where the top 0.01th indegree is 0
+cluster 16200 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16200 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16238 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16260 where the top 0.01th indegree is 0
+cluster 16263 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16263 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16264 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16296 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16314 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16318 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16371 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16375 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16395 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16417 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16435 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16453 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16467 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16489 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16516 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16522 where the top 0.01th indegree is 0
+cluster 16528 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16528 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16559 where the top 0.01th indegree is 0
+cluster 16666 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16666 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16689 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16714 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16849 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16875 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16893 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16975 where the top 0.01th indegree is 0
+UPDATE: 10.1084/jem.183.3.1161 has indegree 1 in cluster 16993 where the top 0.01th indegree is 0
+231 incoming dois
+belongs to [819]
+10.1038/cr.2015.82 is cited by dois from 163 clusters ([6, 205, 274, 387, 447, 644, 654, 686, 819, 920, 993, 1076, 1278, 1334, 1382, 1415, 1429, 1878, 2077, 2112, 2310, 2327, 2588, 2613, 2725, 2750, 2755, 2802, 2823, 2831, 2860, 2891, 3063, 3152, 3225, 3256, 3502, 3537, 3574, 3592, 3634, 3674, 3770, 3773, 3835, 3897, 3920, 3966, 3992, 4013, 4021, 4138, 4149, 4241, 4258, 4287, 4320, 4414, 4445, 4450, 4538, 4625, 4711, 4751, 4817, 4826, 4849, 4887, 4898, 4940, 4958, 4973, 5014, 5025, 5048, 5057, 5058, 5090, 5130, 5178, 5266, 5296, 5364, 5368, 5388, 5394, 5402, 5455, 5490, 5538, 5607, 5618, 5621, 5653, 5792, 5926, 5982, 6085, 6106, 6130, 6171, 6190, 6248, 6304, 6310, 6453, 6482, 6497, 6528, 6601, 6618, 6626, 6694, 6747, 6940, 7253, 7356, 7542, 7631, 7904, 7973, 8260, 8280, 8352, 8369, 8427, 8758, 8766, 8907, 8937, 8955, 9028, 9151, 9462, 9600, 9798, 9893, 9895, 11434, 11468, 11505, 11623, 11625, 11654, 12300, 12787, 13633, 13759, 14227, 14443, 16053, 16062, 16135, 16177, 16287, 16325, 16394, 16460, 16497, 16515, 16549, 17128, 17165])
+UPDATE: 10.1038/cr.2015.82 has indegree 2 in cluster 993 where the top 0.01th indegree is 1
+UPDATE: 10.1038/cr.2015.82 has indegree 2 in cluster 1415 where the top 0.01th indegree is 1
+UPDATE: 10.1038/cr.2015.82 has indegree 2 in cluster 4940 where the top 0.01th indegree is 1
+UPDATE: 10.1038/cr.2015.82 has indegree 2 in cluster 6694 where the top 0.01th indegree is 1
+UPDATE: 10.1038/cr.2015.82 has indegree 2 in cluster 11625 where the top 0.01th indegree is 1
+UPDATE: 10.1038/cr.2015.82 has indegree 2 in cluster 13633 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16053 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16062 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16135 where the top 0.01th indegree is 0
+cluster 16177 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16177 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16325 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16394 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16460 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16497 where the top 0.01th indegree is 0
+cluster 16515 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16515 where the top 0.01th indegree is 0
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 16549 where the top 0.01th indegree is 0
+cluster 17128 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 17128 where the top 0.01th indegree is 0
+cluster 17165 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/cr.2015.82 has indegree 1 in cluster 17165 where the top 0.01th indegree is 0
+226 incoming dois
+belongs to [11275]
+10.3402/jev.v3.26913 is cited by dois from 219 clusters ([1, 73, 126, 166, 198, 234, 366, 617, 639, 709, 710, 731, 784, 789, 852, 885, 887, 942, 956, 977, 1001, 1015, 1065, 1163, 1179, 1188, 1209, 1394, 1566, 1708, 1711, 1981, 1987, 2053, 2096, 2138, 2147, 2195, 2265, 2283, 2293, 2295, 2298, 2331, 2352, 2368, 2422, 2442, 2545, 2568, 2608, 2823, 2921, 2936, 2991, 2998, 2999, 3110, 3134, 3139, 3156, 3186, 3196, 3265, 3279, 3286, 3306, 3354, 3362, 3367, 3384, 3450, 3557, 3711, 3729, 3740, 3746, 3757, 3784, 3821, 3838, 3869, 3925, 3948, 3959, 3973, 3978, 3992, 3996, 4041, 4072, 4086, 4134, 4137, 4155, 4187, 4216, 4246, 4264, 4337, 4364, 4374, 4382, 4406, 4445, 4448, 4451, 4457, 4487, 4494, 4507, 4519, 4589, 4632, 4639, 4728, 4795, 4867, 4917, 5070, 5229, 5303, 5379, 5385, 5406, 5436, 5438, 5477, 5496, 5511, 5578, 5630, 5743, 5921, 6001, 6071, 6226, 6299, 7122, 7266, 7343, 7368, 7775, 7820, 7825, 7861, 7890, 7996, 8222, 8617, 8647, 8744, 8775, 8907, 9156, 9256, 9728, 9759, 9760, 9925, 9974, 10002, 10061, 10078, 10239, 10737, 10872, 10883, 11275, 11280, 11294, 11298, 11508, 11873, 12288, 12297, 12529, 13354, 13377, 13389, 13423, 13573, 13727, 13758, 14515, 14570, 14766, 16036, 16097, 16117, 16156, 16163, 16169, 16185, 16224, 16268, 16287, 16305, 16317, 16354, 16368, 16467, 16483, 16501, 16552, 16559, 16584, 16625, 16663, 16673, 16807, 16893, 16993, 17039, 17066, 17098, 17181, 17183, 17187])
+UPDATE: 10.3402/jev.v3.26913 has indegree 2 in cluster 942 where the top 0.01th indegree is 1
+UPDATE: 10.3402/jev.v3.26913 has indegree 2 in cluster 10239 where the top 0.01th indegree is 1
+UPDATE: 10.3402/jev.v3.26913 has indegree 2 in cluster 13354 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16036 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16097 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16117 where the top 0.01th indegree is 0
+cluster 16156 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16156 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16163 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16169 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16185 where the top 0.01th indegree is 0
+cluster 16224 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16224 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16268 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16305 where the top 0.01th indegree is 0
+cluster 16317 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16317 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16368 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16467 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16483 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16501 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16552 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16559 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16584 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16625 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16663 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16673 where the top 0.01th indegree is 0
+cluster 16807 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16807 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16893 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 16993 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 17039 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 17066 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 17098 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 17181 where the top 0.01th indegree is 0
+cluster 17183 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 17183 where the top 0.01th indegree is 0
+UPDATE: 10.3402/jev.v3.26913 has indegree 1 in cluster 17187 where the top 0.01th indegree is 0
+225 incoming dois
+belongs to [7109]
+10.1007/s00018-017-2595-9 is cited by dois from 216 clusters ([9, 109, 208, 261, 267, 304, 336, 392, 444, 554, 583, 632, 789, 844, 877, 988, 1084, 1163, 1289, 1298, 1387, 1432, 1436, 1458, 1530, 1536, 1557, 1566, 1574, 1649, 1690, 1705, 1715, 1759, 1833, 1967, 2011, 2014, 2035, 2053, 2097, 2138, 2177, 2178, 2191, 2207, 2280, 2282, 2283, 2303, 2310, 2316, 2345, 2355, 2429, 2436, 2491, 2790, 2801, 2816, 2826, 2910, 2959, 2978, 2980, 2999, 3021, 3029, 3087, 3173, 3201, 3211, 3242, 3244, 3330, 3411, 3423, 3488, 3500, 3563, 3643, 3661, 3700, 3707, 3774, 3775, 3792, 3814, 3819, 3821, 3928, 3967, 4005, 4010, 4037, 4041, 4052, 4082, 4088, 4132, 4206, 4218, 4242, 4259, 4288, 4301, 4317, 4344, 4410, 4445, 4464, 4522, 4582, 4602, 4606, 4639, 4651, 4652, 4675, 4677, 4712, 4724, 4859, 4868, 4875, 4940, 4946, 4960, 4994, 5061, 5065, 5178, 5183, 5194, 5204, 5392, 5412, 5436, 5438, 5477, 5519, 5610, 5663, 5754, 5901, 5983, 6176, 6237, 6263, 6294, 6431, 6601, 6609, 6811, 7109, 7183, 7266, 7373, 7668, 7674, 7792, 7794, 7825, 7836, 7857, 8094, 8138, 8162, 8632, 8660, 8733, 8744, 8769, 8798, 9109, 9161, 9946, 10277, 10990, 11280, 11289, 11294, 11324, 11335, 11575, 11603, 11828, 12227, 12250, 12303, 12446, 13381, 13394, 13573, 13584, 13727, 14181, 15983, 16021, 16067, 16199, 16224, 16261, 16301, 16327, 16385, 16437, 16478, 16522, 16524, 16613, 16651, 16909, 16910, 16921, 16932])
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 2 in cluster 392 where the top 0.01th indegree is 1
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 4 in cluster 9161 where the top 0.01th indegree is 1
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 15983 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16021 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16067 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16199 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16224 where the top 0.01th indegree is 0
+cluster 16261 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16261 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16301 where the top 0.01th indegree is 0
+cluster 16327 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16327 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16385 where the top 0.01th indegree is 0
+cluster 16437 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16437 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16478 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16522 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16524 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16613 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16651 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16909 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16910 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16921 where the top 0.01th indegree is 0
+UPDATE: 10.1007/s00018-017-2595-9 has indegree 1 in cluster 16932 where the top 0.01th indegree is 0
+224 incoming dois
+belongs to [2247]
+10.3389/fendo.2018.00402 is cited by dois from 179 clusters ([137, 318, 322, 351, 365, 435, 452, 472, 516, 629, 642, 650, 652, 656, 707, 823, 826, 876, 891, 897, 1009, 1050, 1072, 1075, 1086, 1160, 1186, 1215, 1581, 1583, 1652, 1674, 1678, 1901, 1926, 2177, 2247, 2280, 2286, 2327, 2365, 2410, 2986, 2996, 3035, 3189, 3326, 3392, 3437, 3710, 3861, 4059, 4229, 4269, 4308, 4344, 4410, 4500, 4508, 4549, 4580, 4719, 4942, 4977, 5119, 5176, 5273, 5291, 5455, 5506, 5513, 5571, 5642, 5702, 5720, 5752, 5774, 5839, 5918, 6047, 6085, 6162, 6220, 6254, 6350, 6372, 6413, 6422, 6449, 6451, 6480, 6624, 7014, 7131, 7187, 7264, 7440, 7483, 7509, 7528, 7572, 7796, 7825, 7834, 7842, 7862, 8024, 8037, 8038, 8155, 8167, 8216, 8251, 8254, 8279, 8341, 8374, 8432, 8611, 8665, 8688, 8755, 8871, 8896, 8955, 8992, 9018, 9021, 9031, 9050, 9125, 9246, 9249, 9334, 9336, 9636, 9661, 9762, 9802, 9973, 10064, 10150, 10213, 10217, 10313, 10329, 10364, 10370, 10429, 10546, 10560, 11252, 11635, 11689, 11735, 11943, 12032, 12298, 12399, 12402, 12515, 12553, 12649, 12774, 13406, 13594, 13938, 14548, 16138, 16187, 16224, 16305, 16657, 16681, 16682, 16706, 16712, 16988, 17195])
+cluster 13406 has 2 members but has 0 intracluster indegree
+UPDATE: 10.3389/fendo.2018.00402 has indegree 2 in cluster 13406 where the top 0.01th indegree is 0
+cluster 16138 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16138 where the top 0.01th indegree is 0
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16187 where the top 0.01th indegree is 0
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16224 where the top 0.01th indegree is 0
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16305 where the top 0.01th indegree is 0
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16657 where the top 0.01th indegree is 0
+cluster 16681 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16681 where the top 0.01th indegree is 0
+cluster 16682 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16682 where the top 0.01th indegree is 0
+cluster 16706 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16706 where the top 0.01th indegree is 0
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16712 where the top 0.01th indegree is 0
+cluster 16988 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 16988 where the top 0.01th indegree is 0
+cluster 17195 has 1 members but has 0 intracluster indegree
+UPDATE: 10.3389/fendo.2018.00402 has indegree 1 in cluster 17195 where the top 0.01th indegree is 0
+223 incoming dois
+belongs to [472]
+10.1101/gad.1800909 is cited by dois from 104 clusters ([149, 182, 472, 723, 740, 797, 801, 819, 826, 903, 923, 1003, 1036, 1120, 1215, 1221, 1328, 1335, 2194, 2681, 2710, 2767, 2785, 3013, 3030, 3061, 3155, 3231, 3256, 3584, 3718, 3813, 4147, 4294, 4312, 4428, 4480, 4708, 4782, 4806, 4874, 4925, 5057, 5083, 5235, 5293, 5343, 5430, 5461, 5481, 5510, 5681, 5722, 5844, 5911, 5920, 5979, 6043, 6085, 6409, 6581, 6590, 6667, 6743, 7262, 7264, 7397, 7489, 7503, 8049, 8125, 8292, 8374, 8431, 8521, 8557, 8665, 8777, 8831, 8909, 8925, 8986, 9038, 9320, 9326, 9358, 9467, 9780, 9910, 9946, 9994, 10064, 10138, 10297, 10382, 10966, 11983, 11988, 12180, 12278, 12344, 12386, 15853, 17124])
+cluster 17124 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1101/gad.1800909 has indegree 1 in cluster 17124 where the top 0.01th indegree is 0
+221 incoming dois
+belongs to [61]
+10.1016/s0022-2836(03)00865-9 is cited by dois from 15 clusters ([61, 338, 424, 464, 669, 719, 1424, 1662, 2862, 3737, 4456, 7038, 8465, 8661, 9157])
+UPDATE: 10.1016/s0022-2836(03)00865-9 has indegree 2 in cluster 1662 where the top 0.01th indegree is 1
+216 incoming dois
+belongs to [1848]
+10.1038/s41586-018-0392-8 is cited by dois from 168 clusters ([14, 243, 276, 368, 475, 490, 501, 570, 583, 817, 885, 1017, 1033, 1138, 1144, 1177, 1282, 1293, 1382, 1422, 1541, 1557, 1580, 1586, 1607, 1689, 1789, 1848, 1942, 1968, 1990, 2092, 2131, 2355, 2436, 2474, 2539, 2590, 2762, 2823, 2841, 2869, 2892, 3041, 3269, 3375, 3408, 3427, 3443, 3563, 3766, 3790, 3824, 3835, 3840, 3852, 3855, 3926, 3931, 3934, 3942, 3956, 3969, 3980, 3986, 4072, 4104, 4136, 4144, 4235, 4259, 4278, 4364, 4417, 4445, 4461, 4478, 4486, 4501, 4600, 4757, 4779, 4859, 4864, 4916, 4921, 4966, 4973, 5014, 5039, 5183, 5189, 5191, 5240, 5248, 5409, 5425, 5453, 5477, 5494, 5566, 5578, 5714, 5901, 5915, 5926, 5971, 6021, 6088, 6242, 6245, 6258, 6263, 6289, 6382, 6460, 6626, 6661, 6833, 6932, 7536, 7826, 7840, 7872, 7891, 7954, 8063, 8162, 8612, 8692, 8775, 8918, 9100, 9476, 9569, 9723, 9800, 9999, 10020, 10107, 11289, 11299, 11305, 11335, 11597, 11713, 11755, 13257, 13537, 13567, 14653, 16018, 16040, 16098, 16136, 16287, 16320, 16428, 16444, 16448, 16504, 16543, 16625, 16733, 16742, 17066, 17101, 17181])
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 2 in cluster 368 where the top 0.01th indegree is 1
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 2 in cluster 501 where the top 0.01th indegree is 1
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 3 in cluster 583 where the top 0.01th indegree is 1
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 2 in cluster 2823 where the top 0.01th indegree is 1
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 2 in cluster 3766 where the top 0.01th indegree is 1
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 2 in cluster 5039 where the top 0.01th indegree is 1
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 2 in cluster 5189 where the top 0.01th indegree is 1
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16018 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16098 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16287 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16320 where the top 0.01th indegree is 0
+cluster 16428 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16428 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16444 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16448 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16504 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16543 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16625 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16733 where the top 0.01th indegree is 0
+cluster 16742 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 16742 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 17066 where the top 0.01th indegree is 0
+cluster 17101 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 17101 where the top 0.01th indegree is 0
+UPDATE: 10.1038/s41586-018-0392-8 has indegree 1 in cluster 17181 where the top 0.01th indegree is 0
+214 incoming dois
+belongs to [3817]
+10.1038/nature22341 is cited by dois from 182 clusters ([9, 73, 126, 164, 170, 224, 344, 478, 486, 620, 626, 710, 789, 883, 884, 961, 962, 1068, 1229, 1238, 1282, 1557, 1566, 1586, 1612, 1705, 1751, 1901, 1915, 1924, 1933, 1963, 2056, 2092, 2117, 2265, 2316, 2590, 2599, 2635, 2692, 2697, 2786, 2790, 2803, 2823, 2825, 2991, 3044, 3056, 3256, 3265, 3325, 3395, 3429, 3660, 3665, 3681, 3719, 3729, 3774, 3817, 3819, 3835, 3842, 3888, 3938, 3959, 3967, 3984, 4032, 4038, 4129, 4132, 4166, 4206, 4214, 4233, 4236, 4252, 4259, 4300, 4334, 4377, 4445, 4451, 4459, 4477, 4496, 4533, 4634, 4650, 4705, 4739, 4826, 4868, 4929, 5014, 5046, 5132, 5183, 5189, 5236, 5453, 5473, 5610, 5621, 5791, 5899, 5901, 5915, 6009, 6090, 6112, 6263, 6433, 6601, 6618, 6630, 6694, 6824, 7164, 7326, 7368, 7417, 7577, 7607, 7857, 8024, 8282, 8612, 8712, 8764, 8775, 9057, 9304, 9723, 9856, 9954, 9974, 10239, 10856, 11253, 11289, 11324, 11327, 11434, 11455, 11468, 11513, 11971, 12049, 12101, 13345, 13377, 13607, 13665, 13701, 14047, 14226, 14353, 14614, 16021, 16029, 16032, 16040, 16055, 16117, 16136, 16187, 16206, 16236, 16354, 16428, 16690, 16705, 16719, 16778, 16864, 16911, 16958, 17066])
+UPDATE: 10.1038/nature22341 has indegree 2 in cluster 626 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature22341 has indegree 2 in cluster 2056 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature22341 has indegree 4 in cluster 2117 where the top 0.01th indegree is 2
+UPDATE: 10.1038/nature22341 has indegree 2 in cluster 3681 where the top 0.01th indegree is 1
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 11327 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 13345 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 13607 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16021 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16029 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16032 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16040 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16055 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16117 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16136 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16187 where the top 0.01th indegree is 0
+cluster 16206 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16206 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16236 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16354 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16428 where the top 0.01th indegree is 0
+cluster 16690 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16690 where the top 0.01th indegree is 0
+cluster 16705 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16705 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16719 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16778 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16864 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16911 where the top 0.01th indegree is 0
+cluster 16958 has 1 members but has 0 intracluster indegree
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 16958 where the top 0.01th indegree is 0
+UPDATE: 10.1038/nature22341 has indegree 1 in cluster 17066 where the top 0.01th indegree is 0
