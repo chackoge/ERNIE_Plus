@@ -1,6 +1,6 @@
-# Cluster Processing Scripts
+# Python Scripts
 ---
-## `type_post_processing.py`
+## `cluster_processing_scripts/type_post_processing.py`
 1. Process the high degree nodes (at a network level) in turn.
 2. Examine all of the publications that cite A, the current high degree node.
 3. Identify the clusters of each of the publications that cite A.
@@ -10,3 +10,6 @@
 
 Note: Don't recompute the type 1 threshold even though the cluster membership has been updated
 
+
+## `cluster_processing_scripts/top_down_clustering.py`
+For now, all this does is take in a degree k and then output a clustering that is defined by the components of the subgraph restricted to those nodes with in-degree at least k.

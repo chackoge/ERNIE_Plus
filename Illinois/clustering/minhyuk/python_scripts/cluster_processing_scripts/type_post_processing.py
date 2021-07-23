@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import psycopg2
 
-from utils import file_to_dict,save_scatter
-from sql_utils import get_cursor_client_dict,get_all_dois,get_all_doi_and_indegree,get_all_incoming_dois,get_intracluster_doi_and_indegree,get_intracluster_query_doi_indegree,get_intracluster_query_doi_outdegree
+from python_scripts.utils.utils import file_to_dict,save_scatter
+from python_scripts.utils.sql_utils import get_cursor_client_dict,get_all_dois,get_all_doi_and_indegree,get_all_incoming_dois,get_intracluster_doi_and_indegree,get_intracluster_query_doi_indegree,get_intracluster_query_doi_outdegree
 
 def write_new_clustering_file(type_1_to_be_updated, cluster_to_doi_dict, output_prefix):
     '''This function takes in a dictionary of type 1 nodes to be updated to the list of clusters they newly belong to

@@ -130,3 +130,88 @@ def get_all_id_and_outdegree(cursor, table_name):
     cursor.execute(f"""SELECT citing_id,COUNT(DISTINCT cited_id) FROM {table_name} GROUP BY citing_id ORDER BY COUNT(DISTINCT cited_id) DESC""")
     rows = cursor.fetchall()
     return [tup for tup in rows]
+
+
+def get_high_high_integer_edges(cursor, table_name, high_indegree_threshold):
+    cursor.execute(f"""
+        WITH indegree_table AS(
+            SELECT cited_integer_id,count(citing_integer_id) FROM {table_name} GROUP BY cited_integer_id
+        )
+        SELECT DISTINCT citing_integer_id,cited_integer_id FROM {table_name}
+        WHERE citing_integer_id in (
+            SELECT cited_integer_id FROM indegree_table
+            WHERE count > {high_indegree_threshold - 1}
+        )
+        AND cited_integer_id in (
+            SELECT cited_integer_id FROM indegree_table
+            WHERE count > {high_indegree_threshold - 1}
+        )
+    """)
+    rows = cursor.fetchall()
+    return [tup for tup in rows]
+
+
+def get_high_low_integer_singletons(cursor, table_name, high_indegree_threshold):
+    cursor.execute(f"""
+    WITH indegree_table AS (
+        SELECT cited_integer_id AS node,COUNT(citing_integer_id) FROM {table_name} GROUP BY cited_integer_id
+    ),
+    high_indegree_table AS (
+        SELECT node FROM indegree_table WHERE count > {high_indegree_threshold}
+    ),
+    high_high_indegree_node_table AS (
+        SELECT cited_integer_id AS node FROM {table_name} WHERE citing_integer_id IN (SELECT node FROM high_indegree_table) AND cited_integer_id IN (SELECT node FROM high_indegree_table)
+        UNION DISTINCT
+        SELECT citing_integer_id AS node FROM {table_name} WHERE citing_integer_id IN (SELECT node FROM high_indegree_table) AND cited_integer_id IN (SELECT node FROM high_indegree_table)
+    ),
+    high_low_indegree_node_table AS (
+        SELECT cited_integer_id AS node FROM {table_name} WHERE citing_integer_id NOT IN (SELECT node FROM high_indegree_table) AND cited_integer_id IN (SELECT node FROM high_indegree_table)
+        UNION DISTINCT
+        SELECT citing_integer_id AS node FROM {table_name} WHERE citing_integer_id IN (SELECT node FROM high_indegree_table) AND cited_integer_id NOT IN (SELECT node FROM high_indegree_table)
+    ),
+    high_low_only_table AS (
+        SELECT node FROM high_low_indegree_node_table
+        EXCEPT
+        SELECT node FROM high_high_indegree_node_table
+    ),
+    SELECT DISTINCT node FROM high_low_only_table
+    """)
+    rows = cursor.fetchall()
+    return [tup[0] for tup in rows]
+
+
+def get_num_high_high_nodes(cursor, table_name, high_indegree_threshold):
+    cursor.execute(f"""
+        WITH indegree_table AS(
+            SELECT cited_integer_id,count(citing_integer_id) FROM {table_name} GROUP BY cited_integer_id
+        ), high_high_edges_table AS (
+            SELECT DISTINCT citing_integer_id,cited_integer_id FROM {table_name}
+            WHERE citing_integer_id in (
+                SELECT cited_integer_id FROM indegree_table
+                WHERE count > {high_indegree_threshold}
+            )
+            AND cited_integer_id in (
+                SELECT cited_integer_id FROM indegree_table
+                WHERE count > {high_indegree_threshold}
+            )
+        ), high_high_nodes_table AS (
+            SELECT DISTINCT citing_integer_id AS node FROM high_high_edges_table
+            UNION DISTINCT
+            SELECT DISTINCT cited_integer_id AS node FROM high_high_edges_table
+        )
+        SELECT COUNT(*) FROM high_high_nodes_table
+    """)
+    rows = cursor.fetchall()
+    return rows[0][0]
+
+
+def get_high_indegree_nodes_and_indegree(cursor, table_name, high_indegree_threshold):
+    cursor.execute(f"""
+        WITH indegree_table AS(
+            SELECT cited_integer_id,count(citing_integer_id) FROM {table_name} GROUP BY cited_integer_id
+        )
+        SELECT * FROM indegree_table WHERE count > {high_indegree_threshold}
+    """)
+    rows = cursor.fetchall()
+    return [tup for tup in rows]
+
