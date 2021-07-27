@@ -8,7 +8,7 @@ SET search_path = :schema;
 -- JetBrains IDEs: start execution from here
 SET TIMEZONE = 'US/Eastern';
 
-DROP VIEW IF EXISTS public.nodes
+DROP VIEW IF EXISTS public.nodes;
 
 CREATE OR REPLACE VIEW public.nodes
 AS
