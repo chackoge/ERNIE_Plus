@@ -29,12 +29,18 @@ def top_down_clustering(config_file, network, high_indegree_threshold, output_pr
     # the cluster with the largest size ets assigned to cluster 0
     component_size_arr = sorted(list(cc.getComponentSizes().items()), key=lambda tup: tup[1], reverse=True)
     components = cc.getComponents()
+    sequential_index_to_cluster_index_dict= {}
     with open(output_prefix + f"/{table_name}-{high_indegree_threshold}.component.clustering", "w") as f:
         sequential_index = 0
         for cluster_index,component_size in component_size_arr:
             for member in components[cluster_index]:
                 f.write(f"{sequential_index} {member}\n")
+            sequential_index_to_cluster_index_dict[sequential_index] = cluster_index
             sequential_index += 1
+
+    with open(output_prefix + f"/{table_name}-{high_indegree_threshold}.component.summary", "w") as f:
+        for sequential_index in range(len(component_size_arr)):
+            f.write(f"{sequential_index} {cc.getComponentSizes()[sequential_index_to_cluster_index_dict[sequential_index]]}\n")
 
 if __name__ == "__main__":
     top_down_clustering()

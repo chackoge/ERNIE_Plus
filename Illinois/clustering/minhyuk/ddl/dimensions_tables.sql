@@ -99,6 +99,17 @@ CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated (
     cited_integer_id INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deleted_edges ( -- these edges were deleted since they created loops (e.g. 3->4 and 4->3)
+    citing TEXT,
+    cited TEXT,
+    citing_id TEXT NOT NULL,
+    cited_id TEXT NOT NULL,
+    citing_year INTEGER,
+    cited_year INTEGER,
+    citing_integer_id INTEGER,
+    cited_integer_id INTEGER
+);
+
 COMMENT ON COLUMN dimensions.exosome_1900_2010_sabpq_deduplicated.citing_integer_id IS 'The integer id starts at 0 and is based on dimensions.exosome_1900_2010_sabpq_nodelist table';
 COMMENT ON COLUMN dimensions.exosome_1900_2010_sabpq_deduplicated.cited_integer_id IS 'The integer id starts at 0 and is based on dimensions.exosome_1900_2010_sabpq_nodelist table';
 
