@@ -5,7 +5,7 @@ NAME
   neo4j_switch_db.sh -- switches Neo4j 4 default DB and restarts Neo4j
 
 SYNOPSIS
-  neo4j_load.sh neo4j_db current_user_password
+  neo4j_load.sh neo4j_db
   neo4j_load.sh -h: display this help
 
 ENVIRONMENT
@@ -36,11 +36,11 @@ fi
 readonly DB_NAME="$1"
 
 # region Hide password from the output
-echo "$2" | sudo --stdin -u neo4j bash -c "set -xe
+sudo -u neo4j bash -c "set -xe
   sed --in-place --expression='s/^dbms.default_database=.*/dbms.default_database=${DB_NAME}/' /etc/neo4j/neo4j.conf"
 
 echo "Restarting Neo4j with a new active database ..."
-echo "$2" | sudo --stdin systemctl restart neo4j
+sudo systemctl restart neo4j
 
 declare -i time_limit_s=30
 echo "Waiting for the service to become active up to ${time_limit_s} seconds ..."
