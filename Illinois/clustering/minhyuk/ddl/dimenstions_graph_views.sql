@@ -12,10 +12,10 @@ DROP VIEW IF EXISTS public.nodes;
 
 CREATE OR REPLACE VIEW public.nodes
 AS
-  SELECT citing_integer_id AS "pub_id:ID:int", citing_year AS "pub_year:short"
+  SELECT citing_integer_id AS "pub_id:ID", citing_year AS "pub_year:short"
     FROM dimensions.exosome_1900_2010_sabpq_deduplicated
   UNION -- De-duplicates
-  SELECT cited_integer_id AS "pub_id:ID:int", cited_year AS "pub_year:short"
+  SELECT cited_integer_id AS "pub_id:ID", cited_year AS "pub_year:short"
     FROM dimensions.exosome_1900_2010_sabpq_deduplicated;
 
 DROP VIEW IF EXISTS public.edges;
