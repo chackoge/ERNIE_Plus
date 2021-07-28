@@ -22,10 +22,11 @@ DESCRIPTION
 
     DB_name       Neo4j DB name (spaces will be replaced by underscores)
     nodes_file    defaults to `nodes.csv`. The headers should conform to Neo4j import requirements:
-      * :ID tagged column is required. It is expected to be of integer type.
+      * `:ID`-tagged column is required. It is expected to contain numerical unique ids.
 
     edges_file    defaults to `edges.csv`. The headers should conform to Neo4j import requirements:
-      * :START_ID and :END_ID tagged columns are required
+      * `:START_ID` and `:END_ID` columns are required.
+        * They expected to contain only existing node ids from the nodes file.
 
 ENVIRONMENT
 
