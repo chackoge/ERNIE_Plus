@@ -14,7 +14,6 @@ CREATE OR REPLACE VIEW public.nodes AS
 SELECT citing_integer_id AS "seq_id:ID", citing_id AS dimensions_id, citing AS doi, citing_year AS "pub_year:short"
   FROM dimensions.exosome_1900_2010_sabpq_deduplicated
  UNION
--- De-duplicates
 SELECT cited_integer_id AS "seq_id:ID", cited_id AS dimensions_id, cited AS doi, cited_year AS "pub_year:short"
   FROM dimensions.exosome_1900_2010_sabpq_deduplicated;
 
