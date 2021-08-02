@@ -10,5 +10,4 @@ SET TIMEZONE = 'US/Eastern';
 
 -- Using client-side copy to generate the file under the current user ownership
 -- Have to do `COPY (SELECT * FROM {view}) TO` rather than simply `COPY {view} TO`
-\include_relative export_graph_nodes.sql
-\include_relative export_graph_edges.sql
+\copy (SELECT * FROM nodes) TO 'nodes.csv' (FORMAT CSV, HEADER ON)
