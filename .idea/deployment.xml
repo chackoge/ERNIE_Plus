@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" serverName="Valhalla" stopOnFirstError="true" overwriteAll="false" deleteMissingItems="true" exclude=".svn;.cvs;.DS_Store;.git;.hg;*.hprof;*.pyc" preserveFilePermissions="true">
     <serverData>
+      <paths name="Gypsy">
+        <serverdata>
+          <mappings>
+            <mapping deploy="Workspaces/ERNIE_Plus" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Valhalla">
         <serverdata>
           <mappings>

@@ -10,6 +10,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="45263455-0f1e-4cd9-ad1e-fbb92831c928" name="Gypsy" url="http://gypsy.ahasobriquets.com">
+        <fileTransfer host="gypsy.ahasobriquets.com" port="22" rootFolder="/home/dkorobsk" accessType="SFTP" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>
