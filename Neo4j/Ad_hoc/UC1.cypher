@@ -3,8 +3,8 @@ Parameters example:
 
 Neo4j Browser:
 
-:param seq_ids => [0, 1, 2]
 :param n => 200
+:param seq_ids => [0, 1, 2]
 
 JetBrains Graph Database Support plug-in:
 
