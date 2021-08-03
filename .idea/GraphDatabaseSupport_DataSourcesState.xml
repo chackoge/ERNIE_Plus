@@ -7,11 +7,11 @@
           <list>
             <DataSourceV1>
               <option name="uuid" value="78023bea-8d89-4b07-899e-44dd0aa562e7" />
-              <option name="name" value="ERNIE Neo4j @ tunnel" />
+              <option name="name" value="Valhalla Neo4j" />
               <option name="dataSourceType" value="NEO4J_BOLT" />
               <option name="configuration">
                 <map>
-                  <entry key="host" value="localhost" />
+                  <entry key="host" value="valhalla.cs.illinois.edu" />
                   <entry key="password" value="" />
                   <entry key="port" value="7687" />
                   <entry key="user" value="neo4j" />
