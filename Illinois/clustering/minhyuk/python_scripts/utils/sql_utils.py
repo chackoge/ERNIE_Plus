@@ -25,6 +25,32 @@ def get_cursor_client_dict(config_file):
     }
 
 
+def get_intracluster_query_integer_id_indegree(cursor, table_name, node_id, cluster_member_arr):
+    if(len(cluster_member_arr) < 1):
+        return []
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + str(cluster_member_arr[0]) + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + str(cluster_member) + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""SELECT COUNT(DISTINCT citing_integer_id) FROM {table_name} WHERE cited_integer_id='{node_id}' and citing_integer_id in {cluster_member_string_representation}""")
+    rows = cursor.fetchall()
+    return rows[0][0]
+
+
+def get_intracluster_query_integer_id_outdegree(cursor, table_name, node_id, cluster_member_arr):
+    if(len(cluster_member_arr) < 1):
+        return []
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + str(cluster_member_arr[0]) + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + str(cluster_member) + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""SELECT COUNT(DISTINCT cited_integer_id) FROM {table_name} WHERE citing_integer_id='{node_id}' and cited_integer_id in {cluster_member_string_representation}""")
+    rows = cursor.fetchall()
+    return rows[0][0]
+
+
 def get_intracluster_query_doi_indegree(cursor, table_name, doi, cluster_member_arr):
     if(len(cluster_member_arr) < 1):
         return []
@@ -104,6 +130,11 @@ def get_all_outgoing_dois(cursor, table_name, doi):
 
 def get_all_dois(cursor, table_name):
     cursor.execute(f"""SELECT DISTINCT citing FROM {table_name} UNION SELECT DISTINCT cited FROM {table_name}""")
+    rows = cursor.fetchall()
+    return [tup[0] for tup in rows]
+
+def get_all_integer_ids(cursor, table_name):
+    cursor.execute(f"""SELECT DISTINCT citing_integer_id FROM {table_name} UNION SELECT DISTINCT cited_integer_id FROM {table_name}""")
     rows = cursor.fetchall()
     return [tup[0] for tup in rows]
 

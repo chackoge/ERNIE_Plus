@@ -14,7 +14,7 @@ from python_scripts.utils.utils import mapping_to_dict,save_histogram
 @click.option("--high-degree-nodes", required=False, type=click.Path(), help="High in-degree nodes to analyze")
 @click.option("--mapping-file", required=False, type=click.Path(), help="Mapping from integer labels to dimensions ids")
 @click.option("--figure-prefix", required=True, type=click.Path(), help="Output histogram prefix")
-@click.option("--output-prefix", required=True, type=click.Path(), help="Output file prefix")
+@click.option("--output-prefix", required=False, type=click.Path(), help="Output file prefix")
 def cluster_size_histogram_networkit(input_clusters, input_network, minimum_size, high_degree_nodes, mapping_file, figure_prefix, output_prefix):
     '''This is the main function that takes in an input clustering output in the format
     where line i has "<cluster number>" for node i. Input network should be an edge list

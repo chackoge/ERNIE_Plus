@@ -96,8 +96,30 @@ CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated (
   citing_year INTEGER,
   cited_year INTEGER,
   citing_integer_id INTEGER,
-  cited_integer_id INTEGER
+  cited_integer_id INTEGER,
   CONSTRAINT exosome_1900_2010_sabpq_deduplicated_pk PRIMARY KEY (citing_integer_id, cited_integer_id)
+);
+
+CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated_top_10_pruned (
+  citing TEXT,
+  cited TEXT,
+  citing_id TEXT NOT NULL,
+  cited_id TEXT NOT NULL,
+  citing_year INTEGER,
+  cited_year INTEGER,
+  citing_integer_id INTEGER,
+  cited_integer_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated_top_100_pruned (
+  citing TEXT,
+  cited TEXT,
+  citing_id TEXT NOT NULL,
+  cited_id TEXT NOT NULL,
+  citing_year INTEGER,
+  cited_year INTEGER,
+  citing_integer_id INTEGER,
+  cited_integer_id INTEGER
 );
 
 

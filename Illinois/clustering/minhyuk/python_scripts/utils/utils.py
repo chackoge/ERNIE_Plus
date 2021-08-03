@@ -1,9 +1,12 @@
 import json
+import subprocess
 
 import click
 import matplotlib.pyplot as plt
 import numpy as np
 import psycopg2
+
+import python_scripts.cluster_processing_scripts.convert_to_cluster_id_format
 
 SMALL_SIZE = 12
 MEDIUM_SIZE = 18
@@ -41,24 +44,68 @@ def file_to_dict(clustering):
     and returns two python dictionaries that map from cluster number to a list of node ids and
     from a node id to list of cluster numbers.
     '''
-    cluster_to_doi_dict = {}
-    doi_to_cluster_dict = {}
+    cluster_to_id_dict = {}
+    id_to_cluster_dict = {}
 
     with open(clustering, "r") as f:
         for current_line in f:
-            [current_cluster_number, doi] = current_line.strip().split()
-            if(int(current_cluster_number) not in cluster_to_doi_dict):
-                cluster_to_doi_dict[int(current_cluster_number)] = []
-            if(doi not in doi_to_cluster_dict):
-                doi_to_cluster_dict[doi] = []
-            cluster_to_doi_dict[int(current_cluster_number)].append(doi)
-            doi_to_cluster_dict[doi].append(int(current_cluster_number))
-    for current_doi in doi_to_cluster_dict:
-        doi_to_cluster_dict[current_doi] = list(set(doi_to_cluster_dict[current_doi]))
+            [current_cluster_number, id] = current_line.strip().split()
+            if(int(current_cluster_number) not in cluster_to_id_dict):
+                cluster_to_id_dict[int(current_cluster_number)] = []
+            if(id not in id_to_cluster_dict):
+                id_to_cluster_dict[id] = []
+            cluster_to_id_dict[int(current_cluster_number)].append(id)
+            id_to_cluster_dict[id].append(int(current_cluster_number))
+    for current_id in id_to_cluster_dict:
+        id_to_cluster_dict[current_id] = list(set(id_to_cluster_dict[current_id]))
     return {
-        "cluster_to_doi_dict": cluster_to_doi_dict,
-        "doi_to_cluster_dict": doi_to_cluster_dict,
+        "cluster_to_id_dict": cluster_to_id_dict,
+        "id_to_cluster_dict": id_to_cluster_dict,
     }
+
+def write_new_sorted_cluster_dict(to_be_updated_dict, unassigned_nodes, output_prefix):
+    '''This function takes in a dictionary of cluster_ids to ids and writes a clustering file
+    where each line is "<cluster number>SPACE<node id>" and is sorted by cluster size of each cluster number
+    '''
+    sorted_list = sorted(list(to_be_updated_dict.items()), key=lambda tup:len(tup[1]), reverse=True)
+    renumbered_clustering_dict = {}
+    with open(f"{output_prefix}.clustering", "w") as f_clustering:
+        with open(f"{output_prefix}.summary", "w") as f_summary:
+            for sequential_id,(original_cluster_id, cluster_members) in enumerate(sorted_list):
+                for cluster_member in cluster_members:
+                    f_clustering.write(f"{sequential_id} {cluster_member}\n")
+                f_summary.write(f"{sequential_id} {len(cluster_members)}\n")
+            for unassigned_node_index,unassigned_node in enumerate(unassigned_nodes):
+                f_clustering.write(f"{len(sorted_list) + unassigned_node_index} {unassigned_node}")
+                f_clustering.write(f"{len(sorted_list) + unassigned_node_index} 1")
+
+
+def run_leiden(input_network, resolution, output_prefix):
+    output_raw_cluster_file= f"{output_prefix}/leiden.raw.clustering"
+    output_processed_cluster_file= f"{output_prefix}/leiden.clustering"
+    with open(f"{output_prefix}/leiden_{resolution}.err", "w") as f_err:
+        with open(f"{output_prefix}/leiden_{resolution}.out", "w") as f_out:
+            subprocess.run(["/usr/bin/time", "-v", "java", "-cp", "/srv/local/shared/external/leiden/networkanalysis-1.1.0/leiden.jar", "nl.cwts.networkanalysis.run.RunNetworkClustering", "-r", str(resolution), "-o", output_raw_cluster_file, input_network], stdout=f_out, stderr=f_err)
+    convert_to_cluster_id_format.parse_leiden(output_raw_cluster_file, None, output_processed_cluster_file)
+    return file_to_dict(output_processed_cluster_file)["cluster_to_id_dict"]
+
+
+def run_mcl(input_network, inflation, output_prefix):
+    cluster_to_id_dict = {}
+    output_mci = f"{output_prefix}/mcl.{str(inflation)}.mci"
+    output_tab = f"{output_prefix}/mcl.{str(inflation)}.tab"
+    output_mcl = f"{output_prefix}/mcl.{str(inflation)}.mcl"
+    output_dump = f"{output_prefix}/dump.mcl.{str(inflation)}.mcl"
+    output_processed_cluster_file = f"{output_prefix}/mcl.{str(inflation)}.clustering"
+    with open(f"{output_prefix}/mcl_{inflation}.err", "w") as f_err:
+        with open(f"{output_prefix}/mcl_{inflation}.out", "w") as f_out:
+            subprocess.run(["/usr/bin/time", "-v", "/srv/shared/external/mcl-14-137/bin/mcxload", "--stream-mirror", "-abc", input_network, "-o", output_mci, "-write-tab", output_tab], stdout=f_out, stderr=f_err)
+            subprocess.run(["/usr/bin/time", "-v", "/srv/shared/external/mcl-14-137/bin/mcl", output_mci, "-I", inflation, "-o", output_mcl], stdout=f_out, stderr=f_err)
+
+            subprocess.run(["/usr/bin/time", "-v", "/srv/shared/external/mcl-14-137/bin/mcxdump", "-icl", output_mcl, "-tabr", output_tab, "-o", output_dump], stdout=f_out, stderr=f_err)
+            subprocess.run(["Rscript", "/home/minhyuk2/git_repos/ERNIE_Plus/Illinois/clustering/minhyuk/mcl_scripts/post_process.R"], stdout=f_out, stderr=f_err) # this takes in all files that match dump.*
+    convert_to_cluster_id_format.parse_mcl(f"{output_dump}.csv", output_processed_cluster_file)
+    return file_to_dict(output_processed_cluster_file)["cluster_to_id_dict"]
 
 
 def save_histogram(x_min, x_max, bin_size, data, y_label, x_label, title, output_prefix):

@@ -1,13 +1,13 @@
 #!/bin/bash
 # This script runs the mcl installed on valhalla given the dataset location and original edge list network in csv format
 
-DATA_ROOT="./"
-DATASET_NAME="exosome_1900_1989_citing_cited_network"
+DATA_ROOT="<DATASET FILE LOCATION>"
+DATASET_NAME="<DATASET NAME>"
 DATASET_PATH="${DATA_ROOT}${DATASET_NAME}"
-ORIGINAL_CSV="/srv/shared/external/Dimensions/no_authors_datasets_minhyuk2/exosome_1900_1989/citing_cited_network.csv"
-DESTINATION_TSV="${DATASET_PATH}.tsv"
-OUTPUT_MCI="${DATASET_PATH}.mci"
-OUTPUT_TAB="${DATASET_PATH}.tab"
+ORIGINAL_CSV="<ORIGINAL CSV FILE>"
+DESTINATION_TSV="<OUTPUT TSV LOCATION>.tsv"
+OUTPUT_MCI="<OUTPUT MCI LOCATION>.mci"
+OUTPUT_TAB="<OUTPUT TAB LOCATIAN>.tab"
 
 if [ ! -f ${DESTINATION_TSV} ]; then
     echo "converting csv to tsv and stripping the header"
@@ -22,18 +22,17 @@ if [ ! -f ${OUTPUT_TAB} ]; then
 fi
 
 # Run MCL with DONT RUN WITH 1.0
+if [ ! -f out.${DATASET_NAME}.I12 ]; then
+    echo "Starting 1.2"
+    /srv/shared/external/mcl-14-137/bin/mcl ${OUTPUT_MCI} -I 1.2 -o out.${DATASET_NAME}.I12
+fi
 
-/srv/shared/external/mcl-14-137/bin/mcl ${OUTPUT_MCI} -I 1.2
-# /srv/shared/external/mcl-14-137/bin/mcl ${OUTPUT_MCI} -I 2.0
-# /srv/shared/external/mcl-14-137/bin/mcl ${OUTPUT_MCI} -I 4.0
-# /srv/shared/external/mcl-14-137/bin/mcl ${OUTPUT_MCI} -I 6.0
+if [ ! -f dump.${DATASET_NAME}.I12 ]; then
+    /srv/shared/external/mcl-14-137/bin/mcxdump -icl out.${DATASET_NAME}.I12 -tabr ${OUTPUT_TAB} -o dump.${DATASET_NAME}.I12
+fi
 
-# echo "Starting 1.2"
-# /srv/shared/external/mcl-14-137/bin/mcxdump -icl out.${DATASET_NAME}.I12 -tabr ${OUTPUT_TAB} -o dump.${OUTPUT_MCI}.I12
-#echo "Starting 2.0"
-#mcxdump -icl out.kalluri_sample_network.mci.I20 -tabr kalluri_sample_network.tab -o dump.kalluri_sample_network.mci.I20
-#echo "Starting 4.0"
-#mcxdump -icl out.kalluri_sample_network.mci.I40 -tabr kalluri_sample_network.tab -o dump.kalluri_sample_network.mci.I40
-#echo "Starting 6.0"
-#mcxdump -icl out.kalluri_sample_network.mci.I60 -tabr kalluri_sample_network.tab -o dump.kalluri_sample_network.mci.I60
+if [ ! -f dump.${DATASET_NAME}.I12.csv ]; then
+    Rscript ./post_process.R # this takes in all files that match dump.*
+fi
+
 echo "done"
