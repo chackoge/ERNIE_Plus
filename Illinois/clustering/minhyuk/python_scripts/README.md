@@ -27,4 +27,19 @@ For now, all this does is take in a degree k and then output a clustering that i
 
 Note: Don't recompute the type 1 threshold even though the cluster membership has been updated
 
+## `cluster_processing_scripts/recursive_leiden`
+This script will take a given network and run leiden recursively as follows.
+First it will run leiden on the whole network to determine the initial clusters.
+We will keep these clusters in a stack.
+Until the stack is empty, pop a cluster and do the following.
+1. Check if the cluster is valid, where cluster validitiy is defined below.
+2. If the cluster is valid, run leiden on the subgraph restricted to this cluster. There are three cases to consider.
+    - 2a. If leiden fails to decompose the cluster, then do nothing and keep this cluster
+    - 2b. If leiden fails to recover at least one cluster that is valid, then do nothing and keep this cluster
+    - 2c. If leiden recovers at least one valid cluster, then push all the subclusters onto the stack, knowing that some clusters will immeditely fail the validity check and some clusters will have leiden run on them.
+3. If the cluster is invalid, then we throw out this cluster and do not push anything onto the stack in this iteration.
+
+### Cluster Validity
+A cluster is valid if this inequality holds.
+![](https://latex.codecogs.com/gif.latex?%5Clarge%20%5Cfrac%7Bl_%7Bs%7D%7D%7BL%7D%20-%20%28%5Cfrac%7Bd_%7Bs%7D%7D%7B2L%7D%29%5E%7B2%7D%20%3E%200)
 
