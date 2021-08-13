@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import psycopg2
 
-import python_scripts.cluster_processing_scripts.convert_to_cluster_id_format
+from python_scripts.cluster_processing_scripts import convert_to_cluster_id_format
 
 SMALL_SIZE = 12
 MEDIUM_SIZE = 18
@@ -81,10 +81,10 @@ def write_new_sorted_cluster_dict(to_be_updated_dict, unassigned_nodes, output_p
 
 
 def run_leiden(input_network, resolution, output_prefix):
-    output_raw_cluster_file= f"{output_prefix}/leiden.raw.clustering"
-    output_processed_cluster_file= f"{output_prefix}/leiden.clustering"
-    with open(f"{output_prefix}/leiden_{resolution}.err", "w") as f_err:
-        with open(f"{output_prefix}/leiden_{resolution}.out", "w") as f_out:
+    output_raw_cluster_file= f"{output_prefix}_leiden.raw.clustering"
+    output_processed_cluster_file= f"{output_prefix}_leiden.clustering"
+    with open(f"{output_prefix}_leiden_{resolution}.err", "w") as f_err:
+        with open(f"{output_prefix}_leiden_{resolution}.out", "w") as f_out:
             subprocess.run(["/usr/bin/time", "-v", "java", "-cp", "/srv/local/shared/external/leiden/networkanalysis-1.1.0/leiden.jar", "nl.cwts.networkanalysis.run.RunNetworkClustering", "-r", str(resolution), "-o", output_raw_cluster_file, input_network], stdout=f_out, stderr=f_err)
     convert_to_cluster_id_format.parse_leiden(output_raw_cluster_file, None, output_processed_cluster_file)
     return file_to_dict(output_processed_cluster_file)["cluster_to_id_dict"]

@@ -133,6 +133,7 @@ def get_all_dois(cursor, table_name):
     rows = cursor.fetchall()
     return [tup[0] for tup in rows]
 
+
 def get_all_integer_ids(cursor, table_name):
     cursor.execute(f"""SELECT DISTINCT citing_integer_id FROM {table_name} UNION SELECT DISTINCT cited_integer_id FROM {table_name}""")
     rows = cursor.fetchall()
@@ -246,3 +247,40 @@ def get_high_indegree_nodes_and_indegree(cursor, table_name, high_indegree_thres
     rows = cursor.fetchall()
     return [tup for tup in rows]
 
+
+def get_num_edges(cursor, table_name):
+    cursor.execute(f"""
+        SELECT count(*) FROM {table_name}
+    """)
+    rows = cursor.fetchall()
+    return rows[0][0]
+
+def get_sum_num_degrees(cursor, table_name, cluster_member_arr):
+    if(len(cluster_member_arr) < 1):
+        return []
+    num_degree = 0
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + cluster_member_arr[0] + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + cluster_member + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""SELECT COUNT(cited_integer_id) FROM {table_name} WHERE citing_integer_id in {cluster_member_string_representation}""")
+    rows = cursor.fetchall()
+    num_degree += rows[0][0]
+    cursor.execute(f"""SELECT COUNT(citing_integer_id) FROM {table_name} WHERE cited_integer_id in {cluster_member_string_representation}""")
+    rows = cursor.fetchall()
+    num_degree += rows[0][0]
+    return num_degree
+
+
+def get_intracluster_num_edges(cursor, table_name, cluster_member_arr):
+    if(len(cluster_member_arr) < 1):
+        return []
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + cluster_member_arr[0] + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + cluster_member + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""SELECT COUNT(*) FROM {table_name} WHERE citing_integer_id in {cluster_member_string_representation} and cited_integer_id in {cluster_member_string_representation}""")
+    rows = cursor.fetchall()
+    return rows[0][0]
