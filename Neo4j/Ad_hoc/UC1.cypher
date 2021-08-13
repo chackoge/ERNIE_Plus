@@ -24,10 +24,10 @@ JetBrains Graph Database Support plug-in:
 */
 UNWIND $seq_ids AS seq_id
 MATCH (x1)--(p:Pub {seq_id: seq_id})--(y1)
-WITH p, x1, y1, size((x1)<--()) AS x1_in_degree, size((y1)<--()) AS y1_in_degree
-WHERE x1_in_degree >= $n AND y1_in_degree >= $n
+WHERE size((x1)<--()) >= $n AND size((y1)<--()) >= $n
+WITH seq_id, x1, y1
 MATCH (x1)-->(cc)<--(y1)
-RETURN DISTINCT p.seq_id, cc.seq_id;
+RETURN DISTINCT seq_id, cc.seq_id;
 
 /*
 (1) find all nodes of minimum in_degree n that cite or are cited by some node p for which we know the integer id
@@ -35,7 +35,7 @@ RETURN DISTINCT p.seq_id, cc.seq_id;
 */
 UNWIND $seq_ids AS seq_id
 MATCH (x1)--(p:Pub {seq_id: seq_id})--(y1)
-WITH p, x1, y1, size((x1)<--()) AS x1_in_degree, size((y1)<--()) AS y1_in_degree
-WHERE x1_in_degree >= $n AND y1_in_degree >= $n
+WHERE size((x1)<--()) >= $n AND size((y1)<--()) >= $n
+WITH seq_id, x1, y1
 MATCH (x1)<--(bc)-->(y1)
-RETURN DISTINCT p.seq_id, bc.seq_id;
+RETURN DISTINCT seq_id, bc.seq_id;
