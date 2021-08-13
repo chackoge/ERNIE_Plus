@@ -40,6 +40,9 @@ Until the stack is empty, pop a cluster and do the following.
 3. If the cluster is invalid, then we throw out this cluster and do not push anything onto the stack in this iteration.
 
 ### Cluster Validity
-A cluster is valid if this inequality holds.
-![](https://latex.codecogs.com/gif.latex?%5Clarge%20%5Cfrac%7Bl_%7Bs%7D%7D%7BL%7D%20-%20%28%5Cfrac%7Bd_%7Bs%7D%7D%7B2L%7D%29%5E%7B2%7D%20%3E%200)
+A cluster is valid if the inequality from equation 2 of Fortunato and Barthelemy(2007) holds.
+
+In plain english, a cluster is valid if the difference between the number of edges in a cluster divided by the total number of edges in the graph and the squared value of the quotient of the sum of the degrees of the nodes in a cluster divided by twice the total number of eges in the graph is greater than zero.
+
+Fortunato, Santo, and Marc Barthelemy. "Resolution limit in community detection." Proceedings of the national academy of sciences 104.1 (2007): 36-41.
 
