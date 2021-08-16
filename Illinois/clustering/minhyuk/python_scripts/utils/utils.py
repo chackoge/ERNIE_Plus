@@ -68,16 +68,29 @@ def write_new_sorted_cluster_dict(to_be_updated_dict, unassigned_nodes, output_p
     where each line is "<cluster number>SPACE<node id>" and is sorted by cluster size of each cluster number
     '''
     sorted_list = sorted(list(to_be_updated_dict.items()), key=lambda tup:len(tup[1]), reverse=True)
+    sorted_list = list(filter(lambda tup: len(tup[1]) > 0, sorted_list))
+
     renumbered_clustering_dict = {}
+    renumbered_map = {}
     with open(f"{output_prefix}.clustering", "w") as f_clustering:
         with open(f"{output_prefix}.summary", "w") as f_summary:
             for sequential_id,(original_cluster_id, cluster_members) in enumerate(sorted_list):
+                renumbered_map[original_cluster_id] = sequential_id
                 for cluster_member in cluster_members:
                     f_clustering.write(f"{sequential_id} {cluster_member}\n")
                 f_summary.write(f"{sequential_id} {len(cluster_members)}\n")
             for unassigned_node_index,unassigned_node in enumerate(unassigned_nodes):
-                f_clustering.write(f"{len(sorted_list) + unassigned_node_index} {unassigned_node}")
-                f_clustering.write(f"{len(sorted_list) + unassigned_node_index} 1")
+                f_clustering.write(f"{len(filtered_list) + unassigned_node_index} {unassigned_node}")
+                f_clustering.write(f"{len(filtered_list) + unassigned_node_index} 1")
+
+    with open(f"{output_prefix}.raw.clustering", "w") as f_raw_clustering:
+        for original_cluster_id,cluster_members in sorted_list:
+            for cluster_member in cluster_members:
+                f_raw_clustering.write(f"{original_cluster_id} {cluster_member}\n")
+
+    with open(f"{output_prefix}.renumbered.mapping", "w") as f_mapping:
+        for original_cluster_id,sequential_id in renumbered_map.items():
+            f_mapping.write(f"{original_cluster_id} {sequential_id}\n")
 
 
 def run_leiden(input_network, resolution, output_prefix):

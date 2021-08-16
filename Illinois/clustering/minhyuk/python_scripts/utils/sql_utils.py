@@ -103,6 +103,19 @@ def get_intracluster_doi_and_indegree(cursor, table_name, cluster_member_arr):
     return [tup for tup in rows]
 
 
+def get_intracluster_top_n_indegree_nodes(cursor, table_name, n, cluster_member_arr):
+    if(len(cluster_member_arr) < 1):
+        return []
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + cluster_member_arr[0] + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + cluster_member + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""SELECT cited_integer_id,COUNT(DISTINCT citing_integer_id) FROM {table_name} WHERE citing_integer_id in {cluster_member_string_representation} and cited_integer_id in {cluster_member_string_representation} GROUP BY cited_integer_id ORDER BY COUNT(DISTINCT citing_integer_id) DESC LIMIT {n}""")
+    rows = cursor.fetchall()
+    return [tup for tup in rows]
+
+
 def get_intracluster_doi_and_outdegree(cursor, table_name, cluster_member_arr):
     if(len(cluster_member_arr) < 1):
         return []
@@ -112,6 +125,30 @@ def get_intracluster_doi_and_outdegree(cursor, table_name, cluster_member_arr):
         cluster_member_string_representation += ("," + "'" + cluster_member + "'")
     cluster_member_string_representation += ")"
     cursor.execute(f"""SELECT citing,COUNT(DISTINCT cited) FROM {table_name} WHERE cited in {cluster_member_string_representation} and citing in {cluster_member_string_representation} GROUP BY citing ORDER BY COUNT(DISTINCT cited) DESC""")
+    rows = cursor.fetchall()
+    return [tup for tup in rows]
+
+
+def get_intracluster_num_degree(cursor, table_name, cluster_member_arr):
+    if(len(cluster_member_arr) < 1):
+        return []
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + cluster_member_arr[0] + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + cluster_member + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""
+    WITH incoming_table AS (
+        SELECT citing_integer_id AS node,COUNT(DISTINCT cited_integer_id) FROM {table_name} WHERE cited_integer_id in {cluster_member_string_representation} and citing_integer_id in {cluster_member_string_representation} GROUP BY citing_integer_id
+    ), outgoing_table AS (
+        SELECT cited_integer_id AS node,COUNT(DISTINCT citing_integer_id) FROM {table_name} WHERE citing_integer_id in {cluster_member_string_representation} and cited_integer_id in {cluster_member_string_representation} GROUP BY cited_integer_id
+    ), union_table AS (
+        SELECT node,count FROM incoming_table
+        UNION ALL
+        SELECT node,count FROM outgoing_table
+    )
+    SELECT node,SUM(count) FROM union_table GROUP BY node
+    """)
     rows = cursor.fetchall()
     return [tup for tup in rows]
 
