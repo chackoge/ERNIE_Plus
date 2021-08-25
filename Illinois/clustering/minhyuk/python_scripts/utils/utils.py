@@ -94,12 +94,22 @@ def write_new_sorted_cluster_dict(to_be_updated_dict, unassigned_nodes, output_p
 
 
 def run_leiden(input_network, resolution, output_prefix):
-    output_raw_cluster_file= f"{output_prefix}_leiden.raw.clustering"
-    output_processed_cluster_file= f"{output_prefix}_leiden.clustering"
+    output_raw_cluster_file = f"{output_prefix}_leiden_{resolution}.raw.clustering"
+    output_processed_cluster_file = f"{output_prefix}_leiden_{resolution}.clustering"
     with open(f"{output_prefix}_leiden_{resolution}.err", "w") as f_err:
         with open(f"{output_prefix}_leiden_{resolution}.out", "w") as f_out:
             subprocess.run(["/usr/bin/time", "-v", "java", "-cp", "/srv/local/shared/external/leiden/networkanalysis-1.1.0/leiden.jar", "nl.cwts.networkanalysis.run.RunNetworkClustering", "-r", str(resolution), "-o", output_raw_cluster_file, input_network], stdout=f_out, stderr=f_err)
     convert_to_cluster_id_format.parse_leiden(output_raw_cluster_file, None, output_processed_cluster_file)
+    return file_to_dict(output_processed_cluster_file)["cluster_to_id_dict"]
+
+
+def run_ikc(compacted_graph_filename, k, b, output_prefix):
+    output_raw_cluster_file = f"{output_prefix}/ikc.raw.clustering"
+    output_processed_cluster_file = f"{output_prefix}/ikc.clustering"
+    with open(f"{output_prefix}/ikc_k_{k}_b_{b}.err", "w") as f_err:
+        with open(f"{output_prefix}/ikc_k_{k}_b_{b}.out", "w") as f_out:
+            subprocess.run(["/usr/bin/time", "-v", "python", "/srv/shared/external/for_eleanor/IKC_MCS_ES.py", "-e", compacted_graph_filename, "-k", str(k), "-b", str(b), "-o", output_raw_cluster_file], stdout=f_out, stderr=f_err)
+    convert_to_cluster_id_format.parse_ikc(output_raw_cluster_file, output_processed_cluster_file)
     return file_to_dict(output_processed_cluster_file)["cluster_to_id_dict"]
 
 

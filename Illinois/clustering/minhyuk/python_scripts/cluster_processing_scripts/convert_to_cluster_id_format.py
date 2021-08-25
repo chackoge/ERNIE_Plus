@@ -15,6 +15,17 @@ def parse_mcl(clustering_output, output_prefix):
                 [current_cluster_number, current_id] = current_line.strip().split(",")
                 fw.write(current_cluster_number + " " + current_id + "\n")
 
+def parse_ikc(clustering_output, output_prefix):
+    '''This function takes in the raw ikc cluster format which is
+    node Id, cluster nbr, and value of k for which cluster nbr was generated (and modularity)
+    and writes a cluster format where each line is "<cluster number>SPACE<node id>"
+    '''
+    with open(output_prefix, "w") as fw:
+        with open(clustering_output, "r") as f:
+            for line_number,current_line in enumerate(f):
+                [node_id, cluster_number, k, modularity] = current_line.strip().split(",")
+                fw.write(cluster_number + " " + node_id + "\n")
+
 def parse_leiden(clustering_output, leiden_mapping, output_prefix):
     ''' This function takes in the leiden cluster format and optionally a leiden integer mapping
     and writes a cluster format where each line is "<cluster number>SPACE<node id>"
