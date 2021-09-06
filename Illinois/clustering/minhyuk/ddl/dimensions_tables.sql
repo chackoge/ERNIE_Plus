@@ -172,3 +172,19 @@ CREATE TABLE IF NOT EXISTS dimensions.blast_sabpq_deleted_edges ( -- these edges
     citing_integer_id INTEGER,
     cited_integer_id INTEGER
 );
+
+CREATE TABLE IF NOT EXISTS dimensions.kalluri_references_marker_nodes (
+    PMID TEXT,
+    title TEXT,
+    authors TEXT,
+    citation TEXT,
+    first_author TEXT,
+    journal_book TEXT,
+    publication_year INTEGER,
+    create_date TEXT,
+    PMCID TEXT,
+    NIHMS_ID TEXT,
+    DOI TEXT,
+    id TEXT,
+    integer_id INTEGER
+);
