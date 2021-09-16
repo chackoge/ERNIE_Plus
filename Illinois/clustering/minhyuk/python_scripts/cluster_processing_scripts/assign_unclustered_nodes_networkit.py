@@ -18,7 +18,7 @@ from python_scripts.utils.sql_utils import get_cursor_client_dict,get_intraclust
 
 def find_best_cluster(current_id, graph, id_to_cluster_dict, cluster_to_id_dict, core_nodes, min_degree, cluster_criterion):
     def collect_degrees(u, v, weight, edge_id):
-        if(str(v) in id_to_cluster_dict):
+        if(str(v) in core_nodes):
             outgoing_cluster_id = id_to_cluster_dict[str(v)][0]
             if(outgoing_cluster_id not in cluster_count_dict):
                 cluster_count_dict[outgoing_cluster_id] = 0
@@ -34,7 +34,7 @@ def find_best_cluster(current_id, graph, id_to_cluster_dict, cluster_to_id_dict,
         graph.forInEdgesOf(int(current_id), collect_degrees)
 
 
-    best_cluster = max(cluster_count_dict, key=lambda key: cluster_count_dict[key] / len(cluster_to_id_dict[key]))
+    best_cluster = max(cluster_count_dict, key=lambda key: cluster_count_dict[key] / len(set(cluster_to_id_dict[key]).intersection(set(core_nodes))))
     best_degree = cluster_count_dict[best_cluster]
     best_proportion = best_degree / len(cluster_to_id_dict[best_cluster])
     if(best_degree < min_degree):
