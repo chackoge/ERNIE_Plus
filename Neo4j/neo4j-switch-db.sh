@@ -60,7 +60,7 @@ if ! command -v cypher-shell >/dev/null; then
 fi
 
 sed --in-place --expression="s/^dbms.default_database=.*/dbms.default_database=${DB_NAME}/" /etc/neo4j/neo4j.conf
-echo "Set the default database = $DB_NAME"
+echo "The default database = \`$DB_NAME\`"
 
 if [[ $RESTART ]]; then
   echo "Restarting Neo4j with a new default database..."
@@ -77,5 +77,5 @@ if [[ $RESTART ]]; then
     sleep 1
   done
 else
-  echo "WARNING: the new default database will not be activated until the service is restarted"
+  echo "NOTE: restart the service to activate the new default database"
 fi
