@@ -18,6 +18,45 @@ The scripts are dependent on
 - `numpy`
 - `psycopg2-binary`
 
+## File Formats
+### Network edgelist
+Some scripts require a tab separated integer node edgelist. The format for the network edge list is shown below. The example below shows 6 edges where the edge direction is from the first column to the second column. Node 1 has an edge to node 2 and node 3 while node 2 has an edge to node 3 only. The nodes 4, 5, and 5 form a cycle.
+```csv
+1   2
+2   3
+1   3
+4   5
+5   6
+6   4
+```
+### config.json
+Some scripts require a config.json file in the directory where the python command was issued. The format for the config.json is shown below.
+```json
+{
+    "dbname": "<psql database name>",
+    "user": "<psql username>",
+    "table_name": "<schema.edgelist_tablename>",
+    "node_table_name": "<schema.nodelist_tablename>"
+}
+```
+### Clustering
+Some scripts require a clustering file of cluster ids to integer node ids. The format for the clustering file is shown below. The example below shows 2 clusters with nodes 1,2, and 3 belonging to cluster 0 and nodes 4,5, and 6 belonging to cluster 1.
+```csv
+0 1
+0 2
+0 3
+1 4
+1 5
+1 6
+```
+### Core nodes
+Some scripts require a core nodes file of integer node ids. The format for the clustering file is shown below. The example below shows 3 core nodes with node ids 1, 4, and 5.
+```csv
+1
+4
+5
+```
+
 
 ## [cluster_processing_scripts](cluster_processing_scripts)
 
