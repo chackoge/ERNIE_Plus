@@ -7,4 +7,4 @@ RETURN degree, count(seq_id) AS nodes_count;
 MATCH (p:pub)-[r:cites]-()
 WITH p.seq_id AS seq_id, count(r) as degree
 RETURN degree, count(seq_id) AS nodes_count;
-
+// 3m:22s
