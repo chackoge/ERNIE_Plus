@@ -1,5 +1,24 @@
 # Python Scripts
 ---
+## How to Run
+Once you clone the git repository,
+```console
+foo@bar:~$ export PYTHON_PATH="<path to the python_scripits folder>:$PYTHON_PATH"
+foo@bar:~$ python -m python_scripts.<folder name>.<script name> --help
+```
+For example,
+```console
+foo@bar:~$ export PYTHON_PATH="/home/foo/git_repos/ERNIE_Plus/Illinois/clustering/minhyuk/python_scripts/:$PYTHON_PATH"
+foo@bar:~$ python -m python_scripts.cluster_processing_scripts.recursive_graclus name> --help
+```
+The scripts are dependent on
+- `click`
+- `matplotlib`
+- `networkit`
+- `numpy`
+- `psycopg2-binary`
+
+
 ## [cluster_processing_scripts](cluster_processing_scripts)
 
 ### [cluster_processing_scripts/assign_unclustered_nodes_networkit.py](cluster_processing_scripts/assign_unclustered_nodes_networkit.py)
