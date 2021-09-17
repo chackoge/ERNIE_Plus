@@ -12,9 +12,9 @@
               <option name="configuration">
                 <map>
                   <entry key="host" value="valhalla.cs.illinois.edu" />
-                  <entry key="password" value="" />
+                  <entry key="password" value="dirk-TAMPA-pollack" />
                   <entry key="port" value="7687" />
-                  <entry key="user" value="neo4j" />
+                  <entry key="user" value="dk" />
                 </map>
               </option>
             </DataSourceV1>
