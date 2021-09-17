@@ -22,7 +22,7 @@ DESCRIPTION
                   Executing user must be able to run `systemctl`: either run the script under `root` or enable this
                   via PolKit.
 
-    DB_name       Neo4j DB name. Use simple ascii characters, numbers, dots and dashes only.
+    DB_name       Neo4j DB nodes_name. Use simple ascii characters, numbers, dots and dashes only.
 
     nodes_file    The filename would be used as a node label for all the nodes in this file.
                   The nodes file CSV headers should conform to Neo4j import requirements + using numeric ids:
@@ -75,40 +75,42 @@ while (($# > 0)); do
   nodes_file="$1"
   echo "Loading nodes from $nodes_file"
 
-  # Remove longest */ prefix
-  name_with_ext=${nodes_file##*/}
+  # Remove the longest `*/` prefix
+  nodes_name_with_ext=${nodes_file##*/}
 
-  if [[ "${name_with_ext}" != *.* ]]; then
-    name_with_ext=${name_with_ext}.
+  if [[ "${nodes_name_with_ext}" != *.* ]]; then
+    nodes_name_with_ext=${nodes_name_with_ext}.
   fi
-  # Remove longest *. prefix
-#   ext=${name_with_ext##*.}
+  # Remove the longest `*.` prefix
+#   ext=${nodes_name_with_ext##*.}
 
-  # Remove shortest .* suffix
-  name=${name_with_ext%.*}
+  # Remove the shortest `.*` suffix
+  nodes_name=${nodes_name_with_ext%.*}
 
   if [[ "${nodes_file}" != */* ]]; then
     nodes_file=./${nodes_file}
   fi
-  # Remove shortest /* suffix
-  dir=${nodes_file%/*}
+  # Remove the shortest /* suffix
+  nodes_dir=${nodes_file%/*}
 
-  file_opts="$file_opts --nodes=${name}=$1"
-  for edges_file in "$dir/$name"-*.csv; do
+  file_opts="$file_opts --nodes=${nodes_name}=$1"
+  for edges_file in "$nodes_dir/$nodes_name"-*.csv; do
     echo "Loading edges from $edges_file"
-    # Remove longest */ prefix
-    name_with_ext=${edges_file##*/}
+    # Remove the longest */ prefix
+    edges_name_with_ext=${edges_file##*/}
 
-    if [[ "${name_with_ext}" != *.* ]]; then
-      name_with_ext=${name_with_ext}.
+    if [[ "${edges_name_with_ext}" != *.* ]]; then
+      edges_name_with_ext=${edges_name_with_ext}.
     fi
-    # Remove longest *. prefix
-#    ext=${name_with_ext##*.}
+    # Remove the longest `*.` prefix
+#    ext=${edges_name_with_ext##*.}
 
-    # Remove shortest .* suffix
-    name=${name_with_ext%.*}
+    # Remove the shortest `.*` suffix
+    edges_name=${edges_name_with_ext%.*}
 
-    file_opts="$file_opts --relationships=${name}=${edges_file}"
+    # Remove the longest `$nodes_name-` prefix
+    label=${edges_name##$nodes_name-}
+    file_opts="$file_opts --relationships=${label}=${edges_file}"
   done
 
   shift
