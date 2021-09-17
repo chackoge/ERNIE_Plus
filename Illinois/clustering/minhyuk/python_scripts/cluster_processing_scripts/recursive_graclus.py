@@ -126,7 +126,8 @@ def get_best_graclus(cursor, table_name, graph, compacted_graph_filename, graclu
     if(validity_and_min_k["is_valid"]):
         best_cluster_to_id_dict = cluster_to_id_dict
         for invalid_cluster_id in validity_and_min_k["invalid_cluster_id_arr"]:
-            invalid_nodes.extend(best_cluster_to_id_dict[invalid_cluster_id])
+            remapped_nodes = [inverse_node_map[int(node_id)] for node_id in best_cluster_to_id_dict[invalid_cluster_id]]
+            invalid_nodes.extend(remapped_nodes)
             best_cluster_to_id_dict.pop(invalid_cluster_id)
         best_k = validity_and_min_k["min_k"]
         best_num_subclusters = validity_and_min_k["num_subclusters"]
