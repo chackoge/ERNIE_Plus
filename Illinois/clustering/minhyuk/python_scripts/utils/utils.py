@@ -132,12 +132,12 @@ def run_leiden(input_network, resolution, output_prefix):
     return file_to_dict(output_processed_cluster_file)["cluster_to_id_dict"]
 
 
-def run_graclus(input_network, num_clusters, output_prefix):
+def run_graclus(input_network, num_clusters, local_search, output_prefix):
     output_raw_cluster_file = f"{output_prefix}_graclus.raw.clustering"
     output_processed_cluster_file = f"{output_prefix}_graclus.clustering"
     with open(f"{output_prefix}_graclus.err", "w") as f_err:
         with open(f"{output_prefix}_graclus.out", "w") as f_out:
-            subprocess.run(["/usr/bin/time", "-v", "/srv/shared/external/graclus1.2/graclus", "-l", "2000", input_network, str(num_clusters)], stdout=f_out, stderr=f_err)
+            subprocess.run(["/usr/bin/time", "-v", "/srv/shared/external/graclus1.2/graclus", "-l", str(local_search), input_network, str(num_clusters)], stdout=f_out, stderr=f_err)
     output_file_base_name = Path(input_network).name
     subprocess.run(["mv", f"./{output_file_base_name}.part.{num_clusters}", output_raw_cluster_file])
     convert_to_cluster_id_format.parse_graclus(output_raw_cluster_file, output_processed_cluster_file)
