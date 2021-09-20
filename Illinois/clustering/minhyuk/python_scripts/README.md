@@ -60,7 +60,7 @@ Some scripts require a core nodes file of integer node ids. The format for the c
 
 ## [cluster_processing_scripts](cluster_processing_scripts)
 
-### [cluster_processing_scripts/assign_unclustered_nodes_networkit.py](cluster_processing_scripts/assign_unclustered_nodes_networkit.py)
+### [cluster_processing_scripts/assign_unclustered_nodes.py](cluster_processing_scripts/assign_unclustered_nodes.py)
 Assigns all unclustered nodes based on the given criterion. For a given node unclustered node, the cluster assignment goes to whichever cluster has the most core node to unclustered node connection relative to the total number of nodes in that cluster. The connection can be one of in-degree, out-degree, or the sum of in and out degrees (total degree).
 
 In other words, for each node
