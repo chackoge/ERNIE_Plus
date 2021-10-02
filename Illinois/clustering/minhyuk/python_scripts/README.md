@@ -60,10 +60,10 @@ Some scripts require a core nodes file of integer node ids. The format for the c
 
 ## [cluster_processing_scripts](cluster_processing_scripts)
 
-### [cluster_processing_scripts/assign_unclustered_nodes.py](cluster_processing_scripts/merge_clusterings.py)
+### [cluster_processing_scripts/merge_clusterings.py](cluster_processing_scripts/merge_clusterings.py)
 This script merges all the clusterings provided in the input folder and writes one merged clustering output
 
-### [cluster_processing_scripts/assign_unclustered_nodes.py](cluster_processing_scripts/generate_save_for_later.py)
+### [cluster_processing_scripts/generate_save_for_later.py](cluster_processing_scripts/generate_save_for_later.py)
 This script generates the save\_for\_later(j) clusters given the clustering from the previous iteration and the clustering from the current iteration. The previous iteration and current iteration is expected to contain only kmp-valid clusters, and the current iteration is the set of kmp-valid clusters, or the core components, of the result of running graclus on the previous iteration clustering.
 
 The save\_for\_later(j) clustering then contains all the clusters that were not decomposed into kmp-valid clusters from the previous iteration to the current iteration.
