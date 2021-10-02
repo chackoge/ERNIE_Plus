@@ -6,8 +6,9 @@ setwd('~/Desktop/Exosome Special Edition/')
 library(data.table); library(stringi)
 file_list <- list.files(pattern="*.csv")
 # get rid of unwanted file from pattern search (this is a clunky hack)
-tfl <- file_list[!file_list=="full_marker_node_set.csv"]; rm(file_list)
-fmns <- fread('full_marker_node_set.csv',header=T)
+# tfl <- file_list[!file_list=="full_marker_node_set.csv"]; rm(file_list)
+tfl <- file_list
+fmns <- fread('./Archive/full_marker_node_set.csv',header=T)
 
 # Create empty list and load it with dataframes listed in file_list
 veclist <- list()
@@ -30,6 +31,5 @@ fmns[is.na(fmns)] <- 0
 # calculate rowSums for columns 3-14
 rsnames <- colnames(fmns)[3:14]
 fmns[,rs:=rowSums(.SD), .SDcols = rsnames]
-fmns[,V1:=NULL]
 colnames(fmns)[1] <- "doi"
-fwrite(fmns,file='marker_map_grid.csv')
+fwrite(fmns,file='./Archive/marker_map_grid.csv')
