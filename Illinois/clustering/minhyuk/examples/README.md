@@ -15,7 +15,7 @@ As shown in the diagram, network 1 is simply a line with no core substructures. 
 
 *This is a graphical representation of `no_core/network_1.tsv`, which is an edgelist that represents the network*
 
-The results of running kmp-parsing code for this clustering and network is saved in `no_core/parsing_1.out`
+The log file of running kmp-parsing code for this clustering and network is saved at[no\_core/parsing\_1.out](no_core/parsing_1.out)
 
 ### [no\_core/2.clustering](no_core/2.clustering) and [no\_core/network\_2.tsv](no_core/network_2.tsv)
 As shown in the diagram, network 2 consists of a single 4-clique (nodes 0, 1, 2, and 3) with two nodes connected to the clique in a chain. This network does not contain any core substructures at k=5 since kmp-validity at k=5 requires that every node in the core set of nodes be connected to at least five other core nodes. Therefore, running kmp-parsing code on this input will also result in zero clusters returned.
@@ -24,7 +24,7 @@ As shown in the diagram, network 2 consists of a single 4-clique (nodes 0, 1, 2,
 
 *This is a graphical representation of `no_core/network_2.tsv`, which is an edgelist that represents the network*
 
-The results of running kmp-parsing code for this clustering and network is saved in `no_core/parsing_2.out`
+The log file of running kmp-parsing code for this clustering and network is saved at[no\_core/parsing\_2.out](no_core/parsing_2.out)
 
 ## [one\_core](one_core)
 ### [no\_core/3.clustering](no_core/3.clustering) and [no\_core/network\_3.tsv](no_core/network_3.tsv)
@@ -34,7 +34,7 @@ As shown in the diagram, network 3 consists of a single 6-clique (nodes 0, 1, 2,
 
 *This is a graphical representation of `one_core/network_3.tsv`, which is an edgelist that represents the network*
 
-The results of running kmp-parsing code for this clustering and network is saved in `one_core/parsing_3.out`
+The log file of running kmp-parsing code for this clustering and network is saved at [one\_core/parsing\_3.out](one_core/parsing_3.out). The actual clustering output containing the core nodes and its non-core nodes is saved at [one\_core/3\_parsed.clustering](one_core/3_parsed.clustering).
 
 ## [two\_cores](two_cores)
 ### [no\_core/4.clustering](no_core/4.clustering) and [no\_core/network\_4.tsv](no_core/network_4.tsv)
@@ -44,4 +44,4 @@ As shown in the diagram, network 4 consists of two 6-cliques with four additiona
 
 *This is a graphical representation of `one_core/network_4.tsv`, which is an edgelist that represents the network*
 
-The results of running kmp-parsing code for this clustering and network is saved in `one_core/parsing_4.out`
+The log file of running kmp-parsing code for this clustering and network is saved at [two\_cores/parsing\_4.out](two_cores/parsing_4.out). The actual clustering output containing the core nodes and its non-core nodes is saved at [two\_cores/4\_parsed.clustering](two_cores/4_parsed.clustering).
