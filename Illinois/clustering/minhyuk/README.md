@@ -3,6 +3,9 @@
 ## python\_scripts
 This folder contains python scripts
 
+## examples
+This folder contains some example networks and clusterings and their kmp-parsed equivalents
+
 ## ddl
 This folder contains the SQL table definitions
 
