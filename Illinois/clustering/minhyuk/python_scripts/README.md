@@ -86,7 +86,7 @@ This script will take a given network and run graclus recursively as follows, wh
 First it will run graclus on the whole network to determine the initial clusters if initial clusters is not provided.
 We will keep these clusters in a stack.
 Until the stack is empty, pop a cluster out and do the following.
-1. Check if the cluster is valid, where cluster validitiy is defined below.
+1. Check if the cluster is valid, where cluster validity is defined below.
 2. If the cluster is valid, run graclus on the subgraph restricted to this cluster. There are three cases to consider.
     - 2a. If graclus fails to decompose the cluster, then do nothing and keep this cluster
     - 2b. If graclus fails to recover at least one cluster that is valid, then do nothing and keep this cluster
