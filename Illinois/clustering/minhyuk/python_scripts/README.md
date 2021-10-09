@@ -96,7 +96,7 @@ Until the stack is empty, pop a cluster out and do the following.
 #### Cluster Validity
 A cluster is valid if the inequality from equation 2 of Fortunato and Barthelemy(2007) holds and if every node in the cluster has intracluster degree of at least k.
 
-In plain english, a cluster is valid if the difference between the number of edges in a cluster divided by the total number of edges in the graph and the squared value of the quotient of the sum of the degrees of the nodes in a cluster divided by twice the total number of eges in the graph is greater than zero.
+In plain english, Fortunato and Barthelemy(2007) definiten implies that a cluster is valid if the difference between the number of edges in a cluster divided by the total number of edges in the graph and the squared value of the quotient of the sum of the degrees of the nodes in a cluster divided by twice the total number of eges in the graph is greater than zero.
 
 Fortunato, Santo, and Marc Barthelemy. "Resolution limit in community detection." Proceedings of the national academy of sciences 104.1 (2007): 36-41.
 
