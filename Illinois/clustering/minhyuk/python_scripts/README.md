@@ -94,7 +94,7 @@ Until the stack is empty, pop a cluster out and do the following.
 3. If the cluster is invalid, then we throw out this cluster and do not push anything onto the stack in this iteration. This can happen when the initial clustering provided has invalid clusters.
 
 #### Cluster Validity
-A cluster is valid if the inequality from equation 2 of Fortunato and Barthelemy(2007) holds.
+A cluster is valid if the inequality from equation 2 of Fortunato and Barthelemy(2007) holds and if every node in the cluster has intracluster degree of at least k.
 
 In plain english, a cluster is valid if the difference between the number of edges in a cluster divided by the total number of edges in the graph and the squared value of the quotient of the sum of the degrees of the nodes in a cluster divided by twice the total number of eges in the graph is greater than zero.
 
