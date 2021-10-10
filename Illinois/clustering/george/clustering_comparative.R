@@ -4,7 +4,7 @@
 # 1218 marker nodes on the clusters to identify clusters of interest
 # In other words, clusters in which markers are concentrated.
 
-library(data.table)
+library(data.table);library(ggplot2)
 
 ## read in cluster data
 #vanilla Leiden clustering is in /srv/local/shared/external/minhyuk2/exosome_1900_2010_sabpq/leiden
@@ -51,13 +51,13 @@ total_nodes <- dim(ikc5)[1]
 
 # Process vLeiden_05 (vanilla Leiden at resolution factor 0.05 and CPM)
 
-print("***vLeiden 05***")
+print("***vvLeiden 05***")
 print(paste("Num non-singleton clusters",dim(vl_05_counts[N>1])[1]))
 print(paste("vLeiden Node Coverage:", round(100*vl_05_counts[N>1][,sum(N)]/total_nodes,2),'%'))
 print("vl05 cluster size summary:")
 # generate vector of statistics v is for vector
 vvLeiden_05 <- vl_05_counts[N>1][,summary(N)]
-print(vLeiden_05)
+print(vvLeiden_05)
 vvLeiden_05 <- c(unname(vvLeiden_05),dim(vl_05_counts[N>1])[1],round(100*vl_05_counts[N>1][,sum(N)]/total_nodes,2))
 
 
@@ -108,11 +108,11 @@ markers <- fread('/srv/local/shared/external/for_eleanor/gc_exosome/marker_nodes
 
 vl_05_counts[,clustering:='vleiden_5']
 ikc5_counts[,clustering:='ikc5']
-kmp_leidenl_r05_k5_p2_counts[,clustering:='leiden_kmp_5_2']
+kmp_leiden_r05_k5_p2_counts[,clustering:='leiden_kmp_5_2']
 ikc5_aug_kmp_counts[,clustering:='ikc5_aug']
 ikc5_rg_aug_kmp_counts[,clustering:='ikc5_rg_aug']
 
-all <- rbind(vl_05_counts,ikc5_counts,lkmp_r05_k5_p2_counts,ikc5_aug_kmp_counts,ikc5_rg_aug_kmp_counts)
+all <- rbind(vl_05_counts,ikc5_counts,kmp_leiden_r05_k5_p2_counts,ikc5_aug_kmp_counts,ikc5_rg_aug_kmp_counts)
 pdf('ikc5_boxplots.pdf')
 qplot(as.factor(clustering),log10(N),data=all[N>1],geom='boxplot',xlab='clustering',ylab='log10 cluster size')  + theme_bw()
 dev.off()
