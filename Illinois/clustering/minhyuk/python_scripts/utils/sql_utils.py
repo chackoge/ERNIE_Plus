@@ -22,6 +22,7 @@ def get_cursor_client_dict(config_file):
         "connection": psql_connection,
         "cursor": cursor,
         "table_name": config["table_name"],
+        "node_table_name": config["node_table_name"],
     }
 
 
@@ -199,6 +200,25 @@ def get_all_id_and_outdegree(cursor, table_name):
     cursor.execute(f"""SELECT citing_id,COUNT(DISTINCT cited_id) FROM {table_name} GROUP BY citing_id ORDER BY COUNT(DISTINCT cited_id) DESC""")
     rows = cursor.fetchall()
     return [tup for tup in rows]
+
+
+def get_all_id_and_inoutdegree_node_table(cursor, min_degree, node_table_name):
+    cursor.execute(f"""SELECT integer_id FROM {node_table_name} WHERE in_degree + out_degree >= {min_degree}""")
+    rows = cursor.fetchall()
+    return [tup[0] for tup in rows]
+
+
+def get_all_id_and_indegree_node_table(cursor, min_degree, node_table_name):
+    cursor.execute(f"""SELECT integer_id FROM {node_table_name} WHERE in_degree >= {min_degree}""")
+    rows = cursor.fetchall()
+    return [tup[0] for tup in rows]
+
+
+def get_all_id_and_outdegree_node_table(cursor, min_degree, node_table_name):
+    cursor.execute(f"""SELECT integer_id FROM {node_table_name} WHERE out_degree >= {min_degree}""")
+    rows = cursor.fetchall()
+    return [tup[0] for tup in rows]
+
 
 
 def get_high_high_integer_edges(cursor, table_name, high_indegree_threshold):

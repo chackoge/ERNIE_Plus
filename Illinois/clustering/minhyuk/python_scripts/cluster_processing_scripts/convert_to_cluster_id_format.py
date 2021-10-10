@@ -72,7 +72,7 @@ def parse_leiden(clustering_output, leiden_mapping, output_prefix):
 @click.command()
 @click.option("--clustering-output", required=True, type=click.Path(exists=True), help="Clustering output to be converted")
 @click.option("--leiden-mapping", required=False, type=click.Path(exists=True), help="Leiden integer mapping")
-@click.option("--cluster-method", required=True, type=click.Choice(["mcl", "leiden", "ikc"]), help="Clustering method used")
+@click.option("--cluster-method", required=True, type=click.Choice(["mcl", "leiden", "ikc", "graclus"]), help="Clustering method used")
 @click.option("--output-prefix", required=True, type=click.Path(), help="Output file prefix")
 def convert_to_cluster_id_format(clustering_output, leiden_mapping, cluster_method, output_prefix):
     '''This is the main function that takes in either mcl or leiden formatted clustering output
@@ -84,6 +84,8 @@ def convert_to_cluster_id_format(clustering_output, leiden_mapping, cluster_meth
         parse_leiden(clustering_output, leiden_mapping, output_prefix)
     elif(cluster_method == "ikc"):
         parse_ikc(clustering_output, output_prefix)
+    elif(cluster_method == "graclus"):
+        parse_graclus(clustering_output, output_prefix)
 
 
 if __name__ == "__main__":

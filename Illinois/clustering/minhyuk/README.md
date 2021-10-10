@@ -1,7 +1,10 @@
 # Directories and Their Contents
 ---
-## cluster\_processing\_scripts
-This folder contains code related to processing the output of a clustering method such as incremental cluster building
+## python\_scripts
+This folder contains python scripts
+
+## examples
+This folder contains some example networks and clusterings and their kmp-parsed equivalents
 
 ## ddl
 This folder contains the SQL table definitions

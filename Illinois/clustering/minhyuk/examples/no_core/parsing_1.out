@@ -1,0 +1,13 @@
+1 clusters read
+1 non-singleton clusters read
+orig nodes: 6
+5
+1
+nodes: 5
+edges: 4
+nbr componenets 1
+edges checked 4
+nbr componenets after removeal 1
+edges: 4 removed: 0
+nbr core componenets 1
+old nbr clusters: 1 new: 0
