@@ -102,8 +102,6 @@ df <- data.frame(rbind(vvLeiden_05,vikc5,vkmpLeiden_05,vikc5_aug,vikc5_rg_aug))
 colnames(df) <- c('min','Q1','median','mean','Q3','max','cluster_count','node_coverage_perc')
 print(df)
 
-markers <- fread('/srv/local/shared/external/for_eleanor/gc_exosome/marker_nodes_integer_pub.csv')
-
 # tag each counts df before rbinding them
 
 vl_05_counts[,clustering:='vleiden_5']
@@ -115,4 +113,45 @@ ikc5_rg_aug_kmp_counts[,clustering:='ikc5_rg_aug']
 all <- rbind(vl_05_counts,ikc5_counts,kmp_leiden_r05_k5_p2_counts,ikc5_aug_kmp_counts,ikc5_rg_aug_kmp_counts)
 pdf('ikc5_boxplots.pdf')
 qplot(as.factor(clustering),log10(N),data=all[N>1],geom='boxplot',xlab='clustering',ylab='log10 cluster size')  + theme_bw()
+dev.off()
+
+## Overlay markers
+markers <- fread('/srv/local/shared/external/for_eleanor/gc_exosome/marker_nodes_integer_pub.csv')
+
+# Stage 1 merge markers with clusterings (inner join) to get a <clustering>_marker_counts
+# Stage II merge marker_counts file with node_size file.
+
+# vl_05 data
+# note that vanilla Leiden data (from where I draw it has V1 and V2 reversed compared to the others)
+vl_05_markers <- merge(markers,vl_05,by.x='integer_id',by.y='V2')[,.(integer_id,cluster_no=V1)]
+vl_05_markers_counts <- vl_05_markers[,.(marker_count=.N),by='cluster_no']
+vl_05_markers_nodes_counts <- merge(vl_05_markers_counts,vl_05_counts,by.x='cluster_no',by.y='V2')
+
+# ikc5_data
+ikc5_markers <- merge(markers,ikc5,by.x='integer_id',by.y='V1')[,.(integer_id,cluster_no=V2)]
+ikc5_markers_counts <- ikc5_markers[,.(marker_count=.N),by='cluster_no']
+ikc5_markers_nodes_counts <- merge(ikc5_markers_counts,ikc5_counts,by.x='cluster_no',by.y='V2')
+
+# kmp processed Leiden r=0.05, k=5, p=2
+k5mp2leidenr05_markers <- merge(markers,lkmp_r05_k5_p2,by.x='integer_id',by.y='V1')[,.(integer_id,cluster_no=V2)]
+k5mp2leidenr05_markers_counts <- k5mp2leidenr05_markers[,.N,by='cluster_no']
+k5mp2leidenr05_markers_nodes_counts <- merge(k5mp2leidenr05_markers_counts,kmp_leiden_r05_k5_p2_counts,by.x='cluster_no',by.y='V2')
+# clean up column names
+colnames(k5mp2leidenr05_markers_nodes_counts) <- colnames(ikc5_markers_nodes_counts)
+
+# ikc5 + aug data
+ikc5_aug_markers <- merge(markers,ikc5_aug_kmp,by.x='integer_id',by.y='V1')[,.(integer_id,cluster_no=V2)]
+ikc5_aug_markers_counts <- ikc5_aug_markers[,.N,by='cluster_no']
+ikc5_aug_markers_nodes_counts <- merge(ikc5_aug_markers_counts,ikc5_aug_kmp_counts,by.x='cluster_no',by.y='V2')
+colnames(ikc5_aug_markers_nodes_counts) <- colnames(ikc5_markers_nodes_counts)
+
+# ikc5+rg+aug data
+ikc5_rg_aug_markers <- merge(markers,ikc5_rg_aug_kmp,by.x='integer_id',by.y='V1')[,.(integer_id,cluster_no=V2)]
+ikc5_rg_aug_markers_counts <- ikc5_rg_aug_markers[,.N,by='cluster_no']
+ikc5_rg_aug_markers_nodes_counts <- merge(ikc5_rg_aug_markers_counts,ikc5_rg_aug_kmp_counts,by.x='cluster_no',by.y='V2')
+colnames(ikc5_rg_aug_markers_nodes_counts) <- colnames(ikc5_markers_nodes_counts)
+
+all_markers_nodes <-  rbind(vl_05_markers_nodes_counts,ikc5_markers_nodes_counts,k5mp2leidenr05_markers_nodes_counts,ikc5_aug_markers_nodes_counts,ikc5_rg_aug_markers_nodes_counts)
+pdf('marker_nodes_counts.pdf')
+qplot(log10(N),log10(marker_count),data=all_markers_nodes,xlab="log10(cluster size)",ylab="log10(marker node count)",color=clustering,facets=clustering~.) + theme_bw()
 dev.off()
