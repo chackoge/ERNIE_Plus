@@ -188,3 +188,57 @@ CREATE TABLE IF NOT EXISTS dimensions.kalluri_references_marker_nodes (
     id TEXT,
     integer_id INTEGER
 );
+
+CREATE TABLE IF NOT EXISTS dimensions.p_biology_sabpq_edgelist (
+  citing TEXT,
+  cited TEXT,
+  citing_id TEXT NOT NULL,
+  cited_id TEXT NOT NULL,
+  citing_year INTEGER,
+  cited_year INTEGER,
+  citing_integer_id INTEGER,
+  cited_integer_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS dimensions.p_biology_sabpq_deleted_edges ( -- these edges were deleted since they created loops (e.g. 3->4 and 4->3)
+    citing TEXT,
+    cited TEXT,
+    citing_id TEXT NOT NULL,
+    cited_id TEXT NOT NULL,
+    citing_year INTEGER,
+    cited_year INTEGER,
+    citing_integer_id INTEGER,
+    cited_integer_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS dimensions.p_biology_sabpq_nodelist (
+    node_id TEXT
+    -- integer_id INTEGER -- this is a series starting at 0
+);
+
+CREATE TABLE IF NOT EXISTS dimensions.p_ecology_sabpq_edgelist (
+  citing TEXT,
+  cited TEXT,
+  citing_id TEXT NOT NULL,
+  cited_id TEXT NOT NULL,
+  citing_year INTEGER,
+  cited_year INTEGER,
+  citing_integer_id INTEGER,
+  cited_integer_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS dimensions.p_ecology_sabpq_deleted_edges ( -- these edges were deleted since they created loops (e.g. 3->4 and 4->3)
+    citing TEXT,
+    cited TEXT,
+    citing_id TEXT NOT NULL,
+    cited_id TEXT NOT NULL,
+    citing_year INTEGER,
+    cited_year INTEGER,
+    citing_integer_id INTEGER,
+    cited_integer_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS dimensions.p_ecology_sabpq_nodelist (
+    node_id TEXT
+    -- integer_id INTEGER -- this is a series starting at 0
+);
