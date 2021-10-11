@@ -86,7 +86,7 @@ This script will take a given network and run graclus recursively as follows, wh
 First it will run graclus on the whole network to determine the initial clusters if initial clusters is not provided.
 We will keep these clusters in a stack.
 Until the stack is empty, pop a cluster out and do the following.
-1. Check if the cluster is valid, where cluster validitiy is defined below.
+1. Check if the cluster is valid, where cluster validity is defined below.
 2. If the cluster is valid, run graclus on the subgraph restricted to this cluster. There are three cases to consider.
     - 2a. If graclus fails to decompose the cluster, then do nothing and keep this cluster
     - 2b. If graclus fails to recover at least one cluster that is valid, then do nothing and keep this cluster
@@ -94,9 +94,9 @@ Until the stack is empty, pop a cluster out and do the following.
 3. If the cluster is invalid, then we throw out this cluster and do not push anything onto the stack in this iteration. This can happen when the initial clustering provided has invalid clusters.
 
 #### Cluster Validity
-A cluster is valid if the inequality from equation 2 of Fortunato and Barthelemy(2007) holds.
+A cluster is valid if the inequality from equation 2 of Fortunato and Barthelemy(2007) holds and if every node in the cluster has intracluster degree of at least k.
 
-In plain english, a cluster is valid if the difference between the number of edges in a cluster divided by the total number of edges in the graph and the squared value of the quotient of the sum of the degrees of the nodes in a cluster divided by twice the total number of eges in the graph is greater than zero.
+In plain english, Fortunato and Barthelemy(2007) definition implies that a cluster is valid if the difference between the number of edges in a cluster divided by the total number of edges in the graph and the squared value of the quotient of the sum of the degrees of the nodes in a cluster divided by twice the total number of eges in the graph is greater than zero.
 
 Fortunato, Santo, and Marc Barthelemy. "Resolution limit in community detection." Proceedings of the national academy of sciences 104.1 (2007): 36-41.
 
