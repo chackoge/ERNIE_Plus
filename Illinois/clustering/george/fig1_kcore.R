@@ -18,5 +18,6 @@ x[,nc:=round(100*sum(V2)/(x[V1==1][,sum(V2)]),2),by="V1"]
 
 pdf('fig1_kcore.pdf')
 qplot(as.factor(V1),nc,data=x,size=V2) + theme_bw() + 
-geom_jitter(width=0.02) + labs(x=("K"),y=("% node_coverage")) + theme(legend.position = "none")
+geom_jitter(width=0.02) + labs(x=("K"),y=("% node_coverage")) + 
+theme(legend.position = "none") + theme(text = element_text(size = 20)) 
 dev.off()
