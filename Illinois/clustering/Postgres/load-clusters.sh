@@ -67,6 +67,7 @@ while (($# > 0)); do
   fi
 
   data_file=$1
+  shift
 
   # Remove the longest `*/` prefix
   data_file_name_with_ext=${data_file##*/}
@@ -83,6 +84,4 @@ while (($# > 0)); do
   psql -f "${SCRIPT_DIR}/stage-clusters-$CLUSTER_TYPE.sql" -v schema=clusters -v "data_file=$data_file"
   psql -f "${SCRIPT_DIR}/load-clusters.sql" -v schema=clusters -v "clustering_version=${clustering_version}"
   echo -e "Loaded.\n"
-
-  shift
 done
