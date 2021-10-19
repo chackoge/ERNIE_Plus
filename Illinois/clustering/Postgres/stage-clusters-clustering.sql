@@ -10,3 +10,4 @@ SET TIMEZONE = 'US/Eastern';
 -- FORMAT text
 \set ECHO all
 COPY stg_clusters(cluster_no, node_seq_id) FROM :'data_file' (DELIMITER ' ');
+-- \copy stg_clusters(cluster_no, node_seq_id) from :data_file (DELIMITER ' ')

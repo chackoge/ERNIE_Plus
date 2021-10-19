@@ -55,6 +55,8 @@ readonly SCRIPT_DIR=${0%/*}
 #fi
 #cd "${WORK_DIR}"
 
+trap "echo -e 'Done.\a'" EXIT
+
 # `${USER:-${USERNAME:-${LOGNAME}}}` might be not available inside Docker containers
 echo -e "\n# load-clusters.sh: running under $(whoami)@${HOSTNAME} in ${PWD} #\n"
 
@@ -86,5 +88,3 @@ while (($# > 0)); do
   psql -f "${SCRIPT_DIR}/load-clusters.sql" -v schema=clusters -v "clustering_version=${clustering_version}"
   echo -e "Loaded.\n"
 done
-
-echo -e 'All done.\a'
