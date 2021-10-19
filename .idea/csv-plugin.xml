@@ -10,6 +10,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/Analysis/lifeskills/botvin_wos_search.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/P2_studies/sb_plus/zhao_suppl_1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
