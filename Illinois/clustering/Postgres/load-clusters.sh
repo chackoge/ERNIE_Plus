@@ -30,7 +30,7 @@ EXAMPLES
 
         $ load-clusters.sh ikc ../ikc/testing_k5_b0.csv
 
-v1.1                                   October 2021                                   Created by Dmitriy "DK" Korobskiy
+v1.2                                   October 2021                                   Created by Dmitriy "DK" Korobskiy
 HEREDOC
   exit 1
 }
@@ -86,3 +86,5 @@ while (($# > 0)); do
   psql -f "${SCRIPT_DIR}/load-clusters.sql" -v schema=clusters -v "clustering_version=${clustering_version}"
   echo -e "Loaded.\n"
 done
+
+echo -e 'All done.\a'
