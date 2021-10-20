@@ -13,8 +13,8 @@ INSERT INTO exosome_1900_2010_clusters(clustering_version, cluster_no, min_k, cl
 SELECT DISTINCT :'clustering_version', cluster_no, min_k, cluster_modularity
   FROM stg_clusters;
 
-INSERT INTO exosome_1900_2010_cluster_nodes(clustering_version, cluster_no, node_seq_id)
-SELECT :'clustering_version', cluster_no, node_seq_id
+INSERT INTO exosome_1900_2010_cluster_nodes(clustering_version, cluster_no, node_seq_id, is_core)
+SELECT :'clustering_version', cluster_no, node_seq_id, (core_classifier = 'Core')
   FROM stg_clusters;
 
 TRUNCATE stg_clusters;

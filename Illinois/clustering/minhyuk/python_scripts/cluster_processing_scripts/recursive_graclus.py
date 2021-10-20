@@ -42,6 +42,10 @@ def get_cluster_info_dict(cursor, table_name, graph, cluster_member_arr, inverse
         d_s = 0
         for node in int_cluster_member_arr:
             d_s += graph.degree(node)
+        # since it is inefficient to compute the subgraph at this small of a size,
+        # we check the intracluster neighbors by iterating every neighbor of
+        # each node in the cluster and checking if the adjacent neighbor is also
+        # in the cluster
         for cluster_member in int_cluster_member_arr:
             current_k = 0
             for neighbor in graph.iterNeighbors(cluster_member):
@@ -59,10 +63,13 @@ def get_cluster_info_dict(cursor, table_name, graph, cluster_member_arr, inverse
             int_cluster_member_arr = [inverse_node_map[int(node_id)] for node_id in cluster_member_arr]
         else:
             int_cluster_member_arr = [int(node_id) for node_id in cluster_member_arr]
+        # this is subgraph containing only those nodes within the cluster
         subgraph = nk.graphtools.subgraphFromNodes(graph, int_cluster_member_arr)
         L = graph.numberOfEdges()
         l_s = subgraph.numberOfEdges()
         d_s = 0
+        # the following forloop calculates the d_s term as well as check
+        # each node for k adjacency within cluster by checking the subgraph directly
         for node in int_cluster_member_arr:
             d_s += graph.degree(node)
             current_k = subgraph.degree(node)
@@ -121,10 +128,16 @@ def get_best_graclus(cursor, table_name, graph, compacted_graph_filename, graclu
     best_num_subclusters = 0
     num_clusters = 2
     invalid_nodes = []
+    # after running graclus, we can run the get validity function to check
+    # whether there was at least one cluster that was valid
     cluster_to_id_dict = run_graclus(compacted_graph_filename, num_clusters, local_search, graclus_output_prefix)
     validity_and_min_k = get_validity_and_min_k(cursor, table_name, graph, cluster_to_id_dict, inverse_node_map, k, m)
+    # if we enter the if condition, then that means
+    # at least one subcluster was valid
     if(validity_and_min_k["is_valid"]):
         best_cluster_to_id_dict = cluster_to_id_dict
+        # here we remove all invalid cluster ids so that we can only return
+        # valid clusters
         for invalid_cluster_id in validity_and_min_k["invalid_cluster_id_arr"]:
             remapped_nodes = [inverse_node_map[int(node_id)] for node_id in best_cluster_to_id_dict[invalid_cluster_id]]
             invalid_nodes.extend(remapped_nodes)
@@ -168,6 +181,8 @@ def run_graclus_on_cluster(cursor, table_name, graph, cluster_to_id_dict, cluste
     min_k = best_graclus_result["min_k"]
     num_invalid_cluster_ids = best_graclus_result["num_invalid_cluster_ids"]
     invalid_nodes = best_graclus_result["invalid_nodes"]
+    # entering this if condition implies that we were able to find at least one valid subcluster
+    # this is why the cluster_id_to_split cluster is removed from the clustering
     if(compacted_graph_clusters is not None):
         new_cluster_ids = []
         new_cluster_index = max(cluster_to_id_dict.keys()) + 1

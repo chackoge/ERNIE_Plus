@@ -8,20 +8,21 @@ data_file_name
 
 SYNOPSIS
 
-    load-clusters.sh cluster_type [-v clustering_version_opt] data_file [...]
+    load-clusters.sh clustering_format [-v data_file_clustering_version] data_file [[-v d_f_c_v] data_file] [...]
     load-clusters.sh -h: display this help
 
 DESCRIPTION
 
-    Load cluster data into Postgres.
+    Load cluster data of one of supported formats into Postgres.
 
     The following options are available:
 
-    cluster_type        one of:
-                          * ikc: (node_seq_id, cluster_no, min_k, cluster_modularity), CSV
-                          * clustering: (cluster_no, node_id), space-separated
+    clustering_format             one of supported data file formats:
+                                    * `ikc`: (node_seq_id, cluster_no, min_k, cluster_modularity), CSV
+                                    * `clustering`: (cluster_no, node_seq_id), space-separated text
+                                    * `core_analysis`: (node_seq_id, cluster_no, core_classifier), CSV
 
-    clustering_version_opt  optional, defaults to data_file name without extension
+    data_file_clustering_version  optional, defaults to `data_file`'s name without extension
 
 EXAMPLES
 
@@ -29,7 +30,7 @@ EXAMPLES
 
         $ load-clusters.sh ikc ../ikc/testing_k5_b0.csv
 
-v1.0                                   October 2021                                   Created by Dmitriy "DK" Korobskiy
+v1.2                                   October 2021                                   Created by Dmitriy "DK" Korobskiy
 HEREDOC
   exit 1
 }
@@ -40,7 +41,7 @@ set -o pipefail
 if [[ $1 == "-h" ]]; then
   usage
 fi
-readonly CLUSTER_TYPE=$1
+readonly CLUSTERING_FORMAT=$1
 shift
 
 # Get a script directory, same as by $(dirname $0)
@@ -53,6 +54,8 @@ readonly SCRIPT_DIR=${0%/*}
 #  chmod g+w "${WORK_DIR}"
 #fi
 #cd "${WORK_DIR}"
+
+trap "echo -e 'Done.\a'" EXIT
 
 # `${USER:-${USERNAME:-${LOGNAME}}}` might be not available inside Docker containers
 echo -e "\n# load-clusters.sh: running under $(whoami)@${HOSTNAME} in ${PWD} #\n"
@@ -67,6 +70,7 @@ while (($# > 0)); do
   fi
 
   data_file=$1
+  shift
 
   # Remove the longest `*/` prefix
   data_file_name_with_ext=${data_file##*/}
@@ -80,9 +84,7 @@ while (($# > 0)); do
   clustering_version=${clustering_version_opt:-$data_file_name}
 
   echo "Loading clustering version $clustering_version from $data_file"
-  psql -f "${SCRIPT_DIR}/stage-clusters-$CLUSTER_TYPE.sql" -v schema=clusters -v "data_file=$data_file"
+  psql -f "${SCRIPT_DIR}/stage-clusters-$CLUSTERING_FORMAT.sql" -v schema=clusters -v "data_file=$data_file"
   psql -f "${SCRIPT_DIR}/load-clusters.sql" -v schema=clusters -v "clustering_version=${clustering_version}"
   echo -e "Loaded.\n"
-
-  shift
 done

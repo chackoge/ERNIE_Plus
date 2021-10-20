@@ -1,3 +1,11 @@
+CLUSTERINGS_FOLDER="<Output folder to each iteration's clusterings>"
+CLUSTERING_OUTPUT_PREFIX="${CLUSTERINGS_FOLDER}"
+SAVE_FOR_LATER_PREFIX="<Output folder to contain the clusters deemed to be included in the final clusterings>"
+INPUT_NETWORK="<Input network>"
+local_search="<integer local search parameter at least 0 for graclus>"
+k="<integer at least 0 for k-validity checks>"
+p=-1
+
 for iteration in $(seq 1 <NUM ITERATIONS>)
 do
     PREVIOUS_CLUSTERING_FILE="<CLUSTERING_OUTPUT_PREFIX>/clustering_$((${iteration} - 1)).clustering"

@@ -9,3 +9,4 @@ SET TIMEZONE = 'US/Eastern';
 
 \set ECHO all
 COPY stg_clusters(node_seq_id, cluster_no, min_k, cluster_modularity) FROM :'data_file' (FORMAT csv);
+-- \copy stg_clusters(node_seq_id, cluster_no, min_k, cluster_modularity) from :data_file (FORMAT csv)
