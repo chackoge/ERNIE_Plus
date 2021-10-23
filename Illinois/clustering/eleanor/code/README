@@ -35,8 +35,7 @@ Defaults:
                      
 IKC.py will generate clusters using the Iterative K Core Algorithm.
 
-usage: IKC.py [-h] -e EDGELIST -o OUTDIR [-k KVALUE] [-b MAXSIZE]
-              [-t MAXMODULARITY] [-v]
+usage: IKC.py [-h] -e EDGELIST -o OUTDIR [-k KVALUE] [-v]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -47,10 +46,6 @@ optional arguments:
   -k KVALUE, --kvalue KVALUE
                         non-negative integer value of the minimum required
                         adjacent nodes for each node
-  -b MAXSIZE, --maxSize MAXSIZE
-                        Maximum cluster size
-  -t MAXMODULARITY, --maxModularity MAXMODULARITY
-                        Minimum allowed cluster modularity
   -v, --version         show the version number and exit
 
 Input file formats: An edgelist with the nodes labeled from 0 to n, where n is one minus 
@@ -78,6 +73,25 @@ Optional Parameter Default Values:
               
               
               
+              
+KC.py will generate clusters that correspond to the componenets of the k-core for 
+a given value of k.
+
+usage: KC.py [-h] -e EDGELIST -o OUTDIR [-k KVALUE] [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -e EDGELIST, --edgeList EDGELIST
+                        Path to file containing edge lists
+  -o OUTDIR, --outDir OUTDIR
+                        Path to file containing output
+  -k KVALUE, --kvalue KVALUE
+                        non-negative integer value of the minimum required
+                        adjacent nodes for each node
+  -v, --version         show the version number and exit
+
+              
+              
 parsing_clusters.py and parsing_clusters_strict.py:
 
 Generates a kmp-valid clustering file from an edgelist and clustering
@@ -88,9 +102,9 @@ the output file will have:   node, cluster    line format
 the strict versions will not modify clusters, but rather only 
 returns clusters that are already kmp-valid.
 
-
 usage: parsing_clusters.py [-h] -e EDGELIST -o OUTDIR -c CLUSTERS [-k KVALUE]
-                           [-p PVALUE] [-v]
+                           [-p PVALUE] [-f CLUSTERTONODEFORMAT]
+                           [-m SKIPMVALID] [-v]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -106,7 +120,14 @@ optional arguments:
   -p PVALUE, --pvalue PVALUE
                         Non-negative integer value of the number of core
                         memebers a non-core node must be adjacent to
+  -f CLUSTERTONODEFORMAT, --clusterToNodeFormat CLUSTERTONODEFORMAT
+                        False if input file format is node_id, cluster_id on
+                        each line
+  -m SKIPMVALID, --skipMValid SKIPMVALID
+                        True if you wish to bypass the positive core
+                        modularity check
   -v, --version         show the version number and exit
+
 
 
 Defaults:
