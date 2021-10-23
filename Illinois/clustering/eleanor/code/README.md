@@ -1,0 +1,118 @@
+cluster_info.py generates cluster statistics file from an edgelist and clustering
+(clustering formatted as one node per line with first column node number and second column cluster number)
+
+Will show information about k-valid, kp-valid, m-valid, km-valid, and kpm-valid clusters in the given clustering.
+
+
+usage: cluster_info.py [-h] -e EDGELIST -o OUTDIR -c CLUSTERS -k K_VALUE
+                       [-p P_VALUE] [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -e EDGELIST, --edgeList EDGELIST
+                        Path to file containing edge lists
+  -o OUTDIR, --outDir OUTDIR
+                        Path to file containing output
+  -c CLUSTERS, --clusters CLUSTERS
+                        Path to file containing node clusterings
+  -k K_VALUE, --k_value K_VALUE
+                        Minimum intracluster node degree
+  -p P_VALUE, --p_value P_VALUE
+                        Minimum number of core nodes non-core nodes must be
+                        connected to
+  -v, --version         show the version number and exit
+
+Defaults:
+   p defaults to -1, meaning a non-core node must be connected to all nodes in the 
+                     graph. This will cause kp-valid clusters to only contain core 
+                     nodes.
+                     
+                     If p is set to 0, then all non-core nodes can be in a cluster
+                     and the cluster will be kp-valid if it is k-valid.  
+                     
+                     
+                     
+                     
+IKC.py will generate clusters using the Iterative K Core Algorithm.
+
+usage: IKC.py [-h] -e EDGELIST -o OUTDIR [-k KVALUE] [-b MAXSIZE]
+              [-t MAXMODULARITY] [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -e EDGELIST, --edgeList EDGELIST
+                        Path to file containing edge lists
+  -o OUTDIR, --outDir OUTDIR
+                        Path to file containing output
+  -k KVALUE, --kvalue KVALUE
+                        non-negative integer value of the minimum required
+                        adjacent nodes for each node
+  -b MAXSIZE, --maxSize MAXSIZE
+                        Maximum cluster size
+  -t MAXMODULARITY, --maxModularity MAXMODULARITY
+                        Minimum allowed cluster modularity
+  -v, --version         show the version number and exit
+
+Input file formats: An edgelist with the nodes labeled from 0 to n, where n is one minus 
+                    the total number of nodes in the network. Each line of the edgelist
+                    will correspond to an edge connecting two nodes separated by a tab.
+                    When run with a maxmimum cluster size (optional parameter b) IKC
+                    requires the edgelist to correspond to a directed graph, where the 
+                    arrow points to the second node on the line.
+
+Output file format: A csv where each line has the following information:
+                         node number, in column 1
+                         cluster number, in column 2
+                         minimum intra-cluster degree, in column 3
+                         cluster modularity, in column 4
+
+Optional Parameter Default Values:
+ -k (kvalue)  will default to 0, meaning the resulting clusters have no restriction
+              on the intra-cluster minumum node degree.
+
+ -t (tvalue)  will default to 0, meaning all resulting non-singleton clusters will 
+              have positive modularity
+
+ -b (maxsize) will default to the number of nodes in the input graph, meaning that 
+              there is no restriction on the cluster size.
+              
+              
+              
+parsing_clusters.py and parsing_clusters_strict.py:
+
+Generates a kmp-valid clustering file from an edgelist and clustering
+Clustering input and output formatted as one node per line.
+the input  file must have:   cluster, node    line format
+the output file will have:   node, cluster    line format
+
+the strict versions will not modify clusters, but rather only 
+returns clusters that are already kmp-valid.
+
+
+usage: parsing_clusters.py [-h] -e EDGELIST -o OUTDIR -c CLUSTERS [-k KVALUE]
+                           [-p PVALUE] [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -e EDGELIST, --edgeList EDGELIST
+                        Path to file containing edge lists
+  -o OUTDIR, --outDir OUTDIR
+                        Path to file containing output
+  -c CLUSTERS, --clusters CLUSTERS
+                        Path to file containing node clusterings
+  -k KVALUE, --kvalue KVALUE
+                        non-negative integer value of the minimum required
+                        adjacent nodes for each node
+  -p PVALUE, --pvalue PVALUE
+                        Non-negative integer value of the number of core
+                        memebers a non-core node must be adjacent to
+  -v, --version         show the version number and exit
+
+
+Defaults:
+   p defaults to -1, meaning a non-core node must be connected to all nodes in the 
+                     graph. This will cause returned clusters to only contain core 
+                     nodes.
+                     
+                     If p is set to 0, then all non-core nodes will remain in that
+                     as long as it contains a valid core with positive modularity.
