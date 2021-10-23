@@ -63,14 +63,7 @@ Output file format: A csv where each line has the following information:
 
 Optional Parameter Default Values:
  -k (kvalue)  will default to 0, meaning the resulting clusters have no restriction
-              on the intra-cluster minumum node degree.
-
- -t (tvalue)  will default to 0, meaning all resulting non-singleton clusters will 
-              have positive modularity
-
- -b (maxsize) will default to the number of nodes in the input graph, meaning that 
-              there is no restriction on the cluster size.
-              
+              on the intra-cluster minumum node degree.              
               
               
               
