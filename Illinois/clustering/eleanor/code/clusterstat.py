@@ -255,7 +255,7 @@ class ClusterStats():
         if the modularity is <= 0 or they are not connected this returns False, otherwise True. 
         '''
         if len(self.coreNodes) > 1000:
-            subgraph=nk.graphtools.subgraphFromNodes(self.core_graph, self.coreNodes)
+            subgraph=nk.graphtools.subgraphFromNodes(core_graph, self.coreNodes)
         else:
             subgraph=None
 
