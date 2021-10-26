@@ -341,3 +341,16 @@ def get_intracluster_num_edges(cursor, table_name, cluster_member_arr):
     cursor.execute(f"""SELECT COUNT(*) FROM {table_name} WHERE citing_integer_id in {cluster_member_string_representation} and cited_integer_id in {cluster_member_string_representation}""")
     rows = cursor.fetchall()
     return rows[0][0]
+
+
+def get_query_integer_id_node_ids(cursor, node_table_name, cluster_member_arr):
+    if(len(cluster_member_arr) < 1):
+        return []
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + cluster_member_arr[0] + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + cluster_member + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""SELECT DISTINCT node_id FROM {node_table_name} WHERE integer_id IN {cluster_member_string_representation}""")
+    rows = cursor.fetchall()
+    return [tup[0] for tup in rows]
