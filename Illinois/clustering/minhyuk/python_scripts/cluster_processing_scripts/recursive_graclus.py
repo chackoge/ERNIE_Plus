@@ -207,8 +207,8 @@ def run_graclus_on_cluster(cursor, table_name, graph, cluster_to_id_dict, cluste
 @click.option("--config-file", required=False, type=click.Path(exists=True), help="The config file containing the postgres connection details")
 @click.option("--network", required=True, type=click.Path(exists=True), help="Integer labelled edgelist")
 @click.option("--clustering", required=False, type=click.Path(exists=True), help="Initial clustering to begin with as an alternative to graclus")
-@click.option("--k", required=False, type=int, default=0, help="The minimum connectivity among each other in a cluster to be considered valid")
-@click.option("--m", required=False, type=float, default=float("-inf"), help="The minimum modularity threshold for each cluster")
+@click.option("--k", required=True, type=int, default=0, help="The minimum connectivity among each other in a cluster to be considered valid")
+@click.option("--m", required=False, type=float, default=0, help="The minimum modularity threshold for each cluster")
 @click.option("--local-search", required=False, type=int, default=0, help="The local search parameter for graclus")
 @click.option("--output-prefix", required=True, type=click.Path(), help="Output file prefix")
 def recursive_graclus(config_file, network, clustering, k, m, local_search, output_prefix):
@@ -232,12 +232,17 @@ def recursive_graclus(config_file, network, clustering, k, m, local_search, outp
 
     if(clustering is None):
         # if an initial clustering is not provided, then we simply start by running graclus on the initial network
-        initial_graclus_filename = f"{output_prefix}/initial_graph"
-        inverse_node_map = None
-        best_graclus_result = get_best_graclus(cursor, table_name, graph, network, initial_graclus_filename, inverse_node_map, k, m)
-        cluster_to_id_dict = best_graclus_result["best_cluster_to_id_dict"]
-        initial_graclus_num_clusters = best_graclus_result["num_clusters"]
-        min_k = best_graclus_result["min_k"]
+        # uncomment the area below to enable the feature
+        # initial_graclus_filename = f"{output_prefix}/initial_graph"
+        # inverse_node_map = None
+        # best_graclus_result = get_best_graclus(cursor, table_name, graph, network, initial_graclus_filename, inverse_node_map, k, m)
+        # cluster_to_id_dict = best_graclus_result["best_cluster_to_id_dict"]
+        # initial_graclus_num_clusters = best_graclus_result["num_clusters"]
+        # min_k = best_graclus_result["min_k"]
+        if(clustering is None):
+            with open(f"{output_prefix}/recursive_graclus.log", "w") as f:
+                f.write(f"// No clustering was provided so we are running graclus initially\n")
+            return
     else:
         # if an initial clustering is provided, then we start with the initial clustering directly
         cluster_to_id_dict = file_to_dict(clustering)["cluster_to_id_dict"]
@@ -246,10 +251,7 @@ def recursive_graclus(config_file, network, clustering, k, m, local_search, outp
     cluster_id_stack = list(filter(lambda cluster_id: len(cluster_to_id_dict[cluster_id]) > 1, cluster_to_id_dict.keys()))
 
     with open(f"{output_prefix}/recursive_graclus.log", "w") as f:
-        if(clustering is None):
-            f.write(f"// No clustering was provided so we are running graclus initially\n")
-        else:
-            f.write(f"// An initial clustering was provided so we are not running graclus initially\n")
+        f.write(f"// An initial clustering was provided. \n")
         f.write(f"// we start with {len(cluster_id_stack)} clusters\n")
         if(clustering is None and cluster_to_id_dict is None):
             f.write(f"// No way of running graclus could produce a clustering of only valid clusters. Terminating.\n")
