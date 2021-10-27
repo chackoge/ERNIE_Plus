@@ -64,6 +64,8 @@ def main(args):
                 core_comp_dict[orig_cluster].append(component)
             else:
                 core_comp_dict[orig_cluster] = [component]
+        else:
+            print ("Cluster number", orig_cluster, "was dropped for non-positive modularity")
 
     final_clusters= []
     print ('old nbr clusters:',len(clustering.clusters),'new:', len(core_comp_dict))
