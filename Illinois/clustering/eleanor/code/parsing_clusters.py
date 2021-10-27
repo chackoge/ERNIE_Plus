@@ -59,7 +59,7 @@ def main(args):
         modularity = get_modularity(core_graph, orig_graph, component)
         if modularity > 0 or skip_m_valid:
             if skip_m_valid and modularity > 0:
-                print ("Cluster number", orig_cluster, "would be dropped ofr non-positive modularity")
+                print ("Cluster number", orig_cluster, "would be dropped for non-positive modularity")
             node = component[0]
             orig_cluster = node_cluster[node]
             if orig_cluster in core_comp_dict:
