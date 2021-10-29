@@ -19,6 +19,7 @@ def main(args):
     out_dir = args.outDir
     p_value = args.p_value
     k_value = args.k_value
+    format = args.clusterToNodeFormat
 
     print ('Reading Graph')
 
@@ -31,7 +32,7 @@ def main(args):
 
     print ('Building clustering statistics')
 
-    clustering = cs.read_clustering_from_file(k_value, p_value, clusters, orig_graph)
+    clustering = cs.read_clustering_from_file(k_value, p_value, clusters, orig_graph, cluster_node=format)
 
     print ('Extracting k-Core from clusters')
 
@@ -127,10 +128,26 @@ def parseArgs():
                         help="Minimum number of core nodes non-core nodes must be connected to",
                         required=False, default=-1)
 
+    parser.add_argument("-f", "--clusterToNodeFormat", type=str2bool,
+                        help="False if input file format is node_id, cluster_id on each line",
+                        required=False, default=False)
+
     parser.add_argument("-v", "--version", action="version", version="1.0.0",
                         help="show the version number and exit")
 
     return parser.parse_args()
+
+
+def str2bool(b):
+    if isinstance(b, bool):
+       return b
+    if b.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif b.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 
 if __name__ == "__main__":
     main(parseArgs())
