@@ -20,6 +20,9 @@ optional arguments:
   -p P_VALUE, --p_value P_VALUE
                         Minimum number of core nodes non-core nodes must be
                         connected to
+  -f CLUSTERTONODEFORMAT, --clusterToNodeFormat CLUSTERTONODEFORMAT
+                        False if input file format is node_id, cluster_id on
+                        each line
   -v, --version         show the version number and exit
 
 Defaults:
