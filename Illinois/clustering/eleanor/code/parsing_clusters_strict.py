@@ -56,12 +56,13 @@ def main(args):
 
     core_comp_dict = dict()
     for component in components:
-        modularity = get_modularity(core_graph, orig_graph, component)
+        modularity = get_core_modularity(core_graph, orig_graph, component)
         node = component[0]
         orig_cluster = node_cluster[node]
         if orig_cluster in core_comp_dict:
             core_comp_dict[orig_cluster] = None
         elif modularity <= 0 and not skip_m_valid: 
+            print ("Cluster number", orig_cluster, "was dropped for non-positive core modularity")
             core_comp_dict[orig_cluster] = None
         else:
             core_comp_dict[orig_cluster] = component
@@ -73,10 +74,9 @@ def main(args):
             core_node_set = set(component)
 
             if check_noncore_nodes(component, graph, clustering.clusters[label], p):
-                final_clusters.append((component, core_node_set))
+                final_clusters.append((clustering.clusters[label].nodes, core_node_set))
 
-    print_clusters(final_clusters, out_dir)
-
+    print_clusters(final_clusters, out_dir, orig_graph)
 
 
 def remove_inter_cluster_edges(graph, node_cluster):
@@ -117,7 +117,7 @@ def build_node_cluster(clustering):
     return node_cluster
 
 
-def get_modularity(core_graph, graph, component):
+def get_core_modularity(core_graph, graph, component):
     l = graph.numberOfEdges()
     if l < 1:
         return -1
@@ -131,6 +131,7 @@ def get_modularity(core_graph, graph, component):
     ls = ls/2
 
     return (ls/l - (ds/(2*l))**2)
+
 
 def check_noncore_nodes(component, graph, cluster, p):
     if p < 0: 
@@ -148,14 +149,14 @@ def check_noncore_nodes(component, graph, cluster, p):
             for neighbor in graph.iterNeighbors(node):
                 if neighbor in core_node_set:
                     core_neighbor_count += 1
-       
+
             if core_neighbor_count < p:
                 return False
 
     return True
 
 
-def print_clusters(clusters, out_dir):
+def print_clusters(clusters, out_dir, orig_graph):
     '''
     This writes a csv containing lines with the:
     node Id, cluster nbr, and value of k for which cluster nbr was generated
@@ -172,6 +173,7 @@ def print_clusters(clusters, out_dir):
         csvwriter = csv.writer(output)
         for cluster_info in clusters:
             (cluster, core_node_set) = cluster_info
+            modularity = get_modularity(cluster, orig_graph)
             #print (core_node_set)
             index += 1
             # print a separate line for each node in each cluster
@@ -180,7 +182,44 @@ def print_clusters(clusters, out_dir):
                     core_label = 'Core'
                 else:
                     core_label = 'Non-Core'
-                csvwriter.writerow([node, index, core_label])
+                csvwriter.writerow([node, index, core_label, modularity])
+
+
+
+def get_modularity(cluster, graph):
+
+    if len(cluster) > 1000:
+        subgraph=nk.graphtools.subgraphFromNodes(graph, cluster)
+    else:
+        subgraph=None
+
+    l = graph.numberOfEdges()
+    if l < 1:
+        return -1
+
+    cluster_set = set(cluster)
+
+    ls = 0
+    ds = 0
+
+    if subgraph == None:
+        intra_cluster_degree = 0
+        for node in cluster:
+            ds += graph.degree(node)
+            ic_node_degree = 0
+            for node2 in cluster_set:
+                if graph.hasEdge(node, node2) or graph.hasEdge(node2, node):
+                    ic_node_degree += 1
+            intra_cluster_degree += ic_node_degree
+        ls = intra_cluster_degree / 2
+    else:
+        ls = subgraph.numberOfEdges()
+        for node in cluster:
+            ds += graph.degree(node)
+
+    #print ("l", l, "ls", ls, "ds", ds)
+
+    return (ls/l - (ds/(2*l))**2)
 
 
 def parseArgs():
@@ -206,11 +245,11 @@ def parseArgs():
                         help="Non-negative integer value of the number of core memebers a non-core node must be adjacent to",
                         required=False, default=-1)
 
-    parser.add_argument("-f", "--clusterToNodeFormat", type=bool,
+    parser.add_argument("-f", "--clusterToNodeFormat", type=str2bool,
                         help="False if input file format is node_id, cluster_id on each line",
                         required=False, default=True)
 
-    parser.add_argument("-m", "--skipMValid", type=bool,
+    parser.add_argument("-m", "--skipMValid", type=str2bool,
                         help="True if you wish to bypass the positive core modularity check",
                         required=False, default=False)
 
@@ -218,6 +257,16 @@ def parseArgs():
                         help="show the version number and exit")
 
     return parser.parse_args()
+
+def str2bool(b):
+    if isinstance(b, bool):
+       return b
+    if b.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif b.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 if __name__ == "__main__":
     main(parseArgs())

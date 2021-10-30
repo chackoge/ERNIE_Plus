@@ -56,18 +56,19 @@ def main(args):
 
     core_comp_dict = dict()
     for component in components:
-        modularity = get_modularity(core_graph, orig_graph, component)
-        if modularity > 0 or skip_m_valid:
-            if skip_m_valid and modularity <= 0:
-                print ("Cluster number", orig_cluster, "would be dropped for non-positive modularity")
+        if len(component) > 0:
+            modularity = get_core_modularity(core_graph, orig_graph, component)
             node = component[0]
             orig_cluster = node_cluster[node]
-            if orig_cluster in core_comp_dict:
-                core_comp_dict[orig_cluster].append(component)
+            if modularity > 0 or skip_m_valid:
+                if skip_m_valid and modularity <= 0:
+                    print ("Cluster number", orig_cluster, "would be dropped for non-positive core modularity")
+                if orig_cluster in core_comp_dict:
+                    core_comp_dict[orig_cluster].append(component)
+                else:
+                    core_comp_dict[orig_cluster] = [component]
             else:
-                core_comp_dict[orig_cluster] = [component]
-        else:
-            print ("Cluster number", orig_cluster, "was dropped for non-positive modularity")
+                print ("Cluster number", orig_cluster, "was dropped for non-positive core modularity")
 
     final_clusters= []
     print ('old nbr clusters:',len(clustering.clusters),'new:', len(core_comp_dict))
@@ -82,7 +83,7 @@ def main(args):
         for component in components:
             final_clusters.append((component, core_node_set))
 
-    print_clusters(final_clusters, out_dir)
+    print_clusters(final_clusters, out_dir, orig_graph)
 
 
 def remove_inter_cluster_edges(graph, node_cluster, cc):
@@ -121,7 +122,7 @@ def build_node_cluster(clustering):
     return node_cluster
 
 
-def get_modularity(core_graph, graph, component):
+def get_core_modularity(core_graph, graph, component):
     l = graph.numberOfEdges()
     if l < 1:
         return -1
@@ -135,6 +136,7 @@ def get_modularity(core_graph, graph, component):
     ls = ls/2
 
     return (ls/l - (ds/(2*l))**2)
+
 
 def add_p_nodes(components, graph, cluster, p):
     core_node_sets = [set(component) for component in components]
@@ -152,7 +154,7 @@ def add_p_nodes(components, graph, cluster, p):
                 for index in range(len(core_node_sets)):
                     if neighbor in core_node_sets[index]:
                         core_neighbor_counts[index] += 1
-       
+
             non_core_idx = -1
             neighbor_prop = 0
             for index in range(len(core_neighbor_counts)):
@@ -173,7 +175,7 @@ def add_p_nodes(components, graph, cluster, p):
     return final_components
 
 
-def print_clusters(clusters, out_dir):
+def print_clusters(clusters, out_dir, graph):
     '''
     This writes a csv containing lines with the:
     node Id, cluster nbr, and value of k for which cluster nbr was generated
@@ -190,6 +192,7 @@ def print_clusters(clusters, out_dir):
         csvwriter = csv.writer(output)
         for cluster_info in clusters:
             (cluster, core_node_set) = cluster_info
+            modularity = get_modularity(cluster, graph)
             #print (core_node_set)
             index += 1
             # print a separate line for each node in each cluster
@@ -198,37 +201,43 @@ def print_clusters(clusters, out_dir):
                     core_label = 'Core'
                 else:
                     core_label = 'Non-Core'
-                csvwriter.writerow([node, index, core_label])
+                csvwriter.writerow([node, index, core_label, modularity])
 
 
-def format_graph(graph1):
-    origNodeIdDict = nk.graphtools.getContinuousNodeIds(graph1)
-    invertedOrigNodeIdDict = dict(map(reversed, origNodeIdDict.items()))
-    graph1 = nk.graphtools.getCompactedGraph(graph1, origNodeIdDict)
+def get_modularity(cluster, graph):
 
-    if graph1.isWeighted() == False:
-        print ("not weighted")
-        weighted = nk.Graph(n=0, weighted=True, directed=True)
-
-        for node in graph1.iterNodes():
-            weighted.addNode()
-        for u, v in graph1.iterEdges():
-            if weighted.hasNode(u) == False:
-                weighted.addNode(u)
-            if weighted.hasNode(v) == False:
-                weighted.addNode(v)
-            weighted.addEdge(u, v, graph1.degreeIn(u))
-            #print (u, v, graph1.degreeIn(u))
-        graph = weighted
+    if len(cluster) > 1000:
+        subgraph=nk.graphtools.subgraphFromNodes(graph, cluster)
     else:
-        graph = graph1
-        #for u, v, w in graph1.iterEdgesWeights():
-            #print (u, v, w)
+        subgraph=None
 
-    graph.removeSelfLoops()
+    l = graph.numberOfEdges()
+    if l < 1:
+        return -1
 
-    print (graph.numberOfNodes())
-    return graph, invertedOrigNodeIdDict
+    cluster_set = set(cluster)
+
+    ls = 0
+    ds = 0
+
+    if subgraph == None:
+        intra_cluster_degree = 0
+        for node in cluster:
+            ds += graph.degree(node)
+            ic_node_degree = 0
+            for node2 in cluster_set:
+                if graph.hasEdge(node, node2) or graph.hasEdge(node2, node):
+                    ic_node_degree += 1
+            intra_cluster_degree += ic_node_degree
+        ls = intra_cluster_degree / 2
+    else:
+        ls = subgraph.numberOfEdges()
+        for node in cluster:
+            ds += graph.degree(node)
+
+    #print ("l", l, "ls", ls, "ds", ds)
+
+    return (ls/l - (ds/(2*l))**2)
 
 
 def parseArgs():
@@ -254,11 +263,11 @@ def parseArgs():
                         help="Non-negative integer value of the number of core memebers a non-core node must be adjacent to",
                         required=False, default=-1)
 
-    parser.add_argument("-f", "--clusterToNodeFormat", type=bool,
+    parser.add_argument("-f", "--clusterToNodeFormat", type=str2bool,
                         help="False if input file format is node_id, cluster_id on each line",
                         required=False, default=True)
 
-    parser.add_argument("-m", "--skipMValid", type=bool,
+    parser.add_argument("-m", "--skipMValid", type=str2bool,
                         help="True if you wish to bypass the positive core modularity check",
                         required=False, default=False)
 
@@ -266,6 +275,16 @@ def parseArgs():
                         help="show the version number and exit")
 
     return parser.parse_args()
+
+def str2bool(b):
+    if isinstance(b, bool):
+       return b
+    if b.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif b.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 if __name__ == "__main__":
     main(parseArgs())
