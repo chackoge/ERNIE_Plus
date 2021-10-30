@@ -7,7 +7,7 @@ rm(list=ls())
 library(data.table); library(ggplot2); library(grid)
 
 # read input file
-setwd('/Users/chackoge/repos/clustering_manuscripts/discovery')
+setwd('~/repos/clustering_manuscripts/discovery')
 x <- fread('k_core_cluster_sizes.csv')
 # add node_coverage column 'nc' that expresses the size of K-core output
 # as a percentage of total node count ()14,695,475)
@@ -27,7 +27,6 @@ geom_jitter(width=0.02) + labs(x=("K"),y=("% node_coverage")) +
 theme(legend.position = "none") + theme(text = element_text(size = 20)) 
 dev.off()
 
-pdf('fig1_inset.pdf')
 p1 = qplot(V1,csize/1000000,data=y[V1%%5==0],xlab="k",ylab="k-core size (millions)") +
 theme_bw() + scale_x_continuous("k",breaks=break_vec) + theme(text = element_text(size = 20)) 
 
