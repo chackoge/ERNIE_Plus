@@ -57,16 +57,16 @@ def main(args):
     core_comp_dict = dict()
     for component in components:
         if len(component) > 0:
-            modularity = get_core_modularity(core_graph, orig_graph, component)
+            modularity, mcd, edge_density = get_core_modularity(core_graph, orig_graph, component)
             node = component[0]
             orig_cluster = node_cluster[node]
             if modularity > 0 or skip_m_valid:
                 if skip_m_valid and modularity <= 0:
                     print ("Cluster number", orig_cluster, "would be dropped for non-positive core modularity")
                 if orig_cluster in core_comp_dict:
-                    core_comp_dict[orig_cluster].append(component)
+                    core_comp_dict[orig_cluster].append((component, mcd, edge_density))
                 else:
-                    core_comp_dict[orig_cluster] = [component]
+                    core_comp_dict[orig_cluster] = [(component, mcd, edge_density)]
             else:
                 print ("Cluster number", orig_cluster, "was dropped for non-positive core modularity")
 
@@ -74,14 +74,15 @@ def main(args):
     print ('old nbr clusters:',len(clustering.clusters),'new:', len(core_comp_dict))
     for label, components in core_comp_dict.items():
         core_node_set = set()
-        for component in components:
+        for component, mcd, edge_density in components:
             core_node_set.update(component)
 
         # if p = -1 (default) only return the core nodes
         if p >= 0:
-            components = add_p_nodes(components, graph, clustering.clusters[label], p)
-        for component in components:
-            final_clusters.append((component, core_node_set))
+            new_components = add_p_nodes(components, graph, clustering.clusters[label], p)
+        i = 0
+        for component in new_components:
+            final_clusters.append((component, components[i][1], components[i][2], core_node_set))
 
     print_clusters(final_clusters, out_dir, orig_graph)
 
@@ -123,6 +124,7 @@ def build_node_cluster(clustering):
 
 
 def get_core_modularity(core_graph, graph, component):
+    mcd = 999999999999999999
     l = graph.numberOfEdges()
     if l < 1:
         return -1
@@ -131,17 +133,22 @@ def get_core_modularity(core_graph, graph, component):
     ds = 0
 
     for node in component:
+        if core_graph.degree(node) < mcd:
+            mcd = core_graph.degree(node)
         ls += core_graph.degree(node)
         ds += graph.degree(node)
     ls = ls/2
 
-    return (ls/l - (ds/(2*l))**2)
+    edge_density = ls / len(component)
+
+    return (ls/l - (ds/(2*l))**2), mcd, edge_density
 
 
 def add_p_nodes(components, graph, cluster, p):
-    core_node_sets = [set(component) for component in components]
+
+    core_node_sets = [set(component) for (component, mcd, ed) in components]
     full_core_node_set = set()
-    for component in components:
+    for component, mcd, ed in components:
         full_core_node_set.update(component)
     non_core_node_sets = [set() for component in components]
 
@@ -191,7 +198,7 @@ def print_clusters(clusters, out_dir, graph):
     with open("{}".format(out_dir), "w") as output:
         csvwriter = csv.writer(output)
         for cluster_info in clusters:
-            (cluster, core_node_set) = cluster_info
+            (cluster, mcd, edge_density, core_node_set) = cluster_info
             modularity = get_modularity(cluster, graph)
             #print (core_node_set)
             index += 1
@@ -201,7 +208,7 @@ def print_clusters(clusters, out_dir, graph):
                     core_label = 'Core'
                 else:
                     core_label = 'Non-Core'
-                csvwriter.writerow([node, index, core_label, modularity])
+                csvwriter.writerow([node, index, core_label, modularity, mcd, edge_density])
 
 
 def get_modularity(cluster, graph):
