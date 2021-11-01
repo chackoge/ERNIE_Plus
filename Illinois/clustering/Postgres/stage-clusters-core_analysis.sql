@@ -8,5 +8,5 @@ SET search_path = :schema;
 SET TIMEZONE = 'US/Eastern';
 
 \set ECHO all
-COPY stg_clusters(node_seq_id, cluster_no, core_classifier) FROM :'data_file' (FORMAT csv);
--- \copy stg_clusters(node_seq_id, cluster_no, core_classifier) from :data_file (FORMAT csv)
+\copy stg_clusters(node_seq_id, cluster_no, core_classifier, cluster_modularity, mcd, cced) FROM pstdin (FORMAT csv)
+

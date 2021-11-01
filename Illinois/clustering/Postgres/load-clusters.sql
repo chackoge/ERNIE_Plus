@@ -9,8 +9,8 @@ SET TIMEZONE = 'US/Eastern';
 
 \set ECHO all
 
-INSERT INTO exosome_1900_2010_clusters(clustering_version, cluster_no, min_k, cluster_modularity)
-SELECT DISTINCT :'clustering_version', cluster_no, min_k, cluster_modularity
+INSERT INTO exosome_1900_2010_clusters(clustering_version, cluster_no, min_k, modularity, mcd, cced)
+SELECT DISTINCT :'clustering_version', cluster_no, min_k, cluster_modularity, mcd, cced
   FROM stg_clusters;
 
 INSERT INTO exosome_1900_2010_cluster_nodes(clustering_version, cluster_no, node_seq_id, is_core)

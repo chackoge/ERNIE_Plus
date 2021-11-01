@@ -8,7 +8,7 @@ data_file_name
 
 SYNOPSIS
 
-    load-clusters.sh clustering_format [-v data_file_clustering_version] data_file [[-v d_f_c_v] data_file] [...]
+    load-clusters.sh [-f clustering_format] data_file [...]
     load-clusters.sh -h: display this help
 
 DESCRIPTION
@@ -17,12 +17,12 @@ DESCRIPTION
 
     The following options are available:
 
-    clustering_format             one of supported data file formats:
-                                    * `ikc`: (node_seq_id, cluster_no, min_k, cluster_modularity), CSV
-                                    * `clustering`: (cluster_no, node_seq_id), space-separated text
-                                    * `core_analysis`: (node_seq_id, cluster_no, core_classifier), CSV
-
-    data_file_clustering_version  optional, defaults to `data_file`'s name without extension
+    -f clustering_format         data format for all files:
+                                    * `ikc`: CSV(node_seq_id, cluster_no, min_k, cluster_modularity) or
+                                    * `core_analysis`: CSV(node_seq_id, cluster_no, core_classifier)
+                                 optional, defaults per `data_file`, based on extension:
+                                    * `.csv`: `ikc`
+                                    * `.clustering`: `core_analysis`
 
 EXAMPLES
 
@@ -30,7 +30,7 @@ EXAMPLES
 
         $ load-clusters.sh ikc ../ikc/testing_k5_b0.csv
 
-v1.2                                   October 2021                                   Created by Dmitriy "DK" Korobskiy
+v1.3                                   November 2021                                   Created by Dmitriy "DK" Korobskiy12345
 HEREDOC
   exit 1
 }
@@ -38,11 +38,18 @@ HEREDOC
 set -e
 set -o pipefail
 
-if [[ $1 == "-h" ]]; then
-  usage
-fi
-readonly CLUSTERING_FORMAT=$1
-shift
+# If a character is followed by a colon, the option is expected to have an argument
+while getopts f:h OPT; do
+  case "$OPT" in
+    f)
+      readonly DEFAULT_FORMAT="$OPTARG"
+      ;;
+    *) # -h or `?`: an unknown option
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
 
 # Get a script directory, same as by $(dirname $0)
 readonly SCRIPT_DIR=${0%/*}
@@ -61,30 +68,40 @@ trap "echo -e 'Done.\a'" EXIT
 echo -e "\n# load-clusters.sh: running under $(whoami)@${HOSTNAME} in ${PWD} #\n"
 
 while (($# > 0)); do
-  if [[ $1 == "-v" ]]; then
-    shift
-    clustering_version_opt=$1
-    shift
-  else
-    unset clustering_version_opt
-  fi
-
   data_file=$1
   shift
 
   # Remove the longest `*/` prefix
   data_file_name_with_ext=${data_file##*/}
-
   if [[ "${data_file_name_with_ext}" != *.* ]]; then
     data_file_name_with_ext=${data_file_name_with_ext}.
   fi
 
   # Remove the last (shortest) `.*` suffix
   data_file_name=${data_file_name_with_ext%.*}
-  clustering_version=${clustering_version_opt:-$data_file_name}
 
-  echo "Loading clustering version $clustering_version from $data_file"
-  psql -f "${SCRIPT_DIR}/stage-clusters-$CLUSTERING_FORMAT.sql" -v schema=clusters -v "data_file=$data_file"
+  clustering_version=$data_file_name
+  format=$DEFAULT_FORMAT
+  if [[ ! $format ]]; then
+    # Remove the longest `*.` prefix
+    ext=${data_file_name_with_ext##*.}
+    
+    case $ext in
+      csv)
+        format='ikc'
+      ;;
+      clustering)
+        format='core_analysis'
+      ;;
+      *)
+        >&2 echo "ERROR. Couldn't determine data format for \`$data_file\`: using extension \`$ext\`"
+        exit 2
+      ;;
+    esac
+  fi
+
+  echo "Loading clustering version $clustering_version from $data_file using data format $format"
+  psql -f "${SCRIPT_DIR}/stage-clusters-${format}.sql" -v schema=clusters <"$data_file"
   psql -f "${SCRIPT_DIR}/load-clusters.sql" -v schema=clusters -v "clustering_version=${clustering_version}"
   echo -e "Loaded.\n"
 done
