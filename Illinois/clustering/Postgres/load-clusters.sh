@@ -17,12 +17,11 @@ DESCRIPTION
 
     The following options are available:
 
-    -f clustering_format         data format for all files:
-                                    * `ikc`: CSV(node_seq_id, cluster_no, min_k, cluster_modularity) or
-                                    * `core_analysis`: CSV(node_seq_id, cluster_no, core_classifier)
-                                 optional, defaults per `data_file`, based on extension:
-                                    * `.csv`: `ikc`
-                                    * `.clustering`: `core_analysis`
+      -f clustering_format
+
+        CSV data format for all files: optional, based on file extension by default, per `data_file`.
+        * `core_analysis` (for `.clustering`): node_seq_id, cluster_no, core_classifier, cluster_modularity, mcd, cced
+        * `ikc` (for `.csv`): node_seq_id, cluster_no, min_k, cluster_modularity
 
 EXAMPLES
 
