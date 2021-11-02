@@ -24,6 +24,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/Scopus/asjc_codes.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/Solr/lenoir_solr.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

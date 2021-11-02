@@ -25,9 +25,9 @@ DESCRIPTION
 
 EXAMPLES
 
-    To find all occurrences of the word `patricia' in a file:
+    To load data from the `ikc` format:
 
-        $ load-clusters.sh ikc ../ikc/testing_k5_b0.csv
+        $ load-clusters.sh ../ikc/testing_k5_b0.csv
 
 v1.3                                   November 2021                                   Created by Dmitriy "DK" Korobskiy
 HEREDOC

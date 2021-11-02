@@ -45,3 +45,17 @@ CREATE TABLE clusters.stg_clusters (
 )
 TABLESPACE clustering_tbs;
 
+CREATE TABLE clusters.clustering_marker_nodes (
+  marking_version VARCHAR(100),
+  node_seq_id INTEGER,
+  CONSTRAINT marker_nodes_pk
+    PRIMARY KEY (marking_version, node_seq_id)
+)
+TABLESPACE clustering_tbs;
+
+CREATE TABLE clusters.stg_marker_nodes (
+  row_id INTEGER,
+  node_seq_id INTEGER
+)
+TABLESPACE clustering_tbs;
+
