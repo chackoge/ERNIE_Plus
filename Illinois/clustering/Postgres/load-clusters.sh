@@ -29,7 +29,7 @@ EXAMPLES
 
         $ load-clusters.sh ikc ../ikc/testing_k5_b0.csv
 
-v1.3                                   November 2021                                   Created by Dmitriy "DK" Korobskiy12345
+v1.3                                   November 2021                                   Created by Dmitriy "DK" Korobskiy
 HEREDOC
   exit 1
 }
