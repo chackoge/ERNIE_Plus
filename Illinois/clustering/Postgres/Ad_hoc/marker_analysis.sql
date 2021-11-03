@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW clusters.top_markers_by_cluster_co_occurrence AS
   /*
-  For all pairs of k56 markers: find pair(s) (one or more) with the highest number of the same cluster occurrences across
-  all clusterings.
+  For all pairs of k56/k12 markers: find pair(s) (one or more) with the highest number of the same cluster occurrences
+  across all clusterings.
   List clusters and clusterings where this pair is found.
   */
   WITH cte1 AS (

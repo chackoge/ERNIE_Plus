@@ -28,6 +28,8 @@ CREATE TABLE clusters.exosome_1900_2010_cluster_nodes (
 )
 TABLESPACE clustering_tbs;
 
+CREATE INDEX IF NOT EXISTS e12cn_node_seq_id_i ON exosome_1900_2010_cluster_nodes(node_seq_id);
+
 DROP TYPE IF EXISTS CORE_CLASSIFIER CASCADE;
 
 CREATE TYPE CORE_CLASSIFIER AS ENUM ('Core', 'Non-Core');
