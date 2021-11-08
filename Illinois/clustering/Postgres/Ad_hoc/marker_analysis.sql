@@ -17,3 +17,9 @@ SELECT
            AND e12cn2.node_seq_id = cmn2.node_seq_id
  GROUP BY cmn1.marking_version, cmn1.node_seq_id, cmn2.node_seq_id;
 
+SELECT cm.node_seq_id1, mnip1.doi AS doi1, cm.node_seq_id2, mnip1.doi AS doi2
+  FROM clusters.cluster_markers cm
+  JOIN public.marker_nodes_integer_pub mnip1 ON mnip1.integer_id = cm.node_seq_id1
+  JOIN public.marker_nodes_integer_pub mnip2 ON mnip2.integer_id = cm.node_seq_id2
+WHERE cm.marking_version = 'k12' AND cm.cluster_co_occurrence_count >= 12;
+
