@@ -25,3 +25,11 @@ SELECT cm.node_seq_id1, mnip1.doi AS doi1, cm.node_seq_id2, mnip2.doi AS doi2, c
   JOIN public.marker_nodes_integer_pub mnip2 ON mnip2.integer_id = cm.node_seq_id2
 WHERE cm.marking_version = 'k12' AND cm.cluster_co_occurrence_count >= 12;
 
+CREATE OR REPLACE VIEW clusters.high_co_occurrence_k56_marker_pairs AS
+-- Pairs co-occurring in all clusterings
+SELECT cm.node_seq_id1, mnip1.doi AS doi1, cm.node_seq_id2, mnip2.doi AS doi2, cm.cluster_list
+  FROM clusters.cluster_markers cm
+  JOIN public.marker_nodes_integer_pub mnip1 ON mnip1.integer_id = cm.node_seq_id1
+  JOIN public.marker_nodes_integer_pub mnip2 ON mnip2.integer_id = cm.node_seq_id2
+WHERE cm.marking_version = 'k56' AND cm.cluster_co_occurrence_count >= 12;
+
