@@ -91,15 +91,15 @@ def get_intracluster_query_doi_outgoing_dois(cursor, table_name, doi, cluster_me
     return [tup[0] for tup in rows]
 
 
-def get_intracluster_doi_and_indegree(cursor, table_name, cluster_member_arr):
-    if(len(cluster_member_arr) < 1):
+def get_intracluster_doi_and_indegree(cursor, table_name, int_cluster_member_arr):
+    if(len(int_cluster_member_arr) < 1):
         return []
     cluster_member_string_representation = "("
-    cluster_member_string_representation += ("'" + cluster_member_arr[0] + "'")
-    for cluster_member in cluster_member_arr[1:]:
-        cluster_member_string_representation += ("," + "'" + cluster_member + "'")
+    cluster_member_string_representation += ("'" + int_cluster_member_arr[0] + "'")
+    for int_cluster_member in int_cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + int_cluster_member + "'")
     cluster_member_string_representation += ")"
-    cursor.execute(f"""SELECT cited,COUNT(DISTINCT citing) FROM {table_name} WHERE citing in {cluster_member_string_representation} and cited in {cluster_member_string_representation} GROUP BY cited ORDER BY COUNT(DISTINCT citing) DESC""")
+    cursor.execute(f"""SELECT cited,cited_integer_id,COUNT(DISTINCT citing_integer_id) FROM {table_name} WHERE citing_integer_id in {cluster_member_string_representation} and cited_integer_id in {cluster_member_string_representation} GROUP BY cited,cited_integer_id ORDER BY COUNT(DISTINCT citing_integer_id) DESC""")
     rows = cursor.fetchall()
     return [tup for tup in rows]
 
@@ -352,5 +352,29 @@ def get_query_integer_id_node_ids(cursor, node_table_name, cluster_member_arr):
         cluster_member_string_representation += ("," + "'" + cluster_member + "'")
     cluster_member_string_representation += ")"
     cursor.execute(f"""SELECT DISTINCT node_id FROM {node_table_name} WHERE integer_id IN {cluster_member_string_representation}""")
+    rows = cursor.fetchall()
+    return [tup[0] for tup in rows]
+
+
+def get_query_year_integer_ids(cursor, table_name, cluster_member_arr, year):
+    if(len(cluster_member_arr) < 1):
+        return []
+    if(len(cluster_member_arr) < 1):
+        return []
+    cluster_member_string_representation = "("
+    cluster_member_string_representation += ("'" + cluster_member_arr[0] + "'")
+    for cluster_member in cluster_member_arr[1:]:
+        cluster_member_string_representation += ("," + "'" + cluster_member + "'")
+    cluster_member_string_representation += ")"
+    cursor.execute(f"""
+        WITH citing_year_table AS (
+            SELECT DISTINCT citing_integer_id AS node FROM {table_name} WHERE citing_year = {year} and citing_integer_id IN {cluster_member_string_representation}
+        ), cited_year_table AS (
+            SELECT DISTINCT cited_integer_id AS node FROM {table_name} WHERE cited_year = {year} AND cited_integer_id IN {cluster_member_string_representation}
+        )
+        SELECT node FROM citing_year_table
+        UNION DISTINCT
+        SELECT node FROM cited_year_table
+    """)
     rows = cursor.fetchall()
     return [tup[0] for tup in rows]

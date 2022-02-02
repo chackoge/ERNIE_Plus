@@ -14,6 +14,11 @@ cmake = "*"
 cython = "*"
 networkit = "*"
 tabulate = "*"
+powerlaw = "*"
+scikit-learn = "*"
+dimcli = "*"
+pygraphviz = "*"
+pydot = "*"
 
 [dev-packages]
 

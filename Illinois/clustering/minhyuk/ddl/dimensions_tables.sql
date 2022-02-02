@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS dimensions.exosome_2016_deduplicated (
   cited_year INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated (
+CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated ( -- main edge list for the exosome 1900-2010 sabpq dataset
   citing TEXT,
   cited TEXT,
   citing_id TEXT NOT NULL,
@@ -99,6 +99,15 @@ CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated (
   cited_integer_id INTEGER,
   CONSTRAINT exosome_1900_2010_sabpq_deduplicated_pk PRIMARY KEY (citing_integer_id, cited_integer_id)
 );
+
+-- node list that is generated manually
+-- the main nodelist for the exosome 1900-2010 sabpq dataset
+--CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_nodelist (
+--    node_id TEXT,
+--    in_degree INTEGER,
+--    out_degree INTEGER,
+--    integer_id INTEGER -- this is a series starting at 0
+--);
 
 CREATE TABLE IF NOT EXISTS dimensions.exosome_1900_2010_sabpq_deduplicated_top_10_pruned (
   citing TEXT,
@@ -157,10 +166,12 @@ CREATE TABLE IF NOT EXISTS dimensions.blast_sabpq_edgelist (
   CONSTRAINT blast_sabpq_deduplicated_pk PRIMARY KEY (citing_integer_id, cited_integer_id)
 );
 
-CREATE TABLE IF NOT EXISTS dimensions.blast_sabpq_nodelist (
-    node_id TEXT,
-    integer_id INTEGER -- this is a series starting at 0
-);
+-- node list that is generated manually
+--CREATE TABLE IF NOT EXISTS dimensions.blast_sabpq_nodelist (
+--    node_id TEXT,
+--    integer_id INTEGER -- this is a series starting at 0
+--);
+
 
 CREATE TABLE IF NOT EXISTS dimensions.blast_sabpq_deleted_edges ( -- these edges were deleted since they created loops (e.g. 3->4 and 4->3)
     citing TEXT,

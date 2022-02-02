@@ -49,7 +49,9 @@ def parse_parsing_clusters(clustering_output, output_prefix):
     with open(output_prefix, "w") as fw:
         with open(clustering_output, "r") as f:
             for line_number,current_line in enumerate(f):
-                [node_id, cluster_id, _] = current_line.strip().split(",")
+                line_arr = current_line.strip().split(",")
+                node_id = line_arr[0]
+                cluster_id = line_arr[1]
                 fw.write(cluster_id + " " + node_id + "\n")
 
 
