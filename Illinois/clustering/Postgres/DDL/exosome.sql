@@ -29,8 +29,6 @@ CREATE TABLE exosome_1900_2010_sabpq_deduplicated (
 CREATE INDEX IF NOT EXISTS e12sd_cited_integer_id_i ON dimensions.exosome_1900_2010_sabpq_deduplicated(cited_integer_id);
 -- 1m:40s
 
-CREATE INDEX IF NOT EXISTS e12sd_citing_integer_i ON dimensions.exosome_1900_2010_sabpq_deduplicated(citing_integer_id);
-
 COMMENT ON COLUMN exosome_1900_2010_sabpq_deduplicated.citing_integer_id IS 'The integer id starts at 0 and is based on dimensions.exosome_1900_2010_sabpq_nodelist table';
 
 COMMENT ON COLUMN exosome_1900_2010_sabpq_deduplicated.cited_integer_id IS 'The integer id starts at 0 and is based on dimensions.exosome_1900_2010_sabpq_nodelist table';
