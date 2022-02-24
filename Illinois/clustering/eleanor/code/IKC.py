@@ -9,20 +9,21 @@ def main(args):
     out_dir = args.outDir
     k = args.kvalue
 
-    edge_list_reader = nk.graphio.EdgeListReader('\t', 0, continuous=True, directed=True)
+    edge_list_reader = nk.graphio.EdgeListReader('\t',0, continuous=False, directed=True)
     graph1 = edge_list_reader.read(edge_list)
+    node_id_map = edge_list_reader.getNodeMap()   
+    inverted_node_id_map = dict(map(reversed, node_id_map.items()))
 
     graph, node_id_dict = format_graph(graph1)
 
     clusters = iterative_k_core_decomposition_MCS_ES(graph, k, node_id_dict)
-    print_clusters(clusters, out_dir)
+    print_clusters(clusters, out_dir, inverted_node_id_map)
 
 
-def print_clusters(clusters, out_dir):
+def print_clusters(clusters, out_dir, inverted_node_id_map):
     '''
     This writes a csv containing lines with the:
     node Id, cluster nbr, and value of k for which cluster nbr was generated
-
     INPUT
     -----
     clusters : a list of clusters represented as lists of nodes in each cluster
@@ -39,7 +40,7 @@ def print_clusters(clusters, out_dir):
             index += 1
             # print a separate line for each node in each cluster
             for node in cluster:
-                csvwriter.writerow([node, index, k, modularity_score])
+                csvwriter.writerow([inverted_node_id_map[node], index, k, modularity_score])
 
 
 def iterative_k_core_decomposition_MCS_ES(graph, k, inverted_orig_node_ids):
@@ -49,7 +50,6 @@ def iterative_k_core_decomposition_MCS_ES(graph, k, inverted_orig_node_ids):
     graph                  : the full networkit graph
     k                      : the minimum allowed value for k for valid clusters
     inverted_orig_node_ids : the dictionary mapping the compacted node IDs to the original node IDs
-
     OUTPUT
     ------
     final_clusters : the clustering output, a list of lists with clustered nodes
@@ -168,7 +168,6 @@ def kc(graph, k=None):
     -----
     graph : networkit graph
     k     : the minimum node degree for all nodes in the subgraph
-
     OUTPUT
     ------
     subgraph : the subgraph containing only nodes of degree k or higher
