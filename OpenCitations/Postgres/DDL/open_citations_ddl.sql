@@ -35,7 +35,7 @@ CREATE INDEX IF NOT EXISTS cpa_family_name_given_name_i ON cr_pub_authors(family
 /*TABLESPACE index_tbs*/;
 
 CREATE TABLE open_citations (
-  oci VARCHAR(400)
+  oci VARCHAR(1000)
     CONSTRAINT open_citations_pk
       PRIMARY KEY /*USING INDEX TABLESPACE index_tbs*/,
   citing VARCHAR(400),
@@ -52,8 +52,8 @@ CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) /*TABLESPACE inde
 
 COMMENT ON COLUMN open_citations.creation_date IS --
   'The date on which the citation was created. This has the same value as the publication date of the citing
-bibliographic resource, but is a property of the citation itself. Missing months in source data are defaulted to June
-and missing days are defaulted to 15.';
+bibliographic resource but is a property of the citation itself. Missing months in source data default to June
+and missing days default to 15.';
 
 COMMENT ON COLUMN open_citations.time_span IS --
   'The time span of a citation, i.e. the interval between the publication of the citing entity and the publication
