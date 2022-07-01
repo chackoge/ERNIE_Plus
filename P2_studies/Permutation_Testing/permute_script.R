@@ -2,6 +2,7 @@
 # George Chacko 1/5/2018
 
 # For Scopus data I added an extra step to coerce integers to character so that R doesn't get confused. 7/4/2019
+# This seems to be generally true. The shuffle function does not work with integer identifiers.
 
 # This script takes three parameters: 
 # (i) input_file: self explanatory but should be in .csv format and be a copy of a datasetxxxx table 
