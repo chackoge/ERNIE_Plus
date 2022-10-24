@@ -64,10 +64,9 @@ fi
 # `${USER:-${USERNAME:-${LOGNAME}}}` might be not available inside Docker containers
 echo -e "\n# load-open-citations-CSVs.sh: running under $(whoami)@${HOSTNAME} in ${PWD} #\n"
 
-# When the # of jobs >= 74 Postgres 12 gets overloaded and crashes with the `DETAIL:  The postmaster has commanded this
-# server process to roll back the current transaction and exit because another server process exited abnormally and
-# possibly corrupted shared memory.` error. The limit should be in the [4..74) range with Postgres tuned as it is now.
-readonly MAX_PARALLEL_JOBS=64
+# `\\copy` of large Open Citations CSVs (1.5-1.8 G) consumes a lot of memory, e.g. ≈ 100 G for 32 jobs.
+# When the # of jobs is too large the entire machine might get overloaded.
+readonly MAX_PARALLEL_JOBS=20
 
 load_csv() {
   set -e
