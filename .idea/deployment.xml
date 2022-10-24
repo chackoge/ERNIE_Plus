@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="(t) odesa" stopOnFirstError="true" overwriteAll="false" deleteMissingItems="true" exclude=".svn;.cvs;.DS_Store;.git;.hg;*.hprof;*.pyc" preserveFilePermissions="true">
+  <component name="PublishConfigData" serverName="(t) Odesa" stopOnFirstError="true" overwriteAll="false" deleteMissingItems="true" exclude=".svn;.cvs;.DS_Store;.git;.hg;*.hprof;*.pyc" preserveFilePermissions="true">
     <serverData>
       <paths name="(i) Valhalla">
         <serverdata>
@@ -9,7 +9,7 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="(t) odesa">
+      <paths name="(t) Odesa">
         <serverdata>
           <mappings>
             <mapping deploy="/home/dk/Workspaces/ERNIE_Plus" local="$PROJECT_DIR$" web="/" />

@@ -1,7 +1,10 @@
-CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() RETURNS TRIGGER AS $block$
-  --@formatter:off To match with stored line numbers avoid wrapping or formatting above.
-BEGIN --
-  IF (TG_OP = 'INSERT') THEN
+-- trg_transform_and_load_open_citation(): routine
+CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() --
+  RETURNS TRIGGER
+  LANGUAGE plpgsql --
+AS $block$
+BEGIN
+  IF (tg_op = 'INSERT') THEN
     INSERT INTO open_citations(oci, citing, cited, creation_date, time_span)
     VALUES
       (new.oci,
@@ -13,10 +16,13 @@ BEGIN --
          WHEN left(new.timespan, 1) = '-'
            THEN -CAST(SUBSTR(new.timespan, 2) AS INTERVAL)
          ELSE CAST(new.timespan AS INTERVAL)
-       END);
+       END)
+        ON CONFLICT (oci) DO UPDATE SET citing = excluded.citing,
+          cited = excluded.cited,
+          time_span = excluded.time_span,
+          creation_date = excluded.creation_date;
 
-    RETURN NEW;
+    RETURN new;
   END IF;
-  RAISE 'Operation % is not supported', TG_OP;
---@formatter:on
-END; $block$ LANGUAGE plpgsql;
+  RAISE 'Operation % is not supported', tg_op;
+END; $block$;
