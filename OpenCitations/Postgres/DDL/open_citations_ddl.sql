@@ -37,7 +37,7 @@ CREATE INDEX IF NOT EXISTS cpa_family_name_given_name_i ON cr_pub_authors(family
 CREATE TABLE open_citations (
   oci VARCHAR(1000)
     CONSTRAINT open_citations_pk
-      PRIMARY KEY /*USING INDEX TABLESPACE index_tbs*/,
+      PRIMARY KEY USING INDEX TABLESPACE open_citations_tbs,
   citing VARCHAR(400),
   cited VARCHAR(400),
   creation_date DATE,
@@ -46,9 +46,9 @@ CREATE TABLE open_citations (
   cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
 ) TABLESPACE open_citations_tbs;
 
-CREATE INDEX IF NOT EXISTS oc_citing_i ON open_citations(citing) /*TABLESPACE index_tbs*/;
+CREATE INDEX IF NOT EXISTS oc_citing_i ON open_citations(citing) TABLESPACE open_citations_tbs;
 
-CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) /*TABLESPACE index_tbs*/;
+CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) TABLESPACE open_citations_tbs;
 
 COMMENT ON COLUMN open_citations.creation_date IS --
   'The date on which the citation was created. This has the same value as the publication date of the citing
