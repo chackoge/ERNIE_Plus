@@ -12,7 +12,7 @@ optional arguments:
   -e EDGELIST, --edgeList EDGELIST
                         Path to file containing edge lists
   -o OUTDIR, --outDir OUTDIR
-                        Path to file containing output
+                        Path to file containing output (should include output file name)
   -c CLUSTERS, --clusters CLUSTERS
                         Path to file containing node clusterings
   -k K_VALUE, --k_value K_VALUE
