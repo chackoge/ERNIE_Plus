@@ -61,17 +61,17 @@ COMMENT ON COLUMN open_citations.time_span IS --
 of the cited entity.';
 
 -- Filters out parallel edges, and self-citations
-CREATE OR REPLACE VIEW open_citations_valid AS
+CREATE MATERIALIZED VIEW open_citations_valid AS
 SELECT *
   FROM open_citations oc
  WHERE
    -- Filter out self-citations
    citing <> cited
    AND
-   -- Filter out parallel edges
+   -- Filter out parallel edges. The greatest `oci` from all parallel edges is left.
    NOT EXISTS(
-       SELECT 1 FROM open_citations oc2 WHERE oc2.citing = oc.citing AND oc2.cited = oc.cited AND oc2.oci < oc.oci);
-
+       SELECT 1 FROM open_citations oc2 WHERE oc2.citing = oc.citing AND oc2.cited = oc.cited AND oc2.oci > oc.oci)
+WITH NO DATA;
 
 CREATE OR REPLACE VIEW stg_open_citations AS
 SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journal_sc, 'qux' AS author_sc
