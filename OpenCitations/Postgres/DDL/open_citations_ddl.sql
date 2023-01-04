@@ -44,7 +44,8 @@ CREATE TABLE open_citations (
   time_span INTERVAL,
   citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
   cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
-) TABLESPACE open_citations_tbs;
+)
+TABLESPACE open_citations_tbs;
 
 CREATE INDEX IF NOT EXISTS oc_citing_i ON open_citations(citing) TABLESPACE open_citations_tbs;
 
@@ -58,6 +59,19 @@ and missing days default to 15.';
 COMMENT ON COLUMN open_citations.time_span IS --
   'The time span of a citation, i.e. the interval between the publication of the citing entity and the publication
 of the cited entity.';
+
+-- Filters out parallel edges, and self-citations
+CREATE OR REPLACE VIEW open_citations_valid AS
+SELECT *
+  FROM open_citations oc
+ WHERE
+   -- Filter out self-citations
+   citing <> cited
+   AND
+   -- Filter out parallel edges
+   NOT EXISTS(
+       SELECT 1 FROM open_citations oc2 WHERE oc2.citing = oc.citing AND oc2.cited = oc.cited AND oc2.oci < oc.oci);
+
 
 CREATE OR REPLACE VIEW stg_open_citations AS
 SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journal_sc, 'qux' AS author_sc
