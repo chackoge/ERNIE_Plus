@@ -1,4 +1,4 @@
--- Users = roles
+-- Users, a.k.a. "roles"
 SELECT *
   FROM pg_authid
  ORDER BY rolname;
@@ -40,6 +40,10 @@ GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
 ALTER USER :old_account RENAME TO :account;
 
 -- region End user creation
+/*
+Postgres does not have the concept of "group" or "user" roles. The concept is implied through the use of a role
+WITH LOGIN (user) and WITH NOLOGIN (group).
+*/
 CREATE USER :account WITH PASSWORD :'password';
 CREATE SCHEMA :account AUTHORIZATION :account;
 -- endregion

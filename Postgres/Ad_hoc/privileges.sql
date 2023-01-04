@@ -1,7 +1,13 @@
-CREATE ROLE devs;
-GRANT devs TO :user;
+/*
+Postgres does not have the concept of "group" or "user" roles. The concept is implied through the use of a role
+WITH LOGIN (user) and WITH NOLOGIN (group).
+*/
+CREATE ROLE developers WITH NOLOGIN;
+GRANT developers TO :user;
 
-ALTER TABLE :table OWNER TO devs;
+ALTER TABLE :table OWNER TO developers;
+ALTER MATERIALIZED VIEW :mv OWNER TO developers;
+ALTER TABLE :table OWNER TO CURRENT_USER;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
