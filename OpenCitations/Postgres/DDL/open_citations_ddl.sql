@@ -85,3 +85,10 @@ CREATE TRIGGER stg_open_citations_trg
   ON stg_open_citations
   FOR EACH ROW
 EXECUTE FUNCTION trg_transform_and_load_open_citation();
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
+
+GRANT ALL ON ALL TABLES IN SCHEMA public TO jenkins;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO jenkins;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO jenkins;
