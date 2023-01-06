@@ -70,6 +70,7 @@ SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journa
 \include_relative trg_transform_and_load_open_citation.sql
 
 -- 32h:35m
+-- TBD Refactor to a MATERIALIZED VIEW: some weird disk space errors were preventing that.
 CREATE TABLE open_citations_invalid
 TABLESPACE open_citations_tbs AS
 SELECT *

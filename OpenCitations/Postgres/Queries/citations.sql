@@ -1,3 +1,14 @@
+-- Delete self-citations
+DELETE
+  FROM open_citations
+ WHERE oci IN (
+   SELECT oci
+     FROM open_citations_invalid
+    WHERE
+      -- Self-citations
+      citing = cited
+ );
+
 SELECT oc.citing, oc.cited
   FROM open_citations oc
   JOIN cr_publications citing_cp
