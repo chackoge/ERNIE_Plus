@@ -9,6 +9,11 @@ DELETE
       citing = cited
  );
 
+-- Parallel citations
+SELECT *
+  FROM open_citations_invalid
+WHERE citing <> cited;
+
 SELECT oc.citing, oc.cited
   FROM open_citations oc
   JOIN cr_publications citing_cp
