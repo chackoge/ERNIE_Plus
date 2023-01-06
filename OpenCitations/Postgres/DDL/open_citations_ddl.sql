@@ -60,22 +60,8 @@ COMMENT ON COLUMN open_citations.time_span IS --
   'The time span of a citation, i.e. the interval between the publication of the citing entity and the publication
 of the cited entity.';
 
-ALTER TABLE open_citations OWNER TO developers;
-
--- Filters out parallel edges, and self-citations
-CREATE MATERIALIZED VIEW open_citations_valid AS
-SELECT *
-  FROM open_citations oc
- WHERE
-   -- Filter out self-citations
-   citing <> cited
-   AND
-   -- Filter out parallel edges. The greatest `oci` from all parallel edges is left.
-   NOT EXISTS(
-       SELECT 1 FROM open_citations oc2 WHERE oc2.citing = oc.citing AND oc2.cited = oc.cited AND oc2.oci > oc.oci)
-WITH NO DATA;
-
-ALTER MATERIALIZED VIEW open_citations_valid OWNER TO developers;
+ALTER TABLE open_citations
+  OWNER TO developers;
 
 CREATE OR REPLACE VIEW stg_open_citations AS
 SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journal_sc, 'qux' AS author_sc
@@ -83,12 +69,28 @@ SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, 'baz' AS journa
 
 \include_relative trg_transform_and_load_open_citation.sql
 
-DROP TRIGGER IF EXISTS stg_open_citations_trg ON stg_open_citations;
-CREATE TRIGGER stg_open_citations_trg
-  INSTEAD OF INSERT
-  ON stg_open_citations
-  FOR EACH ROW
-EXECUTE FUNCTION trg_transform_and_load_open_citation();
+-- 32h:35m
+CREATE TABLE open_citations_invalid
+TABLESPACE open_citations_tbs AS
+SELECT *
+  FROM open_citations oc
+ WHERE
+    -- Self-citations
+   citing = cited
+    OR
+    -- Parallel edges
+   EXISTS(SELECT 1 FROM open_citations oc2 WHERE oc2.citing = oc.citing AND oc2.cited = oc.cited AND oc2.oci <> oc.oci);
+
+COMMENT ON TABLE open_citations_invalid IS ---
+  'Parallel edges, and self-citations';
+
+ALTER TABLE open_citations_invalid
+  ADD CONSTRAINT open_citations_invalid_pk
+    PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs;
+
+CREATE INDEX IF NOT EXISTS oci_citing_i ON open_citations_invalid(citing) TABLESPACE open_citations_tbs;
+
+CREATE INDEX IF NOT EXISTS oci_cited_i ON open_citations_invalid(cited) TABLESPACE open_citations_tbs;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;

@@ -26,3 +26,10 @@ BEGIN
   END IF;
   RAISE 'Operation % is not supported', tg_op;
 END; $block$;
+
+DROP TRIGGER IF EXISTS stg_open_citations_trg ON stg_open_citations;
+CREATE TRIGGER stg_open_citations_trg
+  INSTEAD OF INSERT
+  ON stg_open_citations
+  FOR EACH ROW
+EXECUTE FUNCTION trg_transform_and_load_open_citation();
