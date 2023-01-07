@@ -89,9 +89,32 @@ ALTER TABLE open_citations_invalid
   ADD CONSTRAINT open_citations_invalid_pk
     PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs;
 
-CREATE INDEX IF NOT EXISTS oci_citing_i ON open_citations_invalid(citing) TABLESPACE open_citations_tbs;
+CREATE SEQUENCE open_citations_pubs_seq MINVALUE 0;
 
-CREATE INDEX IF NOT EXISTS oci_cited_i ON open_citations_invalid(cited) TABLESPACE open_citations_tbs;
+-- TBD Refactor to a MATERIALIZED VIEW: some weird disk space errors were preventing that.
+CREATE TABLE open_citations_pubs
+TABLESPACE open_citations_tbs AS
+  WITH cte AS (
+    SELECT DISTINCT doi
+      FROM (
+        SELECT citing AS doi
+          FROM open_citations --
+         UNION ALL
+        SELECT cited AS doi
+          FROM open_citations
+      ) sq
+  )
+SELECT cte.doi AS pub_doi, nextval('open_citations_pubs_seq') AS pub_iid
+  FROM cte;
+
+-- 4m:02s
+ALTER TABLE open_citations_pubs
+  ADD CONSTRAINT open_citations_pubs_pk
+    PRIMARY KEY (pub_doi) USING INDEX TABLESPACE open_citations_tbs;
+
+-- 20s
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citations_pubs(pub_iid) --
+  TABLESPACE open_citations_tbs;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
