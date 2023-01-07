@@ -83,37 +83,37 @@ SELECT *
    EXISTS(SELECT 1 FROM open_citations oc2 WHERE oc2.citing = oc.citing AND oc2.cited = oc.cited AND oc2.oci <> oc.oci);
 
 COMMENT ON TABLE open_citations_invalid IS ---
-  'Parallel edges, and self-citations';
+  'Self-citations and parallel edges';
 
 ALTER TABLE open_citations_invalid
   ADD CONSTRAINT open_citations_invalid_pk
     PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs;
 
-CREATE SEQUENCE open_citations_pubs_seq MINVALUE 0;
+CREATE SEQUENCE open_citation_pubs_seq MINVALUE 0;
 
 -- TBD Refactor to a MATERIALIZED VIEW: some weird disk space errors were preventing that.
-CREATE TABLE open_citations_pubs
+CREATE TABLE open_citation_pubs
 TABLESPACE open_citations_tbs AS
-  WITH cte AS (
-    SELECT DISTINCT doi
-      FROM (
-        SELECT citing AS doi
-          FROM open_citations --
-         UNION ALL
-        SELECT cited AS doi
-          FROM open_citations
-      ) sq
-  )
-SELECT cte.doi AS pub_doi, nextval('open_citations_pubs_seq') AS pub_iid
-  FROM cte;
+SELECT sq.doi, nextval('open_citation_pubs_seq') AS iid
+  FROM (
+    SELECT lower(citing) AS doi
+      FROM open_citations
+     UNION
+-- DISTINCT values only
+    SELECT lower(cited)
+      FROM open_citations
+  ) sq;
+
+COMMENT ON TABLE open_citation_pubs IS ---
+  'Unique publications (lower case DOIs) extracted from open_citations';
 
 -- 4m:02s
-ALTER TABLE open_citations_pubs
-  ADD CONSTRAINT open_citations_pubs_pk
-    PRIMARY KEY (pub_doi) USING INDEX TABLESPACE open_citations_tbs;
+ALTER TABLE open_citation_pubs
+  ADD CONSTRAINT open_citation_pubs_pk
+    PRIMARY KEY (doi) USING INDEX TABLESPACE open_citations_tbs;
 
 -- 20s
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citations_pubs(pub_iid) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citations_pubs(iid) --
   TABLESPACE open_citations_tbs;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
