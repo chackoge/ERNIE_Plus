@@ -95,12 +95,12 @@ CREATE SEQUENCE open_citation_pubs_seq MINVALUE 0;
 CREATE TABLE open_citation_pubs
 TABLESPACE open_citations_tbs AS
 SELECT sq.doi, nextval('open_citation_pubs_seq') AS iid
-  FROM (
-    SELECT lower(citing) AS doi
+  FROM ( -- DOI case can be normalized, e.g. lower-cased, but this yields the same number of publications
+    SELECT citing AS doi
       FROM open_citations
      UNION
 -- DISTINCT values only
-    SELECT lower(cited)
+    SELECT cited
       FROM open_citations
   ) sq;
 
