@@ -113,7 +113,7 @@ ALTER TABLE open_citation_pubs
     PRIMARY KEY (doi) USING INDEX TABLESPACE open_citations_tbs;
 
 -- 20s
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citations_pubs(iid) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citation_pubs(iid) --
   TABLESPACE open_citations_tbs;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
