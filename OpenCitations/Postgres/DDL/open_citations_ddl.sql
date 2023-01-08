@@ -107,14 +107,14 @@ SELECT sq.doi, nextval('open_citation_pubs_seq') AS iid
 COMMENT ON TABLE open_citation_pubs IS ---
   'Unique publications with original DOIs extracted from open_citations';
 
--- 4m:02s
 ALTER TABLE open_citation_pubs
   ADD CONSTRAINT open_citation_pubs_pk
     PRIMARY KEY (doi) USING INDEX TABLESPACE open_citations_tbs;
+-- 1m:01s–4m:02s
 
--- 20s
 CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citation_pubs(iid) --
   TABLESPACE open_citations_tbs;
+-- 20s
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
