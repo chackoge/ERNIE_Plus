@@ -105,7 +105,7 @@ SELECT sq.doi, nextval('open_citation_pubs_seq') AS iid
   ) sq;
 
 COMMENT ON TABLE open_citation_pubs IS ---
-  'Unique publications (lower case DOIs) extracted from open_citations';
+  'Unique publications with original DOIs extracted from open_citations';
 
 -- 4m:02s
 ALTER TABLE open_citation_pubs
