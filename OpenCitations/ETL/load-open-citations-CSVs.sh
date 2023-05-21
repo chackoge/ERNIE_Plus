@@ -45,7 +45,7 @@ EXIT STATUS
     1-100 The number of failed load jobs. The process stops gracefully on the first error.
     255   Usage help is requested
 
-v2.1.0                                      October 2022                                      Created by Dima Korobskiy
+v3.0.0                                        May 2023                                        Created by Dima Korobskiy
 HEREDOC
   exit 1
 }
@@ -61,6 +61,7 @@ while getopts ch OPT; do
       ;;
   esac
 done
+echo -e "\n# \`$0${*+ }$*\`: run by \`${USER:-${USERNAME:-${LOGNAME:-UID #$UID}}}@${HOSTNAME}\`, in \`${PWD}\` #\n"
 shift $((OPTIND - 1))
 
 # Process positional parameters
@@ -70,8 +71,6 @@ if ! command -v parallel > /dev/null; then
   echo "Please install GNU parallel"
   exit 1
 fi
-
-echo -e "\n# $SCRIPT_FULL_NAME: run by \`${USER:-${USERNAME:-${LOGNAME:-UID #$UID}}}@${HOSTNAME}\`, in \`${PWD}\` #\n"
 
 load_csv() {
   set -e
@@ -92,10 +91,6 @@ load_csv() {
   absolute_file_dir=$(cd "${dir}" && pwd)
   absolute_file_path="${absolute_file_dir}/${name_with_ext}"
 
-  # Ignoring extra columns `journal_sc, author_sc` from `oci, citing, cited, creation, timespan, journal_sc, author_sc`
-  # could be done via e.g., `COPY ... FROM PROGRAM 'cut -d "," -f 1-5 ':'file'''`, but it is probably not worth it
-  # performance-wise.
-
   # language=PostgresPLSQL
   psql -v ON_ERROR_STOP=on << HEREDOC
     \\copy stg_open_citations(oci, citing, cited, creation, timespan, journal_sc, author_sc) from '${absolute_file_path}' (FORMAT CSV, HEADER ON)
@@ -115,3 +110,7 @@ echo "Starting data load: appending all records to existing Open Citations data.
 find "$DATA_DIR" -maxdepth 1 -type f -name '*.csv' -print0 | \
   parallel -0 -j $MAX_PARALLEL_JOBS --halt soon,fail=1 --line-buffer \
     --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
+
+psql -v ON_ERROR_STOP=on << HEREDOC
+  REFRESH MATERIALIZED VIEW open_citation_pubs;
+HEREDOC

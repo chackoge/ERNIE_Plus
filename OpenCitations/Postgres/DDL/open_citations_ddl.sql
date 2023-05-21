@@ -17,12 +17,11 @@ CREATE TABLE open_citations (
   author_sc BOOLEAN,
   citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
   cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
-)
-TABLESPACE open_citations_tbs;
+) TABLESPACE open_citations_tbs;
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations(citing, cited) TABLESPACE open_citations_tbs;
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations (citing, cited) TABLESPACE open_citations_tbs;
 
-CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) TABLESPACE open_citations_tbs;
+CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE open_citations_tbs;
 
 --CREATE INDEX IF NOT EXISTS oc_citing_i ON open_citations(citing) TABLESPACE open_citations_tbs;
 
@@ -64,9 +63,11 @@ CREATE TABLE open_citation_duplicates (
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
   citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
-)
-TABLESPACE open_citations_tbs;
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
+  CONSTRAINT open_citation_duplicates_pk
+    PRIMARY KEY (oci, citing, cited, creation_date, time_span, journal_sc,
+                 author_sc) USING INDEX TABLESPACE open_citations_tbs
+) TABLESPACE open_citations_tbs;
 
 COMMENT ON TABLE open_citation_duplicates IS 'Citations that duplicate an OCI in open_citations';
 
@@ -74,9 +75,7 @@ ALTER TABLE open_citation_duplicates
   OWNER TO devs;
 
 CREATE TABLE open_citation_parallels (
-  oci VARCHAR(1000)
-    CONSTRAINT open_citation_duplicates_pk
-      PRIMARY KEY USING INDEX TABLESPACE open_citations_tbs,
+  oci VARCHAR(1000),
   citing VARCHAR(400),
   cited VARCHAR(400),
   creation_date DATE,
@@ -84,9 +83,10 @@ CREATE TABLE open_citation_parallels (
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
   citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
-)
-TABLESPACE open_citations_tbs;
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
+  CONSTRAINT open_citation_parallels_pk
+    PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs
+) TABLESPACE open_citations_tbs;
 
 COMMENT ON TABLE open_citation_parallels IS 'Citations that parallel (citing -> cited) in open_citations';
 
@@ -94,9 +94,7 @@ ALTER TABLE open_citation_parallels
   OWNER TO devs;
 
 CREATE TABLE open_citation_self (
-  oci VARCHAR(1000)
-    CONSTRAINT open_citation_self_pk
-      PRIMARY KEY USING INDEX TABLESPACE open_citations_tbs,
+  oci VARCHAR(1000),
   citing VARCHAR(400),
   cited VARCHAR(400),
   creation_date DATE,
@@ -104,9 +102,10 @@ CREATE TABLE open_citation_self (
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
   citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
-)
-TABLESPACE open_citations_tbs;
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
+  CONSTRAINT open_citation_self_pk
+    PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs
+) TABLESPACE open_citations_tbs;
 
 COMMENT ON TABLE open_citation_self IS 'Citations with citing = cited';
 
@@ -114,9 +113,7 @@ ALTER TABLE open_citation_self
   OWNER TO devs;
 
 CREATE TABLE open_citation_loops (
-  oci VARCHAR(1000)
-    CONSTRAINT open_citation_loops_pk
-      PRIMARY KEY USING INDEX TABLESPACE open_citations_tbs,
+  oci VARCHAR(1000),
   citing VARCHAR(400),
   cited VARCHAR(400),
   creation_date DATE,
@@ -124,9 +121,10 @@ CREATE TABLE open_citation_loops (
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
   citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
-)
-TABLESPACE open_citations_tbs;
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
+  CONSTRAINT open_citation_loops_pk
+    PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs
+) TABLESPACE open_citations_tbs;
 
 COMMENT ON TABLE open_citation_loops IS 'Citations that loop back (cited -> citing) in open_citations';
 
@@ -134,8 +132,8 @@ ALTER TABLE open_citation_loops
   OWNER TO devs;
 
 CREATE OR REPLACE VIEW stg_open_citations AS
-SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, journal_sc, author_sc
-  FROM open_citations;
+SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, journal_sc, author_sc, 'baz' AS source
+FROM open_citations;
 
 \include_relative trg_transform_and_load_open_citation.sql
 
@@ -146,14 +144,15 @@ CREATE MATERIALIZED VIEW open_citation_pubs
   --CREATE TABLE open_citation_pubs
   TABLESPACE open_citations_tbs AS
 SELECT sq.doi, nextval('open_citation_pubs_seq') AS iid
-  FROM (
-    SELECT citing AS doi
-      FROM open_citations
-     UNION
--- DISTINCT values only
-    SELECT cited
-      FROM open_citations
-  ) sq;
+FROM (
+       SELECT citing AS doi
+       FROM open_citations
+       UNION
+       -- DISTINCT values only
+       SELECT cited
+       FROM open_citations
+     ) sq
+WITH NO DATA;
 
 COMMENT ON MATERIALIZED VIEW open_citation_pubs IS ---
   'Unique publications with original DOIs extracted from open_citations';
@@ -165,9 +164,12 @@ ALTER TABLE open_citation_pubs
 -- 1m:01s–4m:02s
 */
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citation_pubs(iid) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citation_pubs (iid) --
   TABLESPACE open_citations_tbs;
 -- 20s
+
+ALTER MATERIALIZED VIEW open_citation_pubs
+  OWNER TO devs;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
