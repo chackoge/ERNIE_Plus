@@ -9,10 +9,10 @@
       </value>
     </option>
     <option name="FORMATTER_TAGS_ENABLED" value="true" />
-    <DB2CodeStyleSettings version="2">
+    <DB2CodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -72,10 +72,10 @@
       <option name="INDEX_NAME_TEMPLATE" value="{table}_{columns}_{unique?uk:i}" />
       <option name="FOREIGN_KEY_NAME_TEMPLATE" value="{table}_{columns}_fk" />
     </DB2CodeStyleSettings>
-    <DerbyCodeStyleSettings version="2">
+    <DerbyCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -135,10 +135,10 @@
       <option name="INDEX_NAME_TEMPLATE" value="{table}_{columns}_{unique?uk:i}" />
       <option name="FOREIGN_KEY_NAME_TEMPLATE" value="{table}_{columns}_fk" />
     </DerbyCodeStyleSettings>
-    <H2CodeStyleSettings version="2">
+    <H2CodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -191,10 +191,10 @@
       <option name="INDEX_NAME_TEMPLATE" value="{table}_{columns}_{unique?uk:i}" />
       <option name="FOREIGN_KEY_NAME_TEMPLATE" value="{table}_{columns}_fk" />
     </H2CodeStyleSettings>
-    <HSQLCodeStyleSettings version="2">
+    <HSQLCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -275,9 +275,9 @@
       <option name="JD_KEEP_EMPTY_EXCEPTION" value="false" />
       <option name="JD_KEEP_EMPTY_RETURN" value="false" />
     </JavaCodeStyleSettings>
-    <MSSQLCodeStyleSettings version="2">
+    <MSSQLCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="QUOTE_IDENTIFIER" value="1" />
       <option name="QUERY_SECTION_1ST_WORD_ALIGN" value="8" />
@@ -336,10 +336,10 @@
       <option name="INDEX_NAME_TEMPLATE" value="{table}_{columns}_{unique?uk:i}" />
       <option name="FOREIGN_KEY_NAME_TEMPLATE" value="{table}_{columns}_fk" />
     </MSSQLCodeStyleSettings>
-    <MySQLCodeStyleSettings version="2">
+    <MySQLCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -392,10 +392,10 @@
       <option name="INDEX_NAME_TEMPLATE" value="{table}_{columns}_{unique?uk:i}" />
       <option name="FOREIGN_KEY_NAME_TEMPLATE" value="{table}_{columns}_fk" />
     </MySQLCodeStyleSettings>
-    <OracleCodeStyleSettings version="2">
+    <OracleCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -454,10 +454,10 @@
       <option name="INDEX_NAME_TEMPLATE" value="{table}_{columns}_{unique?uk:i}" />
       <option name="FOREIGN_KEY_NAME_TEMPLATE" value="{table}_{columns}_fk" />
     </OracleCodeStyleSettings>
-    <PostgresCodeStyleSettings version="2">
+    <PostgresCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -519,10 +519,10 @@
       <option name="INDEX_NAME_TEMPLATE" value="{table}_{columns}_{unique?uk:i}" />
       <option name="FOREIGN_KEY_NAME_TEMPLATE" value="{table}_{columns}_fk" />
     </PostgresCodeStyleSettings>
-    <SQLiteCodeStyleSettings version="2">
+    <SQLiteCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -580,9 +580,9 @@
       <option name="SWITCH_CASES_INDENTED" value="true" />
       <option name="REDIRECT_FOLLOWED_BY_SPACE" value="true" />
     </Shell_Script>
-    <SqlCodeStyleSettings version="2">
+    <SqlCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -653,10 +653,10 @@
       <option name="WRAP_INSIDE_ARGUMENT_DEFINITION" value="2" />
       <option name="NEW_LINE_AFTER_SELECT_ITEM" value="false" />
     </SqlCodeStyleSettings>
-    <SybaseCodeStyleSettings version="2">
+    <SybaseCodeStyleSettings version="6">
+      <option name="myVersion" value="6" />
       <option name="USE_GENERIC_STYLE" value="true" />
       <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
       <option name="TYPE_CASE" value="3" />
       <option name="IDENTIFIER_CASE" value="1" />
       <option name="QUOTE_IDENTIFIER" value="1" />
@@ -723,7 +723,6 @@
     </TypeScriptCodeStyleSettings>
     <XML>
       <option name="XML_ALIGN_ATTRIBUTES" value="false" />
-      <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
     </XML>
     <codeStyleSettings language="CSS">
       <indentOptions>

@@ -6,7 +6,7 @@
   <component name="ProjectResources">
     <resource url="http://www.elsevier.com/xml/xocs/dtd" location="$PROJECT_DIR$/Scopus/XML_Schemas/xocs-ani513.xsd" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Anaconda 3" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" project-jdk-name="Python 3 (py3venv)" project-jdk-type="Python SDK" />
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
