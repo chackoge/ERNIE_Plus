@@ -33,20 +33,6 @@ AS
 $block$
 BEGIN
   IF (tg_op = 'INSERT') THEN
-    INSERT INTO open_citation_self(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
-    SELECT new.oci,
-           new.citing,
-           new.cited,
-           to_date(new.creation),
-           to_interval(new.timespan),
-           new.author_sc,
-           new.journal_sc
-    FROM open_citations oc
-    WHERE lower(new.citing) = lower(new.cited);
-    IF FOUND THEN
-      RETURN NULL;
-    END IF;
-
     INSERT INTO open_citation_duplicates(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
     SELECT new.oci,
            new.citing,
@@ -56,7 +42,23 @@ BEGIN
            new.author_sc,
            new.journal_sc
     FROM open_citations oc
-    WHERE oc.oci = new.oci;
+    WHERE oc.oci = new.oci
+    ON CONFLICT DO NOTHING;
+    IF FOUND THEN
+      RETURN NULL;
+    END IF;
+
+    INSERT INTO open_citation_self(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
+    SELECT new.oci,
+           new.citing,
+           new.cited,
+           to_date(new.creation),
+           to_interval(new.timespan),
+           new.author_sc,
+           new.journal_sc
+    FROM open_citations oc
+    WHERE lower(new.citing) = lower(new.cited)
+    ON CONFLICT DO NOTHING;
     IF FOUND THEN
       RETURN NULL;
     END IF;
@@ -71,7 +73,8 @@ BEGIN
            new.journal_sc
     FROM open_citations oc
     WHERE oc.citing = lower(new.citing)
-      AND oc.cited = lower(new.cited);
+      AND oc.cited = lower(new.cited)
+    ON CONFLICT DO NOTHING;
     IF FOUND THEN
       RETURN NULL;
     END IF;
@@ -86,7 +89,8 @@ BEGIN
            new.journal_sc
     FROM open_citations oc
     WHERE oc.citing = lower(new.cited)
-      AND oc.cited = lower(new.citing);
+      AND oc.cited = lower(new.citing)
+    ON CONFLICT DO NOTHING;
     IF FOUND THEN
       RETURN NULL;
     END IF;
