@@ -102,7 +102,9 @@ BEGIN
             to_date(new.creation),
             to_interval(new.timespan),
             new.author_sc,
-            new.journal_sc);
+            new.journal_sc)
+    ON CONFLICT DO NOTHING;
+
     /*
     A nonnull return value is used to signal that the trigger performed the necessary data modifications in the view.
     This will cause the count of the number of rows affected by the command to be incremented

@@ -2,12 +2,14 @@
 set -e
 set -o pipefail
 
+readonly VER=3.0.0
+
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
 
 # `\\copy` of large Open Citations CSVs (1.5-1.8 G) consumes a lot of memory, e.g. ≈ 100 G for 32 jobs.
 # When the # of jobs is too large the entire machine might get overloaded.
-readonly MAX_PARALLEL_JOBS=20
+max_parallel_jobs=1
 
 usage() {
   cat <<HEREDOC
@@ -17,7 +19,7 @@ NAME
 
 SYNOPSIS
 
-    $SCRIPT_FULL_NAME [-c] [data_directory]
+    $SCRIPT_FULL_NAME [-c] [-j parallel_jobs] [data_directory]
     $SCRIPT_FULL_NAME -h: display this help
 
 DESCRIPTION
@@ -31,11 +33,11 @@ DESCRIPTION
 
     -c              clean (remove) loaded CSVs: recommended to simplify error recovery
 
+    -j              maximum number of parallel jobs [DEFAULT: 1]
+
 ENVIRONMENT
 
     * GNU \`parallel\` utility is required.
-
-    * The maximum number of parallel job slots = $MAX_PARALLEL_JOBS.
 
 EXIT STATUS
 
@@ -45,23 +47,26 @@ EXIT STATUS
     1-100 The number of failed load jobs. The process stops gracefully on the first error.
     255   Usage help is requested
 
-v3.0.0                                        May 2023                                        Created by Dima Korobskiy
+v$VER
 HEREDOC
   exit 1
 }
 
 # If a colon follows a character, the option is expected to have an argument
-while getopts ch OPT; do
+while getopts cj:h OPT; do
   case "$OPT" in
     c)
       declare -rx REMOVE_LOADED=true
+      ;;
+    j)
+      max_parallel_jobs=$OPT
       ;;
     *) # -h or `?`: an unknown option
       usage
       ;;
   esac
 done
-echo -e "\n# \`$0${*+ }$*\`: run by \`${USER:-${USERNAME:-${LOGNAME:-UID #$UID}}}@${HOSTNAME}\`, in \`${PWD}\` #\n"
+echo -e "\n# \`$0${*+ }$*\` v$VER: run by \`${USER:-${USERNAME:-${LOGNAME:-UID #$UID}}}@${HOSTNAME}\` in \`${PWD}\` #\n"
 shift $((OPTIND - 1))
 
 # Process positional parameters
@@ -108,9 +113,10 @@ echo "Starting data load: appending all records to existing Open Citations data.
 # Piping to `parallel` is done by design here to handle a large number of files potentially
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
 find "$DATA_DIR" -maxdepth 1 -type f -name '*.csv' -print0 | \
-  parallel -0 -j $MAX_PARALLEL_JOBS --halt soon,fail=1 --line-buffer \
+  parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 --line-buffer \
     --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
 
+# language=PostgresPLSQL
 psql -v ON_ERROR_STOP=on << HEREDOC
   REFRESH MATERIALIZED VIEW open_citation_pubs;
 HEREDOC
