@@ -28,8 +28,7 @@ DESCRIPTION
 
     The following options are available:
 
-    data_directory  directory with Open Citations *.csv files to process (non-recursively: subdirs are not processed)
-                    default=.
+    data_directory  directory with Open Citations *.csv files to process (non-recursively) [DEFAULT: .]
 
     -c              clean (remove) loaded CSVs: recommended to simplify error recovery
 
@@ -59,7 +58,7 @@ while getopts cj:h OPT; do
       declare -rx REMOVE_LOADED=true
       ;;
     j)
-      max_parallel_jobs=$OPT
+      max_parallel_jobs=$OPTARG
       ;;
     *) # -h or `?`: an unknown option
       usage
