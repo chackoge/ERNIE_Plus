@@ -151,6 +151,8 @@ FROM open_citations;
 
 CREATE SEQUENCE open_citation_pubs_seq MINVALUE 0;
 
+ALTER SEQUENCE open_citation_pubs_seq OWNER TO devs;
+
 -- TBD Refactor to a MATERIALIZED VIEW: some weird disk space errors were preventing that.
 CREATE MATERIALIZED VIEW open_citation_pubs
   --CREATE TABLE open_citation_pubs
