@@ -29,7 +29,7 @@ DESCRIPTION
     The following options are available:
 
     data_directory  directory with Open Citations *.csv files to process (non-recursively) [DEFAULT: .]
-                    The CSV files in it must be readable by \`postgres\` user.
+                    The CSV files in it must be readable by the executing user.
 
     -c              clean (remove) loaded CSVs: recommended to simplify error recovery
                     The CSV files in it must be writeable by the executing user.
@@ -39,6 +39,12 @@ DESCRIPTION
 ENVIRONMENT
 
     * GNU \`parallel\` utility is required.
+
+    * Local Postgres must have a user with the name = {OS executing user} and a Postgres role with the provileges:
+      * \`pg_read_server_files\`
+      * INSERT on \`public.*open_citations*\` tables and views
+      * EXECUTE on \`public.to_date()\` and \`public.to_interval()\` functions
+      * CREATE on SCHEMA \`public\`
 
 EXIT STATUS
 
