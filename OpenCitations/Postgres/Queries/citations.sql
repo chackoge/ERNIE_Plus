@@ -1,31 +1,27 @@
--- Delete self-citations
-DELETE
-  FROM open_citations
- WHERE oci IN (
-   SELECT oci
-     FROM open_citations_invalid
-    WHERE
-      -- Self-citations
-      citing = cited
- );
+\set ON_ERROR_STOP on
+\set ECHO all
 
--- Parallel citations
+\if :{?schema}
+SET search_path = :schema;
+\endif
+
+-- JetBrains IDEs: start execution from here
+SET TIMEZONE = 'US/Eastern';
+
+--region Check for separation in `open_citations*` tables
 SELECT *
-  FROM open_citations_invalid
-WHERE citing <> cited;
+FROM open_citation_duplicates
+WHERE oci IN (SELECT oci FROM open_citations);
 
-SELECT oc.citing, oc.cited
-  FROM open_citations oc
-  JOIN cr_publications citing_cp
-       ON citing_cp.doi = oc.citing
-  JOIN cr_publications cited_cp
-       ON cited_cp.doi = oc.cited;
+SELECT *
+FROM open_citation_loops
+WHERE oci IN (SELECT oci FROM open_citations);
 
-INSERT INTO open_citations(oci, citing, cited, time_span, creation_date)
-SELECT oci, citing, cited, time_span, creation_date
-  FROM ernieplus.public.open_citations
- LIMIT 1
-    ON CONFLICT (oci) DO UPDATE SET citing = excluded.citing,
-      cited = excluded.cited,
-      time_span = excluded.time_span,
-      creation_date = excluded.creation_date;
+SELECT *
+FROM open_citation_parallels
+WHERE oci IN (SELECT oci FROM open_citations);
+
+SELECT *
+FROM open_citation_self
+WHERE oci IN (SELECT oci FROM open_citations);
+--endregion

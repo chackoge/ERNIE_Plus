@@ -28,7 +28,6 @@ RETURN CASE
          ELSE cast(signed_iso_8601_interval AS INTERVAL)
   END;
 
--- trg_transform_and_load_open_citation(): routine
 CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() --
   RETURNS TRIGGER
   LANGUAGE plpgsql --
@@ -46,23 +45,24 @@ BEGIN
            new.journal_sc
     FROM open_citations oc
     WHERE oc.oci = new.oci
-    ON CONFLICT DO NOTHING;
+    ON CONFLICT(oci, citing, cited, creation_date, time_span, author_sc, journal_sc) DO UPDATE
+      -- UPDATE is needed to return FOUND in case of a conflict
+      SET oci = excluded.oci;
     IF FOUND THEN
       RETURN NULL;
     END IF;
 
-    INSERT INTO open_citation_self(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
-    SELECT new.oci,
-           new.citing,
-           new.cited,
-           to_date(new.creation),
-           to_interval(new.timespan),
-           new.author_sc,
-           new.journal_sc
-    FROM new
-    WHERE lower(new.citing) = lower(new.cited)
-    ON CONFLICT DO NOTHING;
-    IF FOUND THEN
+    IF lower(new.citing) = lower(new.cited) THEN
+      INSERT INTO open_citation_self(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
+      VALUES (new.oci,
+              new.citing,
+              new.cited,
+              to_date(new.creation),
+              to_interval(new.timespan),
+              new.author_sc,
+              new.journal_sc)
+      ON CONFLICT DO NOTHING;
+
       RETURN NULL;
     END IF;
 
@@ -77,7 +77,13 @@ BEGIN
     FROM open_citations oc
     WHERE oc.citing = lower(new.citing)
       AND oc.cited = lower(new.cited)
-    ON CONFLICT DO NOTHING;
+    ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
+      SET citing        = excluded.citing,
+          cited         = excluded.cited,
+          creation_date = excluded.creation_date,
+          time_span     = excluded.time_span,
+          author_sc     = excluded.author_sc,
+          journal_sc    = excluded.journal_sc;
     IF FOUND THEN
       RETURN NULL;
     END IF;
@@ -93,7 +99,13 @@ BEGIN
     FROM open_citations oc
     WHERE oc.citing = lower(new.cited)
       AND oc.cited = lower(new.citing)
-    ON CONFLICT DO NOTHING;
+    ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
+      SET citing        = excluded.citing,
+          cited         = excluded.cited,
+          creation_date = excluded.creation_date,
+          time_span     = excluded.time_span,
+          author_sc     = excluded.author_sc,
+          journal_sc    = excluded.journal_sc;
     IF FOUND THEN
       RETURN NULL;
     END IF;
@@ -106,7 +118,13 @@ BEGIN
             to_interval(new.timespan),
             new.author_sc,
             new.journal_sc)
-    ON CONFLICT DO NOTHING;
+    ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
+      SET citing        = excluded.citing,
+          cited         = excluded.cited,
+          creation_date = excluded.creation_date,
+          time_span     = excluded.time_span,
+          author_sc     = excluded.author_sc,
+          journal_sc    = excluded.journal_sc;
     IF NOT FOUND THEN
       RETURN NULL;
     END IF;

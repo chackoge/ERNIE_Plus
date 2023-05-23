@@ -9,3 +9,4 @@ SET search_path = :schema;
 SET TIMEZONE = 'US/Eastern';
 
 ALTER TABLE open_citations SET LOGGED;
+ANALYZE VERBOSE open_citations;
