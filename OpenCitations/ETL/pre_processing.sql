@@ -8,6 +8,6 @@ SET search_path = :schema;
 -- JetBrains IDEs: start execution from here
 SET TIMEZONE = 'US/Eastern';
 
--- ALTER TABLE open_citations SET UNLOGGED;
+ALTER TABLE open_citations SET UNLOGGED;
 
--- DROP INDEX IF EXISTS oc_cited_i;
+DROP INDEX IF EXISTS oc_cited_i;
