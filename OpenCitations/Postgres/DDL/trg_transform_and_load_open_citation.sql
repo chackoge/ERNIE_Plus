@@ -118,6 +118,7 @@ BEGIN
             to_interval(new.timespan),
             new.author_sc,
             new.journal_sc)
+    -- CONFLICT should not be happening here because we checked that above and inserted into `open_citation_duplicates`
     ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
       SET citing        = excluded.citing,
           cited         = excluded.cited,
