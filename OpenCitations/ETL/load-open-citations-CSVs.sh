@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=3.0.0
+readonly VER=3.1.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -76,6 +76,13 @@ if ! command -v parallel > /dev/null; then
   exit 1
 fi
 
+readonly SCRIPT_FILENAME=$0
+if [[ "${SCRIPT_FILENAME}" != */* ]]; then
+  SCRIPT_FILENAME=./${SCRIPT_FILENAME}
+fi
+# Remove shortest /* suffix
+readonly SCRIPT_DIR=${SCRIPT_FILENAME%/*}
+
 load_csv() {
   set -e
   set -o pipefail
@@ -109,13 +116,12 @@ export -f load_csv
 
 echo "Starting data load: appending all records to existing Open Citations data."
 
+psql -f "$SCRIPT_DIR/pre_processing.sql"
+
 # Piping to `parallel` is done by design here to handle a large number of files potentially
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
 find "$DATA_DIR" -maxdepth 1 -type f -name '*.csv' -print0 | \
   parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 --line-buffer \
     --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
 
-# language=PostgresPLSQL
-psql -v ON_ERROR_STOP=on << HEREDOC
-  REFRESH MATERIALIZED VIEW open_citation_pubs;
-HEREDOC
+psql -f "$SCRIPT_DIR/post_processing.sql"

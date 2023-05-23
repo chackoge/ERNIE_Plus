@@ -5,6 +5,9 @@
 SET search_path = :schema;
 \endif
 
+-- JetBrains IDEs: start execution from here
+SET TIMEZONE = 'US/Eastern';
+
 CREATE OR REPLACE FUNCTION to_date(date_string TEXT) --
   RETURNS DATE
   /**
@@ -23,7 +26,7 @@ CREATE OR REPLACE FUNCTION to_interval(signed_iso_8601_interval TEXT) --
 RETURN CASE
          WHEN left(signed_iso_8601_interval, 1) = '-' THEN -cast(substr(signed_iso_8601_interval, 2) AS INTERVAL)
          ELSE cast(signed_iso_8601_interval AS INTERVAL)
-       END;
+  END;
 
 -- trg_transform_and_load_open_citation(): routine
 CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() --
@@ -56,7 +59,7 @@ BEGIN
            to_interval(new.timespan),
            new.author_sc,
            new.journal_sc
-    FROM open_citations oc
+    FROM new
     WHERE lower(new.citing) = lower(new.cited)
     ON CONFLICT DO NOTHING;
     IF FOUND THEN
@@ -104,13 +107,16 @@ BEGIN
             new.author_sc,
             new.journal_sc)
     ON CONFLICT DO NOTHING;
-
+    IF NOT FOUND THEN
+      RETURN NULL;
+    END IF;
     /*
     A nonnull return value is used to signal that the trigger performed the necessary data modifications in the view.
     This will cause the count of the number of rows affected by the command to be incremented
     */
     RETURN new;
   END IF;
+
   RAISE 'Operation % is not supported', tg_op;
 END;
 $block$;
