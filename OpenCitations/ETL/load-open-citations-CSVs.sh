@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=3.1.0
+readonly VER=3.2.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -29,8 +29,10 @@ DESCRIPTION
     The following options are available:
 
     data_directory  directory with Open Citations *.csv files to process (non-recursively) [DEFAULT: .]
+                    The CSV files in it must be readable by \`postgres\` user.
 
     -c              clean (remove) loaded CSVs: recommended to simplify error recovery
+                    The CSV files in it must be writeable by the executing user.
 
     -j              maximum number of parallel jobs [DEFAULT: 1]
 
@@ -104,7 +106,8 @@ load_csv() {
 
   # language=PostgresPLSQL
   psql -v ON_ERROR_STOP=on << HEREDOC
-    \\copy stg_open_citations(oci, citing, cited, creation, timespan, journal_sc, author_sc) from '${absolute_file_path}' (FORMAT CSV, HEADER ON)
+    COPY stg_open_citations (oci, citing, cited, creation, timespan, journal_sc, author_sc)
+    FROM '${absolute_file_path}' (FORMAT CSV, HEADER ON);
 HEREDOC
 
   echo "Loaded ${file}"
