@@ -32,7 +32,7 @@ DESCRIPTION
                     The CSV files in it must be readable by the executing user.
 
     -c              clean (remove) loaded CSVs: recommended to simplify error recovery
-                    The CSV files in it must be writeable by the executing user.
+                    The CSV files in this case must be writeable by the executing user.
 
     -j              maximum number of parallel jobs [DEFAULT: 1]
 
