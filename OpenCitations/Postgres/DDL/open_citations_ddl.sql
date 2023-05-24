@@ -150,7 +150,6 @@ FROM open_citations;
 \include_relative trg_transform_and_load_open_citation.sql
 
 CREATE SEQUENCE open_citation_pubs_seq MINVALUE 0;
-
 ALTER SEQUENCE open_citation_pubs_seq OWNER TO devs;
 
 -- TBD Refactor to a MATERIALIZED VIEW: some weird disk space errors were preventing that.

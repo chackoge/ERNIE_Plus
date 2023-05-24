@@ -40,7 +40,7 @@ ENVIRONMENT
 
     * GNU \`parallel\` utility is required.
 
-    * Local Postgres must have a user with the name = {OS executing user} and a Postgres role with the provileges:
+    * Local Postgres must have a user with the name = {OS executing user} and a Postgres role with these privileges:
       * \`pg_read_server_files\`
       * INSERT on \`public.*open_citations*\` tables and views
       * EXECUTE on \`public.to_date()\` and \`public.to_interval()\` functions
