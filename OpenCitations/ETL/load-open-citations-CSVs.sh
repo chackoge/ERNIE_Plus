@@ -110,7 +110,7 @@ load_csv() {
   cd chunks
   # Strip header and split into header-less chunks
   tail -n +2 "../${name_with_ext}" | split --lines="$chunk_size" --numeric-suffixes=1 --elide-empty-files \
-    --additional-suffix=.csv --verbose - "${name_with_ext}.part"
+    --additional-suffix=.csv - "${name_with_ext}.part"
 
   local absolute_chunk_dir
   absolute_chunk_dir=$(pwd)
