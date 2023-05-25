@@ -132,7 +132,7 @@ if [[ ! -d chunks ]]; then
   mkdir -p chunks
   # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
   find . -maxdepth 1 -name '*.csv' -type f -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
-    --verbose --line-buffer --tagstring '|job# {#} of {= $_=total_jobs() =} slot# {%}|' \
+    --verbose --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' \
       "tail -n +2 {} | split --lines=$chunk_size --numeric-suffixes=1 --elide-empty-files --additional-suffix=.csv \
         - chunks/{}.part"
 fi
@@ -142,7 +142,7 @@ cd chunks
 # Piping to `parallel` is done by design here to handle a large number of files potentially
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
 find ~+ -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
-  --line-buffer --tagstring '|job# {#} of {= $_=total_jobs() =} slot# {%}|' load_csv '{}'
+  --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' load_csv '{}'
 cd -
 
 # Successfully loaded all input files
