@@ -9,8 +9,8 @@ CREATE TABLE open_citations (
   oci VARCHAR(1000)
     CONSTRAINT open_citations_pk
       PRIMARY KEY USING INDEX TABLESPACE open_citations_tbs,
-  citing VARCHAR(400),
-  cited VARCHAR(400),
+  citing VARCHAR(400) NOT NULL,
+  cited VARCHAR(400) NOT NULL,
   creation_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
@@ -96,8 +96,8 @@ ALTER TABLE open_citation_loops
 
 CREATE TABLE open_citation_parallels (
   oci VARCHAR(1000),
-  citing VARCHAR(400),
-  cited VARCHAR(400),
+  citing VARCHAR(400) NOT NULL,
+  cited VARCHAR(400) NOT NULL,
   creation_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
@@ -115,8 +115,8 @@ ALTER TABLE open_citation_parallels
 
 CREATE TABLE open_citation_self (
   oci VARCHAR(1000),
-  citing VARCHAR(400),
-  cited VARCHAR(400),
+  citing VARCHAR(400) NOT NULL,
+  cited VARCHAR(400) NOT NULL,
   creation_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
@@ -134,8 +134,8 @@ ALTER TABLE open_citation_self
 
 CREATE TABLE open_citation_loops (
   oci VARCHAR(1000),
-  citing VARCHAR(400),
-  cited VARCHAR(400),
+  citing VARCHAR(400) NOT NULL,
+  cited VARCHAR(400) NOT NULL,
   creation_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,

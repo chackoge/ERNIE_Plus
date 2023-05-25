@@ -37,18 +37,18 @@ BEGIN
   IF (tg_op = 'INSERT') THEN
     INSERT INTO open_citation_duplicates(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
     SELECT new.oci,
-           new.citing,
-           new.cited,
-           to_date(new.creation),
-           to_interval(new.timespan),
-           new.author_sc,
-           new.journal_sc
+      new.citing,
+      new.cited,
+      to_date(new.creation),
+      to_interval(new.timespan),
+      new.author_sc,
+      new.journal_sc
     FROM open_citations oc
     WHERE oc.oci = new.oci
     ON CONFLICT(oci, citing, cited, creation_date, time_span, author_sc, journal_sc) DO UPDATE
       -- UPDATE is needed to return FOUND in case of a conflict
       SET oci = excluded.oci;
-    IF FOUND THEN
+    IF found THEN
       RETURN NULL;
     END IF;
 
@@ -68,45 +68,45 @@ BEGIN
 
     INSERT INTO open_citation_parallels(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
     SELECT new.oci,
-           new.citing,
-           new.cited,
-           to_date(new.creation),
-           to_interval(new.timespan),
-           new.author_sc,
-           new.journal_sc
+      new.citing,
+      new.cited,
+      to_date(new.creation),
+      to_interval(new.timespan),
+      new.author_sc,
+      new.journal_sc
     FROM open_citations oc
     WHERE oc.citing = lower(new.citing)
       AND oc.cited = lower(new.cited)
     ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
-      SET citing        = excluded.citing,
-          cited         = excluded.cited,
-          creation_date = excluded.creation_date,
-          time_span     = excluded.time_span,
-          author_sc     = excluded.author_sc,
-          journal_sc    = excluded.journal_sc;
-    IF FOUND THEN
+      SET citing      = excluded.citing,
+        cited         = excluded.cited,
+        creation_date = excluded.creation_date,
+        time_span     = excluded.time_span,
+        author_sc     = excluded.author_sc,
+        journal_sc    = excluded.journal_sc;
+    IF found THEN
       RETURN NULL;
     END IF;
 
     INSERT INTO open_citation_loops(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
     SELECT new.oci,
-           new.citing,
-           new.cited,
-           to_date(new.creation),
-           to_interval(new.timespan),
-           new.author_sc,
-           new.journal_sc
+      new.citing,
+      new.cited,
+      to_date(new.creation),
+      to_interval(new.timespan),
+      new.author_sc,
+      new.journal_sc
     FROM open_citations oc
     WHERE oc.citing = lower(new.cited)
       AND oc.cited = lower(new.citing)
     ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
-      SET citing        = excluded.citing,
-          cited         = excluded.cited,
-          creation_date = excluded.creation_date,
-          time_span     = excluded.time_span,
-          author_sc     = excluded.author_sc,
-          journal_sc    = excluded.journal_sc;
-    IF FOUND THEN
+      SET citing      = excluded.citing,
+        cited         = excluded.cited,
+        creation_date = excluded.creation_date,
+        time_span     = excluded.time_span,
+        author_sc     = excluded.author_sc,
+        journal_sc    = excluded.journal_sc;
+    IF found THEN
       RETURN NULL;
     END IF;
 
@@ -118,15 +118,15 @@ BEGIN
             to_interval(new.timespan),
             new.author_sc,
             new.journal_sc)
-    -- CONFLICT should not be happening here because we checked that above and inserted into `open_citation_duplicates`
+      -- CONFLICT should not be happening here because we checked that above and inserted into `open_citation_duplicates`
     ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
-      SET citing        = excluded.citing,
-          cited         = excluded.cited,
-          creation_date = excluded.creation_date,
-          time_span     = excluded.time_span,
-          author_sc     = excluded.author_sc,
-          journal_sc    = excluded.journal_sc;
-    IF NOT FOUND THEN
+      SET citing      = excluded.citing,
+        cited         = excluded.cited,
+        creation_date = excluded.creation_date,
+        time_span     = excluded.time_span,
+        author_sc     = excluded.author_sc,
+        journal_sc    = excluded.journal_sc;
+    IF NOT found THEN
       RETURN NULL;
     END IF;
     /*

@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=4.1.0
+readonly VER=4.2.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -63,7 +63,6 @@ HEREDOC
   exit 255
 }
 
-
 # If a colon follows a character, the option is expected to have an argument
 while getopts cj:s:h OPT; do
   case "$OPT" in
@@ -99,36 +98,27 @@ fi
 # Remove shortest /* suffix
 readonly SCRIPT_DIR=${SCRIPT_FILENAME%/*}
 
-# This function is executed in a subshell by `parallel`
+########################################################################################################################
+# Loads a single header-less CSV chunk of Open Citations.
+# Executed in a subshell by `parallel`.
+#
+# Arguments:
+#   $1 absolute CSV filename
+########################################################################################################################
 load_csv() {
   set -e
   set -o pipefail
-  local csv_file=$1
-  local chunk_size=$2
-  echo "Processing ${csv_file} ..."
-  # Remove longest */ prefix
-  local name_with_ext=${csv_file##*/}
-
-  cd chunks
-  # Strip header and split into header-less chunks
-  tail -n +2 "../${name_with_ext}" | split --lines="$chunk_size" --numeric-suffixes=1 --elide-empty-files \
-    --additional-suffix=.csv - "${name_with_ext}.part"
-
-  local absolute_chunk_dir
-  absolute_chunk_dir=$(pwd)
-  for csv_chunk in "${name_with_ext}".part*; do
-    absolute_file_path="${absolute_chunk_dir}/${csv_chunk}"
-    # language=PostgresPLSQL
-    psql -v ON_ERROR_STOP=on <<HEREDOC
+  local absolute_file_path=$1
+  echo "Processing ${absolute_file_path} ..."
+  # language=PostgresPLSQL
+  psql -v ON_ERROR_STOP=on <<HEREDOC
       COPY stg_open_citations (oci, citing, cited, creation, timespan, journal_sc, author_sc)
       FROM '${absolute_file_path}' (FORMAT CSV, HEADER OFF);
 HEREDOC
-  done
-  cd ..
 
-  echo "Loaded ${csv_file}"
+  echo "Loaded ${absolute_file_path}"
   if [[ $REMOVE_LOADED ]]; then
-    rm -v "${csv_file}"
+    rm -v "${absolute_file_path}"
   fi
 }
 export -f load_csv
@@ -138,15 +128,20 @@ echo "Starting data load: appending all records to existing Open Citations data.
 psql -f "$SCRIPT_DIR/pre_processing.sql"
 
 cd "$DATA_DIR"
-mkdir -p chunks
+if [[ ! -d chunks ]]; then
+  mkdir -p chunks
+  # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
+  find . -maxdepth 1 -name '*.csv' -type f -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
+    --verbose --line-buffer --tagstring '|job# {#} of {= $_=total_jobs() =} slot# {%}|' \
+      "tail -n +2 {} | split --lines=$chunk_size --numeric-suffixes=1 --elide-empty-files --additional-suffix=.csv \
+        - chunks/{}.part"
+fi
+cd chunks
+
 # Piping to `parallel` is done by design here to handle a large number of files potentially
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
-find . -maxdepth 1 -type f -name '*.csv' -print0 |
-  parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 --line-buffer \
-    --tagstring '|job# {#} of {= $_=total_jobs() =} slot# {%}|' load_csv '{}' "$chunk_size"
+find ~+ -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
+  --line-buffer --tagstring '|job# {#} of {= $_=total_jobs() =} slot# {%}|' load_csv '{}'
 cd -
 
 psql -f "$SCRIPT_DIR/post_processing.sql"
-
-# shellcheck disable=SC2064 # DATA_DIR is defined once and available at the point of trap definition
-trap "rm -rf $DATA_DIR/chunks" EXIT
