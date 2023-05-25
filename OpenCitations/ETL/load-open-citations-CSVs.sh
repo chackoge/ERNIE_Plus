@@ -123,14 +123,17 @@ HEREDOC
 }
 export -f load_csv
 
-cd "$DATA_DIR"
-mkdir -p chunks
 echo "Starting data load: appending all records to existing Open Citations data."
 
 psql -f "$SCRIPT_DIR/pre_processing.sql"
+
+cd "$DATA_DIR"
+mkdir -p chunks
 # Piping to `parallel` is done by design here to handle a large number of files potentially
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
 find . -maxdepth 1 -type f -name '*.csv' -print0 |
   parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 --line-buffer \
     --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
+cd -
+
 psql -f "$SCRIPT_DIR/post_processing.sql"
