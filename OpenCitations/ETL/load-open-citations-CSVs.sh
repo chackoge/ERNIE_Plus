@@ -146,5 +146,5 @@ cd -
 
 psql -f "$SCRIPT_DIR/post_processing.sql"
 
-# shellcheck disable=SC2064 # DATA_DIR is defined once
+# shellcheck disable=SC2064 # DATA_DIR is defined once and available at the point of trap definition
 trap "rm -rf $DATA_DIR/chunks" EXIT
