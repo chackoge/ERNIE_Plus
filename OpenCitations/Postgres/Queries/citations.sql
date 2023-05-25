@@ -30,8 +30,8 @@ DELETE
 FROM open_citation_duplicates ocd
 WHERE exists (SELECT 1
               FROM open_citations oc
-              WHERE oc.oci = ocd.oci
-                AND (oc.citing, oc.cited, oc.creation_date, oc.time_span, oc.author_sc,
-                     oc.journal_sc) IS NOT DISTINCT FROM (ocd.citing, ocd.cited, ocd.creation_date, ocd.time_span,
+              WHERE (oc.oci, oc.citing, oc.cited, oc.creation_date, oc.time_span, oc.author_sc,
+                     oc.journal_sc) IS NOT DISTINCT FROM (ocd.oci, ocd.citing, ocd.cited, ocd.creation_date,
+                                                          ocd.time_span,
                                                           ocd.author_sc,
                                                           ocd.journal_sc));
