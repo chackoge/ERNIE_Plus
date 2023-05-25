@@ -5,19 +5,18 @@
 SET search_path = :schema;
 \endif
 
-CREATE TABLE open_citations
-(
-  oci             VARCHAR(1000)
+CREATE TABLE open_citations (
+  oci VARCHAR(1000)
     CONSTRAINT open_citations_pk
       PRIMARY KEY USING INDEX TABLESPACE open_citations_tbs,
-  citing          VARCHAR(400),
-  cited           VARCHAR(400),
-  creation_date   DATE,
-  time_span       INTERVAL,
-  journal_sc      BOOLEAN,
-  author_sc       BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year  SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED
+  citing VARCHAR(400),
+  cited VARCHAR(400),
+  creation_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED
 ) TABLESPACE open_citations_tbs;
 
 CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations (citing, cited) TABLESPACE open_citations_tbs;
@@ -55,38 +54,56 @@ COMMENT ON COLUMN open_citations.author_sc IS --
 ALTER TABLE open_citations
   OWNER TO devs;
 
-CREATE TABLE open_citation_duplicates
-(
-  oci             VARCHAR(1000),
-  citing          VARCHAR(400),
-  cited           VARCHAR(400),
-  creation_date   DATE,
-  time_span       INTERVAL,
-  journal_sc      BOOLEAN,
-  author_sc       BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year  SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
-  CONSTRAINT open_citation_duplicates_pk
-    PRIMARY KEY (oci, citing, cited, creation_date, time_span, journal_sc,
-                 author_sc) USING INDEX TABLESPACE open_citations_tbs
+CREATE TABLE open_citation_duplicates (
+  oci VARCHAR(1000),
+  citing VARCHAR(400),
+  cited VARCHAR(400),
+  creation_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED
 ) TABLESPACE open_citations_tbs;
+
+CREATE UNIQUE INDEX IF NOT EXISTS open_citation_duplicates_uk
+  ON open_citation_duplicates (oci, citing, cited, creation_date, time_span, journal_sc, author_sc)
+  TABLESPACE open_citations_tbs;
 
 COMMENT ON TABLE open_citation_duplicates IS 'Citations that duplicate an OCI in open_citations';
 
 ALTER TABLE open_citation_duplicates
   OWNER TO devs;
 
-CREATE TABLE open_citation_parallels
-(
-  oci             VARCHAR(1000),
-  citing          VARCHAR(400),
-  cited           VARCHAR(400),
-  creation_date   DATE,
-  time_span       INTERVAL,
-  journal_sc      BOOLEAN,
-  author_sc       BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year  SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
+CREATE TABLE open_citation_loops (
+  oci VARCHAR(1000),
+  citing VARCHAR(400),
+  cited VARCHAR(400),
+  creation_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
+  CONSTRAINT open_citation_loops_pk
+    PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs
+) TABLESPACE open_citations_tbs;
+
+COMMENT ON TABLE open_citation_loops IS 'Citations that loop back (cited -> citing) in open_citations';
+
+ALTER TABLE open_citation_loops
+  OWNER TO devs;
+
+CREATE TABLE open_citation_parallels (
+  oci VARCHAR(1000),
+  citing VARCHAR(400),
+  cited VARCHAR(400),
+  creation_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
   CONSTRAINT open_citation_parallels_pk
     PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs
 ) TABLESPACE open_citations_tbs;
@@ -96,17 +113,16 @@ COMMENT ON TABLE open_citation_parallels IS 'Citations that parallel (citing -> 
 ALTER TABLE open_citation_parallels
   OWNER TO devs;
 
-CREATE TABLE open_citation_self
-(
-  oci             VARCHAR(1000),
-  citing          VARCHAR(400),
-  cited           VARCHAR(400),
-  creation_date   DATE,
-  time_span       INTERVAL,
-  journal_sc      BOOLEAN,
-  author_sc       BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year  SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
+CREATE TABLE open_citation_self (
+  oci VARCHAR(1000),
+  citing VARCHAR(400),
+  cited VARCHAR(400),
+  creation_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
   CONSTRAINT open_citation_self_pk
     PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs
 ) TABLESPACE open_citations_tbs;
@@ -116,17 +132,16 @@ COMMENT ON TABLE open_citation_self IS 'Citations with citing = cited';
 ALTER TABLE open_citation_self
   OWNER TO devs;
 
-CREATE TABLE open_citation_loops
-(
-  oci             VARCHAR(1000),
-  citing          VARCHAR(400),
-  cited           VARCHAR(400),
-  creation_date   DATE,
-  time_span       INTERVAL,
-  journal_sc      BOOLEAN,
-  author_sc       BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date) ) STORED,
-  cited_pub_year  SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM creation_date - time_span) ) STORED,
+CREATE TABLE open_citation_loops (
+  oci VARCHAR(1000),
+  citing VARCHAR(400),
+  cited VARCHAR(400),
+  creation_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
   CONSTRAINT open_citation_loops_pk
     PRIMARY KEY (oci) USING INDEX TABLESPACE open_citations_tbs
 ) TABLESPACE open_citations_tbs;
@@ -138,13 +153,13 @@ ALTER TABLE open_citation_loops
 
 CREATE OR REPLACE VIEW stg_open_citations AS
 SELECT oci,
-       citing,
-       cited,
-       'foo' AS creation,
-       'bar' AS timespan,
-       journal_sc,
-       author_sc,
-       'baz' AS source
+  citing,
+  cited,
+  'foo' AS creation,
+  'bar' AS timespan,
+  journal_sc,
+  author_sc,
+  'baz' AS source
 FROM open_citations;
 
 \include_relative trg_transform_and_load_open_citation.sql
@@ -156,7 +171,7 @@ ALTER SEQUENCE open_citation_pubs_seq OWNER TO devs;
 CREATE MATERIALIZED VIEW open_citation_pubs
   --CREATE TABLE open_citation_pubs
   TABLESPACE open_citations_tbs AS
-SELECT sq.doi, nextval('open_citation_pubs_seq') AS iid
+SELECT sq.doi, NEXTVAL('open_citation_pubs_seq') AS iid
 FROM (SELECT citing AS doi
       FROM open_citations
       UNION
