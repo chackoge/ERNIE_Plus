@@ -99,10 +99,12 @@ fi
 # Remove shortest /* suffix
 readonly SCRIPT_DIR=${SCRIPT_FILENAME%/*}
 
+# This function is executed in a subshell by `parallel`
 load_csv() {
   set -e
   set -o pipefail
   local csv_file=$1
+  local chunk_size=$2
   echo "Processing ${csv_file} ..."
   # Remove longest */ prefix
   local name_with_ext=${csv_file##*/}
@@ -141,7 +143,7 @@ mkdir -p chunks
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
 find . -maxdepth 1 -type f -name '*.csv' -print0 |
   parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 --line-buffer \
-    --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
+    --tagstring '|job# {#} of {= $_=total_jobs() =} slot# {%}|' load_csv '{}' "$chunk_size"
 cd -
 
 psql -f "$SCRIPT_DIR/post_processing.sql"
