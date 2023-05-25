@@ -138,10 +138,17 @@ if [[ ! -d chunks ]]; then
 fi
 cd chunks
 
+# Load chunks. If load fails, the process should restart here on the remaining chunks.
 # Piping to `parallel` is done by design here to handle a large number of files potentially
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
 find ~+ -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
   --line-buffer --tagstring '|job# {#} of {= $_=total_jobs() =} slot# {%}|' load_csv '{}'
 cd -
+
+# Successfully loaded all input files
+rmdir chunks
+if [[ $REMOVE_LOADED ]]; then
+  rm -v -- *.csv
+fi
 
 psql -f "$SCRIPT_DIR/post_processing.sql"
