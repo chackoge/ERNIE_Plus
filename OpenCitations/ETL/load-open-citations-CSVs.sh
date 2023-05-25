@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=3.2.0
+readonly VER=4.0.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -24,7 +24,7 @@ SYNOPSIS
 
 DESCRIPTION
 
-    Load Open Citations CSVs in parallel.
+    Load Open Citations CSVs in parallel. Split input files into chunks up to 1,000,000 lines.
 
     The following options are available:
 
@@ -62,15 +62,15 @@ HEREDOC
 # If a colon follows a character, the option is expected to have an argument
 while getopts cj:h OPT; do
   case "$OPT" in
-    c)
-      declare -rx REMOVE_LOADED=true
-      ;;
-    j)
-      max_parallel_jobs=$OPTARG
-      ;;
-    *) # -h or `?`: an unknown option
-      usage
-      ;;
+  c)
+    declare -rx REMOVE_LOADED=true
+    ;;
+  j)
+    max_parallel_jobs=$OPTARG
+    ;;
+  *) # -h or `?`: an unknown option
+    usage
+    ;;
   esac
 done
 echo -e "\n# \`$0${*+ }$*\` v$VER: run by \`${USER:-${USERNAME:-${LOGNAME:-UID #$UID}}}@${HOSTNAME}\` in \`${PWD}\` #\n"
@@ -79,7 +79,7 @@ shift $((OPTIND - 1))
 # Process positional parameters
 readonly DATA_DIR="${1:-.}"
 
-if ! command -v parallel > /dev/null; then
+if ! command -v parallel >/dev/null; then
   echo "Please install GNU parallel"
   exit 1
 fi
@@ -94,41 +94,43 @@ readonly SCRIPT_DIR=${SCRIPT_FILENAME%/*}
 load_csv() {
   set -e
   set -o pipefail
-  local file=$1
-  echo "Processing ${file} ..."
-
-  if [[ "${file}" != */* ]]; then
-    file=./${file}
-  fi
-  # Remove shortest /* suffix
-  dir=${file%/*}
-  # dir = '.' for files in the current directory
-
+  local csv_file=$1
+  echo "Processing ${csv_file} ..."
   # Remove longest */ prefix
-  name_with_ext=${file##*/}
+  local name_with_ext=${csv_file##*/}
 
-  absolute_file_dir=$(cd "${dir}" && pwd)
-  absolute_file_path="${absolute_file_dir}/${name_with_ext}"
+  cd chunks
+  # Strip header and split into header-less chunks
+  tail -n +2 "../${name_with_ext}" | split --lines=1000000 --numeric-suffixes=1 --elide-empty-files \
+    --additional-suffix=.csv --verbose - "${name_with_ext}.part"
 
-  # language=PostgresPLSQL
-  psql -v ON_ERROR_STOP=on << HEREDOC
-    COPY stg_open_citations (oci, citing, cited, creation, timespan, journal_sc, author_sc)
-    FROM '${absolute_file_path}' (FORMAT CSV, HEADER ON);
+  local absolute_chunk_dir
+  absolute_chunk_dir=$(pwd)
+  for csv_chunk in "${name_with_ext}".part*; do
+    absolute_file_path="${absolute_chunk_dir}/${csv_chunk}"
+    # language=PostgresPLSQL
+    psql -v ON_ERROR_STOP=on <<HEREDOC
+      COPY stg_open_citations (oci, citing, cited, creation, timespan, journal_sc, author_sc)
+      FROM '${absolute_file_path}' (FORMAT CSV, HEADER OFF);
 HEREDOC
+  done
+  cd ..
 
-  echo "Loaded ${file}"
+  echo "Loaded ${csv_file}"
   if [[ $REMOVE_LOADED ]]; then
-    rm -v "${file}"
+    rm -v "${csv_file}"
   fi
 }
 export -f load_csv
 
+cd "$DATA_DIR"
+mkdir -p chunks
 echo "Starting data load: appending all records to existing Open Citations data."
 
 psql -f "$SCRIPT_DIR/pre_processing.sql"
 # Piping to `parallel` is done by design here to handle a large number of files potentially
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
-find "$DATA_DIR" -maxdepth 1 -type f -name '*.csv' -print0 | \
+find . -maxdepth 1 -type f -name '*.csv' -print0 |
   parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 --line-buffer \
     --tagstring '|job#{#} of {= $_=total_jobs() =} s#{%}|' load_csv '{}'
 psql -f "$SCRIPT_DIR/post_processing.sql"
