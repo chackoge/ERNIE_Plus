@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=4.0.0
+readonly VER=4.1.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -10,6 +10,7 @@ readonly SCRIPT_FULL_NAME="${0##*/}"
 # `\\copy` of large Open Citations CSVs (1.5-1.8 G) consumes a lot of memory, e.g. ≈ 100 G for 32 jobs.
 # When the # of jobs is too large the entire machine might get overloaded.
 max_parallel_jobs=1
+chunk_size=100000
 
 usage() {
   cat <<HEREDOC
@@ -19,12 +20,12 @@ NAME
 
 SYNOPSIS
 
-    $SCRIPT_FULL_NAME [-c] [-j parallel_jobs] [data_directory]
+    $SCRIPT_FULL_NAME [-c] [-j parallel_jobs] [-s chunk_size] [data_directory]
     $SCRIPT_FULL_NAME -h: display this help
 
 DESCRIPTION
 
-    Load Open Citations CSVs in parallel. Split input files into chunks up to 1,000,000 lines.
+    Load Open Citations CSVs in parallel. Split input files into chunks.
 
     The following options are available:
 
@@ -34,7 +35,9 @@ DESCRIPTION
     -c              clean (remove) loaded CSVs: recommended to simplify error recovery
                     The CSV files in this case must be writeable by the executing user.
 
-    -j              maximum number of parallel jobs [DEFAULT: 1]
+    -j              maximum number of parallel jobs [DEFAULT: $max_parallel_jobs]
+
+    -s              maximum number of lines (citations) per chunk and transaction [DEFAULT: $chunk_size]
 
 ENVIRONMENT
 
@@ -59,14 +62,18 @@ HEREDOC
   exit 1
 }
 
+
 # If a colon follows a character, the option is expected to have an argument
-while getopts cj:h OPT; do
+while getopts cj:s:h OPT; do
   case "$OPT" in
   c)
     declare -rx REMOVE_LOADED=true
     ;;
   j)
     max_parallel_jobs=$OPTARG
+    ;;
+  s)
+    chunk_size=$OPTARG
     ;;
   *) # -h or `?`: an unknown option
     usage
@@ -101,7 +108,7 @@ load_csv() {
 
   cd chunks
   # Strip header and split into header-less chunks
-  tail -n +2 "../${name_with_ext}" | split --lines=1000000 --numeric-suffixes=1 --elide-empty-files \
+  tail -n +2 "../${name_with_ext}" | split --lines="$chunk_size" --numeric-suffixes=1 --elide-empty-files \
     --additional-suffix=.csv --verbose - "${name_with_ext}.part"
 
   local absolute_chunk_dir
