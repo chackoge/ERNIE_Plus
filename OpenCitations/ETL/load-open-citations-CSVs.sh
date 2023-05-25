@@ -50,16 +50,17 @@ ENVIRONMENT
       * CREATE on SCHEMA \`public\`
 
 EXIT STATUS
+    The process stops gracefully on the first error.
 
     The $SCRIPT_FULL_NAME utility exits with one of the following values:
 
     0     All files have been successfully loaded
-    1-100 The number of failed load jobs. The process stops gracefully on the first error.
-    255   Usage help is requested
+    1-100 The number of files failed to load
+    255   Usage help is requested or invalid options
 
 v$VER
 HEREDOC
-  exit 1
+  exit 255
 }
 
 
@@ -144,3 +145,6 @@ find . -maxdepth 1 -type f -name '*.csv' -print0 |
 cd -
 
 psql -f "$SCRIPT_DIR/post_processing.sql"
+
+# shellcheck disable=SC2064 # DATA_DIR is defined once
+trap "rm -rf $DATA_DIR/chunks" EXIT
