@@ -141,7 +141,7 @@ cd chunks
 # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
 find ~+ -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
   --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' load_csv '{}'
-cd - >/dev/null
+cd "$DATA_DIR"
 
 # Successfully loaded all input files
 rmdir chunks
