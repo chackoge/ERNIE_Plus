@@ -2,13 +2,10 @@
 set -e
 set -o pipefail
 
-readonly VER=4.2.0
+readonly VER=4.2.1
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
-
-# `\\copy` of large Open Citations CSVs (1.5-1.8 G) consumes a lot of memory, e.g. ≈ 100 G for 32 jobs.
-# When the # of jobs is too large the entire machine might get overloaded.
 max_parallel_jobs=1
 chunk_size=100000
 
@@ -97,6 +94,7 @@ if [[ "${SCRIPT_FILENAME}" != */* ]]; then
 fi
 # Remove shortest /* suffix
 readonly SCRIPT_DIR=${SCRIPT_FILENAME%/*}
+readonly ABSOLUTE_SCRIPT_DIR=$(cd "${SCRIPT_DIR}" && pwd)
 
 ########################################################################################################################
 # Loads a single header-less CSV chunk of Open Citations.
@@ -125,7 +123,7 @@ export -f load_csv
 
 echo "Starting data load: appending all records to existing Open Citations data."
 
-psql -f "$SCRIPT_DIR/pre_processing.sql"
+psql -f "$ABSOLUTE_SCRIPT_DIR/pre_processing.sql"
 
 cd "$DATA_DIR"
 if [[ ! -d chunks ]]; then
@@ -151,4 +149,4 @@ if [[ $REMOVE_LOADED ]]; then
   rm -v -- *.csv
 fi
 
-psql -f "$SCRIPT_DIR/post_processing.sql"
+psql -f "$ABSOLUTE_SCRIPT_DIR/post_processing.sql"
