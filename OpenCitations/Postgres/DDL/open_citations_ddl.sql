@@ -19,9 +19,9 @@ CREATE TABLE open_citations (
   cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED
 ) TABLESPACE open_citations_tbs;
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations (citing, cited) TABLESPACE open_citations_tbs;
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations (citing, cited) TABLESPACE index_tbs;
 
-CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE open_citations_tbs;
+CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE index_tbs;
 
 --CREATE INDEX IF NOT EXISTS oc_citing_i ON open_citations(citing) TABLESPACE open_citations_tbs;
 
@@ -55,7 +55,7 @@ ALTER TABLE open_citations
   OWNER TO devs;
 
 CREATE TABLE open_citation_duplicates (
-  oci VARCHAR(1000),
+  oci VARCHAR(1000) NOT NULL,
   citing VARCHAR(400),
   cited VARCHAR(400),
   creation_date DATE,
@@ -73,25 +73,6 @@ CREATE UNIQUE INDEX IF NOT EXISTS open_citation_duplicates_uk
 COMMENT ON TABLE open_citation_duplicates IS 'Citations that duplicate an OCI in open_citations';
 
 ALTER TABLE open_citation_duplicates
-  OWNER TO devs;
-
-CREATE TABLE open_citation_loops (
-  oci VARCHAR(1000),
-  citing VARCHAR(400),
-  cited VARCHAR(400),
-  creation_date DATE,
-  time_span INTERVAL,
-  journal_sc BOOLEAN,
-  author_sc BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
-  CONSTRAINT open_citation_loops_pk
-    PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
-) TABLESPACE open_citations_tbs;
-
-COMMENT ON TABLE open_citation_loops IS 'Citations that loop back (cited -> citing) in open_citations';
-
-ALTER TABLE open_citation_loops
   OWNER TO devs;
 
 CREATE TABLE open_citation_parallels (
