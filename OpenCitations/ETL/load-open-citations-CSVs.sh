@@ -146,7 +146,7 @@ cd "$DATA_DIR"
 # Successfully loaded all input files
 rmdir chunks
 if [[ $REMOVE_LOADED ]]; then
-  rm -v -- *.csv
+  rm -fv -- *.csv
 fi
 
 psql -f "$ABSOLUTE_SCRIPT_DIR/post_processing.sql"
