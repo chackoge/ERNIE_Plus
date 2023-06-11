@@ -6,29 +6,55 @@ SET search_path = :schema;
 \endif
 
 CREATE TABLE open_citations (
-  oci VARCHAR(1000)
-    CONSTRAINT open_citations_pk
-      PRIMARY KEY USING INDEX TABLESPACE index_tbs,
+  oci VARCHAR(1000),
   citing VARCHAR(400) NOT NULL,
   cited VARCHAR(400) NOT NULL,
-  creation_date DATE,
+  citing_pub_year SMALLINT,
+  citing_pub_month SMALLINT,
+  citing_pub_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED
-) TABLESPACE open_citations_tbs;
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  CONSTRAINT open_citations_pk PRIMARY KEY (oci, citing_pub_year) USING INDEX TABLESPACE index_tbs
+) PARTITION BY RANGE (citing_pub_year) TABLESPACE open_citations_tbs;
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations (citing, cited) TABLESPACE index_tbs;
+-- Partitions
+DO
+$block$
+  DECLARE
+    year SMALLINT;
+    century SMALLINT;
+    sql TEXT;
+  BEGIN
+    FOR year IN 1900..EXTRACT(YEAR FROM current_date)
+      LOOP
+        sql := FORMAT('CREATE TABLE open_citations_%s PARTITION OF open_citations
+                      FOR VALUES FROM (%1$s) TO (%1$s + 1)
+                      TABLESPACE open_citations_tbs', year);
+        RAISE NOTICE USING MESSAGE = sql || ';';
+        EXECUTE sql;
+      END LOOP;
+
+    -- Citations start from publication year 1500
+    FOR century IN 16..19
+      LOOP
+        sql := FORMAT('CREATE TABLE open_citations_%s_%s PARTITION OF open_citations
+                      FOR VALUES FROM (%1$s) TO (%2$s + 1)
+                      TABLESPACE open_citations_tbs', (century - 1) * 100, (century - 1) * 100 + 99);
+        RAISE NOTICE USING MESSAGE = sql || ';';
+        EXECUTE sql;
+      END LOOP;
+  END;
+$block$;
+
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations (citing, cited, citing_pub_year) --
+  TABLESPACE index_tbs;
 
 CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE index_tbs;
 
---CREATE INDEX IF NOT EXISTS oc_citing_i ON open_citations(citing) TABLESPACE open_citations_tbs;
-
---CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) TABLESPACE open_citations_tbs;
-
 COMMENT ON TABLE open_citations IS --
-  'Open Citations COCI: Crossref open DOI-to-DOI citations excluding duplicate, parallel, self and loop citations';
+  'Open Citations COCI: Crossref open DOI-to-DOI citations excluding citation anomalies';
 
 COMMENT ON COLUMN open_citations.citing IS --
   'DOI, lower-cased';
@@ -36,14 +62,14 @@ COMMENT ON COLUMN open_citations.citing IS --
 COMMENT ON COLUMN open_citations.cited IS --
   'DOI, lower-cased';
 
-COMMENT ON COLUMN open_citations.creation_date IS --
-  'The date on which the citation was created. This has the same value as the publication date of the citing
-bibliographic resource but is a property of the citation itself. Missing months in source data default to June
-and missing days default to 15.';
+COMMENT ON COLUMN open_citations.citing_pub_year IS 'The publication year of the citing bibliographic resource';
+
+COMMENT ON COLUMN open_citations.citing_pub_month IS 'The publication month of the citing bibliographic resource';
+
+COMMENT ON COLUMN open_citations.citing_pub_date IS 'The publication date of the citing bibliographic resource';
 
 COMMENT ON COLUMN open_citations.time_span IS --
-  'The time span of a citation, i.e. the interval between the publication of the citing entity and the publication
-of the cited entity.';
+  'The interval between the publications of the citing entity and the cited entity.';
 
 COMMENT ON COLUMN open_citations.journal_sc IS --
   'Whether it is a journal self-citation (i.e. the citing and the cited entities are published in the same journal)';
@@ -54,104 +80,119 @@ COMMENT ON COLUMN open_citations.author_sc IS --
 ALTER TABLE open_citations
   OWNER TO devs;
 
-CREATE TABLE open_citation_duplicates (
-  oci VARCHAR(1000) NOT NULL,
-  citing VARCHAR(400),
-  cited VARCHAR(400),
-  creation_date DATE,
-  time_span INTERVAL,
-  journal_sc BOOLEAN,
-  author_sc BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED
-) TABLESPACE open_citations_tbs;
-
-CREATE UNIQUE INDEX IF NOT EXISTS open_citation_duplicates_uk
-  ON open_citation_duplicates (oci, citing, cited, creation_date, time_span, journal_sc, author_sc)
-  TABLESPACE index_tbs;
-
-COMMENT ON TABLE open_citation_duplicates IS 'Citations that duplicate an OCI in open_citations';
-
-ALTER TABLE open_citation_duplicates
-  OWNER TO devs;
-
-CREATE TABLE open_citation_parallels (
+CREATE TABLE open_citations_duplicate (
   oci VARCHAR(1000),
   citing VARCHAR(400) NOT NULL,
   cited VARCHAR(400) NOT NULL,
-  creation_date DATE,
+  citing_pub_year SMALLINT,
+  citing_pub_month SMALLINT,
+  citing_pub_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
-  CONSTRAINT open_citation_parallels_pk
-    PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED
 ) TABLESPACE open_citations_tbs;
 
-COMMENT ON TABLE open_citation_parallels IS 'Citations that parallel (citing -> cited) in open_citations';
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_duplicate_uk ON open_citations_duplicate (oci, citing, cited,
+                                                                                           citing_pub_year,
+                                                                                           citing_pub_month,
+                                                                                           citing_pub_date, time_span,
+                                                                                           journal_sc,
+                                                                                           author_sc) TABLESPACE index_tbs;
 
-ALTER TABLE open_citation_parallels
+COMMENT ON TABLE open_citations_duplicate IS --
+  'Citations with a duplicate OCI to `open_citations` but different data in an other column';
+
+ALTER TABLE open_citations_duplicate
   OWNER TO devs;
 
-CREATE TABLE open_citation_self (
+CREATE TABLE open_citations_parallel (
   oci VARCHAR(1000),
   citing VARCHAR(400) NOT NULL,
   cited VARCHAR(400) NOT NULL,
-  creation_date DATE,
+  citing_pub_year SMALLINT,
+  citing_pub_month SMALLINT,
+  citing_pub_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
-  CONSTRAINT open_citation_self_pk
-    PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  CONSTRAINT open_citations_parallel_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
-COMMENT ON TABLE open_citation_self IS 'Citations with citing = cited';
+COMMENT ON TABLE open_citations_parallel IS 'Citations that parallel (citing -> cited) in `open_citations`';
 
-ALTER TABLE open_citation_self
+ALTER TABLE open_citations_parallel
   OWNER TO devs;
 
-CREATE TABLE open_citation_loops (
+CREATE TABLE open_citations_self (
   oci VARCHAR(1000),
   citing VARCHAR(400) NOT NULL,
   cited VARCHAR(400) NOT NULL,
-  creation_date DATE,
+  citing_pub_year SMALLINT,
+  citing_pub_month SMALLINT,
+  citing_pub_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  citing_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date) ) STORED,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM creation_date - time_span) ) STORED,
-  CONSTRAINT open_citation_loops_pk
-    PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  CONSTRAINT open_citations_self_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
-COMMENT ON TABLE open_citation_loops IS 'Citations that loop back (cited -> citing) in open_citations';
+COMMENT ON TABLE open_citations_self IS 'Citations with citing = cited';
 
-ALTER TABLE open_citation_loops
+ALTER TABLE open_citations_self
+  OWNER TO devs;
+
+CREATE TABLE open_citations_looping (
+  oci VARCHAR(1000),
+  citing VARCHAR(400) NOT NULL,
+  cited VARCHAR(400) NOT NULL,
+  citing_pub_year SMALLINT,
+  citing_pub_month SMALLINT,
+  citing_pub_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  CONSTRAINT open_citations_looping_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
+) TABLESPACE open_citations_tbs;
+
+COMMENT ON TABLE open_citations_looping IS 'Citations that loop back (cited -> citing) comparing with `open_citations`';
+
+ALTER TABLE open_citations_looping
+  OWNER TO devs;
+
+CREATE TABLE open_citations_future (
+  oci VARCHAR(1000),
+  citing VARCHAR(400) NOT NULL,
+  cited VARCHAR(400) NOT NULL,
+  citing_pub_year SMALLINT,
+  citing_pub_month SMALLINT,
+  citing_pub_date DATE,
+  time_span INTERVAL,
+  journal_sc BOOLEAN,
+  author_sc BOOLEAN,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  CONSTRAINT open_citations_future_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
+) TABLESPACE open_citations_tbs;
+
+COMMENT ON TABLE open_citations_future IS 'Citations with the future publication years';
+
+ALTER TABLE open_citations_future
   OWNER TO devs;
 
 CREATE OR REPLACE VIEW stg_open_citations AS
-SELECT oci,
-  citing,
-  cited,
-  'foo' AS creation,
-  'bar' AS timespan,
-  journal_sc,
-  author_sc,
-  'baz' AS source
+SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, journal_sc, author_sc
 FROM open_citations;
 
 \include_relative trg_transform_and_load_open_citation.sql
 
+DROP SEQUENCE IF EXISTS open_citation_pubs_seq;
 CREATE SEQUENCE open_citation_pubs_seq MINVALUE 0;
 ALTER SEQUENCE open_citation_pubs_seq OWNER TO devs;
 
--- TBD Refactor to a MATERIALIZED VIEW: some weird disk space errors were preventing that.
-CREATE MATERIALIZED VIEW open_citation_pubs
-  --CREATE TABLE open_citation_pubs
-  TABLESPACE open_citations_tbs AS
+CREATE MATERIALIZED VIEW open_citation_pubs TABLESPACE open_citations_tbs AS
 SELECT sq.doi, NEXTVAL('open_citation_pubs_seq') AS iid
 FROM (SELECT citing AS doi
       FROM open_citations
@@ -164,19 +205,13 @@ WITH NO DATA;
 COMMENT ON MATERIALIZED VIEW open_citation_pubs IS ---
   'Unique publications with original DOIs extracted from open_citations';
 
-/*
-ALTER TABLE open_citation_pubs
-  ADD CONSTRAINT open_citation_pubs_pk
-    PRIMARY KEY (doi) USING INDEX TABLESPACE index_tbs;
--- 1m:01s–4m:02s
-*/
-
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_pubs_uk ON open_citation_pubs (iid) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_doi_uk ON open_citation_pubs (doi) --
   TABLESPACE index_tbs;
--- 20s
 
-ALTER MATERIALIZED VIEW open_citation_pubs
-  OWNER TO devs;
+CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_iid_uk ON open_citation_pubs (iid) --
+  TABLESPACE index_tbs;
+
+ALTER MATERIALIZED VIEW open_citation_pubs OWNER TO devs;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;

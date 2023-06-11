@@ -8,15 +8,27 @@ SET search_path = :schema;
 -- JetBrains IDEs: start execution from here
 SET TIMEZONE = 'US/Eastern';
 
+CREATE OR REPLACE FUNCTION extract_year(date_string TEXT) --
+  RETURNS SMALLINT
+  /**
+  Extracts year from YYYY[-MM][-DD] string
+  */
+RETURN cast(left(date_string, 4) AS SMALLINT);
+
+CREATE OR REPLACE FUNCTION extract_month(date_string TEXT) --
+  RETURNS SMALLINT
+  /**
+  Extracts month from YYYY[-MM][-DD] string
+  */
+RETURN cast(nullif(substr(date_string, 6, 2), '') AS SMALLINT);
+
 CREATE OR REPLACE FUNCTION to_date(date_string TEXT) --
   RETURNS DATE
   /**
   Converts YYYY[-MM][-DD] string to a DATE
-  @return default omitted month to June and omitted day to 15
+  @return NULL for incomplete dates
   */
-RETURN make_date(cast(left(date_string, 4) AS INT), --
-                 cast(coalesce(nullif(substr(date_string, 6, 2), ''), '6') AS INT),
-                 cast(coalesce(nullif(substr(date_string, 9), ''), '15') AS INT));
+RETURN CASE WHEN length(date_string) = length('YYYY-MM-DD') THEN to_date(date_string, 'YYYY-MM-DD') END;
 
 CREATE OR REPLACE FUNCTION to_interval(signed_iso_8601_interval TEXT) --
   RETURNS INTERVAL
@@ -25,8 +37,7 @@ CREATE OR REPLACE FUNCTION to_interval(signed_iso_8601_interval TEXT) --
   */
 RETURN CASE
          WHEN left(signed_iso_8601_interval, 1) = '-' THEN -cast(substr(signed_iso_8601_interval, 2) AS INTERVAL)
-         ELSE cast(signed_iso_8601_interval AS INTERVAL)
-  END;
+         ELSE cast(signed_iso_8601_interval AS INTERVAL) END;
 
 CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() --
   RETURNS TRIGGER
@@ -35,100 +46,74 @@ AS
 $block$
 BEGIN
   IF (tg_op = 'INSERT') THEN
-    INSERT INTO open_citation_duplicates(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
-    SELECT new.oci,
-      new.citing,
-      new.cited,
-      to_date(new.creation),
-      to_interval(new.timespan),
-      new.author_sc,
-      new.journal_sc
-    FROM open_citations oc
-    WHERE oc.oci = new.oci
-    ON CONFLICT(oci, citing, cited, creation_date, time_span, author_sc, journal_sc) DO UPDATE
-      -- UPDATE is needed to return FOUND in case of a conflict
-      SET oci = excluded.oci;
-    IF found THEN
-      RETURN NULL;
-    END IF;
-
     IF lower(new.citing) = lower(new.cited) THEN
-      INSERT INTO open_citation_self(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
-      VALUES (new.oci,
-              new.citing,
-              new.cited,
-              to_date(new.creation),
-              to_interval(new.timespan),
-              new.author_sc,
-              new.journal_sc)
+      INSERT INTO open_citations_self(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                                      time_span, author_sc, journal_sc)
+      VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+              to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
       ON CONFLICT DO NOTHING;
 
       RETURN NULL;
     END IF;
 
-    INSERT INTO open_citation_parallels(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
-    SELECT new.oci,
-      new.citing,
-      new.cited,
-      to_date(new.creation),
-      to_interval(new.timespan),
-      new.author_sc,
-      new.journal_sc
+    IF extract_year(new.creation) > extract(YEAR FROM current_date) THEN
+      INSERT INTO open_citations_future(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                                        time_span, author_sc, journal_sc)
+      VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+              to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
+      ON CONFLICT DO NOTHING;
+
+      RETURN NULL;
+    END IF;
+
+    INSERT INTO open_citations_duplicate(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                                         time_span, author_sc, journal_sc)
+    SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+      to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
     FROM open_citations oc
-    WHERE oc.citing = lower(new.citing)
-      AND oc.cited = lower(new.cited)
-    ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
-      SET citing      = excluded.citing,
-        cited         = excluded.cited,
-        creation_date = excluded.creation_date,
-        time_span     = excluded.time_span,
-        author_sc     = excluded.author_sc,
-        journal_sc    = excluded.journal_sc;
+    WHERE oc.oci = new.oci
+    ON CONFLICT(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date, time_span, author_sc, --
+      journal_sc) DO UPDATE -- NOP, but DO UPDATE is needed to set FOUND
+      SET oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
 
-    INSERT INTO open_citation_loops(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
-    SELECT new.oci,
-      new.citing,
-      new.cited,
-      to_date(new.creation),
-      to_interval(new.timespan),
-      new.author_sc,
-      new.journal_sc
+    INSERT INTO open_citations_looping AS ocl(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                                              time_span, author_sc, journal_sc)
+    SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+      to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
     FROM open_citations oc
     WHERE oc.citing = lower(new.cited)
       AND oc.cited = lower(new.citing)
-    ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
-      SET citing      = excluded.citing,
-        cited         = excluded.cited,
-        creation_date = excluded.creation_date,
-        time_span     = excluded.time_span,
-        author_sc     = excluded.author_sc,
-        journal_sc    = excluded.journal_sc;
+    ON CONFLICT(oci) DO UPDATE -- NOP, but DO UPDATE is needed to set FOUND
+      SET oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
 
-    INSERT INTO open_citations(oci, citing, cited, creation_date, time_span, author_sc, journal_sc)
-    VALUES (new.oci,
-            lower(new.citing),
-            lower(new.cited),
-            to_date(new.creation),
-            to_interval(new.timespan),
-            new.author_sc,
-            new.journal_sc)
-      -- CONFLICT should not be happening here because we checked that above and inserted into `open_citation_duplicates`
-    ON CONFLICT(oci) DO UPDATE -- UPDATE is needed to return FOUND in case of a conflict
-      SET citing      = excluded.citing,
-        cited         = excluded.cited,
-        creation_date = excluded.creation_date,
-        time_span     = excluded.time_span,
-        author_sc     = excluded.author_sc,
-        journal_sc    = excluded.journal_sc;
+    INSERT INTO open_citations_parallel(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                                        time_span, author_sc, journal_sc)
+    SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+      to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
+    FROM open_citations oc
+    WHERE oc.citing = lower(new.citing)
+      AND oc.cited = lower(new.cited)
+    ON CONFLICT(oci) DO UPDATE -- NOP, but DO UPDATE is needed to set FOUND
+      SET oci = excluded.oci;
+    IF found THEN
+      RETURN NULL;
+    END IF;
+
+    INSERT INTO open_citations(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                               time_span, author_sc, journal_sc)
+    VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+            to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
+    ON CONFLICT(oci) DO NOTHING;
     IF NOT found THEN
       RETURN NULL;
     END IF;
+
     /*
     A nonnull return value is used to signal that the trigger performed the necessary data modifications in the view.
     This will cause the count of the number of rows affected by the command to be incremented
