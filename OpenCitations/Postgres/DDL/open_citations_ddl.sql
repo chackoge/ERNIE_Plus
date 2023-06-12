@@ -164,7 +164,7 @@ COMMENT ON TABLE open_citations_looping IS 'Citations that loop back (cited -> c
 ALTER TABLE open_citations_looping
   OWNER TO devs;
 
-CREATE TABLE open_citations_future (
+CREATE TABLE open_citations_no_valid_pub_date (
   oci VARCHAR(1000),
   citing VARCHAR(400) NOT NULL,
   cited VARCHAR(400) NOT NULL,
@@ -178,9 +178,10 @@ CREATE TABLE open_citations_future (
   CONSTRAINT open_citations_future_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
-COMMENT ON TABLE open_citations_future IS 'Citations with the future publication years';
+COMMENT ON TABLE open_citations_no_valid_pub_date IS --
+  'Citations with either unknown pub date or the future publication year';
 
-ALTER TABLE open_citations_future
+ALTER TABLE open_citations_no_valid_pub_date
   OWNER TO devs;
 
 CREATE OR REPLACE VIEW stg_open_citations AS

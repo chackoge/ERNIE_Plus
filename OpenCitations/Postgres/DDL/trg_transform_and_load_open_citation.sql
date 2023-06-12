@@ -37,7 +37,8 @@ CREATE OR REPLACE FUNCTION to_interval(signed_iso_8601_interval TEXT) --
   */
 RETURN CASE
          WHEN left(signed_iso_8601_interval, 1) = '-' THEN -cast(substr(signed_iso_8601_interval, 2) AS INTERVAL)
-         ELSE cast(signed_iso_8601_interval AS INTERVAL) END;
+         ELSE cast(signed_iso_8601_interval AS INTERVAL)
+       END;
 
 CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() --
   RETURNS TRIGGER
@@ -49,18 +50,21 @@ BEGIN
     IF lower(new.citing) = lower(new.cited) THEN
       INSERT INTO open_citations_self(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
                                       time_span, author_sc, journal_sc)
-      VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
-              to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
+      VALUES
+        (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+         to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
       ON CONFLICT DO NOTHING;
 
       RETURN NULL;
     END IF;
 
-    IF extract_year(new.creation) > extract(YEAR FROM current_date) THEN
-      INSERT INTO open_citations_future(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
-                                        time_span, author_sc, journal_sc)
-      VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
-              to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
+    IF new.creation IS NULL OR extract_year(new.creation) > extract(YEAR FROM current_date) THEN
+      INSERT INTO open_citations_no_valid_pub_date(oci, citing, cited, citing_pub_year, citing_pub_month,
+                                                   citing_pub_date,
+                                                   time_span, author_sc, journal_sc)
+      VALUES
+        (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+         to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
       ON CONFLICT DO NOTHING;
 
       RETURN NULL;
@@ -71,10 +75,12 @@ BEGIN
     SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
       to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
     FROM open_citations oc
-    WHERE oc.oci = new.oci
+    WHERE
+      oc.oci = new.oci
     ON CONFLICT(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date, time_span, author_sc, --
       journal_sc) DO UPDATE -- NOP, but DO UPDATE is needed to set FOUND
-      SET oci = excluded.oci;
+      SET
+        oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
@@ -84,10 +90,12 @@ BEGIN
     SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
       to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
     FROM open_citations oc
-    WHERE oc.citing = lower(new.cited)
+    WHERE
+      oc.citing = lower(new.cited)
       AND oc.cited = lower(new.citing)
     ON CONFLICT(oci) DO UPDATE -- NOP, but DO UPDATE is needed to set FOUND
-      SET oci = excluded.oci;
+      SET
+        oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
@@ -97,18 +105,21 @@ BEGIN
     SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
       to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
     FROM open_citations oc
-    WHERE oc.citing = lower(new.citing)
+    WHERE
+      oc.citing = lower(new.citing)
       AND oc.cited = lower(new.cited)
     ON CONFLICT(oci) DO UPDATE -- NOP, but DO UPDATE is needed to set FOUND
-      SET oci = excluded.oci;
+      SET
+        oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
 
     INSERT INTO open_citations(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
                                time_span, author_sc, journal_sc)
-    VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
-            to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
+    VALUES
+      (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+       to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
     ON CONFLICT(oci, citing_pub_year) DO NOTHING;
     IF NOT found THEN
       RETURN NULL;
