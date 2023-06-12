@@ -79,8 +79,8 @@ BEGIN
       RETURN NULL;
     END IF;
 
-    INSERT INTO open_citations_looping AS ocl(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
-                                              time_span, author_sc, journal_sc)
+    INSERT INTO open_citations_looping(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                                       time_span, author_sc, journal_sc)
     SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
       to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
     FROM open_citations oc

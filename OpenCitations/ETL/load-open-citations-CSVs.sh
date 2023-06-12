@@ -112,7 +112,7 @@ load_csv() {
   if [[ $BATCH_SIZE ]]; then
     local -r HEADERS=OFF
   else
-    local -r HEADERS="ON MATCH"
+    local -r HEADERS=MATCH
   fi
   # language=PostgresPLSQL
   psql -v ON_ERROR_STOP=on <<HEREDOC
