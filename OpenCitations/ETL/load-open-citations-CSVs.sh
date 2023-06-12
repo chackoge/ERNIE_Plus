@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=4.3.0
+readonly VER=4.4.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -16,7 +16,7 @@ NAME
 
 SYNOPSIS
 
-    $SCRIPT_FULL_NAME [-c] [-j parallel_jobs] [-s batch_max_records] [data_directory]
+    $SCRIPT_FULL_NAME [-c] [-j parallel_jobs] [-s batch_max_records] [-d data_dir]
     $SCRIPT_FULL_NAME -h: display this help
 
 DESCRIPTION
@@ -25,15 +25,15 @@ DESCRIPTION
 
     The following options are available:
 
-    data_directory  directory with Open Citations *.csv files to process (non-recursively) [DEFAULT: .]
-                    The CSV files in it must be readable by the executing user.
+    -d data_dir           directory with Open Citations *.csv files to process (non-recursively) [DEFAULT: .]
+                          The CSV files in it must be readable by the executing user.
 
-    -c              clean (remove) loaded CSVs: recommended to simplify error recovery
-                    The CSV files in this case must be writeable by the executing user.
+    -c                    clean (remove) loaded CSVs: recommended to simplify error recovery
+                          The CSV files in this case must be writeable by the executing user.
 
-    -j              maximum number of parallel jobs [DEFAULT: $max_parallel_jobs]
+    -j parallel_jobs      maximum number of parallel jobs [DEFAULT: $max_parallel_jobs]
 
-    -s              split and process each CSV in batches up to this maximum number of records
+    -s batch_max_records  split and process each CSV in batches up to this maximum number of records
 
 ENVIRONMENT
 
