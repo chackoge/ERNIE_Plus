@@ -15,7 +15,7 @@ CREATE TABLE open_citations (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_pk PRIMARY KEY (oci, citing_pub_year) USING INDEX TABLESPACE index_tbs
 ) PARTITION BY RANGE (citing_pub_year) TABLESPACE open_citations_tbs;
 
@@ -27,9 +27,9 @@ $block$
     century SMALLINT;
     sql TEXT;
   BEGIN
-    FOR year IN 1900..EXTRACT(YEAR FROM current_date)
+    FOR year IN 1900..extract(YEAR FROM current_date)
       LOOP
-        sql := FORMAT('CREATE TABLE open_citations_%s PARTITION OF open_citations
+        sql := format('CREATE TABLE open_citations_%s PARTITION OF open_citations
                       FOR VALUES FROM (%1$s) TO (%1$s + 1)
                       TABLESPACE open_citations_tbs', year);
         RAISE NOTICE USING MESSAGE = sql || ';';
@@ -39,7 +39,7 @@ $block$
     -- Citations start from publication year 1500
     FOR century IN 16..19
       LOOP
-        sql := FORMAT('CREATE TABLE open_citations_%s_%s PARTITION OF open_citations
+        sql := format('CREATE TABLE open_citations_%s_%s PARTITION OF open_citations
                       FOR VALUES FROM (%1$s) TO (%2$s + 1)
                       TABLESPACE open_citations_tbs', (century - 1) * 100, (century - 1) * 100 + 99);
         RAISE NOTICE USING MESSAGE = sql || ';';
@@ -48,10 +48,10 @@ $block$
   END;
 $block$;
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations (citing, cited, citing_pub_year) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations(citing, cited, citing_pub_year) --
   TABLESPACE index_tbs;
 
-CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE index_tbs;
+CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) TABLESPACE index_tbs;
 
 COMMENT ON TABLE open_citations IS --
   'Open Citations COCI: Crossref open DOI-to-DOI citations excluding citation anomalies';
@@ -90,15 +90,16 @@ CREATE TABLE open_citations_duplicate (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED
 ) TABLESPACE open_citations_tbs;
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_duplicate_uk ON open_citations_duplicate (oci, citing, cited,
-                                                                                           citing_pub_year,
-                                                                                           citing_pub_month,
-                                                                                           citing_pub_date, time_span,
-                                                                                           journal_sc,
-                                                                                           author_sc) TABLESPACE index_tbs;
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_duplicate_uk --
+  ON open_citations_duplicate(oci, citing, cited,
+                              citing_pub_year,
+                              citing_pub_month,
+                              citing_pub_date, time_span,
+                              journal_sc,
+                              author_sc) TABLESPACE index_tbs;
 
 COMMENT ON TABLE open_citations_duplicate IS --
   'Citations with a duplicate OCI to `open_citations` but different data in an other column';
@@ -116,7 +117,7 @@ CREATE TABLE open_citations_parallel (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_parallel_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
@@ -135,7 +136,7 @@ CREATE TABLE open_citations_self (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_self_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
@@ -154,7 +155,7 @@ CREATE TABLE open_citations_looping (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_looping_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
@@ -173,7 +174,7 @@ CREATE TABLE open_citations_future (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( EXTRACT(YEAR FROM citing_pub_date - time_span) ) STORED,
+  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_future_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
@@ -193,7 +194,7 @@ CREATE SEQUENCE open_citation_pubs_seq MINVALUE 0;
 ALTER SEQUENCE open_citation_pubs_seq OWNER TO devs;
 
 CREATE MATERIALIZED VIEW open_citation_pubs TABLESPACE open_citations_tbs AS
-SELECT sq.doi, NEXTVAL('open_citation_pubs_seq') AS iid
+SELECT sq.doi, nextval('open_citation_pubs_seq') AS iid
 FROM (SELECT citing AS doi
       FROM open_citations
       UNION
@@ -205,10 +206,10 @@ WITH NO DATA;
 COMMENT ON MATERIALIZED VIEW open_citation_pubs IS ---
   'Unique publications with original DOIs extracted from open_citations';
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_doi_uk ON open_citation_pubs (doi) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_doi_uk ON open_citation_pubs(doi) --
   TABLESPACE index_tbs;
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_iid_uk ON open_citation_pubs (iid) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_iid_uk ON open_citation_pubs(iid) --
   TABLESPACE index_tbs;
 
 ALTER MATERIALIZED VIEW open_citation_pubs OWNER TO devs;
