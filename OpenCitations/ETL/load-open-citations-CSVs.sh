@@ -59,8 +59,9 @@ HEREDOC
   exit 255
 }
 
+DATA_DIR=.
 # If a colon follows a character, the option is expected to have an argument
-while getopts cj:s:h OPT; do
+while getopts cj:s:d:h OPT; do
   case "$OPT" in
   c)
     declare -rx REMOVE_LOADED=true
@@ -71,16 +72,16 @@ while getopts cj:s:h OPT; do
   s)
     declare -rx BATCH_SIZE=$OPTARG
     ;;
+  d)
+    readonly DATA_DIR="$OPTARG"
+    ;;
   *) # -h or `?`: an unknown option
     usage
     ;;
   esac
 done
 echo -e "\n# \`$0${*+ }$*\` v$VER: run by \`${USER:-${USERNAME:-${LOGNAME:-UID #$UID}}}@${HOSTNAME}\` in \`${PWD}\` #\n"
-shift $((OPTIND - 1))
-
-# Process positional parameters
-readonly DATA_DIR="${1:-.}"
+#shift $((OPTIND - 1))
 
 if ! command -v parallel >/dev/null; then
   echo "Please install GNU parallel"
