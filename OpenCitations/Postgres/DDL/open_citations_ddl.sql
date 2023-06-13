@@ -16,9 +16,11 @@ CREATE TABLE open_citations (
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
   cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
-  CONSTRAINT open_citations_pk PRIMARY KEY (oci, citing_pub_year) USING INDEX TABLESPACE index_tbs
-) PARTITION BY RANGE (citing_pub_year) TABLESPACE open_citations_tbs;
+  CONSTRAINT open_citations_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
+  --CONSTRAINT open_citations_pk PRIMARY KEY (citing_pub_year, oci) USING INDEX TABLESPACE index_tbs
+) /*PARTITION BY RANGE (citing_pub_year)*/ TABLESPACE open_citations_tbs;
 
+/*
 -- Partitions
 DO
 $block$
@@ -47,8 +49,9 @@ $block$
       END LOOP;
   END;
 $block$;
+*/
 
-CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations(citing, cited, citing_pub_year) --
+CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations(citing, cited) --
   TABLESPACE index_tbs;
 
 CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) TABLESPACE index_tbs;
@@ -187,6 +190,11 @@ ALTER TABLE open_citations_no_valid_pub_date
 CREATE OR REPLACE VIEW stg_open_citations AS
 SELECT oci, citing, cited, 'foo' AS creation, 'bar' AS timespan, journal_sc, author_sc
 FROM open_citations;
+
+COMMENT ON VIEW stg_open_citations IS 'Staging entity for ETL. Columns must match the CSV header exactly.';
+
+ALTER VIEW stg_open_citations
+  OWNER TO devs;
 
 \include_relative trg_transform_and_load_open_citation.sql
 

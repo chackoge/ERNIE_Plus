@@ -53,7 +53,7 @@ BEGIN
       VALUES
         (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
          to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
-      ON CONFLICT DO NOTHING;
+      ON CONFLICT(oci) DO NOTHING;
 
       RETURN NULL;
     END IF;
@@ -65,7 +65,7 @@ BEGIN
       VALUES
         (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
          to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
-      ON CONFLICT DO NOTHING;
+      ON CONFLICT(oci) DO NOTHING;
 
       RETURN NULL;
     END IF;
@@ -120,7 +120,7 @@ BEGIN
     VALUES
       (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
        to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
-    ON CONFLICT(oci, citing_pub_year) DO NOTHING;
+    ON CONFLICT(oci) DO NOTHING;
     IF NOT found THEN
       RETURN NULL;
     END IF;

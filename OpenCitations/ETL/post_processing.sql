@@ -13,7 +13,8 @@ ALTER TABLE open_citations SET LOGGED;
 CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE index_tbs;
 
 ANALYZE VERBOSE open_citations;
-ANALYZE VERBOSE open_citation_duplicates;
-ANALYZE VERBOSE open_citation_loops;
-ANALYZE VERBOSE open_citation_parallels;
-ANALYZE VERBOSE open_citation_self;
+ANALYZE VERBOSE open_citations_duplicate;
+ANALYZE VERBOSE open_citations_looping;
+ANALYZE VERBOSE open_citations_no_valid_pub_date;
+ANALYZE VERBOSE open_citations_parallel;
+ANALYZE VERBOSE open_citations_self;
