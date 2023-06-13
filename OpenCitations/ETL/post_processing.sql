@@ -15,6 +15,6 @@ CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE index
 ANALYZE VERBOSE open_citations;
 ANALYZE VERBOSE open_citations_duplicate;
 ANALYZE VERBOSE open_citations_looping;
-ANALYZE VERBOSE open_citations_no_valid_pub_date;
+ANALYZE VERBOSE open_citations_no_valid_dating;
 ANALYZE VERBOSE open_citations_parallel;
 ANALYZE VERBOSE open_citations_self;
