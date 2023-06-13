@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=4.4.0
+readonly VER=4.4.1
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -138,8 +138,8 @@ if [[ $BATCH_SIZE ]]; then
     # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
     find . -maxdepth 1 -name '*.csv' -type f -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
         --verbose --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' \
-        "tail -n +2 {} | split --lines=$BATCH_SIZE --numeric-suffixes=1 --elide-empty-files --additional-suffix=.csv - \
-            batches/{}.part"
+        "tail -n +2 {} | split --lines=$BATCH_SIZE --suffix-length=4 --numeric-suffixes=1 --elide-empty-files \
+          --additional-suffix=.csv - batches/{}.part"
   fi
   cd batches
 fi
