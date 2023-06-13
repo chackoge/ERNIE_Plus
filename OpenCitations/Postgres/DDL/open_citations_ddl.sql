@@ -15,7 +15,6 @@ CREATE TABLE open_citations (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
   --CONSTRAINT open_citations_pk PRIMARY KEY (citing_pub_year, oci) USING INDEX TABLESPACE index_tbs
 ) /*PARTITION BY RANGE (citing_pub_year)*/ TABLESPACE open_citations_tbs;
@@ -92,8 +91,7 @@ CREATE TABLE open_citations_duplicate (
   citing_pub_date DATE,
   time_span INTERVAL,
   journal_sc BOOLEAN,
-  author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED
+  author_sc BOOLEAN
 ) TABLESPACE open_citations_tbs;
 
 CREATE UNIQUE INDEX IF NOT EXISTS open_citations_duplicate_uk --
@@ -120,7 +118,6 @@ CREATE TABLE open_citations_parallel (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_parallel_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
@@ -139,7 +136,6 @@ CREATE TABLE open_citations_self (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_self_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
@@ -158,7 +154,6 @@ CREATE TABLE open_citations_looping (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_looping_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
@@ -167,7 +162,7 @@ COMMENT ON TABLE open_citations_looping IS 'Citations that loop back (cited -> c
 ALTER TABLE open_citations_looping
   OWNER TO devs;
 
-CREATE TABLE open_citations_no_valid_pub_date (
+CREATE TABLE open_citations_no_valid_dating (
   oci VARCHAR(1000),
   citing VARCHAR(400) NOT NULL,
   cited VARCHAR(400) NOT NULL,
@@ -177,14 +172,13 @@ CREATE TABLE open_citations_no_valid_pub_date (
   time_span INTERVAL,
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
-  cited_pub_year SMALLINT GENERATED ALWAYS AS ( extract(YEAR FROM citing_pub_date - time_span) ) STORED,
   CONSTRAINT open_citations_future_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
-COMMENT ON TABLE open_citations_no_valid_pub_date IS --
-  'Citations with either unknown pub date or the future publication year';
+COMMENT ON TABLE open_citations_no_valid_dating IS --
+  'Citations where the citing publication has either unknown (blank) date or the future year';
 
-ALTER TABLE open_citations_no_valid_pub_date
+ALTER TABLE open_citations_no_valid_dating
   OWNER TO devs;
 
 CREATE OR REPLACE VIEW stg_open_citations AS
