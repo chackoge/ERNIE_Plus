@@ -16,6 +16,7 @@ CREATE TABLE open_citations (
   journal_sc BOOLEAN,
   author_sc BOOLEAN,
   CONSTRAINT open_citations_pk PRIMARY KEY (oci) USING INDEX TABLESPACE index_tbs
+  -- TBD Partitioning seems like the Right Thing here, but it slowed down ETL by multiple orders of magnitude
   --CONSTRAINT open_citations_pk PRIMARY KEY (citing_pub_year, oci) USING INDEX TABLESPACE index_tbs
 ) /*PARTITION BY RANGE (citing_pub_year)*/ TABLESPACE open_citations_tbs;
 
