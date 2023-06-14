@@ -31,8 +31,9 @@ CREATE OR REPLACE FUNCTION to_interval(signed_iso_8601_interval TEXT) RETURNS IN
   /**
   Converts [-]P{quantity}{unit}[{quantity}{unit} ...] string to an INTERVAL
   */
-RETURN CASE WHEN left(signed_iso_8601_interval, 1) = '-' THEN -cast(substr(signed_iso_8601_interval, 2) AS INTERVAL)
-            ELSE cast(signed_iso_8601_interval AS INTERVAL) END;
+RETURN CASE
+         WHEN left(signed_iso_8601_interval, 1) = '-' THEN -cast(substr(signed_iso_8601_interval, 2) AS INTERVAL)
+         ELSE cast(signed_iso_8601_interval AS INTERVAL) END;
 
 CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() RETURNS TRIGGER
   LANGUAGE plpgsql --
@@ -45,7 +46,7 @@ BEGIN
                                       time_span, author_sc, journal_sc)
       VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
               to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
-          ON CONFLICT(oci) DO NOTHING;
+      ON CONFLICT(oci) DO NOTHING;
 
       RETURN NULL;
     END IF;
@@ -56,70 +57,105 @@ BEGIN
                                                  time_span, author_sc, journal_sc)
       VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
               to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
-          ON CONFLICT(oci) DO NOTHING;
+      ON CONFLICT(oci) DO NOTHING;
 
       RETURN NULL;
     END IF;
 
     INSERT INTO open_citations_duplicate(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
                                          time_span, author_sc, journal_sc)
-    SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
-           to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
-      FROM open_citations oc
-     WHERE oc.oci = new.oci
-        ON CONFLICT(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date, time_span, author_sc, --
-          journal_sc)
-          -- NOP, but DO UPDATE is needed to set FOUND
-          DO UPDATE SET oci = excluded.oci;
+    SELECT new.oci,
+           new.citing,
+           new.cited,
+           extract_year(new.creation),
+           extract_month(new.creation),
+           to_date(new.creation),
+           to_interval(new.timespan),
+           new.author_sc,
+           new.journal_sc
+    FROM open_citations oc
+    WHERE oc.oci = new.oci
+    ON CONFLICT(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date, time_span, author_sc, --
+      journal_sc)
+      -- NOP, but DO UPDATE is needed to set FOUND
+      DO UPDATE SET oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
 
     INSERT INTO open_citations_looping(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
                                        time_span, author_sc, journal_sc)
-    SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
-           to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
-      FROM open_citations oc
-     WHERE oc.citing = lower(new.cited)
-       AND oc.cited = lower(new.citing)
-        ON CONFLICT(oci)
-          -- NOP, but DO UPDATE is needed to set FOUND
-          DO UPDATE SET oci = excluded.oci;
+    SELECT new.oci,
+           new.citing,
+           new.cited,
+           extract_year(new.creation),
+           extract_month(new.creation),
+           to_date(new.creation),
+           to_interval(new.timespan),
+           new.author_sc,
+           new.journal_sc
+    FROM open_citations oc
+    WHERE oc.citing = lower(new.cited)
+      AND oc.cited = lower(new.citing)
+    ON CONFLICT(oci)
+      -- NOP, but DO UPDATE is needed to set FOUND
+      DO UPDATE SET oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
 
     INSERT INTO open_citations_parallel(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
                                         time_span, author_sc, journal_sc)
-    SELECT new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
-           to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc
-      FROM open_citations oc
-     WHERE oc.citing = lower(new.citing)
-       AND oc.cited = lower(new.cited)
-        ON CONFLICT(oci)
-          -- NOP, but DO UPDATE is needed to set FOUND
-          DO UPDATE SET oci = excluded.oci;
+    SELECT new.oci,
+           new.citing,
+           new.cited,
+           extract_year(new.creation),
+           extract_month(new.creation),
+           to_date(new.creation),
+           to_interval(new.timespan),
+           new.author_sc,
+           new.journal_sc
+    FROM open_citations oc
+    WHERE oc.citing = lower(new.citing)
+      AND oc.cited = lower(new.cited)
+    ON CONFLICT(oci)
+      -- NOP, but DO UPDATE is needed to set FOUND
+      DO UPDATE SET oci = excluded.oci;
     IF found THEN
       RETURN NULL;
     END IF;
 
-    INSERT INTO open_citations(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
-                               time_span, author_sc, journal_sc)
-    VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
-            to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
-        ON CONFLICT(oci) DO NOTHING;
-    IF NOT found THEN
-      RETURN NULL;
-    END IF;
-
-    /*
-    A nonnull return value is used to signal that the trigger performed the necessary data modifications in the view.
-    This will cause the count of the number of rows affected by the command to be incremented
-    */
-    RETURN new;
+  /*
+  TBD This runs into deadlocks e.g. with 8 parallel load jobs x 10,000 record batches, for example:
+    ```
+    ERROR:  deadlock detected
+    DETAIL:  Process 3814937 waits for ShareLock on transaction 23722; blocked by process 3814933.
+    Process 3814933 waits for ShareLock on transaction 23723; blocked by process 3814937.
+    HINT:  See server log for query details.
+    CONTEXT:  while inserting index tuple (4761626,35) in relation "open_citations"
+    SQL statement [skipped] ...
+    COPY stg_open_citations, line 9537:
+    "02003030809361525283429370200020037050403090603-020010001063619371110231312370200000737000537000007,..."
+    ```
+    The ETL completes successfully with 4 parallel load jobs x 10,000 record batches.
+  */
+  INSERT INTO open_citations(oci, citing, cited, citing_pub_year, citing_pub_month, citing_pub_date,
+                             time_span, author_sc, journal_sc)
+  VALUES (new.oci, new.citing, new.cited, extract_year(new.creation), extract_month(new.creation),
+          to_date(new.creation), to_interval(new.timespan), new.author_sc, new.journal_sc)
+      ON CONFLICT(oci) DO NOTHING;
+  IF NOT found THEN
+    RETURN NULL;
   END IF;
 
-  RAISE 'Operation % is not supported', tg_op;
+  /*
+  A nonnull return value is used to signal that the trigger performed the necessary data modifications in the view.
+  This will cause the count of the number of rows affected by the command to be incremented
+  */
+  RETURN new;
+END IF;
+
+RAISE 'Operation % is not supported', tg_op;
 END;
 $block$;
 
