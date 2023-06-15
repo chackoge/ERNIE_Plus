@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-readonly VER=4.4.1
+readonly VER=4.4.2
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
