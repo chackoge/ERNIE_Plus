@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="(t) Odesa" stopOnFirstError="true" overwriteAll="false" deleteMissingItems="true" exclude=".svn;.cvs;.DS_Store;.git;.hg;*.hprof;*.pyc" preserveFilePermissions="true">
+  <component name="PublishConfigData" serverName="(i) Valhalla" overwriteAll="false" deleteMissingItems="true" exclude=".svn;.cvs;.DS_Store;.git;.hg;*.hprof;*.pyc" preserveFilePermissions="true" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
     <serverData>
       <paths name="(i) Valhalla">
         <serverdata>
           <mappings>
-            <mapping deploy="Workspaces/ERNIE_Plus" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="(t) Odesa">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/home/dk/Workspaces/ERNIE_Plus" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/dmitriy/Workspaces/ERNIE_Plus" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
