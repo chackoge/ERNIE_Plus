@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
+if [ "$POSIXLY_CORRECT" = "y" ]; then
+  echo "This script is not designed for POSIX mode" >&2
+  exit 1
+fi
+
+if [[ ! $BASH ]]; then
+  echo "This script is designed for Bash only" >&2
+  exit 1
+fi
+
 set -e
 set -o pipefail
 
-readonly VER=4.4.2
+readonly SCRIPT_VER=4.5.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -54,10 +64,14 @@ EXIT STATUS
     1-100 The number of files failed to load
     255   Usage help is requested or invalid options
 
-v$VER
+v$SCRIPT_VER
 HEREDOC
-  exit 255
+  exit 1
 }
+
+if [[ $1 == "-h" ]]; then
+  usage
+fi
 
 DATA_DIR=.
 # If a colon follows a character, the option is expected to have an argument
@@ -80,8 +94,36 @@ while getopts cj:s:d:h OPT; do
     ;;
   esac
 done
-echo -e "\n# \`$0${*+ }$*\` v$VER: run by \`${USER:-${USERNAME:-${LOGNAME:-UID #$UID}}}@${HOSTNAME}\` in \`${PWD}\` #\n"
-#shift $((OPTIND - 1))
+
+########################################################################################################################
+# Print basic info about the running script and parameters
+#
+# Globals:
+#   $SCRIPT_VER
+########################################################################################################################
+hello() {
+  local exec_sh
+  exec_sh=$(ps -p "$$" -o comm=)
+  if [[ "$exec_sh" != /* ]]; then
+    # Shell filename without the path: `script.sh` (= `/usr/bin/env bash script.sh`) or `shell script.sh` execution
+
+    # Suffix after the first '-', if any. Login shell process names start with `-`, e.g. `-bash`.
+    local -r EXEC_SH_NAME=${exec_sh#*-}
+
+    # The parent, e.g., login, interactive shell, finds the subshell to execute on its PATH. The following is the
+    # best guess assuming that this subshell (non-login, non-interactive) PATH is the same.
+    exec_sh="$(which "$EXEC_SH_NAME") (?)"
+  fi
+  printf '\n[%s] %s@%s %s> [%s] %s [v%s]' "$(date +'%T %Z')" "$(id -un)" "${HOSTNAME}" "${PWD}" "${exec_sh}" "$0" \
+    "$SCRIPT_VER"
+  if (($# > 0)); then
+    printf ' '
+    printf '"%s" ' "$@"
+  fi
+  printf '\n\n'
+}
+
+hello "$@"
 
 if ! command -v parallel >/dev/null; then
   echo "Please install GNU parallel"

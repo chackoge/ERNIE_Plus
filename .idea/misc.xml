@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+  <component name="Black">
+    <option name="sdkName" value="Python 3 (py3venv)" />
   </component>
   <component name="ProjectResources">
     <resource url="http://www.elsevier.com/xml/xocs/dtd" location="$PROJECT_DIR$/Scopus/XML_Schemas/xocs-ani513.xsd" />

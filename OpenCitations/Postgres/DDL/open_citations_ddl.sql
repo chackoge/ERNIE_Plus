@@ -57,7 +57,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS open_citations_uk ON open_citations(citing, ci
 CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations(cited) TABLESPACE index_tbs;
 
 COMMENT ON TABLE open_citations IS --
-  'Open Citations COCI: Crossref open DOI-to-DOI citations excluding citation anomalies';
+  'Open Citations Index: Crossref open DOI-to-DOI citations excluding citation anomalies';
 
 COMMENT ON COLUMN open_citations.citing IS --
   'DOI, lower-cased';
@@ -193,6 +193,7 @@ ALTER VIEW stg_open_citations
 
 \include_relative trg_transform_and_load_open_citation.sql
 
+/*
 DROP SEQUENCE IF EXISTS open_citation_pubs_seq;
 CREATE SEQUENCE open_citation_pubs_seq MINVALUE 0;
 ALTER SEQUENCE open_citation_pubs_seq OWNER TO devs;
@@ -217,6 +218,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_iid_uk ON open_citation_pub
   TABLESPACE index_tbs;
 
 ALTER MATERIALIZED VIEW open_citation_pubs OWNER TO devs;
+*/
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
