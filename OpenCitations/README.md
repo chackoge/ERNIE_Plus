@@ -2,6 +2,17 @@
 
 OpenCitations ETL loads Open Citations data into a Postgres DB.
 
+Requirements as of OpenCitations v2023-11-29:
+
+Postgres 15+ with the default Postgres DB which has the following:
+* `open_citations_tbs` tablespace with 300 GB available disk space
+* `index_tbs` tablespace with 250 GB available disk space
+* A user with the name = {OS executing user} and the following Postgres privileges or a superuser role:
+  * `pg_read_server_files`
+  * INSERT on `public.*open_citations*` tables and views
+  * EXECUTE on `public.to_date()` and `public.to_interval()` functions
+  * CREATE on SCHEMA `public`
+
 ## OpenCitations Index ##
 
 1. Download the latest Index CSVs from [OpenCitations](https://opencitations.net/download#index).
@@ -26,3 +37,7 @@ another column.
 * `open_citations_looping` are citations that loop back comparing to another one in `open_citations`: cited -> citing
 * `open_citations_no_valid_dating` are citations from the citing publication with either unknown / blank date or a
 future year
+
+Estimated load time: 24-25 hours
+* Server: 96 CPU cores (48 x 2) and 256 GB RAM
+* Load with four parallel jobs, 10,000 record batches
