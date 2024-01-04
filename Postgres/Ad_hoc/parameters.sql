@@ -34,6 +34,15 @@ ORDER BY name;
 --region Require server restart
 ALTER SYSTEM SET listen_addresses = '*';
 
+/*
+Determines the maximum number of concurrent connections to the database server. The default is typically 100
+connections, but might be less if your kernel settings will not support it (as determined during initdb).
+
+When running a standby server, you must set this parameter to the same or higher value than on the primary server.
+Otherwise, queries will not be allowed in the standby server.
+*/
+ALTER SYSTEM SET max_connections = 100;
+
 ALTER SYSTEM SET max_locks_per_transaction = 256;
 
 ALTER SYSTEM SET shared_buffers = '10GB';
