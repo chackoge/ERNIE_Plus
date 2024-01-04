@@ -14,8 +14,8 @@ AS
 $block$
 BEGIN
   IF (tg_op = 'INSERT') THEN
-    INSERT INTO open_citation_pubs(omid, uri, title, author_uris, issue, volume, venue_uri, pages, pub_year, pub_month,
-                                   pub_date, type, publisher_uri, editor_uris)
+    INSERT INTO open_citation_pubs(omid, uri, title, authors, issue, volume, venue, pages, pub_year, pub_month,
+                                   pub_date, type, publisher, editors)
     VALUES (split_part(new.id, ' ', 1), split_part(new.id, ' ', 2), new.title, new.author, new.issue, new.volume,
             new.venue, new.page, extract_year(new.pub_date), extract_month(new.pub_date), to_date(new.pub_date),
             new.type, new.publisher, new.editor)

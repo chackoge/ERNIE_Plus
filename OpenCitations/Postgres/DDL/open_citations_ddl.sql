@@ -207,39 +207,49 @@ CREATE TABLE open_citation_pubs (
   authors VARCHAR(1000) NOT NULL,
   issue VARCHAR(100),
   volume VARCHAR(100),
-  venue_uri CHAR(39),
+  venue VARCHAR(400),
   pages VARCHAR(100),
   pub_year SMALLINT,
   pub_month SMALLINT,
   pub_date DATE,
   type VARCHAR(100),
-  publisher_uri CHAR(39),
-  editor_uris VARCHAR(1000),
+  publisher VARCHAR(400),
+  editors VARCHAR(1000),
   CONSTRAINT open_citation_pubs_pk PRIMARY KEY (omid) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
 
 COMMENT ON TABLE open_citation_pubs IS 'Open Citations Meta: bibliographic resources';
 
 COMMENT ON COLUMN open_citation_pubs.omid IS 'The OMID of the publication (bibliographic resource, document)';
-COMMENT ON COLUMN open_citation_pubs.uri IS 'The publication URI: OpenCitations, DOI, etc.';
+COMMENT ON COLUMN open_citation_pubs.uri IS --
+  'The publication URI: OpenCitations, DOI, etc., for example: "https://w3id.org/oc/meta/id/06480223593"';
 COMMENT ON COLUMN open_citation_pubs.iid IS 'Zero-based index';
 COMMENT ON COLUMN open_citation_pubs.title IS 'The publication''s title';
-COMMENT ON COLUMN open_citation_pubs.authors IS --
-  'The authors, "; "-separated. Each has name (optionally) followed by URI, for example: '
-  '"Pelletier, Mariane [omid:ra/0648019318]"';
+--@formatter:off
+COMMENT ON COLUMN open_citation_pubs.authors IS
+  'The authors, "; "-separated. Each is "{Full Name} [{URIs}] or just {URI}", for example: '
+  '"Pelletier, Mariane [omid:ra/0648019318]" or "https://w3id.org/oc/meta/ar/06480809000"';
+--@formatter:on
 COMMENT ON COLUMN open_citation_pubs.issue IS --
   'The issue sequence identifier (e.g. a number) to which the document belongs';
 COMMENT ON COLUMN open_citation_pubs.volume IS --
   'The volume sequence identifier (e.g. a number) to which the document belongs';
-COMMENT ON COLUMN open_citation_pubs.venue_uri IS --
-  'The venue: the bibliographical resource to which the document belongs';
+--@formatter:off
+COMMENT ON COLUMN open_citation_pubs.venue IS
+  'The venue: the bibliographical resource to which the document belongs: "{Name} [{URIs}] or just {URI}, for example: '
+  '"https://w3id.org/oc/meta/br/06480193512"';
+--@formatter:on
 COMMENT ON COLUMN open_citation_pubs.pages IS 'The page range';
 COMMENT ON COLUMN open_citation_pubs.pub_year IS 'The publication year';
 COMMENT ON COLUMN open_citation_pubs.pub_month IS 'The publication month';
 COMMENT ON COLUMN open_citation_pubs.pub_date IS 'The publication date';
 COMMENT ON COLUMN open_citation_pubs.type IS 'The publication type: "journal article", "book chapter", etc.';
-COMMENT ON COLUMN open_citation_pubs.publisher_uri IS 'The entity responsible for making the document available';
-COMMENT ON COLUMN open_citation_pubs.editor_uris IS 'The editors of the document';
+--@formatter:off
+COMMENT ON COLUMN open_citation_pubs.publisher IS
+  'The entity responsible for making the document available: "{Name} [{URIs}] or just {URI}, for exаmple, '
+  'Elsevier Bv [omid:ra/0610116009 crossref:78]';
+--@formatter:on
+COMMENT ON COLUMN open_citation_pubs.editors IS 'The editors of the document';
 
 CREATE UNIQUE INDEX IF NOT EXISTS open_citation_pubs_iid_uk ON open_citation_pubs (iid) --
   TABLESPACE index_tbs;
@@ -248,8 +258,8 @@ ALTER TABLE open_citation_pubs
   OWNER TO devs;
 
 CREATE OR REPLACE VIEW stg_open_citation_pubs AS
-SELECT 'foo' AS id, title, authors AS author, issue, volume, venue_uri AS venue, pages AS page, 'bar' AS pub_date, type,
-  publisher_uri AS publisher, editor_uris AS editor
+SELECT 'foo' AS id, title, authors AS author, issue, volume, venue AS venue, pages AS page, 'bar' AS pub_date, type,
+  publisher, editors AS editor
 FROM open_citation_pubs;
 
 COMMENT ON VIEW stg_open_citation_pubs IS --
