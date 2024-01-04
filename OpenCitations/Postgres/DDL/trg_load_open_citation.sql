@@ -8,7 +8,7 @@ SET search_path = :schema;
 -- JetBrains IDEs: start execution from here
 SET TIMEZONE = 'US/Eastern';
 
-CREATE OR REPLACE FUNCTION trg_transform_and_load_open_citation() RETURNS TRIGGER
+CREATE OR REPLACE FUNCTION trg_load_open_citation() RETURNS TRIGGER
   LANGUAGE plpgsql --
 AS
 $block$
@@ -148,4 +148,4 @@ CREATE TRIGGER stg_open_citations_trg
   INSTEAD OF INSERT
   ON stg_open_citations
   FOR EACH ROW
-EXECUTE FUNCTION trg_transform_and_load_open_citation();
+EXECUTE FUNCTION trg_load_open_citation();
