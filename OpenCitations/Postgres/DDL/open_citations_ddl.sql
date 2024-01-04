@@ -65,21 +65,18 @@ CREATE INDEX IF NOT EXISTS oc_cited_i ON open_citations (cited) TABLESPACE index
 COMMENT ON TABLE open_citations IS 'OpenCitations Index: Crossref open citations excluding citation anomalies';
 
 COMMENT ON COLUMN open_citations.citing IS 'OMID of the citing publication';
-
 COMMENT ON COLUMN open_citations.cited IS 'OMID of the citing publication';
-
 COMMENT ON COLUMN open_citations.citing_pub_year IS 'The publication year of the citing bibliographic resource';
-
 COMMENT ON COLUMN open_citations.citing_pub_month IS 'The publication month of the citing bibliographic resource';
-
-COMMENT ON COLUMN open_citations.citing_pub_date IS 'The publication date of the citing bibliographic resource';
-
+--@formatter:off
+COMMENT ON COLUMN open_citations.citing_pub_date IS --
+  'The publication date of the citing bibliographic resource. Sometimes only a year or a year and month are available, '
+  'not the full date.';
+--@formatter:on
 COMMENT ON COLUMN open_citations.time_span IS --
   'The interval between the publications of the citing entity and the cited entity.';
-
 COMMENT ON COLUMN open_citations.journal_sc IS --
   'Whether it is a journal self-citation (i.e. the citing and the cited entities are published in the same journal)';
-
 COMMENT ON COLUMN open_citations.author_sc IS --
   'Whether it is an author self-citation (i.e. the citing and the cited entities have at least one author in common).';
 
@@ -206,7 +203,7 @@ CREATE TABLE open_citation_pubs (
   pub_year SMALLINT,
   pub_month SMALLINT,
   pub_date DATE,
-  type VARCHAR(100),
+  type VARCHAR(100), -- TBD replace by ENUM
   publisher VARCHAR(400),
   editors VARCHAR(1000),
   CONSTRAINT open_citation_pubs_pk PRIMARY KEY (omid) USING INDEX TABLESPACE index_tbs
@@ -216,12 +213,12 @@ COMMENT ON TABLE open_citation_pubs IS 'Open Citations Meta: bibliographic resou
 
 COMMENT ON COLUMN open_citation_pubs.omid IS 'The OMID of the publication (bibliographic resource, document)';
 COMMENT ON COLUMN open_citation_pubs.uri IS --
-  'The publication URI: OpenCitations, DOI, etc., for example: "https://w3id.org/oc/meta/id/06480223593"';
+  'The publication URI: OpenCitations, DOI or PMID. for example: "doi:10.1002/cctc.201200008"';
 COMMENT ON COLUMN open_citation_pubs.iid IS 'Zero-based index: 0..2,147,483,647';
 COMMENT ON COLUMN open_citation_pubs.title IS 'The publication''s title';
 --@formatter:off
 COMMENT ON COLUMN open_citation_pubs.authors IS
-  'The authors, "; "-separated. Each is "{Full Name} [{URIs}] or just {URI}", for example: '
+  'The authors, "; "-separated. Each is "{Last, First Middle} [{URIs}] or just {URI}", for example: '
   '"Pelletier, Mariane [omid:ra/0648019318]" or "https://w3id.org/oc/meta/ar/06480809000"';
 --@formatter:on
 COMMENT ON COLUMN open_citation_pubs.issue IS 'The issue to which the document belongs, for example, "1-2"';
@@ -234,7 +231,8 @@ COMMENT ON COLUMN open_citation_pubs.venue IS
 COMMENT ON COLUMN open_citation_pubs.pages IS 'The page range';
 COMMENT ON COLUMN open_citation_pubs.pub_year IS 'The publication year';
 COMMENT ON COLUMN open_citation_pubs.pub_month IS 'The publication month';
-COMMENT ON COLUMN open_citation_pubs.pub_date IS 'The publication date';
+COMMENT ON COLUMN open_citation_pubs.pub_date IS --
+  'The publication date. Sometimes only a year or a year and month are available, not the full date.';
 COMMENT ON COLUMN open_citation_pubs.type IS 'The publication type: "journal article", "book chapter", etc.';
 --@formatter:off
 COMMENT ON COLUMN open_citation_pubs.publisher IS
