@@ -12,7 +12,7 @@ CREATE OR REPLACE FUNCTION extract_year(date_string TEXT) RETURNS SMALLINT
   /**
   Extracts year from YYYY[-MM][-DD] string
   */
-RETURN cast(left(date_string, 4) AS SMALLINT);
+RETURN cast(nullif(left(date_string, 4), '') AS SMALLINT);
 
 CREATE OR REPLACE FUNCTION extract_month(date_string TEXT) RETURNS SMALLINT
   /**
