@@ -280,6 +280,14 @@ ALTER VIEW stg_open_citations OWNER TO devs;
 
 \include_relative trg_load_open_citation.sql
 
+CREATE OR REPLACE VIEW open_citations_between_known_pubs AS
+SELECT ocp_citing.iid AS citing_iid, ocp_cited.iid AS cited_iid
+FROM open_citations oc
+  JOIN open_citation_pubs ocp_citing ON ocp_citing.omid = oc.citing
+  JOIN open_citation_pubs ocp_cited ON ocp_cited.omid = oc.cited;
+
+COMMENT ON VIEW open_citations_between_known_pubs IS 'Citations between valid, existing pubs only.';
+
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
 GRANT pg_read_server_files TO devs;
