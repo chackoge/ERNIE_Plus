@@ -116,7 +116,7 @@ ALTER TABLE open_citation_pub_ids
 -- region stg_open_citation_pubs
 DROP VIEW IF EXISTS stg_open_citation_pub_ids;
 CREATE OR REPLACE VIEW stg_open_citation_pub_ids AS
-SELECT omid, cast(id AS VARCHAR(5000))
+SELECT omid, cast(id AS VARCHAR(50000))
 FROM open_citation_pub_ids ocpi;
 
 COMMENT ON VIEW stg_open_citation_pub_ids IS 'Staging for OpenCitations Meta BR OMID map ETL.';
