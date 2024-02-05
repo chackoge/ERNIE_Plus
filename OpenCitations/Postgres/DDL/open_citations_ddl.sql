@@ -32,7 +32,10 @@ CREATE TABLE IF NOT EXISTS open_citation_pubs (
 
 COMMENT ON TABLE open_citation_pubs IS 'Open Citations Meta: bibliographic resources';
 
-COMMENT ON COLUMN open_citation_pubs.omid IS 'The OMID of the publication (bibliographic resource, document),' 'for example: "omid:br/06230199640"';
+--@formatter:off
+COMMENT ON COLUMN open_citation_pubs.omid IS 'The OMID of the publication (bibliographic resource, document),'
+  'for example: "omid:br/06230199640"';
+--@formatter:on
 COMMENT ON COLUMN open_citation_pubs.uri IS --
   'The publication URI: OpenCitations, DOI, PMID or another, for example: "doi:10.1002/cctc.201200008"';
 COMMENT ON COLUMN open_citation_pubs.iid IS 'Zero-based index: 0..2,147,483,647';
@@ -96,6 +99,8 @@ CREATE TABLE IF NOT EXISTS open_citation_pub_ids (
   id VARCHAR(200) NOT NULL,
   CONSTRAINT open_citation_pub_ids_pk PRIMARY KEY (omid, id) USING INDEX TABLESPACE index_tbs
 ) TABLESPACE open_citations_tbs;
+
+CREATE INDEX IF NOT EXISTS ocpi_id_i ON open_citation_pub_ids (id) TABLESPACE index_tbs;
 
 COMMENT ON TABLE open_citation_pub_ids IS 'Open Citations Meta BR OMID map';
 
