@@ -91,6 +91,7 @@ ALTER VIEW stg_open_citation_pubs OWNER TO devs;
 
 \include_relative trg_load_open_citation_pub.sql
 
+-- region open_citation_pub_ids
 CREATE TABLE IF NOT EXISTS open_citation_pub_ids (
   omid VARCHAR(20) NOT NULL,
   id VARCHAR(200) NOT NULL,
@@ -106,6 +107,10 @@ COMMENT ON COLUMN open_citation_pub_ids.omid IS 'The OMID of the publication (bi
 
 COMMENT ON COLUMN open_citation_pub_ids.id IS--
   'Another pub ID, e.g. `arxiv:`, `doi:`, `isbn:`, `issn:`, `jid:`, `pmci:`, `pmid:`';
+
+ALTER TABLE open_citation_pub_ids
+  OWNER TO devs;
+-- endregion
 
 -- region stg_open_citation_pubs
 DROP VIEW IF EXISTS stg_open_citation_pub_ids;
