@@ -12,7 +12,7 @@ fi
 set -e
 set -o pipefail
 
-readonly SCRIPT_VER=1.0.0
+readonly SCRIPT_VER=2.0.0
 
 # Remove the longest `*/` prefix
 readonly SCRIPT_FULL_NAME="${0##*/}"
@@ -26,14 +26,17 @@ NAME
 
 SYNOPSIS
 
-    $SCRIPT_FULL_NAME [-c] [-j parallel_jobs] [-d data_dir]
+    $SCRIPT_FULL_NAME [-c] [-j parallel_jobs] [-d data_dir] BR_OMID_map_file
     $SCRIPT_FULL_NAME -h: display this help
 
 DESCRIPTION
 
     Append OpenCitations Meta data from CSVs in parallel. The script can resume an execution after an error.
+    Load BR OMID map at the end.
 
     The following options are available:
+
+    BR_OMID_map_file      The path to the \`omid.csv\` file.
 
     -d data_dir           directory with Open Citations *.csv files to process (non-recursively) [DEFAULT: .]
                           The CSV files in it must be readable by the executing user.
@@ -70,25 +73,6 @@ if [[ $1 == "-h" ]]; then
   usage
 fi
 
-DATA_DIR=.
-# If a colon follows a character, the option is expected to have an argument
-while getopts cj:d:h OPT; do
-  case "$OPT" in
-  c)
-    declare -rx REMOVE_LOADED=true
-    ;;
-  j)
-    max_parallel_jobs=$OPTARG
-    ;;
-  d)
-    readonly DATA_DIR="$OPTARG"
-    ;;
-  *) # -h or `?`: an unknown option
-    usage
-    ;;
-  esac
-done
-
 ########################################################################################################################
 # Print basic info about the running script and parameters
 #
@@ -118,6 +102,33 @@ hello() {
 }
 
 hello "$@"
+
+DATA_DIR=.
+# If a colon follows a character, the option is expected to have an argument
+while getopts cj:d:h OPT; do
+  case "$OPT" in
+  c)
+    declare -rx REMOVE_LOADED=true
+    ;;
+  j)
+    max_parallel_jobs=$OPTARG
+    ;;
+  d)
+    readonly DATA_DIR="$OPTARG"
+    ;;
+  *) # -h or `?`: an unknown option
+    usage
+    ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+# Process positional parameters
+readonly MAP_FILE="$1"
+
+if [[ $MAP_FILE == "" ]]; then
+  usage
+fi
 
 if ! command -v parallel >/dev/null; then
   echo "Please install GNU parallel"
@@ -165,30 +176,52 @@ export -f load_csv
 
 echo "Starting data load: appending all records to existing OpenCitations Meta data."
 
-cd "$DATA_DIR"
-#if [[ $BATCH_SIZE ]]; then
-#  if [[ ! -d batches ]]; then
-#    mkdir -p batches
-#    # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
-#    find . -maxdepth 1 -name '*.csv' -type f -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
-#        --verbose --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' \
-#        "tail -n +2 {} | split --lines=$BATCH_SIZE --suffix-length=4 --numeric-suffixes=1 --elide-empty-files \
-#          --additional-suffix=.csv - batches/{}.part"
-#  fi
-#  cd batches
-#fi
+if [[ -d "$DATA_DIR" ]]; then
+  cd "$DATA_DIR"
+  #if [[ $BATCH_SIZE ]]; then
+  #  if [[ ! -d batches ]]; then
+  #    mkdir -p batches
+  #    # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
+  #    find . -maxdepth 1 -name '*.csv' -type f -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
+  #        --verbose --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' \
+  #        "tail -n +2 {} | split --lines=$BATCH_SIZE --suffix-length=4 --numeric-suffixes=1 --elide-empty-files \
+  #          --additional-suffix=.csv - batches/{}.part"
+  #  fi
+  #  cd batches
+  #fi
 
-# Load files. If the load fails, the process can nbe resumed here on the remaining files.
-# Piping to `parallel` is done by design here to handle a large number of files potentially
-# shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
-find ~+ -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
-    --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' load_csv '{}'
-#cd "$DATA_DIR"
+  # Load files. If the load fails, the process can nbe resumed here on the remaining files.
+  # Piping to `parallel` is done by design here to handle a large number of files potentially
+  # shellcheck disable=SC2016 # `--tagstring` tokens are expanded by GNU `parallel`
+  find ~+ -maxdepth 1 -type f -name '*.csv' -print0 | parallel -0 -j "$max_parallel_jobs" --halt soon,fail=1 \
+      --line-buffer --tagstring '|job #{#} of {= $_=total_jobs() =} slot #{%}|' load_csv '{}'
+  #cd "$DATA_DIR"
 
-# Successfully loaded all input files
-#rm -rf batches
-#if [[ $REMOVE_LOADED && $BATCH_SIZE ]]; then
-#if [[ $REMOVE_LOADED ]]; then
-#  # Remove original files
-#  rm -fv -- *.csv
-#fi
+  # Successfully loaded all input files
+  #rm -rf batches
+  #if [[ $REMOVE_LOADED && $BATCH_SIZE ]]; then
+  #if [[ $REMOVE_LOADED ]]; then
+  #  # Remove original files
+  #  rm -fv -- *.csv
+  #fi
+fi
+
+file=$MAP_FILE
+if [[ "${file}" != */* ]]; then
+  file=./${file}
+fi
+# Remove shortest /* suffix
+dir=${file%/*}
+# dir = '.' for files in the current directory
+
+# Remove longest */ prefix
+name_with_ext=${file##*/}
+
+absolute_file_dir="$(cd ${dir} && pwd)"
+absolute_file_path="${absolute_file_dir}/${name_with_ext}"
+
+# language=PostgresPLSQL
+psql -v ON_ERROR_STOP=on <<HEREDOC
+    COPY stg_open_citation_pub_ids (omid, id)
+    FROM '${absolute_file_path}' (FORMAT CSV, HEADER MATCH);
+HEREDOC

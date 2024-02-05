@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS open_citation_pubs (
   pub_year SMALLINT,
   pub_month SMALLINT,
   pub_date DATE,
-  type VARCHAR(100),         -- TBD replace by ENUM
+  type VARCHAR(100), -- TBD replace by ENUM
   publisher VARCHAR(400),
   editors VARCHAR(2000),
   CONSTRAINT open_citation_pubs_pk PRIMARY KEY (omid) USING INDEX TABLESPACE index_tbs
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS open_citation_pubs (
 
 COMMENT ON TABLE open_citation_pubs IS 'Open Citations Meta: bibliographic resources';
 
-COMMENT ON COLUMN open_citation_pubs.omid IS 'The OMID of the publication (bibliographic resource, document)';
+COMMENT ON COLUMN open_citation_pubs.omid IS 'The OMID of the publication (bibliographic resource, document),' 'for example: "omid:br/06230199640"';
 COMMENT ON COLUMN open_citation_pubs.uri IS --
-  'The publication URI: OpenCitations, DOI or PMID. for example: "doi:10.1002/cctc.201200008"';
+  'The publication URI: OpenCitations, DOI, PMID or another, for example: "doi:10.1002/cctc.201200008"';
 COMMENT ON COLUMN open_citation_pubs.iid IS 'Zero-based index: 0..2,147,483,647';
 COMMENT ON COLUMN open_citation_pubs.title IS 'The publication''s title';
 --@formatter:off
@@ -90,6 +90,33 @@ ALTER VIEW stg_open_citation_pubs OWNER TO devs;
 \include_relative generic_functions.sql
 
 \include_relative trg_load_open_citation_pub.sql
+
+CREATE TABLE IF NOT EXISTS open_citation_pub_ids (
+  omid VARCHAR(20) NOT NULL,
+  id VARCHAR(200) NOT NULL,
+  CONSTRAINT open_citation_pub_ids_pk PRIMARY KEY (omid, id) USING INDEX TABLESPACE index_tbs
+) TABLESPACE open_citations_tbs;
+
+COMMENT ON TABLE open_citation_pub_ids IS 'Open Citations Meta BR OMID map';
+
+--@formatter:off
+COMMENT ON COLUMN open_citation_pub_ids.omid IS 'The OMID of the publication (bibliographic resource, document),'
+  'for example: "omid:br/06230199640"';
+--@formatter:on
+
+COMMENT ON COLUMN open_citation_pub_ids.id IS--
+  'Another pub ID, e.g. `arxiv:`, `doi:`, `isbn:`, `issn:`, `jid:`, `pmci:`, `pmid:`';
+
+-- region stg_open_citation_pubs
+DROP VIEW IF EXISTS stg_open_citation_pub_ids;
+CREATE VIEW stg_open_citation_pub_ids AS
+SELECT omid, id
+FROM open_citation_pub_ids ocpi;
+
+COMMENT ON VIEW stg_open_citation_pub_ids IS 'Staging for OpenCitations Meta BR OMID map ETL.';
+
+ALTER VIEW stg_open_citation_pub_ids OWNER TO devs;
+-- endregion
 
 CREATE TABLE IF NOT EXISTS open_citations (
   oci VARCHAR(1000),

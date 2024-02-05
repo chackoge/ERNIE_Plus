@@ -14,11 +14,13 @@ AS
 $block$
 BEGIN
   IF (tg_op = 'INSERT') THEN
-    INSERT INTO open_citation_pubs(omid, uri, title, authors, issue, volume, venue, pages, pub_year, pub_month,
+    INSERT INTO open_citation_pubs(omid, title, authors, issue, volume, venue, pages, pub_year, pub_month,
                                    pub_date, type, publisher, editors)
-    VALUES (split_part(new.id, ' ', 1), split_part(new.id, ' ', 2), new.title, new.author, new.issue, new.volume,
-            new.venue, new.page, extract_year(new.pub_date), extract_month(new.pub_date), to_date(new.pub_date),
-            new.type, new.publisher, new.editor)
+    VALUES (split_part(new.id, ' ', 1),
+      -- TODO change to in the future version:
+      -- ltrim(split_part(new.id, ' ', 1), 'omid:')
+            new.title, new.author, new.issue, new.volume, new.venue, new.page, extract_year(new.pub_date),
+            extract_month(new.pub_date), to_date(new.pub_date), new.type, new.publisher, new.editor)
     ON CONFLICT(omid) DO NOTHING;
 
     /*

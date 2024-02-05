@@ -23,6 +23,7 @@ Postgres 15+ with the default Postgres DB which has the following:
 ./load-open-citations-meta.sh -j 64 -d /data1/open_citations/open_citations_meta-v6-2023-11-30/csv -c
 ```
 * `-c` is a recommended option to clean, that is, remove completed CSVs
+5. Download and unZIP the latest BR OMID map from [OpenCitations](https://opencitations.net/download#index).
 
 ETL creates publications in the following table:
 * `open_citations_pubs`: bibliographic resources
