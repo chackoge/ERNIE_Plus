@@ -124,6 +124,8 @@ COMMENT ON VIEW stg_open_citation_pub_ids IS 'Staging for OpenCitations Meta BR 
 ALTER VIEW stg_open_citation_pub_ids OWNER TO devs;
 -- endregion
 
+\include_relative trg_load_open_citation_pub_ids.sql
+
 CREATE TABLE IF NOT EXISTS open_citations (
   oci VARCHAR(1000),
   citing VARCHAR(20) NOT NULL,
