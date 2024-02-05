@@ -16,14 +16,14 @@ Postgres 15+ with the default Postgres DB which has the following:
 ## OpenCitations Meta ##
 
 1. Download the latest Meta ZIP from [OpenCitations](https://opencitations.net/download#index).
-2. Unzip.
-3. Create [Postgres data structures](Postgres/DDL/open_citations_ddl.sql).
-4. Run ETL, for example, using 64 parallel jobs:
+1. Unzip it into a separate directory.
+1. Download and unzip the latest BR OMID map from [OpenCitations](https://opencitations.net/download#index).
+1. Create [Postgres data structures](Postgres/DDL/open_citations_ddl.sql).
+1. Run ETL, for example, using 64 parallel jobs:
 ```Bash
-./load-open-citations-meta.sh -j 64 -d /data1/open_citations/open_citations_meta-v6-2023-11-30/csv -c
+./load-open-citations-meta.sh -c -j 64 -d csv omid.csv
 ```
 * `-c` is a recommended option to clean, that is, remove completed CSVs
-5. Download and unZIP the latest BR OMID map from [OpenCitations](https://opencitations.net/download#index).
 
 ETL creates publications in the following table:
 * `open_citations_pubs`: bibliographic resources
@@ -35,11 +35,11 @@ Estimated load time v6-2023-11-30: 11-12 minutes
 ## OpenCitations Index ##
 
 1. Download the latest Index CSVs from [OpenCitations](https://opencitations.net/download#index).
-2. Unzip all ZIPs into a single CSV directory.
-3. Create [Postgres data structures](Postgres/DDL/open_citations_ddl.sql).
-4. Run ETL, for example, using four parallel jobs and batches of 10,000 records:
+1. Unzip all ZIPs into a single CSV directory.
+1. Create [Postgres data structures](Postgres/DDL/open_citations_ddl.sql).
+1. Run ETL, for example, using four parallel jobs and batches of 10,000 records:
 ```Bash
-./load-open-citations-index.sh -j 4 -s 10000 -d /data1/open_citations/csv -c
+./load-open-citations-index.sh -c -d /data1/open_citations/csv -j 4 -s 10000
 ```
   * `-c` is a recommended option to clean, that is, remove completed CSVs
   * Scaling up the number of parallel jobs may lead to deadlock errors
